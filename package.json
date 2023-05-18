@@ -38,6 +38,8 @@
     "@storybook/nextjs": "^7.0.12",
     "@storybook/react": "^7.0.12",
     "@storybook/testing-library": "^0.0.14-next.2",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
     "@types/eslint": "^8.21.3",
     "@types/node": "^18.15.5",
     "@types/prettier": "^2.7.2",

@@ -23,6 +23,7 @@ const Error: NextPage = () => {
             </NextLink>
           </div>
         </div>
+        
       </section>
     </>
   );
