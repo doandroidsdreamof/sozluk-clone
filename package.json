@@ -50,6 +50,7 @@
     "autoprefixer": "^10.4.14",
     "eslint": "^8.36.0",
     "eslint-config-next": "^13.4.1",
+    "eslint-plugin-react-camel-case": "^1.1.1",
     "eslint-plugin-storybook": "^0.6.12",
     "postcss": "^8.4.21",
     "prettier": "^2.8.6",

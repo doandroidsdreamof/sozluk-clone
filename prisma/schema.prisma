@@ -5,14 +5,12 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model Widget {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 }
 
 // Necessary for Next auth

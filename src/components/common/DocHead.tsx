@@ -5,7 +5,7 @@ const DocHead = () => {
     <Head>
     <meta name="description" />
     <title>Sözlük</title>
-    <link rel="shortcut icon" href="/public/favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" />
   </Head>
   )
 }

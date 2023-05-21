@@ -72,7 +72,6 @@ export default {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-
         black: '#000',
         white: '#fff',
 
@@ -94,7 +93,7 @@ export default {
           dark: '#878787',
         },
 
-        brandGray: {
+        brandGreen: {
           50: '#82dab0',
           100: '#82dab0',
           200: '#69d3a0',
