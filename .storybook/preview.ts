@@ -5,11 +5,17 @@ import { Provider } from "react-redux";
 
 
 const preview: Preview = {
-
+  globalTypes: {
+    darkMode: {
+      defaultValue: true, // Enable dark mode by default on all stories
+    },
+    // Optional (Default: 'dark')
+    className: {
+      defaultValue: 'dark', // Set
+    },},
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     backgrounds: {
-
       default: 'dark',
       values: [
         {
@@ -33,7 +39,6 @@ const preview: Preview = {
   },
 
 };
-
 
 export default preview;
 

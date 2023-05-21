@@ -1,4 +1,4 @@
 import DocHead from "./DocHead";
-import ThemeToggle from "./ThemeToggle";
+import DarkMode from "./DarkMode";
 
-export {DocHead,ThemeToggle}
+export {DocHead,DarkMode}

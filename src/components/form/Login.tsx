@@ -6,7 +6,7 @@ const Login = () => {
     <>
       <div className="py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <form className="mx-auto max-w-lg rounded-lg bg-bg-secondary-light  dark:bg-bg-secondary-dark ">
+          <form className="mx-auto max-w-lg border rounded-lg bg-bg-secondary-light dark:border-input-border-dark border-input-border-light dark:bg-bg-secondary-dark ">
             <div className="flex flex-col gap-4 p-4 md:p-8 ">
               <div>
                 <label
@@ -17,7 +17,7 @@ const Login = () => {
                 </label>
                 <input
                   name="email"
-                  className="w-full rounded border border-input-border-light bg-bg-secondary-dark px-3 py-2 text-white outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark"
+                  className="w-full rounded border border-input-border-light bg-bg-secondary-light dark:bg-bg-secondary-dark px-3 py-2 text-black dark:text-white outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark"
                 />
               </div>
 
@@ -30,7 +30,7 @@ const Login = () => {
                 </label>
                 <input
                   name="password"
-                  className="w-full rounded border border-input-border-light bg-bg-secondary-dark px-3 py-2 text-white outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark"
+                  className="w-full rounded border border-input-border-light bg-bg-secondary-light dark:bg-bg-secondary-dark px-3 py-2 text-black dark:text-white outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark"
                 />
               </div>
 
@@ -40,7 +40,7 @@ const Login = () => {
 
               <div className="relative flex items-center justify-center">
                 <span className="absolute inset-x-0 h-px bg-gray-300"></span>
-                <span className="relative bg-bg-secondary-dark px-4 text-sm text-gray-400">
+                <span className="relative bg-bg-secondary-light dark:bg-bg-secondary-dark px-4 text-sm text-gray-400">
                   or
                 </span>
               </div>

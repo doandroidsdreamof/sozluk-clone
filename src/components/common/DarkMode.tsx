@@ -4,7 +4,7 @@ import { setTheme } from "~/lib/store/reducers/themeSlice";
 
 
 
-const ThemeToggle = () => {
+const DarkMode = () => {
   const theme = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
@@ -71,4 +71,4 @@ if(theme){
   );
 };
 
-export default ThemeToggle;
+export default DarkMode;
