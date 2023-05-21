@@ -17,6 +17,7 @@ export const themeSlice = createSlice({
     setTheme: (state, action:ThemeAction) => {
       if(typeof state.value != null){
         state.value = action.payload;
+
       }
 
     },

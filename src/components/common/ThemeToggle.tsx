@@ -2,31 +2,31 @@ import React, {useEffect, useState} from "react";
 import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
 import { setTheme } from "~/lib/store/reducers/themeSlice";
 
+
+
 const ThemeToggle = () => {
   const theme = useAppSelector((state) => state.theme);
   const dispatch = useAppDispatch();
 
 useEffect(() => {
-if(theme && theme.value === 'dark'){
-  localStorage.theme = "dark";
-  document.documentElement.classList.remove("dark");
-  document.documentElement.classList.add("light");
-}else{
-  localStorage.theme = "light";
-  document.documentElement.classList.remove("light");
-  document.documentElement.classList.add("dark");
+if(theme){
+  const logicDark = theme.value === "dark" ? "dark" : "light";
+  console.log("🚀 ~ file: ThemeToggle.tsx:12 ~ useEffect ~ logicDark:", logicDark)
+  localStorage.theme = logicDark;
+  document.documentElement.classList.remove(logicDark);
+  document.documentElement.classList.add(logicDark === 'light' ? 'dark' : 'light');
 }
 
   }, [theme]);
 
-  const handleChange = () => {
+  const handleTheme = () => {
     const next = theme.value === "dark" ? "light" : "dark";
     dispatch(setTheme(next));
   };
 
   return (
     <>
-      <button className="" onClick={handleChange}>
+      <button className="" onClick={handleTheme}>
         {theme?.value && theme?.value === "dark" ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
