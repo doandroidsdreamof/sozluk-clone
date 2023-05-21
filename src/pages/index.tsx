@@ -7,19 +7,13 @@ import { api } from "~/utils/api";
 import { useEffect } from "react";
 
 import Login from "~/components/form/Login";
+import { ThemeToggle } from "~/components/common";
 
 const Home: NextPage = () => {
-  console.log("test");
-
-  useEffect(() => {
-    document.documentElement.classList.add("dark");
-    
-  }, []);
-
   return (
     <>
       <main className="flex h-screen w-full items-center justify-center bg-bg-primary-light dark:bg-bg-primary-dark">
-        <Login />
+        <ThemeToggle />
       </main>
     </>
   );

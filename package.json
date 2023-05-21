@@ -57,6 +57,7 @@
     "prettier-plugin-tailwindcss": "^0.2.6",
     "prisma": "^4.11.0",
     "storybook": "^7.0.12",
+    "storybook-tailwind-dark-mode": "^1.0.22",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.0.2"
   },

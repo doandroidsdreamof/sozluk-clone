@@ -1,16 +1,17 @@
 import React from "react";
+import Link from "next/link";
 
 const Login = () => {
   return (
     <>
       <div className="py-6 sm:py-8 lg:py-12">
         <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-          <form className="mx-auto max-w-lg rounded-lg  bg-bg-secondary-dark ">
+          <form className="mx-auto max-w-lg rounded-lg bg-bg-secondary-light  dark:bg-bg-secondary-dark ">
             <div className="flex flex-col gap-4 p-4 md:p-8 ">
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 inline-block text-sm text-white sm:text-base"
+                  className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                 >
                   Email
                 </label>
@@ -23,7 +24,7 @@ const Login = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="mb-2 inline-block text-sm text-white sm:text-base"
+                  className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                 >
                   Password
                 </label>
@@ -94,12 +95,13 @@ const Login = () => {
             <div className="flex items-center justify-center  p-4">
               <p className="text-center text-sm text-gray-500">
                 Dont have an account?{" "}
-                <a
-                  href="#"
-                  className="text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700"
+                <Link
+                  href={"/"}
+                  className="text-secondary-text-light  dark:text-secondary-text-dark"
                 >
-                  Register
-                </a>
+                    <span className="text-brandGreen-300 transition duration-100 hover:text-brandGreen-200 ">Register</span>
+
+                </Link>
               </p>
             </div>
           </form>

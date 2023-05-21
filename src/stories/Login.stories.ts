@@ -21,5 +21,7 @@ type Story = StoryObj<typeof Login>;
 export const Primary: Story = {
   args: {
     label: "Login",
+    darkMode: "dark",
   },
 };
+
