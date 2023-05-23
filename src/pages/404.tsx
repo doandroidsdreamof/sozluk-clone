@@ -1,7 +1,6 @@
 import React from "react";
 import { type NextPage } from "next";
 import NextLink from "next/link";
-import { DarkMode } from "~/components/shared";
 
 const Error: NextPage = () => {
   return (

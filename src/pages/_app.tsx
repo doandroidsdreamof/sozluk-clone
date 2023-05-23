@@ -3,7 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { DocHead } from "~/components/shared/index";
+import { DocHead } from "~/components/common/index";
 import "~/styles/globals.css";
 import { api } from "~/utils/api";
 import { Provider } from "react-redux";

@@ -18,11 +18,14 @@ export const themeSlice = createSlice({
       if(typeof state.value != null){
         state.value = action.payload;
 
+
       }
 
     },
   },
 });
+
+
 
 export const { setTheme } = themeSlice.actions;
 
