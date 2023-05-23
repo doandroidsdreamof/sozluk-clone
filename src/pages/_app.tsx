@@ -3,11 +3,11 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { DocHead } from "~/components/common/index";
+import { DocHead } from "~/components/shared/index";
 import "~/styles/globals.css";
 import { api } from "~/utils/api";
 import { Provider } from "react-redux";
-import {store} from "~/lib/store/store";
+import { store } from "~/lib/store/store";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,

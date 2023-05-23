@@ -10,14 +10,15 @@ import Login from "~/components/form/Login";
 import { DarkMode } from "~/components/common";
 import { Input } from "~/components/elements";
 import Aside from "~/components/module/Aside";
+import Register from "~/components/form/Register";
 
 const Home: NextPage = () => {
   return (
     <>
       <main className="flex h-screen w-full items-center justify-center bg-bg-primary-light dark:bg-bg-primary-dark">
-        <Aside />
-        <DarkMode />
+        <Register />
       </main>
+      <DarkMode />
     </>
   );
 };

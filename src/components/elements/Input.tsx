@@ -14,7 +14,7 @@ const Input: FC<FormInputProps> = ({
   type,
   name,
   placeholder,
-  style
+  style,
 }: FormInputProps) => {
   return (
     <>
@@ -27,6 +27,7 @@ const Input: FC<FormInputProps> = ({
       className={style}
     />
     :
+
     <Field
     type={type}
     name={name}

@@ -1,7 +1,6 @@
 import { Provider } from "react-redux";
-import { DarkMode } from "~/components/common";
+import { DarkMode } from "~/components/shared";
 import { store } from "~/lib/store/store";
-
 
 export default {
   component: DarkMode,

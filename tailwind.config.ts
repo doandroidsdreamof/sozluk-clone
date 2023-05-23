@@ -51,6 +51,9 @@ const coolGray = {
   900: '#111827',
 }
 
+
+
+
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: 'class',
