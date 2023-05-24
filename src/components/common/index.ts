@@ -1,5 +1,6 @@
-import DocHead from "./DocHead";
-import DarkMode from "./DarkMode";
 import AlertMessage from "./AlertMessage";
+import DarkMode from "./DarkMode";
+import DocHead from "./DocHead";
+import ScrollUpButton from "./ScrollUpButton";
 
-export {DocHead,DarkMode,AlertMessage}
+export { AlertMessage, DarkMode, DocHead, ScrollUpButton };

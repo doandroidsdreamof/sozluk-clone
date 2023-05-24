@@ -21,41 +21,17 @@ import {
 
 
 const Home: NextPage = () => {
-  const dispatch = useAppDispatch();
-  const alerts = useAppSelector((state) => state.notification);
 
-  const setAlert = (message: string, alertRaw: AlertType, timeout = 5000) => {
-    const uid = nanoid();
-    if(typeof alertRaw){
-      const alertType = alertRaw.toUpperCase() as AlertType;
-      dispatch(insertNotification({ message, uid, alertType }));
-      setTimeout(() => dispatch(removeNotification(uid)), timeout);
-    }
-
-  };
 
   return (
     <>
       <main className="flex h-screen w-full flex-col items-center justify-center bg-bg-primary-light dark:bg-bg-primary-dark">
-        <button
-          onClick={() => setAlert("deneme bir iki", "DANGER", 5000)}
-          className="z-50 mb-4 border-2 bg-red-500 text-white"
-        >
-          ADD ALERT{" "}
-        </button>
-        <div className="mt-auto w-full ml-auto px-4 md:max-w-fifty">
-          {alerts &&
-            alerts.map((items) => (
-              <AlertMessage
-                msg={items.message}
-                id={items.uid}
-                alertType={items.alertType}
-                key={items.uid}
-              />
-            ))}
-        </div>
+
+          <Register />
+
+        <DarkMode />
       </main>
-      <DarkMode />
+
     </>
   );
 };

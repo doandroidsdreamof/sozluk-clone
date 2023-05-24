@@ -1,4 +1,5 @@
 import FormLayout from "./FormLayout";
+import BaseLayout from "./BaseLayout";
 
 
-export {FormLayout}
+export {FormLayout,BaseLayout}

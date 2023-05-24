@@ -20,9 +20,9 @@ const notificationSlice = createSlice({
   initialState: notificationMsg,
   reducers: {
     insertNotification: (state, action: PayloadAction<Notification>) => {
-      if(state.length < 4){
+
         state.push(action.payload);
-      }
+      
 
     },
     removeNotification: (state, action) => {

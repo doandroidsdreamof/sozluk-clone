@@ -9,9 +9,10 @@ const FormError: FC<FormErrorProps> = ({ name }: FormErrorProps) => {
   return (
     <>
       <ErrorMessage
-        className="inline-flex  text-xs text-error-message"
+        className=" relative translate-y-1 flex border-white  text-xs text-red-700"
         component={"span"}
         name={name}
+
       />
     </>
   );

@@ -16,7 +16,7 @@ type StyleAlert<T> = {
 };
 
 const sharedStyle =
-  "relative  z-50 mb-4 ml-auto flex w-full items-center rounded-lg p-4 text-sm ";
+  "relative mb-4 ml-auto flex w-full items-center rounded-lg p-4 text-sm ";
 const alertStyle: StyleAlert<string> = {
   DANGER: `${sharedStyle} bg-red-50 dark:bg-gray-800 dark:text-red-400`,
   SUCCESS: `${sharedStyle} bg-green-50  text-blue-800 dark:bg-gray-800 dark:text-blue-400`,
@@ -39,7 +39,7 @@ const AlertMessage = ({ msg, alertType, id }: AlertMessageProps) => {
           <button
             type="button"
             onClick={() => handleClose(id)}
-            className="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="ml-auto flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <svg
               aria-hidden="true"

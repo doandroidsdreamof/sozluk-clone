@@ -2,31 +2,46 @@ import { Form, Formik } from "formik";
 import Link from "next/link";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import { Input, Button } from "~/components/elements/index";
-import { loginSchema } from "~/schemas/index";
-import { FormFooter } from "./index";
+import { clientRegisterSchema } from "~/schemas/index";
+import { FormError, FormFooter } from "./index";
 
 interface ISignin {
   password: string;
   email: string;
+  userName: string;
+  confirmPassword: string;
+}
+
+const loginValues: ISignin = {
+  userName: "",
+  password: "",
+  confirmPassword: "",
+  email: "",
+};
+
+function handleRegister({
+  userName,
+  password,
+  email,
+  confirmPassword,
+}: ISignin) {
+  console.log("🚀 ~ file: Register.tsx:28 ~ email:", email)
+
+
 }
 
 const Register = () => {
-  const loginValues: ISignin = {
-    email: "",
-    password: "",
-  };
-
   return (
     <>
       <Formik
+        validationSchema={toFormikValidationSchema(clientRegisterSchema)}
         initialValues={loginValues}
-        validationSchema={toFormikValidationSchema(loginSchema)}
-        onSubmit={(values, actions) => {
-          console.log("🚀 ~ file: Login.tsx:137 ~ Login ~ values:", values);
+        onSubmit={(values) => {
+          handleRegister(values);
         }}
       >
-        <div className="py-6 sm:py-8 lg:py-12">
-          <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+        <div className="py-6 w-full   sm:py-8 lg:py-12">
+          <div className="mx-auto max-w-screen-2xl max-h-fit px-4 md:px-8">
             <Form className="mx-auto max-w-lg rounded-lg border border-input-border-light bg-bg-secondary-light dark:border-input-border-dark dark:bg-bg-secondary-dark ">
               <div className="flex flex-col gap-4 p-4 md:p-8 ">
                 <div>
@@ -38,7 +53,7 @@ const Register = () => {
                   </label>
                   <Input
                     type="text"
-                    name="user name"
+                    name="userName"
                     style={
                       "w-full rounded border border-input-border-light bg-bg-secondary-light dark:bg-bg-secondary-dark px-3 py-2 text-black dark:text-white outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark"
                     }
@@ -76,10 +91,11 @@ const Register = () => {
                       "w-full rounded border border-input-border-light bg-bg-secondary-light dark:bg-bg-secondary-dark px-3 py-2 text-black dark:text-white outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark"
                     }
                   />
+
                 </div>
                 <div>
                   <label
-                    htmlFor="Confirm password"
+                    htmlFor="confirmPassword"
                     className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                   >
                     Confirm password
@@ -87,7 +103,7 @@ const Register = () => {
 
                   <Input
                     type="password"
-                    name="Confirm password"
+                    name="confirmPassword"
                     style={
                       "w-full rounded border border-input-border-light bg-bg-secondary-light dark:bg-bg-secondary-dark px-3 py-2 text-black dark:text-white outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark"
                     }

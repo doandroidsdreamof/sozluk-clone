@@ -4,7 +4,7 @@ import React from "react";
 const Aside = () => {
   return (
     <>
-      <div className="flex h-screen w-fit absolute left-0">
+      <div className="flex h-screen w-fit hidden left-0">
         <div className="flex w-64 overflow-y-auto flex-col border-r border-dark-300 bg-bg-primary-light dark:bg-bg-primary-dark">
           <div className="text-left  flex h-16 items-center px-4">
             <span className="text-lg font-semibold pt-2 px-4  text-gray-800 dark:text-white">
