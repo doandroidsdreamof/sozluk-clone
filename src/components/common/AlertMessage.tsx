@@ -1,24 +1,36 @@
 import React from "react";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
+import {
+  insertNotification,
+  removeNotification,
+} from "~/lib/store/reducers/notificationSlice";
 
-
-interface AlertMessageProps{
-  msg:string;
-  alertType:string;
+interface AlertMessageProps {
+  msg: string;
+  alertType?: string;
+  id: string;
 }
 
-const AlertMessage = () => {
+const AlertMessage = ({ msg, alertType, id }: AlertMessageProps) => {
+  const dispatch = useAppDispatch();
+
+  const handleClose = (uid: string) => {
+    dispatch(removeNotification(uid));
+  };
+
   return (
     <div
-      className="mb-4  flex items-center rounded-lg bg-blue-50 p-4 text-sm text-blue-800 dark:bg-gray-800 dark:text-blue-400"
+      className="z-50  mb-4  flex items-center rounded-lg bg-blue-800 p-4 text-sm text-blue-800 dark:bg-gray-800 dark:text-blue-400"
       role="alert"
     >
       <span className="sr-only">Info</span>
       <div>
-        <span className="font-medium">Info alert!</span> Change a few things up
-        and try submitting again.
+        <span className="font-medium">Info alert!</span>
+        {msg}
       </div>
       <button
         type="button"
+        onClick={() => handleClose(id)}
         className="ml-auto inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
       >
         <svg
@@ -34,7 +46,6 @@ const AlertMessage = () => {
             clipRule="evenodd"
           ></path>
         </svg>
-        <span className="sr-only">Close modal</span>
       </button>
     </div>
   );
