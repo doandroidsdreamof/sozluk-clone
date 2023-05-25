@@ -1,9 +1,9 @@
 import { useAppSelector } from "~/lib/store/hooks";
 import { AlertMessage, DocHead, ScrollUpButton } from "../common";
 import { Aside, Navbar } from "../module/index";
-import { LayoutProps } from "~/@types/interface";
+import { ILayoutProps } from "~/@types/interface";
 
-function BaseLayout({ children }: LayoutProps) {
+function BaseLayout({ children }: ILayoutProps) {
   const alerts = useAppSelector((state) => state.notification);
 
   return (

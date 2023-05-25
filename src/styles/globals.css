@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.form_submitted  input {
+    border-color: green;
+ }
+
+ .form_submitted  input.error {
+    border-color: red !important;
+ }

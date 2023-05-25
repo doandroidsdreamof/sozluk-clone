@@ -27,7 +27,7 @@ const Home: NextPage = () => {
     <>
       <main className="flex h-screen w-full flex-col items-center justify-center bg-bg-primary-light dark:bg-bg-primary-dark">
 
-          <Register />
+          <Login />
 
         <DarkMode />
       </main>

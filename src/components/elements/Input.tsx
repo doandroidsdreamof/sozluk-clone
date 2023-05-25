@@ -30,6 +30,7 @@ const Input: FC<FormInputProps> = ({
 
     <div className="">
       <Field
+            
             type={type}
             name={name}
             placeholder={placeholder || ""}

@@ -4,15 +4,11 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { Input, Button } from "~/components/elements/index";
 import { clientRegisterSchema } from "~/schemas/index";
 import { FormError, FormFooter } from "./index";
+import { IRegister } from "~/@types/interface";
 
-interface ISignin {
-  password: string;
-  email: string;
-  userName: string;
-  confirmPassword: string;
-}
 
-const loginValues: ISignin = {
+
+const loginValues = {
   userName: "",
   password: "",
   confirmPassword: "",
@@ -24,7 +20,7 @@ function handleRegister({
   password,
   email,
   confirmPassword,
-}: ISignin) {
+}: IRegister) {
   console.log("🚀 ~ file: Register.tsx:28 ~ email:", email)
 
 
