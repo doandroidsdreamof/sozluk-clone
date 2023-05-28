@@ -6,9 +6,13 @@ import {
   type NextAuthOptions,
 } from "next-auth";
 import { prisma } from "~/server/db";
-import GoogleProvider from 'next-auth/providers/google';
-import FacebookProvider from 'next-auth/providers/facebook';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { ILogin } from "~/@types/interface";
+import { loginSchema } from "~/schemas";
+import { hash,compare } from "bcrypt";
+
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -51,10 +55,39 @@ export const authOptions: NextAuthOptions = {
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
-    } ) ,
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    }),
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: { label: "email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        try {
+          const { email } = credentials as ILogin;
+          const emailAndPassword = await loginSchema.parseAsync(credentials);
+          const user = await prisma.user.findFirst({
+            where: { email: email },
+          });
+          const isValidPassword = await verifyUserPassword(
+            user?.password,
+            emailAndPassword.password
+          );
+          if (!user || !isValidPassword) {
+            return null;
+          }
+          return {
+            ...user,
+          };
+        } catch (err) {
+          console.log("🚀 ~ file: auth.ts:167 ~ authorize ~ err:", err);
+          return null;
+        }
+      },
     }),
   ],
 };

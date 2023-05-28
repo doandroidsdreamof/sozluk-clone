@@ -7,7 +7,7 @@ export const registerSchema = z.object({
     })
     .email(),
   password: z
-    .string({
+  .string({
       required_error: "Password is required",
     })
     .min(6),
