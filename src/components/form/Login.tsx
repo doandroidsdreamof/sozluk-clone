@@ -3,21 +3,17 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { Input, Button } from "~/components/elements/index";
 import { loginSchema } from "~/schemas/index";
 import { SocialButton, FormFooter } from "./index";
-import { type ILogin } from "~/@types/interface";
 
-
-
-const loginValues = {
-  email: "",
-  password: "",
-};
+interface ISignin {
+  password: string;
+  email: string;
+}
 
 const Login = () => {
-
-
-  function handleRegister({ email, password }: ILogin) {
-    console.log("🚀 ~ file: Register.tsx:28 ~ email:", email);
-  }
+  const loginValues: ISignin = {
+    email: "",
+    password: "",
+  };
 
   return (
     <>
@@ -25,10 +21,10 @@ const Login = () => {
         initialValues={loginValues}
         validationSchema={toFormikValidationSchema(loginSchema)}
         onSubmit={(values, actions) => {
-          handleRegister(values);
+          console.log("🚀 ~ file: Login.tsx:137 ~ Login ~ values:", values);
         }}
       >
-        <div className="w-full py-6 sm:py-8 lg:py-12">
+        <div className="py-6 sm:py-8 lg:py-12">
           <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
             <Form className="mx-auto max-w-lg rounded-lg border border-input-border-light bg-bg-secondary-light dark:border-input-border-dark dark:bg-bg-secondary-dark ">
               <div className="flex flex-col gap-4 p-4 md:p-8 ">

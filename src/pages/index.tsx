@@ -1,7 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
 
 import { api } from "~/utils/api";
 import { useEffect } from "react";
@@ -27,7 +26,7 @@ const Home: NextPage = () => {
     <>
       <main className="flex h-screen w-full flex-col items-center justify-center bg-bg-primary-light dark:bg-bg-primary-dark">
 
-          <Login />
+          <Register />
 
         <DarkMode />
       </main>

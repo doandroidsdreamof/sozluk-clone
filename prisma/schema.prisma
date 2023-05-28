@@ -1,17 +1,16 @@
 
 generator client {
-    provider = "prisma-client-js"
-    previewFeatures = ["jsonProtocol"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
-  provider = "cockroachdb"
-  url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
 }
 
-model Widget {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-}
+
+
 
 // Necessary for Next auth
 model Account {
@@ -48,6 +47,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+
 }
 
 model VerificationToken {

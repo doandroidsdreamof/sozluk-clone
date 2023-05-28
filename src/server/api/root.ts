@@ -1,11 +1,11 @@
 import { createTRPCRouter } from "~/server/api/trpc";
-import { sessionRouter } from "~/server/api/routers/session";
+import { exampleRouter } from "~/server/api/routers/example";
 
 
 
 
 export const appRouter = createTRPCRouter({
-  session:sessionRouter,
+  example:exampleRouter,
 });
 
 
