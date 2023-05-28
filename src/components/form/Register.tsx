@@ -4,8 +4,9 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { Input, Button } from "~/components/elements/index";
 import { clientRegisterSchema } from "~/schemas/index";
 import { FormError, FormFooter } from "./index";
-import { IRegister } from "~/@types/interface";
+import { type IRegister } from "~/@types/interface";
 import { api } from "~/utils/api";
+import { signIn } from "next-auth/react";
 
 const loginValues = {
   userName: "",
@@ -15,18 +16,23 @@ const loginValues = {
 };
 
 const Register = () => {
+  const { mutate } = api.user.insertUser.useMutation();
 
 
   // eslint-disable-next-line @typescript-eslint/require-await
-  async function handleRegister({
-    userName,
-    password,
-    email,
-    confirmPassword,
-  }: IRegister) {
+  async function handleRegister(data: IRegister) {
+    const { confirmPassword, ...state } = data;
     try {
-      console.log(loginValues)
+      mutate(state, {
+        onError: (err) => {
+          console.log(err);
+          console.log("başarısız ve mesaj göster");
+        },
+        onSuccess: () => {
+          console.log("başarılı yönlendir ve mesaj göster");
 
+        },
+      });
     } catch (err) {
       console.log("🚀 ~ file: Register.tsx:39 ~ Register ~ err:", err);
     }

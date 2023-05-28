@@ -11,8 +11,11 @@ export const userRouter = createTRPCRouter({
       const checkEmail = await ctx.prisma.user.findFirst({
         where: { email },
       });
-      if (checkEmail) {
+      console.log("🚀 ~ file: user.ts:14 ~ .mutation ~ checkEmail:", checkEmail)
+      if (checkEmail === null) {
+          console.log("🚀 ~ file: user.ts:16 ~ .mutation ~ checkEmail:", checkEmail)
           const hashedPassword =  await hash(password, 12);
+            console.log("🚀 ~ file: user.ts:16 ~ .mutation ~ hashedPassword:", hashedPassword)
             const insertUser = await ctx.prisma.user.create({
               data: {
                 email,

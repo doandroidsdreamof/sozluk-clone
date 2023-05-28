@@ -17,16 +17,18 @@ import {
   removeNotification,
   AlertType
 } from "~/lib/store/reducers/notificationSlice";
+import { useSession } from "next-auth/react";
 
 
 const Home: NextPage = () => {
-
+  const { data: session } = useSession();
+  console.log("🚀 ~ file: index.tsx:25 ~ session:", session)
 
   return (
     <>
       <main className="flex h-screen w-full flex-col items-center justify-center bg-bg-primary-light dark:bg-bg-primary-dark">
 
-          <Register />
+          <Login />
 
         <DarkMode />
       </main>

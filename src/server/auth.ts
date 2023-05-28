@@ -11,8 +11,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { ILogin } from "~/@types/interface";
 import { loginSchema } from "~/schemas";
-import { hash,compare } from "bcrypt";
-
+import { hash, compare } from "bcrypt";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -51,6 +50,15 @@ export const authOptions: NextAuthOptions = {
     }),
   },
   adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60,
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/",
+    error: "/",
+  },
   providers: [
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
@@ -64,18 +72,22 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {
         email: { label: "email", type: "email" },
-        password: { label: "Password", type: "password" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
+        console.log(
+          "🚀 ~ file: auth.ts:70 ~ authorize ~ credentials:",
+          credentials
+        );
         try {
-          const { email } = credentials as ILogin;
+          const { email, password } = credentials as ILogin;
           const emailAndPassword = await loginSchema.parseAsync(credentials);
           const user = await prisma.user.findFirst({
             where: { email: email },
           });
-          const isValidPassword = await verifyUserPassword(
-            user?.password,
-            emailAndPassword.password
+          const isValidPassword = await compare(
+            user?.password as string,
+            password
           );
           if (!user || !isValidPassword) {
             return null;

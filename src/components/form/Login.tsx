@@ -4,8 +4,7 @@ import { Input, Button } from "~/components/elements/index";
 import { loginSchema } from "~/schemas/index";
 import { SocialButton, FormFooter } from "./index";
 import { type ILogin } from "~/@types/interface";
-
-
+import { signIn } from "next-auth/react";
 
 const loginValues = {
   email: "",
@@ -13,10 +12,24 @@ const loginValues = {
 };
 
 const Login = () => {
-
-
-  function handleRegister({ email, password }: ILogin) {
-    console.log("🚀 ~ file: Register.tsx:28 ~ email:", email);
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async function handleLogin(data: ILogin) {
+    console.log("🚀 ~ file: Login.tsx:17 ~ handleLogin ~ data:", data)
+    try {
+      await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } catch (err) {
+      console.log("🚀 ~ file: Login.tsx:27 ~ handleRegister ~ err:", err);
+    }
   }
 
   return (
@@ -25,7 +38,7 @@ const Login = () => {
         initialValues={loginValues}
         validationSchema={toFormikValidationSchema(loginSchema)}
         onSubmit={(values, actions) => {
-          handleRegister(values);
+          handleLogin(values).catch((err) => console.error(err));
         }}
       >
         <div className="w-full py-6 sm:py-8 lg:py-12">
