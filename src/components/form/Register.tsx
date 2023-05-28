@@ -5,8 +5,7 @@ import { Input, Button } from "~/components/elements/index";
 import { clientRegisterSchema } from "~/schemas/index";
 import { FormError, FormFooter } from "./index";
 import { IRegister } from "~/@types/interface";
-
-
+import { api } from "~/utils/api";
 
 const loginValues = {
   userName: "",
@@ -15,29 +14,35 @@ const loginValues = {
   email: "",
 };
 
-function handleRegister({
-  userName,
-  password,
-  email,
-  confirmPassword,
-}: IRegister) {
-  console.log("🚀 ~ file: Register.tsx:28 ~ email:", email)
-
-
-}
-
 const Register = () => {
+
+
+  // eslint-disable-next-line @typescript-eslint/require-await
+  async function handleRegister({
+    userName,
+    password,
+    email,
+    confirmPassword,
+  }: IRegister) {
+    try {
+      console.log(loginValues)
+
+    } catch (err) {
+      console.log("🚀 ~ file: Register.tsx:39 ~ Register ~ err:", err);
+    }
+  }
+
   return (
     <>
       <Formik
         validationSchema={toFormikValidationSchema(clientRegisterSchema)}
         initialValues={loginValues}
         onSubmit={(values) => {
-          handleRegister(values);
+          handleRegister(values).catch((err) => console.error(err));
         }}
       >
-        <div className="py-6 w-full   sm:py-8 lg:py-12">
-          <div className="mx-auto max-w-screen-2xl max-h-fit px-4 md:px-8">
+        <div className="w-full py-6   sm:py-8 lg:py-12">
+          <div className="mx-auto max-h-fit max-w-screen-2xl px-4 md:px-8">
             <Form className="mx-auto max-w-lg rounded-lg border border-input-border-light bg-bg-secondary-light dark:border-input-border-dark dark:bg-bg-secondary-dark ">
               <div className="flex flex-col gap-4 p-4 md:p-8 ">
                 <div>
@@ -87,7 +92,6 @@ const Register = () => {
                       "w-full rounded border border-input-border-light bg-bg-secondary-light dark:bg-bg-secondary-dark px-3 py-2 text-black dark:text-white outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark"
                     }
                   />
-
                 </div>
                 <div>
                   <label
