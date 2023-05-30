@@ -5,8 +5,8 @@ interface ButtonProps {
   style: string;
 }
 const Button = ({ text, style }: ButtonProps) => {
-  return <button onClick={(e)=>{
-    e.stopPropagation()
+  return <button type="button" onClick={(e)=>{
+    e.stopPropagation();
   }}  className={`${style}`}>{text}</button>;
 };
 

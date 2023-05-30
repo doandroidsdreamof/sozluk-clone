@@ -41,6 +41,19 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
+    redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
+    },
+    jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+
+      return token;
+    },
     session: ({ session, user }) => ({
       ...session,
       user: {
@@ -86,15 +99,16 @@ export const authOptions: NextAuthOptions = {
             where: { email: email },
           });
           const isValidPassword = await compare(
-            user?.password as string,
-            password
+            password,
+            user?.password as string
           );
           if (!user || !isValidPassword) {
             return null;
+          } else {
+            return {
+              ...user,
+            };
           }
-          return {
-            ...user,
-          };
         } catch (err) {
           console.log("🚀 ~ file: auth.ts:167 ~ authorize ~ err:", err);
           return null;

@@ -8,7 +8,6 @@ import { store } from "~/lib/store/store";
 import "~/styles/globals.css";
 import { api } from "~/utils/api";
 
-
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
@@ -16,7 +15,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <>
       <Provider store={store}>
-        <SessionProvider session={session}>
+        <SessionProvider
+          session={session}
+          refetchInterval={5 * 60}
+          refetchOnWindowFocus={false}
+        >
           <BaseLayout>
             <Component {...pageProps} />
           </BaseLayout>

@@ -17,8 +17,7 @@ const Login = () => {
     console.log("🚀 ~ file: Login.tsx:17 ~ handleLogin ~ data:", data)
     try {
       await signIn('credentials', {
-        email: data.email,
-        password: data.password,
+       ...data,
         redirect: false,
       })
         .then((res) => {
@@ -37,7 +36,7 @@ const Login = () => {
       <Formik
         initialValues={loginValues}
         validationSchema={toFormikValidationSchema(loginSchema)}
-        onSubmit={(values, actions) => {
+        onSubmit={(values) => {
           handleLogin(values).catch((err) => console.error(err));
         }}
       >
