@@ -1,3 +1,4 @@
+import { signIn } from "next-auth/react";
 import React from "react";
 
 interface SocialButtonProps {
@@ -7,9 +8,14 @@ interface SocialButtonProps {
 }
 
 const SocialButton = ({ icon, text, style }: SocialButtonProps) => {
-  // console.log("🚀 ~ file: SocialButton.tsx:10 ~ SocialButton ~ text:", text)
+  const provider = text === "Continue with Facebook" ? "facebook" : "google";
   return (
-    <button className={`${style}`}>
+    <button
+      onClick={() =>
+        void signIn(provider).catch((err) => console.log("social login", err))
+      }
+      className={`${style}`}
+    >
       {icon}
       <span>{text}</span>
     </button>

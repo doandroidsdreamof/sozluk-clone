@@ -54,13 +54,16 @@ export const authOptions: NextAuthOptions = {
 
       return token;
     },
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    session({ session, token, user }) {
+      const generatedSession = {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id as string,
+        },
+      };
+      return generatedSession;
+    },
   },
   adapter: PrismaAdapter(prisma),
   session: {
@@ -88,10 +91,7 @@ export const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-        console.log(
-          "🚀 ~ file: auth.ts:70 ~ authorize ~ credentials:",
-          credentials
-        );
+        console.log("🚀 ~ file: auth.ts:101 ~ authorize ~ credentials:", credentials)
         try {
           const { email, password } = credentials as ILogin;
           const emailAndPassword = await loginSchema.parseAsync(credentials);

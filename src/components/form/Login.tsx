@@ -14,7 +14,6 @@ const loginValues = {
 const Login = () => {
   // eslint-disable-next-line @typescript-eslint/require-await
   async function handleLogin(data: ILogin) {
-    console.log("🚀 ~ file: Login.tsx:17 ~ handleLogin ~ data:", data)
     try {
       await signIn('credentials', {
        ...data,
