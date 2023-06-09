@@ -10,7 +10,6 @@ function BaseLayout({ children }: ILayoutProps) {
     <>
       <DocHead />
       <Navbar />
-
       <main>
         <div className="w-full flex flex-row">
           <Aside />

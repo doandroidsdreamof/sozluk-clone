@@ -17,6 +17,7 @@ model Account {
     id                String  @id @default(cuid())
     userId            String
     type              String
+    avatar            String?
     provider          String
     providerAccountId String
     refresh_token     String? // @db.Text
@@ -50,6 +51,12 @@ model User {
     password      String
     accounts      Account[]
     sessions      Session[]
+    entry         Entry[]
+    feed          Feed[]
+    likes         Likes[]
+    title         Title[]
+    messagesSent  Message[]    @relation("sender")
+    messagesReceived Message[]    @relation("recipient")
 
 }
 
@@ -59,4 +66,68 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+
+model Entry{
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    content   String
+    userId    String
+    entryId   String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    title     Title    @relation(fields: [entryId], references: [id])
+    likes     Likes[]
+    avatar    String?
+    postUrl   String?
+}
+
+model Feed{
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    content   String
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+}
+
+model Likes {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  entry     Entry    @relation(fields: [LikeId], references: [id])
+  LikeId    String
+  createdAt DateTime @default(now())
+
+}
+
+model Title{
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now())
+    content   String
+    userId    String
+    tagId     String
+    user      User     @relation(fields: [userId], references: [id])
+    tag       Tag    @relation(fields: [tagId], references: [id])
+    count     Int
+    entry     Entry[]
+
+}
+
+ model Tag {
+    id String @id @default(cuid())
+    title Title[]
+    name String
+    slug String @unique
+
+    }
+
+    model Message {
+  id          String   @id @default(uuid())
+  sender      User     @relation("sender", fields: [senderId], references: [id])
+  senderId    String
+  recipient   User     @relation("recipient", fields: [recipientId], references: [id])
+  recipientId String
+  message      String
+  image       String?
+  createdAt   DateTime @default(now())
 }
