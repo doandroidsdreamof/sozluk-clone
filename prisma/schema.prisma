@@ -55,6 +55,8 @@ model User {
     feed          Feed[]
     likes         Likes[]
     title         Title[]
+    followersCount    Int        @default(0)
+    followingCount    Int        @default(0)
     messagesSent  Message[]    @relation("sender")
     messagesReceived Message[]    @relation("recipient")
 
@@ -80,6 +82,7 @@ model Entry{
     likes     Likes[]
     avatar    String?
     postUrl   String?
+    likeCount    Int        @default(0)
 }
 
 model Feed{
@@ -108,7 +111,7 @@ model Title{
     tagId     String
     user      User     @relation(fields: [userId], references: [id])
     tag       Tag    @relation(fields: [tagId], references: [id])
-    count     Int
+    titleEntryCount      Int        @default(0)
     entry     Entry[]
 
 }
