@@ -9,11 +9,11 @@ const Aside = () => {
       <div
         className={
           toggleState
-            ? "left-0 top-0 flex  max-h-screen min-h-screen  w-fit  bg-bg-primary-light  transition-transform  dark:bg-bg-primary-dark"
-            : "left-0 top-0 flex  max-h-screen min-h-screen  w-fit  -translate-x-full  bg-bg-primary-light   transition-transform dark:bg-bg-primary-dark lg:translate-x-0"
+            ? "fixed  left-0 z-0   flex max-h-screen min-h-screen  w-fit  bg-bg-primary-light  transition-transform  dark:bg-bg-primary-dark"
+            : "fixed  left-0 z-0  flex  max-h-screen min-h-screen  w-fit  -translate-x-full  bg-bg-primary-light   transition-transform dark:bg-bg-primary-dark lg:translate-x-0"
         }
       >
-        <div className="flex w-64 flex-col overflow-y-auto border-r border-input-border-dark bg-bg-primary-light dark:bg-bg-primary-dark">
+        <div className="flex w-64 flex-col  overflow-y-auto border-r border-input-border-dark bg-bg-primary-light dark:bg-bg-primary-dark">
           <div className="flex   h-16  items-center  px-4 pt-2 text-left">
             <span className="px-4 text-lg font-semibold  text-gray-800 dark:text-white">
               Gündem

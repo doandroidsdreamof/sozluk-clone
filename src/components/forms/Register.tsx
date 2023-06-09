@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import Link from "next/link";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import { Input, Button } from "~/components/elements/index";
+import { Input, FormButton } from "~/components/elements/index";
 import { clientRegisterSchema } from "~/schemas/index";
 import { FormError, FormFooter } from "./index";
 import { type IRegister } from "~/@types/interface";
@@ -113,7 +113,7 @@ const Register = () => {
                     }
                   />
                 </div>
-                <Button
+                <FormButton
                   text={"Register"}
                   style={
                     "block rounded-md bg-brandGreen-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"

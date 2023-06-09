@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import { Input, Button } from "~/components/elements/index";
+import { Input, FormButton } from "~/components/elements/index";
 import { loginSchema } from "~/schemas/index";
 import { SocialButton, FormFooter } from "./index";
 import { type ILogin } from "~/@types/interface";
@@ -74,7 +74,7 @@ const Login = () => {
                     }
                   />
                 </div>
-                <Button
+                <FormButton
                   text={"Log in"}
                   style={
                     "block rounded-md bg-brandGreen-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"

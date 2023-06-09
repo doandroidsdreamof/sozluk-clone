@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { AutoSearch, Hamburger } from "../common/index";
 import { Logo } from "../elements/index";
 import { MdWaterDrop } from "react-icons/md";
+import Button from "./button/Button";
 
 //BiSolidDroplet
 
@@ -20,9 +21,9 @@ const Navbar = () => {
   return (
     <>
       <nav>
-        <div className="  top-0  z-50  w-full border-b border-b-input-border-light bg-opacity-0  backdrop-blur-sm dark:border-b-input-border-dark">
+        <div className="  top-0    w-full border-b border-b-input-border-light bg-opacity-0  backdrop-blur-sm dark:border-b-input-border-dark">
           <div className="p-3 lg:pl-3">
-            <div className="flex items-center  justify-between">
+            <div className="flex  items-center justify-between gap-y-3">
               <div className="ml-3 flex items-center justify-start">
                 <Hamburger />
                 <Logo
@@ -46,11 +47,18 @@ const Navbar = () => {
                     </button>
                   </div>
                   <div>
-                    {/* <Dropdown
-                      open={open}
-                      handleClose={handleClose}
-                      anchorEl={anchorEl}
-                    /> */}
+                    <div className="flex flex-row gap-x-2">
+                      <Button
+                        className="dark:bg-dark-600 dark:text-typography-body-dark dark:hover:bg-dark-500"
+                        size="tiny"
+                        type="secondary"
+                      >
+                        sign in
+                      </Button>
+                      <Button size="tiny" type="primary">
+                        register
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

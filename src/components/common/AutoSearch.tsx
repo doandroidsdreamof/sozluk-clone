@@ -61,7 +61,7 @@ const AutoSearch = () => {
             <div className="relative flex w-full   cursor-default items-center overflow-hidden rounded-md   text-left focus:outline-none   focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 dark:border-input-border-dark dark:opacity-50 sm:text-sm">
               <HiOutlineSearch className=" absolute z-40 ml-2 h-4 w-4  dark:text-bg-primary-light " />
               <Combobox.Input
-                className=" w-full  rounded-md border-brandSozluk-600  py-2 pl-7  pr-10 text-sm leading-5 shadow-inner backdrop-blur-md focus:border-brandSozluk-700 focus:ring-0 dark:bg-bg-secondary-dark dark:placeholder-white "
+                className=" w-full  rounded-md border-brandSozluk-800  py-2 pl-7  pr-10 text-sm leading-5 shadow-inner backdrop-blur-md focus:border-brandSozluk-700 focus:ring-0 dark:bg-bg-secondary-dark dark:placeholder-white "
                 onChange={(event) => {
                   setInput(event.target.value);
                 }}
