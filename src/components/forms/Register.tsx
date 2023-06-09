@@ -18,7 +18,6 @@ const loginValues = {
 const Register = () => {
   const { mutate } = api.user.insertUser.useMutation();
 
-
   // eslint-disable-next-line @typescript-eslint/require-await
   async function handleRegister(data: IRegister) {
     const { confirmPassword, ...state } = data;
@@ -30,7 +29,6 @@ const Register = () => {
         },
         onSuccess: () => {
           console.log("başarılı yönlendir ve mesaj göster");
-
         },
       });
     } catch (err) {

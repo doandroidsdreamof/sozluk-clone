@@ -1,7 +1,7 @@
 import { DarkMode } from "~/components/common";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Login from "../components/form/Login";
+import Login from "../components/forms/Login";
 
 const meta: Meta<typeof Login> = {
   title: "Login",

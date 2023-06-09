@@ -15,8 +15,8 @@ const Login = () => {
   // eslint-disable-next-line @typescript-eslint/require-await
   async function handleLogin(data: ILogin) {
     try {
-      await signIn('credentials', {
-       ...data,
+      await signIn("credentials", {
+        ...data,
         redirect: false,
       })
         .then((res) => {

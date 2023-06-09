@@ -1,7 +1,6 @@
-import { FC } from "react";
-import { Field, Form, Formik, FormikProps } from 'formik';
-import { FormError } from "../form";
-
+import { type FC } from "react";
+import { Field, Form, Formik, FormikProps } from "formik";
+import { FormError } from "../forms";
 
 interface FormInputProps {
   type: string;
@@ -18,26 +17,24 @@ const Input: FC<FormInputProps> = ({
 }: FormInputProps) => {
   return (
     <>
-    {
-      name === 'test' ?
-      <input
-      type={type}
-      name={name}
-      placeholder={placeholder || ""}
-      className={style}
-    />
-    :
-
-    <div className="">
-      <Field
-            
+      {name === "test" ? (
+        <input
+          type={type}
+          name={name}
+          placeholder={placeholder || ""}
+          className={style}
+        />
+      ) : (
+        <div className="">
+          <Field
             type={type}
             name={name}
             placeholder={placeholder || ""}
-            className={style} /><FormError name={name} /></div>
-
-    }
-
+            className={style}
+          />
+          <FormError name={name} />
+        </div>
+      )}
     </>
   );
 };

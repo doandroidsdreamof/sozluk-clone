@@ -47,6 +47,7 @@ model User {
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt
     emailVerified DateTime?
+    birthDate     DateTime?
     avatar        String?
     password      String
     accounts      Account[]
@@ -54,7 +55,7 @@ model User {
     entry         Entry[]
     feed          Feed[]
     likes         Likes[]
-    title         Title[]
+    topic         Topic[]
     followersCount    Int        @default(0)
     followingCount    Int        @default(0)
     messagesSent  Message[]    @relation("sender")
@@ -78,7 +79,7 @@ model Entry{
     userId    String
     entryId   String
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    title     Title    @relation(fields: [entryId], references: [id])
+    topic     Topic    @relation(fields: [entryId], references: [id])
     likes     Likes[]
     avatar    String?
     postUrl   String?
@@ -103,10 +104,11 @@ model Likes {
 
 }
 
-model Title{
+model Topic{
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
     content   String
+    topicTitle String
     userId    String
     tagId     String
     user      User     @relation(fields: [userId], references: [id])
@@ -118,19 +120,19 @@ model Title{
 
  model Tag {
     id String @id @default(cuid())
-    title Title[]
+    title Topic[]
     name String
     slug String @unique
 
     }
 
-    model Message {
+model Message {
   id          String   @id @default(uuid())
   sender      User     @relation("sender", fields: [senderId], references: [id])
   senderId    String
   recipient   User     @relation("recipient", fields: [recipientId], references: [id])
   recipientId String
-  message      String
+  message     String
   image       String?
   createdAt   DateTime @default(now())
 }
