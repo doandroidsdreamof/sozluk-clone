@@ -45,9 +45,9 @@ const RegisterForm = () => {
           handleRegister(values).catch((err) => console.error(err));
         }}
       >
-        <div className="w-full py-6   sm:py-8 lg:py-12">
+        <div className="w-full ">
           <div className="mx-auto max-h-fit max-w-screen-2xl px-4 md:px-8">
-            <Form className="mx-auto max-w-lg rounded-lg border border-input-border-light bg-bg-secondary-light dark:border-input-border-dark dark:bg-bg-secondary-dark ">
+            <Form className="mx-auto max-w-lg rounded-lg  ">
               <div className="flex flex-col gap-4 p-4 md:p-8 ">
                 <div>
                   <label
@@ -116,12 +116,10 @@ const RegisterForm = () => {
                 <FormButton
                   text={"Register"}
                   style={
-                    "block rounded-md bg-brandGreen-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
+                    "block rounded-sm bg-brandGreen-800 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
                   }
                 />
               </div>
-              <div></div>
-
               <FormFooter
                 text={"Already have an account?"}
                 href={"login"}

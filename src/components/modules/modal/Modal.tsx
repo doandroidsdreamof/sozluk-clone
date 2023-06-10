@@ -38,7 +38,7 @@ export default function Modal({ children }: ModalProps) {
             leaveTo="opacity-0"
           ></Transition.Child>
           <div className="fixed  inset-0 overflow-y-auto">
-            <div className="flex  min-h-full items-center justify-center p-4 text-center">
+            <div className="flex   min-h-full items-center justify-center p-4 ">
               <Transition.Child
                 enter="ease-out duration-300"
                 enterFrom="opacity-0 scale-95"
@@ -47,8 +47,8 @@ export default function Modal({ children }: ModalProps) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="flex w-full transform flex-col overflow-hidden rounded-md border bg-white  align-middle shadow-xl transition-all">
-                  <button className="ml-auto inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
+                <Dialog.Panel className="flex   w-full transform flex-col overflow-hidden rounded-md   border border-input-border-light bg-bg-secondary-light  align-middle   shadow-xl transition-all dark:border-input-border-dark dark:bg-bg-secondary-dark">
+                  <button className="relative right-6 top-5 ml-auto inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
                     <AiOutlineClose size={20} onClick={closeModal} />
                   </button>
                   {children}
