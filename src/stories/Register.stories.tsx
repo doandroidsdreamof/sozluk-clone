@@ -1,7 +1,7 @@
 import { DarkMode } from "~/components/common";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Register from "../components/forms/Register";
+import Register from "../components/forms/RegisterForm";
 
 const meta: Meta<typeof Register> = {
   title: "Register",

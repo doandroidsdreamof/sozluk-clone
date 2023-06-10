@@ -8,7 +8,12 @@ import Button from "../modules/button/Button";
 function BaseLayout({ children }: ILayoutProps) {
   const alerts = useAppSelector((state) => state.notification);
   const router = useRouter();
-  if (router.pathname == "/404" || router.pathname == "/reset") {
+  if (
+    router.pathname == "/404" ||
+    router.pathname == "/reset" ||
+    router.pathname == "/login" ||
+    router.pathname == "/register"
+  ) {
     return (
       <>
         <DocHead />
@@ -22,8 +27,8 @@ function BaseLayout({ children }: ILayoutProps) {
       <>
         <DocHead />
         <main>
-          <div className=" flex min-h-screen  w-full flex-col    bg-bg-primary-light dark:bg-bg-primary-dark">
-            <div className="sticky top-0   z-50 w-full">
+          <div className=" flex min-h-screen  w-full flex-col bg-bg-primary-light dark:bg-bg-primary-dark">
+            <div className="sticky top-0 z-40 w-full">
               <Navbar />
             </div>
             <div className="flex w-full   flex-row">

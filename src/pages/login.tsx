@@ -1,17 +1,20 @@
 import { type NextPage } from "next";
-
 import { useSession } from "next-auth/react";
 import { DarkMode } from "~/components/common";
 import { FormLayout } from "~/components/layouts";
+import Modal from "~/components/modules/modal/Modal";
+import { LoginForm } from "~/components/forms/index";
 
-const Home: NextPage = () => {
+const Login: NextPage = () => {
   const { data: session } = useSession();
 
   return (
     <>
-      <DarkMode />
+      <FormLayout>
+        <LoginForm />
+      </FormLayout>
     </>
   );
 };
 
-export default Home;
+export default Login;

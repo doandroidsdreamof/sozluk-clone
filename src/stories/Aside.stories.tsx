@@ -1,7 +1,7 @@
 import Aside from "~/components/modules/Aside";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import type Login from "../components/forms/Login";
+import type Login from "../components/forms/LoginForm";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof Login> = {

@@ -15,7 +15,7 @@ const loginValues = {
   email: "",
 };
 
-const Register = () => {
+const RegisterForm = () => {
   const { mutate } = api.user.insertUser.useMutation();
 
   // eslint-disable-next-line @typescript-eslint/require-await
@@ -135,4 +135,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterForm;

@@ -11,7 +11,7 @@ const loginValues = {
   password: "",
 };
 
-const Login = () => {
+const LoginForm = () => {
   // eslint-disable-next-line @typescript-eslint/require-await
   async function handleLogin(data: ILogin) {
     try {
@@ -134,4 +134,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginForm;
