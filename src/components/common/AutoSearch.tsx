@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
 import { api } from "~/utils/api";
 import { HiOutlineSearch } from "react-icons/hi";
+import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
+import { FilterModal } from "../modals";
 
 interface SearchOptions {
   id: string;
@@ -14,6 +16,7 @@ const AutoSearch = () => {
   const router = useRouter();
   const [data, setData] = useState<SearchOptions[]>([]);
   const [input, setInput] = useState<string>("");
+  const [up, setUp] = useState(false);
   const {
     data: getData,
     refetch,
@@ -60,22 +63,28 @@ const AutoSearch = () => {
           <div className="relative mt-1 ">
             <div className="relative  flex w-full flex-wrap items-stretch">
               <Combobox.Input
-                className="focus:border-primary dark:focus:border-primary relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out placeholder:text-xs focus:z-[3] focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
+                className="focus:border-primary dark:focus:border-primary relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-r-0 border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out placeholder:text-xs focus:z-[3] focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
                 onChange={(event) => {
                   setInput(event.target.value);
                 }}
                 placeholder="başlık,#entry,@yazar"
               />
               <button
-                className="bg-primary relative   z-[2] flex items-center rounded-r bg-brandGreen-900 px-6 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-brandGreen-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-                type="button"
-                id="button-addon1"
-                data-te-ripple-init
-                data-te-ripple-color="light"
+                onClick={() => setUp(!up)}
+                className=" top-1 z-[2]  inline-block  items-center border-b  border-t border-solid border-neutral-300 bg-transparent  px-2 text-xs font-medium uppercase "
               >
+                {up ? (
+                  <BsFillCaretUpFill className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
+                ) : (
+                  <BsFillCaretDownFill className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
+                )}
+              </button>
+              <button className="bg-primary relative   z-[2] flex items-center rounded-r bg-brandGreen-900 px-6 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md hover:bg-brandGreen-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg">
                 <HiOutlineSearch className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
               </button>
+              <FilterModal />
             </div>
+
             <Transition
               as={Fragment}
               leave="transition ease-in duration-100"

@@ -5,6 +5,7 @@ import { MdWaterDrop } from "react-icons/md";
 import Button from "./button/Button";
 import Link from "next/link";
 import { DarkMode } from "../common/index";
+import { FilterModal } from "../modals/index";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -33,6 +34,7 @@ const Navbar = () => {
                 />
               </div>
               <AutoSearch />
+
               <div className="flex items-center">
                 <div className="ml-0 flex w-full items-center md:ml-3 ">
                   <div>

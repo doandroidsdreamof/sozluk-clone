@@ -31,7 +31,7 @@ const DarkMode = () => {
         {theme?.value && theme?.value === "dark" ? (
           <FiMoon size={15} />
         ) : (
-          <BsSun className="text-white" size={15} />
+          <BsSun className="dark:text-white" size={15} />
         )}
       </Button>
     </>

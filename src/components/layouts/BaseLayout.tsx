@@ -4,6 +4,7 @@ import { Aside, Navbar } from "../modules/index";
 import { type ILayoutProps } from "~/@types/interface";
 import { useRouter } from "next/router";
 import Button from "../modules/button/Button";
+import { FilterModal } from "../modals";
 
 function BaseLayout({ children }: ILayoutProps) {
   const alerts = useAppSelector((state) => state.notification);
@@ -31,7 +32,7 @@ function BaseLayout({ children }: ILayoutProps) {
             <div className="sticky top-0 z-40 w-full">
               <Navbar />
             </div>
-            <div className="flex w-full   flex-row">
+            <div className="flex w-full  flex-row">
               <Aside />
               {children}
             </div>
