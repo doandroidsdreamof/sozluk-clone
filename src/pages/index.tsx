@@ -7,11 +7,7 @@ import { FormLayout } from "~/components/layouts";
 const Home: NextPage = () => {
   const { data: session } = useSession();
 
-  return (
-    <>
-      <DarkMode />
-    </>
-  );
+  return <></>;
 };
 
 export default Home;

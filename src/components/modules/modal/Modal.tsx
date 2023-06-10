@@ -13,7 +13,6 @@ export default function Modal({ children }: ModalProps) {
 
   useEffect(() => {
     router.prefetch("/");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function closeModal() {

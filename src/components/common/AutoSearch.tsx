@@ -55,18 +55,26 @@ const AutoSearch = () => {
 
   return (
     <>
-      <div className=" mx-auto   w-seventy md:w-sixty lg:w-fifty   ">
+      <div className=" mx-auto w-full   md:w-[40rem] ">
         <Combobox value={data} onChange={filteredPeople}>
           <div className="relative mt-1 ">
-            <div className="relative flex w-full   cursor-default items-center overflow-hidden rounded-md   text-left focus:outline-none   focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 dark:border-input-border-dark dark:opacity-50 sm:text-sm">
-              <HiOutlineSearch className=" absolute z-40 ml-2 h-4 w-4  dark:text-bg-primary-light " />
+            <div className="relative  flex w-full flex-wrap items-stretch">
               <Combobox.Input
-                className=" w-full  rounded-md border-brandSozluk-800  py-2 pl-7  pr-10 text-sm leading-5 shadow-inner backdrop-blur-md focus:border-brandSozluk-700 focus:ring-0 dark:bg-bg-secondary-dark dark:placeholder-white "
+                className="focus:border-primary dark:focus:border-primary relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out placeholder:text-xs focus:z-[3] focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
                 onChange={(event) => {
                   setInput(event.target.value);
                 }}
                 placeholder="başlık,#entry,@yazar"
               />
+              <button
+                className="bg-primary relative   z-[2] flex items-center rounded-r bg-brandGreen-900 px-6 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-brandGreen-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                type="button"
+                id="button-addon1"
+                data-te-ripple-init
+                data-te-ripple-color="light"
+              >
+                <HiOutlineSearch className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
+              </button>
             </div>
             <Transition
               as={Fragment}
