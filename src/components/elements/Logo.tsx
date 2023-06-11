@@ -14,7 +14,7 @@ const Logo = ({ text, logo, textYellow, footer }: LogoProps) => {
       <div
         className={
           footer
-            ? " ml-4    flex items-center justify-center"
+            ? " ml-4  hidden  items-center justify-center lg:flex"
             : " ml-4   hidden items-center justify-center lg:flex"
         }
       >

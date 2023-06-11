@@ -36,8 +36,8 @@ function BaseLayout({ children }: ILayoutProps) {
             <div>
               <NotificationContainer />
               <ScrollUpButton />
-              <Footer />
             </div>
+            <Footer />
           </div>
         </main>
       </>
