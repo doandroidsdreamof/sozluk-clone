@@ -59,7 +59,7 @@ const AutoSearch = () => {
                 onKeyUp={(e) => {
                   if (
                     e.key === "Enter" &&
-                    getData != null &&
+                    getData == null &&
                     input.length > 0
                   ) {
                     void router.push(`/topic/${input.replace(/\s/g, "")}`);

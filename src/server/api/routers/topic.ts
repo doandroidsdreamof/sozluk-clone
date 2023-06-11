@@ -25,7 +25,7 @@ export const topicRouter = createTRPCRouter({
             topicTitle: true,
           },
         });
-        if (findTopics) {
+        if (findTopics.length > 0) {
           return findTopics;
         } else {
           return null;
