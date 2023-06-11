@@ -29,7 +29,7 @@ function BaseLayout({ children }: ILayoutProps) {
             <div className="sticky top-0 z-40 w-full">
               <Navbar />
             </div>
-            <div className="flex  w-full flex-row items-start justify-between">
+            <div className="flex  w-full flex-row  justify-between">
               <Aside />
               {children}
             </div>
