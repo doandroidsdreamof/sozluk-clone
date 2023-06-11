@@ -1,7 +1,7 @@
 import { useAppSelector } from "~/lib/store/hooks";
 import { IoIosSettings } from "react-icons/io";
 import { api } from "~/utils/api";
-import { TopicLink } from "../elements/index";
+import { TopicLink } from "../modules/topic/index";
 
 const Aside = () => {
   const toggleState = useAppSelector((state) => state.toggle.navbarState);
