@@ -7,7 +7,7 @@ interface FormButtonProps {
 const FormButton = ({ text, style }: FormButtonProps) => {
   return (
     <button
-      type="button"
+      type="submit"
       onClick={(e) => {
         e.stopPropagation();
       }}

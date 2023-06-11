@@ -11,9 +11,10 @@ const SocialButton = ({ icon, text, style }: SocialButtonProps) => {
   const provider = text === "Continue with Facebook" ? "facebook" : "google";
   return (
     <button
-      onClick={() =>
-        void signIn(provider).catch((err) => console.log("social login", err))
-      }
+      onClick={(e) => {
+        e.preventDefault();
+        void signIn(provider).catch((err) => console.log("social login", err));
+      }}
       className={`${style}`}
     >
       {icon}

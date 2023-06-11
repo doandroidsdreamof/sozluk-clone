@@ -1,35 +1,42 @@
 import { hash } from "bcrypt";
 import { registerSchema } from "~/schemas";
-import { createTRPCRouter, protectedProcedure,publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 import { prisma } from "~/server/db";
 
 export const userRouter = createTRPCRouter({
-  insertUser: publicProcedure
+  createUser: publicProcedure
     .input(registerSchema)
     .mutation(async ({ ctx, input }) => {
       const { email, userName, password } = input;
-      const checkEmail = await ctx.prisma.user.findFirst({
-        where: { email },
+      const checkUser = await ctx.prisma.user.findFirst({
+        where: { OR: [{ email: input.email }, { name: input.userName }] },
       });
-      if (checkEmail === null) {
-          console.log("🚀 ~ file: user.ts:16 ~ .mutation ~ checkEmail:", checkEmail)
-          const hashedPassword =  await hash(password, 12);
-            console.log("🚀 ~ file: user.ts:16 ~ .mutation ~ hashedPassword:", hashedPassword)
-            const insertUser = await ctx.prisma.user.create({
-              data: {
-                email,
-                name: userName,
-                password:  hashedPassword ,
-              },
-            });
+      if (!checkUser) {
+        const hashedPassword = await hash(password, 12);
+        const insertUser = await ctx.prisma.user.create({
+          data: {
+            email,
+            name: userName,
+            password: hashedPassword,
+          },
+        });
 
-          return {
-            status: 201,
-            message: "Account created successfully",
-            success: true,
-            data: insertUser,
-          };
-        }
+        return {
+          status: 201,
+          message: "Account created successfully",
+          success: true,
+          data: insertUser,
+        };
+      } else {
+        return {
+          success: false,
+          message: "email or username is wrong",
+        };
+      }
     }),
 
   getUserSession: protectedProcedure.query(async ({ ctx }) => {
@@ -46,6 +53,4 @@ export const userRouter = createTRPCRouter({
       console.error(err);
     }
   }),
-
-
 });

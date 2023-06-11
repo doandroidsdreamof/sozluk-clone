@@ -16,7 +16,7 @@ type StyleAlert<T> = {
 };
 
 const sharedStyle =
-  "relative mb-4 ml-auto flex w-full items-center rounded-lg p-4 text-sm ";
+  "relative z-50 mb-4 ml-auto flex w-full items-center rounded-lg p-4 text-sm ";
 const alertStyle: StyleAlert<string> = {
   DANGER: `${sharedStyle} bg-red-50 dark:bg-gray-800 dark:text-red-400`,
   SUCCESS: `${sharedStyle} bg-green-50  text-blue-800 dark:bg-gray-800 dark:text-blue-400`,

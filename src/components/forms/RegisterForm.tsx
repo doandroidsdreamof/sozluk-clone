@@ -7,6 +7,13 @@ import { FormError, FormFooter } from "./index";
 import { type IRegister } from "~/@types/interface";
 import { api } from "~/utils/api";
 import { signIn } from "next-auth/react";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
+import { nanoid } from "nanoid";
+import {
+  type AlertType,
+  insertNotification,
+  removeNotification,
+} from "~/lib/store/reducers/notificationSlice";
 
 const loginValues = {
   userName: "",
@@ -16,7 +23,17 @@ const loginValues = {
 };
 
 const RegisterForm = () => {
-  const { mutate } = api.user.insertUser.useMutation();
+  const { mutate } = api.user.createUser.useMutation();
+  const dispatch = useAppDispatch();
+
+  const setAlert = (message: string, alertRaw: AlertType, timeout = 5000) => {
+    const uid = nanoid();
+    if (typeof alertRaw) {
+      const alertType = alertRaw.toUpperCase() as AlertType;
+      dispatch(insertNotification({ message, uid, alertType }));
+      setTimeout(() => dispatch(removeNotification(uid)), timeout);
+    }
+  };
 
   // eslint-disable-next-line @typescript-eslint/require-await
   async function handleRegister(data: IRegister) {
@@ -25,10 +42,14 @@ const RegisterForm = () => {
       mutate(state, {
         onError: (err) => {
           console.log(err);
-          console.log("başarısız ve mesaj göster");
+          setAlert("başarısız", "DANGER", 5000);
         },
-        onSuccess: () => {
-          console.log("başarılı yönlendir ve mesaj göster");
+        onSuccess: (data) => {
+          if (data.success === false) {
+            setAlert(data.message, "DANGER", 5000);
+          } else {
+            setAlert(data.message, "SUCCESS", 5000);
+          }
         },
       });
     } catch (err) {

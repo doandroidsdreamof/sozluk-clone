@@ -71,7 +71,7 @@ const AutoSearch = () => {
               />
               <button
                 onClick={() => setUp(!up)}
-                className=" top-1 z-[2]  inline-block  items-center border-b  border-t border-solid border-neutral-300 bg-transparent  px-2 text-xs font-medium uppercase "
+                className=" top-1 z-[2] inline-block items-center  border-b border-t  border-solid border-neutral-300 bg-transparent px-2  text-xs font-medium uppercase dark:border-neutral-600 "
               >
                 {up ? (
                   <BsFillCaretUpFill className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
@@ -82,7 +82,6 @@ const AutoSearch = () => {
               <button className="bg-primary relative   z-[2] flex items-center rounded-r bg-brandGreen-900 px-6 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md hover:bg-brandGreen-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg">
                 <HiOutlineSearch className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
               </button>
-              <FilterModal />
             </div>
 
             <Transition

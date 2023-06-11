@@ -3,7 +3,7 @@ import React from "react";
 const FilterModal = () => {
   return (
     <>
-      <div className=" absolute -left-2 top-5  z-50 -ml-1 min-h-[30rem]   w-screen items-center justify-center  overflow-y-auto  overflow-x-hidden md:inset-0  md:left-0 md:right-0  md:mx-auto    md:ml-0 md:mt-10 md:max-w-[45rem]  ">
+      <div className=" relative -left-2 top-5  z-50 -ml-1 min-h-[30rem]   w-screen items-center justify-center  overflow-y-auto  overflow-x-hidden md:inset-0  md:left-0 md:right-0  md:mx-auto    md:ml-0 md:mt-10 md:max-w-[45rem]  ">
         <div className="relative h-full w-full max-w-2xl p-4 md:h-auto">
           <div className="relative rounded-sm bg-white p-4 shadow dark:bg-gray-800 sm:p-5">
             <div className="mb-4 flex items-center justify-between rounded-t border-b pb-4 dark:border-gray-600 sm:mb-5">

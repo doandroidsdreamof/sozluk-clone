@@ -5,6 +5,14 @@ import { loginSchema } from "~/schemas/index";
 import { SocialButton, FormFooter } from "./index";
 import { type ILogin } from "~/@types/interface";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { nanoid } from "nanoid";
+import { useAppDispatch } from "~/lib/store/hooks";
+import {
+  type AlertType,
+  insertNotification,
+  removeNotification,
+} from "~/lib/store/reducers/notificationSlice";
 
 const loginValues = {
   email: "",
@@ -13,6 +21,18 @@ const loginValues = {
 
 const LoginForm = () => {
   // eslint-disable-next-line @typescript-eslint/require-await
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
+  const setAlert = (message: string, alertRaw: AlertType, timeout = 5000) => {
+    const uid = nanoid();
+    if (typeof alertRaw) {
+      const alertType = alertRaw.toUpperCase() as AlertType;
+      dispatch(insertNotification({ message, uid, alertType }));
+      setTimeout(() => dispatch(removeNotification(uid)), timeout);
+    }
+  };
+
   async function handleLogin(data: ILogin) {
     try {
       await signIn("credentials", {
@@ -20,10 +40,16 @@ const LoginForm = () => {
         redirect: false,
       })
         .then((res) => {
-          console.log(res);
+          if (res?.ok === true) {
+            router.push("/");
+            setAlert("login is success", "SUCCESS", 5000);
+          } else {
+            setAlert("email or password is wrong", "DANGER", 5000);
+          }
         })
         .catch((err) => {
           console.error(err);
+          setAlert("login is not success", "DANGER", 5000);
         });
     } catch (err) {
       console.log("🚀 ~ file: Login.tsx:27 ~ handleRegister ~ err:", err);
