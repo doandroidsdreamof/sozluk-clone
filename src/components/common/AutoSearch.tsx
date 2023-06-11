@@ -40,13 +40,14 @@ const AutoSearch = () => {
           query: {
             topicId: id,
             topicTitle: value,
+            topicExist: true,
           },
         });
       }
     }
   };
 
-  const filteredPeople = () => {
+  const filteredTopics = () => {
     console.info(data);
     input === ""
       ? data
@@ -58,7 +59,7 @@ const AutoSearch = () => {
   return (
     <>
       <div className=" mx-auto w-full   md:w-[40rem] ">
-        <Combobox value={data} onChange={filteredPeople}>
+        <Combobox value={data} onChange={filteredTopics}>
           <div className="relative mt-1 ">
             <div className="relative  flex w-full flex-wrap items-stretch">
               <Combobox.Input
@@ -88,7 +89,17 @@ const AutoSearch = () => {
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              afterLeave={() => setInput("")}
+              afterLeave={() => {
+                void router.push({
+                  pathname: "/topic/[topicId]",
+                  query: {
+                    topicId: input,
+                    topicTitle: input,
+                    topicExist: false,
+                  },
+                });
+                setInput("");
+              }}
             >
               <Combobox.Options
                 className={

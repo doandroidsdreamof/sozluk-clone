@@ -1,6 +1,6 @@
 import Input from "./Input";
 import FormButton from "./FormButton";
 import Logo from "./Logo";
-import Topic from "./Topic";
+import TopicLink from "./TopicLink";
 
-export { Input, FormButton, Logo, Topic };
+export { Input, FormButton, Logo, TopicLink };

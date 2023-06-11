@@ -107,12 +107,11 @@ model Likes {
 model Topic{
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
-    content   String
     topicTitle String
     userId    String
-    tagId     String
+    // tagId     String
     user      User     @relation(fields: [userId], references: [id])
-    tag       Tag    @relation(fields: [tagId], references: [id])
+    // tag       Tag      @relation(fields: [tagId], references: [id])
     titleEntryCount      Int        @default(0)
     entry     Entry[]
 
@@ -120,7 +119,7 @@ model Topic{
 
  model Tag {
     id String @id @default(cuid())
-    title Topic[]
+    // title Topic[]
     name String
     slug String @unique
 
@@ -135,4 +134,10 @@ model Message {
   message     String
   image       String?
   createdAt   DateTime @default(now())
+}
+
+
+enum Role {
+  Noob
+  Author
 }

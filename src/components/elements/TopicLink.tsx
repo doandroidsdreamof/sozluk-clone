@@ -6,9 +6,9 @@ interface TopicsProps {
   url: string;
 }
 
-const Topic = ({ text, url }: TopicsProps) => {
+const TopicLink = ({ text, url }: TopicsProps) => {
   return (
-    <Link href={`/${url}`}>
+    <Link href={`/${url.replace(/\s/g, "")}`}>
       <button className="rounded-md  px-4 py-2 text-left text-gray-700 hover:bg-gray-200 focus:outline-none dark:text-gray-300 dark:hover:bg-bg-alt-dark ">
         {text}
       </button>
@@ -16,4 +16,4 @@ const Topic = ({ text, url }: TopicsProps) => {
   );
 };
 
-export default Topic;
+export default TopicLink;
