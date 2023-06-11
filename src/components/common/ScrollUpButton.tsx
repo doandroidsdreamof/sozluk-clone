@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AiOutlineArrowUp } from "react-icons/ai";
 
 const ScrollUpButton = () => {
   const [visible, setVisible] = useState(false);
@@ -30,11 +31,11 @@ const ScrollUpButton = () => {
       onClick={handleClick}
       className={
         visible
-          ? "!fixed !bottom-3 !right-3 -z-50 !block !rounded-full  !bg-button-light !p-2.5 hover:!bg-blue-900"
-          : "!hidden"
+          ? "fixed bottom-12 right-4  mx-auto flex items-center rounded-full bg-brandGreen-700  p-3 text-sm  text-white hover:bg-green-600"
+          : "hidden"
       }
     >
-
+      <AiOutlineArrowUp size={15} />
     </button>
   );
 };

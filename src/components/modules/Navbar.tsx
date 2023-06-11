@@ -40,8 +40,8 @@ const Navbar = () => {
                       className="flex items-center overflow-hidden rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 "
                     ></button>
                   </div>
-                  <div className="relative   flex w-full flex-row items-center   justify-between   md:w-fit">
-                    <Hamburger breakPoint="md" />
+                  <div className="relative   flex w-full flex-row items-center    justify-between   ">
+                    <Hamburger breakPoint="lg" />
                     <div className="flex gap-x-2  ">
                       <ButtonContainer />
                     </div>

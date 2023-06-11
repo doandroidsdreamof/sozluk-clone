@@ -51,7 +51,7 @@ const AutoSearch = () => {
 
   return (
     <>
-      <div className=" mx-auto w-full   md:w-[38rem] ">
+      <div className=" mx-auto w-full   lg:w-[38rem] ">
         <Combobox value={data} onChange={filteredTopics}>
           <div className="relative mt-1 ">
             <div className="relative  flex w-full flex-wrap items-stretch">
