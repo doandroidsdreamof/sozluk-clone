@@ -1,6 +1,5 @@
 import React, { forwardRef, useRef, useImperativeHandle } from "react";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+
 import ButtonStyles from "./Button.module.css";
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -89,8 +88,7 @@ const Button = forwardRef<RefHandle, ButtonProps>(
     }
 
     if (className) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      classes.push(className);
+      classes.push(className as string);
     }
 
     classes.push(ButtonStyles[`sbui-btn--text-align-${textAlign}`]);

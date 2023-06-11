@@ -12,7 +12,9 @@ const SocialButton = ({ icon, text, style }: SocialButtonProps) => {
     <button
       onClick={(e) => {
         e.preventDefault();
-        void signIn("google").catch((err) => console.log("social login", err));
+        void signIn("google", { callbackUrl: "/" }, { prompt: "login" }).catch(
+          (err) => console.log("social login", err)
+        );
       }}
       className={`${style}`}
     >

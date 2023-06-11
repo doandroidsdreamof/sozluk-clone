@@ -1,17 +1,16 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { compare } from "bcrypt";
 import { type GetServerSidePropsContext } from "next";
 import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-import { prisma } from "~/server/db";
-import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { ILogin } from "~/@types/interface";
+import GoogleProvider from "next-auth/providers/google";
+import { type ILogin } from "~/@types/interface";
 import { loginSchema } from "~/schemas";
-import { hash, compare } from "bcrypt";
+import { prisma } from "~/server/db";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -84,11 +83,10 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        email: { label: "email", type: "email" },
-        password: { label: "password", type: "password" },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log("🚀 ~ file: auth.ts:101 ~ authorize ~ credentials:", credentials)
         try {
           const { email, password } = credentials as ILogin;
           const emailAndPassword = await loginSchema.parseAsync(credentials);

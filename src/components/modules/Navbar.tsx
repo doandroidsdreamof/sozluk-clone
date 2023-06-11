@@ -38,11 +38,7 @@ const Navbar = () => {
                       onClick={handleClick}
                       type="button"
                       className="flex items-center overflow-hidden rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 "
-                      aria-expanded="false"
-                      data-dropdown-toggle="dropdown-user"
-                    >
-                      <span className="sr-only">Open user menu</span>
-                    </button>
+                    ></button>
                   </div>
                   <div className="relative  flex w-full flex-row items-center   justify-between   md:w-fit">
                     <Hamburger breakPoint="md" />
