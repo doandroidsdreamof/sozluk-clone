@@ -25,7 +25,11 @@ export const topicRouter = createTRPCRouter({
             topicTitle: true,
           },
         });
-        return findTopics;
+        if (findTopics) {
+          return findTopics;
+        } else {
+          return null;
+        }
       }
     }),
   createTopic: protectedProcedure

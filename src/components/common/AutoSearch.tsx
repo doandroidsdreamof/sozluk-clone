@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Combobox, Transition } from "@headlessui/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { HiOutlineSearch } from "react-icons/hi";
@@ -35,14 +35,7 @@ const AutoSearch = () => {
         e.target as HTMLInputElement;
       if (typeof value === "string" && typeof id === "string") {
         setData([]);
-        void router.push({
-          pathname: "/topic/[topicId]",
-          query: {
-            topicId: id,
-            topicTitle: value,
-            topicExist: true,
-          },
-        });
+        void router.push(`/topic/${value.replace(/\s/g, "")}`);
       }
     }
   };
@@ -63,6 +56,16 @@ const AutoSearch = () => {
           <div className="relative mt-1 ">
             <div className="relative  flex w-full flex-wrap items-stretch">
               <Combobox.Input
+                onKeyUp={(e) => {
+                  if (
+                    e.key === "Enter" &&
+                    getData != null &&
+                    input.length > 0
+                  ) {
+                    void router.push(`/topic/${input.replace(/\s/g, "")}`);
+                    setInput("");
+                  }
+                }}
                 className="focus:border-primary dark:focus:border-primary relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-r-0 border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out placeholder:text-xs focus:z-[3] focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
                 onChange={(event) => {
                   setInput(event.target.value);
@@ -89,17 +92,7 @@ const AutoSearch = () => {
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              afterLeave={() => {
-                void router.push({
-                  pathname: "/topic/[topicId]",
-                  query: {
-                    topicId: input,
-                    topicTitle: input,
-                    topicExist: false,
-                  },
-                });
-                setInput("");
-              }}
+              afterLeave={() => setInput("")}
             >
               <Combobox.Options
                 className={

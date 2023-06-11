@@ -1,14 +1,19 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
+import { TopicLayout } from "~/components/layouts/index";
 
 const Topic: NextPage = () => {
   const router = useRouter();
-  //   const { snippetId: roomId, roomName } = router.query as {
-  //     snippetId: string;
-  //     roomName: string;
-  //   };
-  console.log("===========================>", router.query);
-  return <div>topics</div>;
+  const { topicId, topicExist } = router.query as {
+    topicId: string;
+    topicExist: string;
+  };
+
+  return (
+    <>
+      <TopicLayout topicId={topicId} topicExist={topicExist} />
+    </>
+  );
 };
 
 export default Topic;
