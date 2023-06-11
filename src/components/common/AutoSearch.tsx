@@ -2,10 +2,9 @@
 import { Combobox, Transition } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { Fragment, useEffect, useState } from "react";
-import { api } from "~/utils/api";
-import { HiOutlineSearch } from "react-icons/hi";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
-import { FilterModal } from "../modals";
+import { HiOutlineSearch } from "react-icons/hi";
+import { api } from "~/utils/api";
 
 interface SearchOptions {
   id: string;

@@ -1,19 +1,17 @@
 import { Form, Formik } from "formik";
-import Link from "next/link";
-import { toFormikValidationSchema } from "zod-formik-adapter";
-import { Input, FormButton } from "~/components/elements/index";
-import { clientRegisterSchema } from "~/schemas/index";
-import { FormError, FormFooter } from "./index";
-import { type IRegister } from "~/@types/interface";
-import { api } from "~/utils/api";
-import { signIn } from "next-auth/react";
-import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
 import { nanoid } from "nanoid";
+import { toFormikValidationSchema } from "zod-formik-adapter";
+import { type IRegister } from "~/@types/interface";
+import { FormButton, Input } from "~/components/elements/index";
+import { useAppDispatch } from "~/lib/store/hooks";
 import {
-  type AlertType,
   insertNotification,
   removeNotification,
+  type AlertType,
 } from "~/lib/store/reducers/notificationSlice";
+import { clientRegisterSchema } from "~/schemas/index";
+import { api } from "~/utils/api";
+import { FormFooter } from "./index";
 
 const loginValues = {
   userName: "",

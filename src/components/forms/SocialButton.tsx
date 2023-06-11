@@ -8,12 +8,11 @@ interface SocialButtonProps {
 }
 
 const SocialButton = ({ icon, text, style }: SocialButtonProps) => {
-  const provider = text === "Continue with Facebook" ? "facebook" : "google";
   return (
     <button
       onClick={(e) => {
         e.preventDefault();
-        void signIn(provider).catch((err) => console.log("social login", err));
+        void signIn("google").catch((err) => console.log("social login", err));
       }}
       className={`${style}`}
     >

@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
 import { type ILayoutProps } from "~/@types/interface";
-import { useAppSelector } from "~/lib/store/hooks";
-import { DocHead, ScrollUpButton } from "../common";
+import { DocHead, ScrollUpButton } from "../common/index";
+import { NotificationContainer } from "../containers/index";
 import { Aside, Navbar } from "../modules/index";
-import { NotificationContainer } from "../containers";
 
 function BaseLayout({ children }: ILayoutProps) {
   const router = useRouter();

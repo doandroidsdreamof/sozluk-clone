@@ -10,7 +10,7 @@ interface LogoProps {
 const Logo = ({ text, logo, textYellow }: LogoProps) => {
   return (
     <Link href={"/"}>
-      <div className=" ml-4 flex  hidden items-center justify-center lg:flex">
+      <div className=" ml-4   hidden items-center justify-center lg:flex">
         <div className="text-logo ">{logo}</div>
         <h1 className="dark:text-dark-head self-center  whitespace-nowrap font-roboto text-xl font-semibold dark:text-gray-100   md:text-lg   lg:text-xl ">
           {text}

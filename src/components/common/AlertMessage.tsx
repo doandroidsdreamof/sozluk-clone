@@ -1,9 +1,5 @@
-import React from "react";
-import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
-import {
-  insertNotification,
-  removeNotification,
-} from "~/lib/store/reducers/notificationSlice";
+import { useAppDispatch } from "~/lib/store/hooks";
+import { removeNotification } from "~/lib/store/reducers/notificationSlice";
 
 interface AlertMessageProps {
   msg: string;

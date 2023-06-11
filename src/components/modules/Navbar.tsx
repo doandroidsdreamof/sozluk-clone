@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { AutoSearch, Hamburger } from "../common/index";
-import { Logo } from "../elements/index";
 import { MdWaterDrop } from "react-icons/md";
-import Button from "./button/Button";
-import Link from "next/link";
-import { DarkMode } from "../common/index";
-import { FilterModal } from "../modals/index";
+import { AutoSearch, Hamburger } from "../common/index";
+import { ButtonContainer } from "../containers/index";
+import { Logo } from "../elements/index";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -34,7 +31,6 @@ const Navbar = () => {
                 />
               </div>
               <AutoSearch />
-
               <div className="flex items-center">
                 <div className="ml-0 flex w-full items-center md:ml-3 ">
                   <div>
@@ -50,24 +46,8 @@ const Navbar = () => {
                   </div>
                   <div className="relative  flex w-full flex-row items-center   justify-between   md:w-fit">
                     <Hamburger breakPoint="md" />
-
                     <div className="flex gap-x-2">
-                      <Link href={"/login"}>
-                        <Button
-                          className="dark:bg-dark-600 dark:text-typography-body-dark dark:hover:bg-dark-500"
-                          size="tiny"
-                          type="secondary"
-                        >
-                          login
-                        </Button>
-                      </Link>
-                      <Link href={"/register"}>
-                        <Button size="tiny" type="primary">
-                          register
-                        </Button>
-                      </Link>
-
-                      <DarkMode />
+                      <ButtonContainer />
                     </div>
                   </div>
                 </div>
