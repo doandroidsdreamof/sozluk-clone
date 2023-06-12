@@ -234,10 +234,9 @@ const TextEditor = () => {
     editorProps: {
       attributes: {
         class:
-          "richText block w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-light text-sm text-gray-800 bg-white border-0 dark:bg-bg-alt-light  dark:text-typography-body-light",
+          "richText prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl  block w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-light text-sm text-gray-800 bg-white border-0 dark:bg-bg-alt-light  dark:text-typography-body-light",
       },
     },
-    content: content,
     onUpdate({ editor }) {
       setContent(editor.getText());
     },
