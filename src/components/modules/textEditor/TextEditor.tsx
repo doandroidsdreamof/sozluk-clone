@@ -18,17 +18,29 @@ import { MdHorizontalRule, MdRedo, MdUndo } from "react-icons/md";
 import { RxListBullet, RxQuote } from "react-icons/rx";
 import Button from "../button/Button";
 import { useState } from "react";
+import { api } from "~/utils/api";
 
 type MenuProps = {
   editor: Editor;
   content: string;
+  topicId: string;
 };
 
-const MenuBar = ({ editor, content }: MenuProps) => {
-  console.info("🚀 ~ file: TextEditor.tsx:26 ~ MenuBar ~ editor:", content);
+const MenuBar = ({ editor, content, topicId }: MenuProps) => {
+  const { mutate } = api.topic.createTopic.useMutation();
+
   if (!editor) {
     return null;
   }
+
+  const handlePost = () => {
+    mutate({
+      topicTitle: topicId.replace(/\+/g, " "),
+      entry: JSON.stringify(editor.getJSON()),
+    });
+    editor.commands.clearContent(true);
+  };
+
   const buttonStyle =
     "is-active p-2 text-gray-200  rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
@@ -216,6 +228,7 @@ const MenuBar = ({ editor, content }: MenuProps) => {
       </button>
       <Button
         disabled={content.length == 0 ? true : false}
+        onClick={() => handlePost()}
         className="ml-auto max-w-fit "
         block={true}
         size="tiny"
@@ -227,7 +240,10 @@ const MenuBar = ({ editor, content }: MenuProps) => {
   );
 };
 
-const TextEditor = () => {
+interface TextEditorProps {
+  topicId: string;
+}
+const TextEditor = ({ topicId }: TextEditorProps) => {
   const [content, setContent] = useState("");
   const editor = useEditor({
     extensions: [StarterKit, TextStyle, Color],
@@ -248,7 +264,7 @@ const TextEditor = () => {
   return (
     <div className="mb-24 w-full  border  border-gray-200 bg-gray-50 dark:border-input-border-dark   ">
       <EditorContent editor={editor} />
-      <MenuBar content={content} editor={editor} />
+      <MenuBar topicId={topicId} content={content} editor={editor} />
     </div>
   );
 };

@@ -35,26 +35,38 @@ export const topicRouter = createTRPCRouter({
   createTopic: protectedProcedure
     .input(z.object({ topicTitle: z.string(), entry: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const insertTopic = await ctx.prisma.topic.create({
-        data: {
-          user: { connect: { id: ctx.session.user.id } },
+      const findTopic = await ctx.prisma.topic.findFirst({
+        where: {
           topicTitle: input.topicTitle,
-          entry: {
-            createMany: {
-              data: [
-                {
-                  content: input.entry,
-                  userId: ctx.session.user.id,
-                },
-              ],
-            },
-          },
         },
       });
-      if (insertTopic) {
-        return { success: true, message: "entry is created" };
+      if (!findTopic) {
+        const insertTopic = await ctx.prisma.topic.create({
+          data: {
+            user: { connect: { id: ctx.session.user.id } },
+            topicTitle: input.topicTitle,
+            entry: {
+              createMany: {
+                data: [
+                  {
+                    content: input.entry,
+                    userId: ctx.session.user.id,
+                  },
+                ],
+              },
+            },
+          },
+        });
+        if (insertTopic) {
+          return { success: true, message: "topic and first entry is created" };
+        } else {
+          return {
+            success: false,
+            message: "topic and first entry is not created",
+          };
+        }
       } else {
-        return { success: false, message: "entry is not created" };
+        return { success: false, message: "topic already exist" };
       }
     }),
   getAllTopics: publicProcedure.query(async ({ ctx }) => {
