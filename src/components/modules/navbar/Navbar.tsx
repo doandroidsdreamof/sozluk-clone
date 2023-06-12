@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { MdWaterDrop } from "react-icons/md";
-import { AutoSearch, Hamburger } from "../common/index";
-import { ButtonContainer } from "../containers/index";
-import { Logo } from "../elements/index";
+import { AutoSearch, Hamburger } from "../../common/index";
+import { ButtonContainer } from "../../containers/index";
+import { Logo } from "../../elements/index";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
