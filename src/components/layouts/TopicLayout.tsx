@@ -3,20 +3,22 @@ import { TopicHeader, TextEditor } from "../modules/index";
 import { TopicEditorContainer, RendererContainer } from "../containers/index";
 
 interface TopicLayoutProps {
-  topicId: string;
-  topicExist: string;
-  topicUid: string;
+  topicTitle: string;
+  topicUid: string | null;
 }
 
-const TopicLayout = ({ topicId, topicExist, topicUid }: TopicLayoutProps) => {
+const TopicLayout = ({ topicTitle, topicUid }: TopicLayoutProps) => {
   return (
     <div className=" top-0 mx-auto flex min-h-screen w-full  flex-col gap-4  p-3  text-left  lg:w-[38rem]    lg:-translate-x-3 lg:pl-0">
-      <TopicHeader headerOne={topicId} />
+      <TopicHeader
+        headerOne={topicTitle}
+        headerTwo={topicUid ? "" : "There is nothing here."}
+      />
       <div className="">
-        <RendererContainer topicId={topicId} />
+        <RendererContainer topicTitle={topicTitle} />
       </div>
       <TopicEditorContainer
-        textEditor={<TextEditor topicExist={true} topicId={topicUid} />}
+        textEditor={<TextEditor topicTitle={topicTitle} topicUid={topicUid} />}
       />
     </div>
   );

@@ -3,11 +3,11 @@ import { api } from "~/utils/api";
 import { TextRenderer } from "../modules/index";
 
 interface RendererContainerProps {
-  topicId: string;
+  topicTitle: string;
 }
 
-const RendererContainer = ({ topicId }: RendererContainerProps) => {
-  const { data } = api.entry.getEntries.useQuery(topicId);
+const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
+  const { data } = api.entry.getEntries.useQuery(topicTitle);
 
   return (
     <div>

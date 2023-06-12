@@ -57,11 +57,7 @@ const AutoSearch = () => {
             <div className="relative  flex w-full flex-wrap items-stretch">
               <Combobox.Input
                 onKeyUp={(e) => {
-                  if (
-                    e.key === "Enter" &&
-                    getData == null &&
-                    input.length > 0
-                  ) {
+                  if (e.key === "Enter" && input.length > 0) {
                     void router.push(
                       `/topic/${encodeURIComponent(input.replace(/ /g, "+"))}`
                     );
@@ -103,7 +99,7 @@ const AutoSearch = () => {
                     : "hidden"
                 }
               >
-                {input !== "" && getData == null ? (
+                {data.length == 0 && getData == null ? (
                   <div className=" relative cursor-default select-none px-4 py-2 dark:text-typography-body-strong-dark ">
                     Nothing found.
                   </div>
