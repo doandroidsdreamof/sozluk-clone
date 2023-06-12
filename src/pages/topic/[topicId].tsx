@@ -15,7 +15,7 @@ const Topic: NextPage = () => {
   return (
     <>
       <TopicLayoutNull
-        topicId={topicId.replace(/\+/g, " ")}
+        topicId={topicId?.replace(/\+/g, " ")}
         topicExist={getData != null ? "true" : "false"}
       />
     </>

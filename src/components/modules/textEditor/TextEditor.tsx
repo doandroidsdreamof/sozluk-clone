@@ -17,12 +17,15 @@ import { BsCodeSquare, BsTextParagraph } from "react-icons/bs";
 import { MdHorizontalRule, MdRedo, MdUndo } from "react-icons/md";
 import { RxListBullet, RxQuote } from "react-icons/rx";
 import Button from "../button/Button";
+import { useState } from "react";
 
 type MenuProps = {
   editor: Editor;
+  content: string;
 };
 
-const MenuBar = ({ editor }: MenuProps) => {
+const MenuBar = ({ editor, content }: MenuProps) => {
+  console.info("🚀 ~ file: TextEditor.tsx:26 ~ MenuBar ~ editor:", content);
   if (!editor) {
     return null;
   }
@@ -212,6 +215,7 @@ const MenuBar = ({ editor }: MenuProps) => {
         <MdRedo />
       </button>
       <Button
+        disabled={content.length == 0 ? true : false}
         className="ml-auto max-w-fit "
         block={true}
         size="tiny"
@@ -224,6 +228,7 @@ const MenuBar = ({ editor }: MenuProps) => {
 };
 
 const TextEditor = () => {
+  const [content, setContent] = useState("");
   const editor = useEditor({
     extensions: [StarterKit, TextStyle, Color],
     editorProps: {
@@ -232,14 +237,19 @@ const TextEditor = () => {
           "richText block w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-light text-sm text-gray-800 bg-white border-0 dark:bg-bg-alt-light  dark:text-typography-body-light",
       },
     },
+    content: content,
+    onUpdate({ editor }) {
+      setContent(editor.getText());
+    },
   }) as Editor;
+
   // const json = editor.getJSON()
   // console.info("🚀 ~ file: TextEditor.tsx:237 ~ TextEditor ~ json:", json)
 
   return (
     <div className="mb-24 w-full  border  border-gray-200 bg-gray-50 dark:border-input-border-dark   ">
       <EditorContent editor={editor} />
-      <MenuBar editor={editor} />
+      <MenuBar content={content} editor={editor} />
     </div>
   );
 };
