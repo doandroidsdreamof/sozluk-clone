@@ -78,6 +78,7 @@ export default {
         black: "#000",
         white: "#fff",
         logo: "#81C14B",
+        editorHead: "#0d0d0d",
 
         dark: {
           100: "#eeeeee",

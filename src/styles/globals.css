@@ -9,3 +9,6 @@
 .form_submitted input.error {
   border-color: red !important;
 }
+.richText {
+  outline: none;
+}

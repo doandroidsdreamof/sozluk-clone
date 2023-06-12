@@ -4,6 +4,29 @@ import { Color } from "@tiptap/extension-color";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
 import Document from "@tiptap/extension-document";
+import Code from "@tiptap/extension-code";
+import {
+  AiOutlineBold,
+  AiOutlineItalic,
+  AiOutlineStrikethrough,
+  AiOutlineCode,
+  AiOutlineOrderedList,
+  AiOutlineClear,
+} from "react-icons/ai";
+import { RxListBullet, RxQuote } from "react-icons/rx";
+import {
+  BsCodeSquare,
+  BsFileBreak,
+  BsParagraph,
+  BsTextParagraph,
+} from "react-icons/bs";
+import {
+  MdFormatClear,
+  MdHorizontalRule,
+  MdInsertPageBreak,
+  MdRedo,
+  MdUndo,
+} from "react-icons/md";
 
 type MenuProps = {
   editor: Editor;
@@ -14,10 +37,10 @@ const MenuBar = ({ editor }: MenuProps) => {
     return null;
   }
   const buttonStyle =
-    "is-active p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
+    "is-active p-2 text-gray-200  rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
   return (
-    <>
+    <div className="flex flex-wrap  items-center  border-t bg-editorHead   px-3 py-2 dark:border-gray-600 dark:bg-bg-alt-dark">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -27,7 +50,7 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        bold
+        <AiOutlineBold />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -38,7 +61,7 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        italic
+        <AiOutlineItalic />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
@@ -49,7 +72,7 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        strike
+        <AiOutlineStrikethrough />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCode().run()}
@@ -60,19 +83,13 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        code
-      </button>
-      <button
-        className={`${buttonStyle}`}
-        onClick={() => editor.chain().focus().unsetAllMarks().run()}
-      >
-        clear marks
+        <AiOutlineCode />
       </button>
       <button
         className={`${buttonStyle}`}
         onClick={() => editor.chain().focus().clearNodes().run()}
       >
-        clear nodes
+        <AiOutlineClear />
       </button>
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
@@ -82,7 +99,7 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        paragraph
+        <BsTextParagraph />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -152,7 +169,7 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        bullet list
+        <RxListBullet />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
@@ -162,7 +179,7 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        ordered list
+        <AiOutlineOrderedList />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -172,7 +189,7 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        code block
+        <BsCodeSquare />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -182,63 +199,47 @@ const MenuBar = ({ editor }: MenuProps) => {
             : `${buttonStyle}`
         }
       >
-        blockquote
+        <RxQuote />
       </button>
       <button
         className={`${buttonStyle}`}
         onClick={() => editor.chain().focus().setHorizontalRule().run()}
       >
-        horizontal rule
-      </button>
-      <button
-        className={`${buttonStyle}`}
-        onClick={() => editor.chain().focus().setHardBreak().run()}
-      >
-        hard break
+        <MdHorizontalRule />
       </button>
       <button
         className={`${buttonStyle}`}
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().chain().focus().undo().run()}
       >
-        undo
+        <MdUndo />
       </button>
       <button
         className={`${buttonStyle}`}
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().chain().focus().redo().run()}
       >
-        redo
+        <MdRedo />
       </button>
-      <button
-        onClick={() => editor.chain().focus().setColor("#958DF1").run()}
-        className={
-          editor.isActive("textStyle", { color: "#958DF1" })
-            ? `is-active ${buttonStyle}`
-            : `${buttonStyle}`
-        }
-      >
-        purple
-      </button>
-    </>
+    </div>
   );
 };
 
 const TextEditor = () => {
   const editor = useEditor({
-    extensions: [StarterKit, TextStyle, Color, Document, ListItem],
+    extensions: [StarterKit, TextStyle, Color, Document, ListItem, Code],
     editorProps: {
       attributes: {
         class:
-          "prose border-2 dark:border-input-dark border-input-light dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl m-5 focus:outline-none",
+          "richText block w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-light text-sm text-gray-800 bg-white border-0 dark:bg-bg-alt-light  dark:text-typography-body-light",
       },
     },
   }) as Editor;
 
   return (
-    <div className="">
-      <MenuBar editor={editor} />
+    <div className="mb-4 w-full rounded-lg border  border-gray-200 bg-gray-50 dark:border-input-border-dark   ">
       <EditorContent editor={editor} />
+      <MenuBar editor={editor} />
     </div>
   );
 };
