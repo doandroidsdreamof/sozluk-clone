@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 export const entryRouter = createTRPCRouter({
   createEntry: protectedProcedure
@@ -16,6 +20,28 @@ export const entryRouter = createTRPCRouter({
         return { data: { success: true, message: "entry is created" } };
       } else {
         return { data: { success: false, message: "entry is not created" } };
+      }
+    }),
+  getEntries: publicProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) => {
+      const findEntrysAndToic = await ctx.prisma.entry.findMany({
+        where: {
+          topic: {
+            topicTitle: input,
+          },
+        },
+        select: {
+          content: true,
+          topic: true,
+          user: true,
+          id: true,
+        },
+      });
+      if (findEntrysAndToic) {
+        return findEntrysAndToic;
+      } else {
+        return null;
       }
     }),
 });

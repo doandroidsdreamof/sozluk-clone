@@ -29,7 +29,7 @@ const Aside = () => {
                 <TopicLink
                   key={items.id}
                   text={items.topicTitle}
-                  url={items.id}
+                  url={items.topicTitle}
                 />
               ))}
           </nav>

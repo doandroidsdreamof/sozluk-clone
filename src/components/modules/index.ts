@@ -5,5 +5,15 @@ import Button from "./button/Button";
 import TextEditor from "./textEditor/TextEditor";
 import TopicHeader from "./topic/TopicHeader";
 import TopicLink from "./topic/TopicLink";
+import TextRenderer from "./textEditor/TextRenderer";
 
-export { Navbar, Aside, Footer, Button, TextEditor, TopicHeader, TopicLink };
+export {
+  Navbar,
+  Aside,
+  Footer,
+  Button,
+  TextEditor,
+  TopicHeader,
+  TopicLink,
+  TextRenderer,
+};

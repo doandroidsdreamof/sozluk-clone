@@ -12,13 +12,11 @@ export const topicRouter = createTRPCRouter({
       if (input != null) {
         const findTopics = await ctx.prisma.topic.findMany({
           orderBy: {
-            id: "desc",
+            createdAt: "desc",
           },
           take: 10,
           where: {
-            topicTitle: {
-              contains: input,
-            },
+            topicTitle: input,
           },
           select: {
             id: true,

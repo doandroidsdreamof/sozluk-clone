@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { TopicLayoutNull } from "~/components/layouts/index";
+import { TopicLayoutNull, TopicLayout } from "~/components/layouts/index";
 import { api } from "~/utils/api";
 
 const Topic: NextPage = () => {
@@ -10,14 +10,22 @@ const Topic: NextPage = () => {
     topicExist: string;
   };
 
-  const { data: getData, status } = api.topic.filterTopic.useQuery(topicId);
+  const { data: getData } = api.topic.filterTopic.useQuery(topicId);
+  console.info("🚀 ~ file: [topicId].tsx:15 ~ getData:", getData);
 
   return (
     <>
-      <TopicLayoutNull
-        topicId={topicId?.replace(/\+/g, " ")}
-        topicExist={getData != null ? "true" : "false"}
-      />
+      {getData ? (
+        <TopicLayout
+          topicId={topicId?.replace(/\+/g, " ")}
+          topicExist={"true"}
+        />
+      ) : (
+        <TopicLayoutNull
+          topicId={topicId?.replace(/\+/g, " ")}
+          topicExist={"false"}
+        />
+      )}
     </>
   );
 };
