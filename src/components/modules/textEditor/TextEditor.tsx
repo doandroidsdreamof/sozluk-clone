@@ -250,7 +250,7 @@ const TextEditor = ({ topicId }: TextEditorProps) => {
     editorProps: {
       attributes: {
         class:
-          "richText prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl  block w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-light text-sm text-gray-800 bg-white border-0 dark:bg-bg-alt-light  dark:text-typography-body-light",
+          "richText prose prose-sm sm:prose-base lg:prose-md xl:prose-lg  block w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-dark text-sm text-gray-800 bg-white border-0 dark:bg-dark-300  dark:text-typography-body-light",
       },
     },
     onUpdate({ editor }) {
@@ -262,7 +262,7 @@ const TextEditor = ({ topicId }: TextEditorProps) => {
   // console.info("🚀 ~ file: TextEditor.tsx:237 ~ TextEditor ~ json:", json)
 
   return (
-    <div className="mb-24 w-full  border  border-gray-200 bg-gray-50 dark:border-input-border-dark   ">
+    <div className="mb-24 w-full  border border-gray-200   bg-gray-50 dark:border-input-border-dark dark:bg-dark-300   ">
       <EditorContent editor={editor} />
       <MenuBar topicId={topicId} content={content} editor={editor} />
     </div>

@@ -1,12 +1,13 @@
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import { logoutClick } from "~/lib/auth-helpers/logout";
 import { DarkMode } from "../common/index";
 import Button from "../modules/button/Button";
-import { useSession } from "next-auth/react";
-import { signOut } from "next-auth/react";
 
 const ButtonContainer = () => {
   const session = useSession();
+  const router = useRouter();
   const registerLink = session.data == null ? "/register" : "/profile";
   const loginLink = session.data == null ? "/login" : "/";
   const registerButton = session.data == null ? "register" : "profile";
@@ -14,7 +15,7 @@ const ButtonContainer = () => {
 
   const handleSignout = () => {
     if (loginButton === "sign out") {
-      signOut().catch((err) => console.error(err));
+      logoutClick().catch((err) => console.error(err));
     } else {
       return false;
     }

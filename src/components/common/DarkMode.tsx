@@ -30,9 +30,9 @@ const DarkMode = () => {
     <>
       <button className={buttonStyle} onClick={handleTheme}>
         {theme && theme.value === "dark" ? (
-          <FiMoon size={15} />
+          <FiMoon size={12} />
         ) : (
-          <BsSun className="dark:text-white" size={15} />
+          <BsSun className="dark:text-white" size={12} />
         )}
       </button>
     </>
