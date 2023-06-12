@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const darkmodeStatus =
-  typeof window !== "undefined" ? localStorage.getItem("theme") : null;
+  typeof window != "undefined" ? localStorage.getItem("theme") : null;
 
 interface ThemeAction {
   payload: string;

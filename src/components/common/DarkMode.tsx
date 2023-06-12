@@ -3,7 +3,6 @@ import { BsSun } from "react-icons/bs";
 import { FiMoon } from "react-icons/fi";
 import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
 import { setTheme } from "~/lib/store/reducers/themeSlice";
-import Button from "../modules/button/Button";
 
 const DarkMode = () => {
   const theme = useAppSelector((state) => state.theme);
@@ -24,16 +23,18 @@ const DarkMode = () => {
     const next = theme.value === "dark" ? "light" : "dark";
     dispatch(setTheme(next));
   }
+  const buttonStyle =
+    "is-active p-2 border   rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
   return (
     <>
-      <Button type="outline" onClick={handleTheme}>
-        {theme.value === "dark" ? (
+      <button className={buttonStyle} onClick={handleTheme}>
+        {theme && theme.value === "dark" ? (
           <FiMoon size={15} />
         ) : (
           <BsSun className="dark:text-white" size={15} />
         )}
-      </Button>
+      </button>
     </>
   );
 };

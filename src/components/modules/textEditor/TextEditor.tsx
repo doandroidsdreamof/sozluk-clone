@@ -225,7 +225,7 @@ const MenuBar = ({ editor }: MenuProps) => {
 
 const TextEditor = () => {
   const editor = useEditor({
-    extensions: [StarterKit, TextStyle, Color, Document, ListItem, Code],
+    extensions: [StarterKit, TextStyle, Color],
     editorProps: {
       attributes: {
         class:
@@ -233,9 +233,11 @@ const TextEditor = () => {
       },
     },
   }) as Editor;
+  // const json = editor.getJSON()
+  // console.info("🚀 ~ file: TextEditor.tsx:237 ~ TextEditor ~ json:", json)
 
   return (
-    <div className="mb-4 w-full  border  border-gray-200 bg-gray-50 dark:border-input-border-dark   ">
+    <div className="mb-24 w-full  border  border-gray-200 bg-gray-50 dark:border-input-border-dark   ">
       <EditorContent editor={editor} />
       <MenuBar editor={editor} />
     </div>

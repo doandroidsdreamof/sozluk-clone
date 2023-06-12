@@ -36,7 +36,6 @@ const ButtonContainer = () => {
           {registerButton}
         </Button>
       </Link>
-
       <DarkMode />
     </div>
   );

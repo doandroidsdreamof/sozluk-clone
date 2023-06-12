@@ -1,5 +1,5 @@
 import FormLayout from "./FormLayout";
 import BaseLayout from "./BaseLayout";
-import TopicLayout from "./TopicLayout";
+import TopicLayoutNull from "./TopicLayoutNull";
 
-export { FormLayout, BaseLayout, TopicLayout };
+export { FormLayout, BaseLayout, TopicLayoutNull };

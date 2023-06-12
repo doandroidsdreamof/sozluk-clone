@@ -62,7 +62,9 @@ const AutoSearch = () => {
                     getData == null &&
                     input.length > 0
                   ) {
-                    void router.push(`/topic/${input.replace(/\s/g, "")}`);
+                    void router.push(
+                      `/topic/${encodeURIComponent(input.replace(/ /g, "+"))}`
+                    );
                     setInput("");
                   }
                 }}

@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { TopicLayout } from "~/components/layouts/index";
+import { TopicLayoutNull } from "~/components/layouts/index";
 import { api } from "~/utils/api";
 
 const Topic: NextPage = () => {
@@ -14,8 +14,8 @@ const Topic: NextPage = () => {
 
   return (
     <>
-      <TopicLayout
-        topicId={topicId}
+      <TopicLayoutNull
+        topicId={topicId.replace(/\+/g, " ")}
         topicExist={getData != null ? "true" : "false"}
       />
     </>
