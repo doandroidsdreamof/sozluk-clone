@@ -1,32 +1,22 @@
-import { EditorContent, useEditor, type Editor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
+import Code from "@tiptap/extension-code";
 import { Color } from "@tiptap/extension-color";
+import Document from "@tiptap/extension-document";
 import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
-import Document from "@tiptap/extension-document";
-import Code from "@tiptap/extension-code";
+import { EditorContent, useEditor, type Editor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import {
   AiOutlineBold,
-  AiOutlineItalic,
-  AiOutlineStrikethrough,
-  AiOutlineCode,
-  AiOutlineOrderedList,
   AiOutlineClear,
+  AiOutlineCode,
+  AiOutlineItalic,
+  AiOutlineOrderedList,
+  AiOutlineStrikethrough,
 } from "react-icons/ai";
+import { BsCodeSquare, BsTextParagraph } from "react-icons/bs";
+import { MdHorizontalRule, MdRedo, MdUndo } from "react-icons/md";
 import { RxListBullet, RxQuote } from "react-icons/rx";
-import {
-  BsCodeSquare,
-  BsFileBreak,
-  BsParagraph,
-  BsTextParagraph,
-} from "react-icons/bs";
-import {
-  MdFormatClear,
-  MdHorizontalRule,
-  MdInsertPageBreak,
-  MdRedo,
-  MdUndo,
-} from "react-icons/md";
+import Button from "../button/Button";
 
 type MenuProps = {
   editor: Editor;
@@ -221,6 +211,14 @@ const MenuBar = ({ editor }: MenuProps) => {
       >
         <MdRedo />
       </button>
+      <Button
+        className="ml-auto max-w-fit "
+        block={true}
+        size="tiny"
+        type="primary"
+      >
+        comment
+      </Button>
     </div>
   );
 };
@@ -237,7 +235,7 @@ const TextEditor = () => {
   }) as Editor;
 
   return (
-    <div className="mb-4 w-full rounded-lg border  border-gray-200 bg-gray-50 dark:border-input-border-dark   ">
+    <div className="mb-4 w-full  border  border-gray-200 bg-gray-50 dark:border-input-border-dark   ">
       <EditorContent editor={editor} />
       <MenuBar editor={editor} />
     </div>
