@@ -33,12 +33,22 @@ export const topicRouter = createTRPCRouter({
       }
     }),
   createTopic: protectedProcedure
-    .input(z.object({ topicTitle: z.string() }))
+    .input(z.object({ topicTitle: z.string(), entry: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const insertTopic = await ctx.prisma.topic.create({
         data: {
           user: { connect: { id: ctx.session.user.id } },
           topicTitle: input.topicTitle,
+          entry: {
+            createMany: {
+              data: [
+                {
+                  content: input.entry,
+                  userId: ctx.session.user.id,
+                },
+              ],
+            },
+          },
         },
       });
       if (insertTopic) {
