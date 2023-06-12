@@ -5,7 +5,6 @@ import { getServerAuthSession } from "~/server/auth";
 
 const Home: NextPage = () => {
   const session = useSession();
-  console.log("🚀 ~ file: index.tsx:15 ~ session:", session);
 
   return <></>;
 };

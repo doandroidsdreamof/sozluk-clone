@@ -99,7 +99,7 @@ const AutoSearch = () => {
               <Combobox.Options
                 className={
                   data.length > 0
-                    ? " absolute  mt-1 max-h-60  w-full overflow-auto rounded-md bg-bg-primary-light py-1 text-base shadow ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-bg-secondary-dark sm:text-sm"
+                    ? " absolute z-50  mt-1 max-h-60  w-full overflow-auto rounded-md bg-bg-primary-light py-1 text-base shadow ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-bg-secondary-dark sm:text-sm"
                     : "hidden"
                 }
               >
@@ -114,7 +114,7 @@ const AutoSearch = () => {
                       className={({ active }) =>
                         `relative  cursor-pointer select-none   text-sm ${
                           active
-                            ? "bg-button-light text-white  dark:text-typography-body-strong-dark  "
+                            ? "bg-button-light bg-brandGreen-800  text-white dark:text-typography-body-strong-dark  "
                             : " dark:text-typography-body-strong-dark "
                         }`
                       }
@@ -138,7 +138,7 @@ const AutoSearch = () => {
                             <span
                               className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
                                 active
-                                  ? " dark:text-typography-body-strong-dark "
+                                  ? " dark:text-typography-body-strong-dark"
                                   : " dark:text-typography-body-strong-dark  "
                               }`}
                             ></span>
