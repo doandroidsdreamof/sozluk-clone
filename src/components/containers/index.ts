@@ -1,11 +1,13 @@
 import NotificationContainer from "./NotificationContainer";
 import ButtonContainer from "./ButtonContainer";
-import TopicContainer from "./TopicContainer";
+import TopicEditorContainer from "./TopicEditorContainer";
 import RendererContainer from "./RendererContainer";
+import TopicViewContainer from "./TopicViewContainer";
 
 export {
   NotificationContainer,
   ButtonContainer,
-  TopicContainer,
+  TopicEditorContainer,
   RendererContainer,
+  TopicViewContainer,
 };

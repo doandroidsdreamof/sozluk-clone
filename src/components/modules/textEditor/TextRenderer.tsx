@@ -6,21 +6,24 @@ import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
 // Option 1: Browser + server-side
 import React, { useMemo } from "react";
+import Code from "@tiptap/extension-code";
+import Heading from "@tiptap/extension-heading";
 
 interface TextRendererProps {
   serializeString: string;
 }
 
 const TextRenderer = ({ serializeString }: TextRendererProps) => {
-  const json = JSON.parse(serializeString) as unknown[];
+  const json = JSON.parse(serializeString) as string[];
   const output = useMemo(() => {
-    return generateHTML(json, [Document, Paragraph, Text, Bold]);
+    return generateHTML(json, [Document, Paragraph, Text, Bold, Heading, Code]);
   }, [json]);
 
   return (
-    <pre>
-      <code className="max-w-xl text-white">{output}</code>
-    </pre>
+    <div
+      className="m-2 border p-4 dark:text-white"
+      dangerouslySetInnerHTML={{ __html: output }}
+    ></div>
   );
 };
 

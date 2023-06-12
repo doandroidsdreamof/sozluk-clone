@@ -10,15 +10,15 @@ const Topic: NextPage = () => {
     topicExist: string;
   };
 
-  const { data: getData } = api.topic.filterTopic.useQuery(topicId);
-  console.info("🚀 ~ file: [topicId].tsx:15 ~ getData:", getData);
+  const { data: getData } = api.topic.getSingleTopic.useQuery(topicId);
 
   return (
     <>
-      {getData ? (
+      {getData != null ? (
         <TopicLayout
           topicId={topicId?.replace(/\+/g, " ")}
           topicExist={"true"}
+          topicUid={getData.id}
         />
       ) : (
         <TopicLayoutNull

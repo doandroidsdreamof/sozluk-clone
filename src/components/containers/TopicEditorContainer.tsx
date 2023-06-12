@@ -1,11 +1,11 @@
 import { useSession } from "next-auth/react";
 import React, { type FC } from "react";
 
-interface TopicContainerProps {
+interface TopicEditorContainerProps {
   textEditor: React.ReactNode;
 }
 
-const TopicContainer: FC<TopicContainerProps> = (props) => {
+const TopicEditorContainer: FC<TopicEditorContainerProps> = (props) => {
   const session = useSession();
 
   return (
@@ -19,4 +19,4 @@ const TopicContainer: FC<TopicContainerProps> = (props) => {
   );
 };
 
-export default TopicContainer;
+export default TopicEditorContainer;

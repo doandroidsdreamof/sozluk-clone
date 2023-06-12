@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import router from "next/router";
 
 interface TopicsProps {
   text: string;
@@ -7,17 +8,15 @@ interface TopicsProps {
 }
 
 const TopicLink = ({ text, url }: TopicsProps) => {
-  //topicExist
+  const handleClick = () => {
+    void router.push(`/topic/${encodeURIComponent(url.replace(/ /g, "+"))}`);
+  };
   return (
-    <Link
-      href={{
-        pathname: `/topic/${url.replace(/\s/g, "")}`,
-      }}
-    >
+    <button onClick={handleClick}>
       <p className="line-clamp-2   items-center text-ellipsis  break-all  rounded-md px-4 py-2 text-left text-gray-700 hover:bg-gray-200 focus:outline-none dark:text-gray-300 dark:hover:bg-bg-alt-dark ">
         {text}
       </p>
-    </Link>
+    </button>
   );
 };
 

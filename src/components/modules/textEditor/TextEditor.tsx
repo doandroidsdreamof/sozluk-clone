@@ -24,21 +24,31 @@ type MenuProps = {
   editor: Editor;
   content: string;
   topicId: string;
+  topicExist: boolean;
 };
 
-const MenuBar = ({ editor, content, topicId }: MenuProps) => {
+const MenuBar = ({ editor, content, topicId, topicExist }: MenuProps) => {
   const { mutate } = api.topic.createTopic.useMutation();
+  const { mutate: createEntry } = api.entry.createEntry.useMutation();
 
   if (!editor) {
     return null;
   }
 
   const handlePost = () => {
-    mutate({
-      topicTitle: topicId.replace(/\+/g, " "),
-      entry: JSON.stringify(editor.getJSON()),
-    });
+    if (!topicExist) {
+      mutate({
+        topicTitle: topicId.replace(/\+/g, " "),
+        entry: JSON.stringify(editor.getJSON()),
+      });
+    } else {
+      createEntry({
+        topicId: topicId,
+        content: JSON.stringify(editor.getJSON()),
+      });
+    }
     editor.commands.clearContent(true);
+    return;
   };
 
   const buttonStyle =
@@ -242,8 +252,9 @@ const MenuBar = ({ editor, content, topicId }: MenuProps) => {
 
 interface TextEditorProps {
   topicId: string;
+  topicExist: boolean;
 }
-const TextEditor = ({ topicId }: TextEditorProps) => {
+const TextEditor = ({ topicId, topicExist }: TextEditorProps) => {
   const [content, setContent] = useState("");
   const editor = useEditor({
     extensions: [StarterKit, TextStyle, Color],
@@ -258,13 +269,15 @@ const TextEditor = ({ topicId }: TextEditorProps) => {
     },
   }) as Editor;
 
-  // const json = editor.getJSON()
-  // console.info("🚀 ~ file: TextEditor.tsx:237 ~ TextEditor ~ json:", json)
-
   return (
     <div className="mb-24 w-full  border border-gray-200   bg-gray-50 dark:border-input-border-dark dark:bg-dark-300   ">
       <EditorContent editor={editor} />
-      <MenuBar topicId={topicId} content={content} editor={editor} />
+      <MenuBar
+        topicExist={topicExist}
+        topicId={topicId}
+        content={content}
+        editor={editor}
+      />
     </div>
   );
 };

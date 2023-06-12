@@ -1,20 +1,23 @@
 import React, { useEffect } from "react";
 import { TopicHeader, TextEditor } from "../modules/index";
-import { TopicContainer, RendererContainer } from "../containers/index";
+import { TopicEditorContainer, RendererContainer } from "../containers/index";
 
 interface TopicLayoutProps {
   topicId: string;
   topicExist: string;
+  topicUid: string;
 }
 
-const TopicLayout = ({ topicId, topicExist }: TopicLayoutProps) => {
+const TopicLayout = ({ topicId, topicExist, topicUid }: TopicLayoutProps) => {
   return (
-    <div className=" top-0 mx-auto flex min-h-screen w-full  flex-col gap-4  p-3  text-left  lg:w-[38rem]      lg:-translate-x-3 lg:pl-0">
+    <div className=" top-0 mx-auto flex min-h-screen w-full  flex-col gap-4  p-3  text-left  lg:w-[38rem]    lg:-translate-x-3 lg:pl-0">
       <TopicHeader headerOne={topicId} />
-      <div className="h-fit max-w-md overflow-hidden break-all border-2">
+      <div className="">
         <RendererContainer topicId={topicId} />
       </div>
-      <TopicContainer textEditor={<TextEditor topicId={topicId} />} />
+      <TopicEditorContainer
+        textEditor={<TextEditor topicExist={true} topicId={topicUid} />}
+      />
     </div>
   );
 };

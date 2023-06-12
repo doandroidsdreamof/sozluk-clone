@@ -103,7 +103,7 @@ const AutoSearch = () => {
                     : "hidden"
                 }
               >
-                {data.length === 0 && input !== "" && getData == null ? (
+                {input !== "" && getData == null ? (
                   <div className=" relative cursor-default select-none px-4 py-2 dark:text-typography-body-strong-dark ">
                     Nothing found.
                   </div>

@@ -9,25 +9,43 @@ export const topicRouter = createTRPCRouter({
   filterTopic: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input }) => {
-      if (input != null) {
-        const findTopics = await ctx.prisma.topic.findMany({
-          orderBy: {
-            createdAt: "desc",
+      const findTopics = await ctx.prisma.topic.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        take: 10,
+        where: {
+          topicTitle: {
+            startsWith: input,
           },
-          take: 10,
-          where: {
-            topicTitle: input,
-          },
-          select: {
-            id: true,
-            topicTitle: true,
-          },
-        });
-        if (findTopics.length > 0) {
-          return findTopics;
-        } else {
-          return null;
-        }
+        },
+        select: {
+          id: true,
+          topicTitle: true,
+        },
+      });
+      if (findTopics) {
+        return findTopics;
+      } else {
+        return null;
+      }
+    }),
+  getSingleTopic: publicProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) => {
+      const findSingle = await ctx.prisma.topic.findFirst({
+        where: {
+          topicTitle: input,
+        },
+        select: {
+          topicTitle: true,
+          id: true,
+        },
+      });
+      if (findSingle) {
+        return findSingle;
+      } else {
+        return null;
       }
     }),
   createTopic: protectedProcedure
