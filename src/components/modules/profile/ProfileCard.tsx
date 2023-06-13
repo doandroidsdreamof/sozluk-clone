@@ -1,4 +1,5 @@
 import React from "react";
+import { Avatar } from "~/components/common/index";
 
 interface ProfileCardProps {
   imageURL: string;
@@ -6,21 +7,23 @@ interface ProfileCardProps {
   date: Date;
 }
 
-const ProfileCard = () => {
+const ProfileCard = ({ imageURL, date, name }: ProfileCardProps) => {
   return (
     <>
       <div className="">
         <h1 className="text-[0.80rem] font-bold text-typography-body-light dark:text-typography-body-dark">
-          Khatab wedaa
+          {name}
         </h1>
         <p className="font-helvetica text-[0.75em] font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
-          mar 10, 2019
+          {date.toDateString()}
         </p>
       </div>
-      <img
-        className="mx-4 block h-10 w-10 cursor-pointer  rounded-full object-cover"
-        src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=373&q=80"
+      <Avatar
         alt="avatar"
+        width={144}
+        height={144}
+        src="/images/default-avatar.png"
+        fallbackSrc="/images/default-avatar.png"
       />
     </>
   );

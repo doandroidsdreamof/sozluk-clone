@@ -26,16 +26,16 @@ const TextRenderer = ({ serializeString }: TextRendererProps) => {
   };
 
   return (
-    <div className="my-4  min-h-[10rem] max-w-4xl rounded-sm bg-white  p-3 text-sm shadow-sm   dark:bg-bg-alt-dark  ">
+    <div className="my-4 min-h-[10rem] max-w-4xl rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[42rem]  ">
       <div className="mt-2">
         {typeof output === "string" && output.length < 250 ? (
           <div
-            className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark "
+            className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white "
             dangerouslySetInnerHTML={{ __html: output }}
           ></div>
         ) : (
           <div
-            className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark"
+            className="prose prose-sm  m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white"
             dangerouslySetInnerHTML={{ __html: output.slice(0, showMore) }}
           ></div>
         )}
@@ -54,7 +54,7 @@ const TextRenderer = ({ serializeString }: TextRendererProps) => {
           {showMore === 250 ? "show more" : "show less"}
         </button>
         <div className="ml-auto flex flex-row items-center ">
-          <ProfileCard />
+          <ProfileCard name={"berkay"} date={new Date()} imageURL={"test"} />
         </div>
       </div>
     </div>

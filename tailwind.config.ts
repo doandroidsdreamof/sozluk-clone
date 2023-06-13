@@ -60,6 +60,9 @@ export default {
         roboto: ["Roboto", "sans-serif"],
         helvetica: ["Helvetica", "Arial", "sans-serif"],
       },
+      backgroundImage: {
+        "avatar-placeholder": "url('/static/images/default-avatar.png')",
+      },
       typography: {
         DEFAULT: {
           css: {

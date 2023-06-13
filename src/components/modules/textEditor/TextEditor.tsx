@@ -27,7 +27,7 @@ const TextEditor = ({ topicTitle }: TextEditorProps) => {
     editorProps: {
       attributes: {
         class:
-          "richText prose prose-sm sm:prose-base lg:prose-md xl:prose-lg  block w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-dark text-sm text-gray-800 bg-white border-0 dark:bg-dark-300  dark:text-typography-body-light",
+          "richText prose prose-sm sm:prose-base  lg:prose-md xl:prose-lg  block min-w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-dark text-sm text-gray-800  bg-gray-50 border-0 dark:bg-dark-300  dark:text-typography-body-light",
       },
     },
     onUpdate({ editor }) {
