@@ -15,8 +15,12 @@ const TextEditor = ({ topicTitle }: TextEditorProps) => {
   const { mutate: createEntry } = api.entry.createEntry.useMutation();
   const { refetch } = api.entry.getEntries.useQuery(topicTitle);
   const [content, setContent] = useState("");
-  const { data: getData, isLoading } =
-    api.topic.getSingleTopic.useQuery(topicTitle);
+  const { refetch: refetchGetAllTopics } = api.topic.getAllTopics.useQuery();
+  const {
+    refetch: refetchTopic,
+    data: getData,
+    isLoading,
+  } = api.topic.getSingleTopic.useQuery(topicTitle);
 
   const editor = useEditor({
     extensions: [StarterKit, TextStyle, Color],
@@ -44,7 +48,10 @@ const TextEditor = ({ topicTitle }: TextEditorProps) => {
             refetch()
               .then((get) => console.info("refetch =====>", get))
               .catch((err) => console.error(err));
+            refetchTopic().catch((err) => console.error(err));
+            refetchGetAllTopics().catch((err) => console.error(err));
           },
+
           onError: (error) => {
             console.error(error);
           },
@@ -60,6 +67,8 @@ const TextEditor = ({ topicTitle }: TextEditorProps) => {
             refetch()
               .then((get) => console.info("refetch =====>", get))
               .catch((err) => console.error(err));
+            refetchTopic().catch((err) => console.error(err));
+            refetchGetAllTopics().catch((err) => console.error(err));
           },
           onError: (error) => {
             console.error(error);
