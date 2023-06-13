@@ -12,6 +12,8 @@ import {
 import { clientRegisterSchema } from "~/schemas/index";
 import { api } from "~/utils/api";
 import { FormFooter } from "./index";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const loginValues = {
   userName: "",
@@ -23,6 +25,7 @@ const loginValues = {
 const RegisterForm = () => {
   const { mutate } = api.user.createUser.useMutation();
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const setAlert = (message: string, alertRaw: AlertType, timeout = 5000) => {
     const uid = nanoid();
@@ -36,6 +39,7 @@ const RegisterForm = () => {
   // eslint-disable-next-line @typescript-eslint/require-await
   async function handleRegister(data: IRegister) {
     const { confirmPassword, ...state } = data;
+    const { email, password } = data;
     try {
       mutate(state, {
         onError: (err) => {
@@ -46,7 +50,20 @@ const RegisterForm = () => {
           if (data.success === false) {
             setAlert(data.message, "DANGER", 5000);
           } else {
-            setAlert(data.message, "SUCCESS", 5000);
+            signIn("credentials", {
+              email: email,
+              password: password,
+              redirect: false,
+            })
+              .then((res) => {
+                if (res?.ok === true) {
+                  router.push("/");
+                  setAlert(data.message, "SUCCESS", 5000);
+                }
+              })
+              .catch((err) => {
+                console.error(err);
+              });
           }
         },
       });

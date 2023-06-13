@@ -34,8 +34,15 @@ export const entryRouter = createTRPCRouter({
         select: {
           content: true,
           topic: true,
-          user: true,
           id: true,
+          createdAt: true,
+          user: {
+            select: {
+              avatar: true,
+              name: true,
+              id: true,
+            },
+          },
         },
       });
       if (findEntrysAndToic) {

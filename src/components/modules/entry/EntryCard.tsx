@@ -5,9 +5,15 @@ interface EntryCardProps {
   outputLength: number;
   setShowMore: (param: number) => void;
   showMore: number;
+  children: React.ReactNode;
 }
 
-const EntryCard = ({ setShowMore, outputLength, showMore }: EntryCardProps) => {
+const EntryCard = ({
+  setShowMore,
+  outputLength,
+  showMore,
+  children,
+}: EntryCardProps) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const input = e.target as HTMLElement;
     if (input.innerText === "show more") {
@@ -30,9 +36,7 @@ const EntryCard = ({ setShowMore, outputLength, showMore }: EntryCardProps) => {
       >
         {showMore === 250 ? "show more" : "show less"}
       </button>
-      <div className="ml-auto flex flex-row items-center ">
-        <ProfileCard name={"berkay"} date={new Date()} imageURL={"test"} />
-      </div>
+      <div className="ml-auto flex flex-row items-center ">{children}</div>
     </div>
   );
 };

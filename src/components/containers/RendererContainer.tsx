@@ -12,9 +12,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   return (
     <div>
       {data != null ? (
-        data.map((items) => (
-          <TextRenderer key={items.id} serializeString={items.content} />
-        ))
+        data.map((items) => <TextRenderer {...items} key={items.id} />)
       ) : (
         <></>
       )}
