@@ -7,6 +7,7 @@ import TopicHeader from "./topic/TopicHeader";
 import TopicLink from "./topic/TopicLink";
 import TextRenderer from "./textEditor/TextRenderer";
 import ProfileCard from "./profile/ProfileCard";
+import EntryCard from "./entry/EntryCard";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   TopicLink,
   TextRenderer,
   ProfileCard,
+  EntryCard,
 };

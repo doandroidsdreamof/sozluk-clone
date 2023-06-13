@@ -3,7 +3,7 @@ import { generateHTML } from "@tiptap/html";
 // Option 1: Browser + server-side
 import StarterKit from "@tiptap/starter-kit";
 import React, { useMemo, useState } from "react";
-import { ProfileCard } from "../index";
+import { ProfileCard, EntryCard } from "../index";
 
 interface TextRendererProps {
   serializeString: string;
@@ -16,47 +16,25 @@ const TextRenderer = ({ serializeString }: TextRendererProps) => {
     return generateHTML(json, [StarterKit]);
   }, [json]);
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    const input = e.target as HTMLElement;
-    if (input.innerText === "show more") {
-      setShowMore(output.length);
-    } else {
-      setShowMore(250);
-    }
-  };
-
   return (
-    <div className="my-4 min-h-[10rem] max-w-4xl rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[42rem]  ">
+    <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[42rem]  ">
       <div className="mt-2">
-        {typeof output === "string" && output.length < 250 ? (
+        {typeof output === "string" ? (
           <div
             className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white "
-            dangerouslySetInnerHTML={{ __html: output }}
+            dangerouslySetInnerHTML={{
+              __html: output.length > 200 ? output.slice(0, showMore) : output,
+            }}
           ></div>
         ) : (
-          <div
-            className="prose prose-sm  m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white"
-            dangerouslySetInnerHTML={{ __html: output.slice(0, showMore) }}
-          ></div>
+          <></>
         )}
       </div>
-      <div className="mt-4 flex items-center justify-between">
-        <button
-          onClick={(e) => {
-            handleClick(e);
-          }}
-          className={
-            output.length < 250
-              ? "hidden"
-              : " mr-auto  flex max-w-fit cursor-pointer rounded-md px-2.5 py-1.5 text-xs text-blue-600  hover:underline dark:text-brandGreen-600  "
-          }
-        >
-          {showMore === 250 ? "show more" : "show less"}
-        </button>
-        <div className="ml-auto flex flex-row items-center ">
-          <ProfileCard name={"berkay"} date={new Date()} imageURL={"test"} />
-        </div>
-      </div>
+      <EntryCard
+        setShowMore={setShowMore}
+        showMore={showMore}
+        outputLength={output.length}
+      />
     </div>
   );
 };
