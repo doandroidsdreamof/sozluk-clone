@@ -49,7 +49,7 @@ export const topicRouter = createTRPCRouter({
       }
     }),
   createTopic: protectedProcedure
-    .input(z.object({ topicTitle: z.string(), entry: z.string() }))
+    .input(z.object({ topicTitle: z.string(), entry: z.string().min(2) }))
     .mutation(async ({ ctx, input }) => {
       const findTopic = await ctx.prisma.topic.findFirst({
         where: {
@@ -93,15 +93,7 @@ export const topicRouter = createTRPCRouter({
       select: {
         userId: true,
         topicTitle: true,
-        createdAt: true,
         id: true,
-        user: {
-          select: {
-            email: true,
-            name: true,
-            avatar: true,
-          },
-        },
       },
     });
     if (getAll != null) {

@@ -7,7 +7,7 @@ import {
 
 export const entryRouter = createTRPCRouter({
   createEntry: protectedProcedure
-    .input(z.object({ content: z.string(), topicId: z.string() }))
+    .input(z.object({ content: z.string().min(2), topicId: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const insertEntry = await ctx.prisma.entry.create({
         data: {

@@ -11,20 +11,21 @@ import { BsCodeSquare, BsTextParagraph } from "react-icons/bs";
 import { MdHorizontalRule, MdRedo, MdUndo } from "react-icons/md";
 import { RxListBullet, RxQuote } from "react-icons/rx";
 import Button from "../button/Button";
+import { BlockList } from "net";
+import { useEffect } from "react";
 
 interface MenuProps {
   editor: Editor;
-  content: string;
   handleFunc: () => void;
 }
 
-const TextEditorMenu = ({ editor, content, handleFunc }: MenuProps) => {
+const buttonStyle =
+  "is-active p-2 text-gray-200  rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
+
+const TextEditorMenu = ({ editor, handleFunc }: MenuProps) => {
   if (!editor) {
     return null;
   }
-
-  const buttonStyle =
-    "is-active p-2 text-gray-200  rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
   return (
     <div className="flex flex-wrap  items-center  border-t bg-editorHead   px-3 py-2 dark:border-gray-600 dark:bg-bg-alt-dark">
@@ -208,16 +209,13 @@ const TextEditorMenu = ({ editor, content, handleFunc }: MenuProps) => {
       >
         <MdRedo />
       </button>
-      <Button
-        disabled={content.length == 0 ? true : false}
-        onClick={() => handleFunc()}
-        className="ml-auto max-w-fit "
-        block={true}
-        size="tiny"
-        type="primary"
+      <button
+        onClick={handleFunc}
+        disabled={editor.getText().length === 0 ? true : false}
+        className="sbui-btn-primary dark ml-auto max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 px-2.5 py-1.5 text-xs text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
       >
         comment
-      </Button>
+      </button>
     </div>
   );
 };

@@ -12,3 +12,6 @@
 .richText {
   outline: none;
 }
+.dark .sbui-btn-primary {
+  text-shadow: 0px 0px 4px rgba(38 111 78 / 50%);
+}

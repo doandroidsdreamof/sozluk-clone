@@ -9,13 +9,15 @@ const Topic: NextPage = () => {
     topicId: string;
   };
 
-  const { data: getData } = api.topic.getSingleTopic.useQuery(topicId);
+  const { data: getData, isLoading } =
+    api.topic.getSingleTopic.useQuery(topicId);
 
   return (
     <>
       <TopicLayout
         topicTitle={topicId?.replace(/\+/g, " ")}
         topicUid={getData?.id || null}
+        isLoading={isLoading}
       />
     </>
   );
