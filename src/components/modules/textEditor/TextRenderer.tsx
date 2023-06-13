@@ -2,13 +2,20 @@
 import { generateHTML } from "@tiptap/html";
 // Option 1: Browser + server-side
 import StarterKit from "@tiptap/starter-kit";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ProfileCard, EntryCard, ShareButton } from "../index";
 import { Settings } from "~/components/common/index";
+import { useAppSelector } from "~/lib/store/hooks";
+import { TextEditor } from "../index";
+import { api } from "~/utils/api";
 
 interface TextRendererProps {
   content: string;
   createdAt: Date;
+  id: string;
+  topic: {
+    topicTitle: string;
+  };
   user: {
     avatar: string | null;
     name: string;
@@ -16,29 +23,57 @@ interface TextRendererProps {
   };
 }
 
-const TextRenderer = ({ content, user, createdAt }: TextRendererProps) => {
+const TextRenderer = ({
+  content,
+  user,
+  createdAt,
+  topic,
+  id: entryId,
+}: TextRendererProps) => {
+  const { refetch } = api.entry.getEntries.useQuery(topic.topicTitle);
   const json = JSON.parse(content) as string[];
   const [showMore, setShowMore] = useState<number>(250);
+  const [edit, setEdit] = useState(false);
+  const utils = api.useContext();
+
   const output = useMemo(() => {
     return generateHTML(json, [StarterKit]);
   }, [json]);
+
+  const handleEdit = () => {
+    setEdit(!edit);
+  };
+  const handleClose = () => {
+    setEdit(false);
+  };
 
   return (
     <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[42rem]  ">
       <div className="mt-2">
         <div className="flex flex-row  justify-end">
           <ShareButton />
-          <Settings userId={user.id} />
+          <Settings
+            key={entryId}
+            handleEdit={() => handleEdit()}
+            userId={user.id}
+          />
         </div>
-        {typeof output === "string" ? (
+        {!edit && typeof output === "string" ? (
           <div
+            key={entryId}
             className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white "
             dangerouslySetInnerHTML={{
               __html: output.length > 200 ? output.slice(0, showMore) : output,
             }}
           ></div>
         ) : (
-          <></>
+          <TextEditor
+            handleClose={() => handleClose()}
+            entryId={entryId}
+            key={user.id}
+            entry={output}
+            topicTitle={topic.topicTitle}
+          />
         )}
       </div>
       <EntryCard

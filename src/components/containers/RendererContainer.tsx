@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { api } from "~/utils/api";
 import { TextRenderer } from "../modules/index";
 

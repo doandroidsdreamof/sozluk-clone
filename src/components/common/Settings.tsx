@@ -2,18 +2,20 @@ import React, { Fragment } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useSession } from "next-auth/react";
 import { Menu, Transition } from "@headlessui/react";
+import { useAppDispatch } from "~/lib/store/hooks";
 
 interface SettingsProps {
   userId: string;
+  handleEdit: () => void;
 }
 
-const Settings = ({ userId }: SettingsProps) => {
+const Settings = ({ userId, handleEdit }: SettingsProps) => {
   const session = useSession();
 
   return (
     <>
       {session.data?.user.id === userId ? (
-        <div className="">
+        <div className="z-40">
           <Menu as="div" className="relative inline-block text-left ">
             <div>
               <Menu.Button className="is-active  right-0 flex  cursor-pointer rounded  p-2 text-typography-body-light hover:bg-gray-100 hover:text-gray-900  dark:text-typography-body-strong-dark dark:hover:bg-gray-600 dark:hover:text-white">
@@ -35,6 +37,7 @@ const Settings = ({ userId }: SettingsProps) => {
                   <Menu.Item>
                     {({ active }) => (
                       <button
+                        onClick={handleEdit}
                         className={`${
                           active ? "bg-violet-500 text-white" : "text-gray-900"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}

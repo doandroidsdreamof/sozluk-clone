@@ -23,12 +23,12 @@ export const entryRouter = createTRPCRouter({
       }
     }),
   getEntries: publicProcedure
-    .input(z.string())
+    .input(z.string().nullable())
     .query(async ({ ctx, input }) => {
       const findEntrysAndToic = await ctx.prisma.entry.findMany({
         where: {
           topic: {
-            topicTitle: input,
+            topicTitle: input || "",
           },
         },
         select: {
@@ -49,6 +49,37 @@ export const entryRouter = createTRPCRouter({
         return findEntrysAndToic;
       } else {
         return null;
+      }
+    }),
+  updateEntry: protectedProcedure
+    .input(
+      z.object({
+        entryId: z.string(),
+        content: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const checkCurrentUser = await ctx.prisma.entry.findFirst({
+        where: {
+          userId: ctx.session?.user?.id,
+        },
+      });
+      if (checkCurrentUser) {
+        const updateSingleEntry = await ctx.prisma.entry.update({
+          where: {
+            id: input.entryId,
+          },
+          data: {
+            content: input.content,
+          },
+        });
+        if (updateSingleEntry) {
+          return { data: { success: true, message: "entry is updated" } };
+        } else {
+          return { data: { success: false, message: "entry is not updated" } };
+        }
+      } else {
+        return { data: { success: false, message: "entry is not updated" } };
       }
     }),
 });

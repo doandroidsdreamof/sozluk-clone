@@ -14,12 +14,13 @@ import { RxListBullet, RxQuote } from "react-icons/rx";
 interface MenuProps {
   editor: Editor;
   handleFunc: () => void;
+  buttonText: string;
 }
 
 const buttonStyle =
   "is-active p-2 text-gray-200  rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
-const TextEditorMenu = ({ editor, handleFunc }: MenuProps) => {
+const TextEditorMenu = ({ editor, handleFunc, buttonText }: MenuProps) => {
   if (!editor) {
     return null;
   }
@@ -207,11 +208,11 @@ const TextEditorMenu = ({ editor, handleFunc }: MenuProps) => {
         <MdRedo />
       </button>
       <button
-        onClick={handleFunc}
+        onClick={() => handleFunc()}
         disabled={editor.getText().length === 0 ? true : false}
-        className="sbui-btn-primary dark ml-auto max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 px-2.5 py-1.5 text-xs text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
+        className="sbui-btn-primary dark ml-auto mt-3 max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 px-2.5 py-1.5 text-xs text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
       >
-        comment
+        {buttonText}
       </button>
     </div>
   );

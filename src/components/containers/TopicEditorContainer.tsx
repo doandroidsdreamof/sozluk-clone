@@ -7,10 +7,6 @@ interface TopicEditorContainerProps {
 
 const TopicEditorContainer: FC<TopicEditorContainerProps> = (props) => {
   const session = useSession();
-  console.log(
-    "🚀 ~ file: TopicEditorContainer.tsx:10 ~ session:",
-    session.data
-  );
 
   return (
     <div>
