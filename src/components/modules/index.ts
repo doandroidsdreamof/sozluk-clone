@@ -8,6 +8,7 @@ import TopicLink from "./topic/TopicLink";
 import TextRenderer from "./textEditor/TextRenderer";
 import ProfileCard from "./profile/ProfileCard";
 import EntryCard from "./entry/EntryCard";
+import ShareButton from "./entry/ShareButton";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   TextRenderer,
   ProfileCard,
   EntryCard,
+  ShareButton,
 };

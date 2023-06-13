@@ -10,9 +10,6 @@ import {
 import { BsCodeSquare, BsTextParagraph } from "react-icons/bs";
 import { MdHorizontalRule, MdRedo, MdUndo } from "react-icons/md";
 import { RxListBullet, RxQuote } from "react-icons/rx";
-import Button from "../button/Button";
-import { BlockList } from "net";
-import { useEffect } from "react";
 
 interface MenuProps {
   editor: Editor;
