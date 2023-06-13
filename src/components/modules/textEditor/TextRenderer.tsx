@@ -1,6 +1,6 @@
 import Bold from "@tiptap/extension-bold";
 // Option 2: Browser-only (lightweight)
-import { generateHTML } from "@tiptap/core";
+import { generateHTML } from "@tiptap/html";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
 import Text from "@tiptap/extension-text";
@@ -18,15 +18,7 @@ const TextRenderer = ({ serializeString }: TextRendererProps) => {
   const json = JSON.parse(serializeString) as string[];
   const [showMore, setShowMore] = useState<number>(250);
   const output = useMemo(() => {
-    return generateHTML(json, [
-      Document,
-      Paragraph,
-      Text,
-      Bold,
-      Heading,
-      Code,
-      StarterKit,
-    ]);
+    return generateHTML(json, [Document, Heading, Code, StarterKit]) ;
   }, [json]);
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
@@ -39,11 +31,15 @@ const TextRenderer = ({ serializeString }: TextRendererProps) => {
   };
 
   return (
-    <div className="lg:prose-md prose prose-sm  m-2 block min-h-[10rem] w-full rounded-t-sm  border bg-white p-4  px-0 text-sm text-gray-800 sm:prose-base xl:prose-lg  dark:bg-dark-300  dark:text-typography-body-light">
-      {output.length < 250 && typeof output === "string" ? (
-        <div dangerouslySetInnerHTML={{ __html: output }}></div>
+    <div className=" prose prose-sm m-2  min-h-[10rem]  w-full rounded-t-sm border  bg-white p-3 text-sm   text-gray-800 sm:prose-base xl:prose-lg  dark:bg-dark-300  dark:text-typography-body-light">
+      {typeof output === "string" && output.length < 250 ? (
+        <section
+          className="break-words text-sm"
+          dangerouslySetInnerHTML={{ __html: output }}
+        ></section>
       ) : (
         <div
+          className="break-words text-sm"
           dangerouslySetInnerHTML={{ __html: output.slice(0, showMore) }}
         ></div>
       )}
@@ -54,7 +50,7 @@ const TextRenderer = ({ serializeString }: TextRendererProps) => {
         className={
           output.length < 250
             ? "hidden"
-            : "sbui-btn-primary dark ml-auto max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 px-2.5 py-1.5 text-xs text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
+            : "sbui-btn-primary dark ml-auto   flex max-w-fit cursor-pointer rounded-md px-2.5  py-1.5 text-xs text-typography-body-light hover:bg-brandGreen-600 hover:text-white dark:text-white dark:hover:bg-brandGreen-900"
         }
       >
         {showMore === 250 ? "show more" : "show less"}

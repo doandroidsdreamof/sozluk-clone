@@ -9,10 +9,6 @@ interface TopicLayoutProps {
 }
 
 const TopicLayout = ({ topicTitle, topicUid, isLoading }: TopicLayoutProps) => {
-  console.log(
-    "🚀 ~ file: TopicLayout.tsx:12 ~ TopicLayout ~ topicUid:",
-    topicUid
-  );
   if (isLoading) {
     return <></>;
   }
