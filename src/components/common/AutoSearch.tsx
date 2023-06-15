@@ -5,6 +5,7 @@ import { Fragment, useEffect, useState } from "react";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { HiOutlineSearch } from "react-icons/hi";
 import { api } from "~/utils/api";
+import { FilterModal } from "../modals/index";
 
 interface SearchOptions {
   id: string;
@@ -84,7 +85,7 @@ const AutoSearch = () => {
                 <HiOutlineSearch className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
               </button>
             </div>
-
+            {up ? <FilterModal /> : <></>}
             <Transition
               as={Fragment}
               leave="transition ease-in duration-100"
