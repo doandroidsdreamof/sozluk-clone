@@ -11,7 +11,7 @@ const FilterForm = () => {
   return (
     <>
       <form className="text-left">
-        <div className="flex flex-col gap-4 p-1  ">
+        <div className="flex flex-col gap-3 p-1  ">
           <div>
             <label
               htmlFor="keywords"
@@ -27,7 +27,6 @@ const FilterForm = () => {
               }
             />
           </div>
-
           <div>
             <label
               htmlFor="author"
@@ -39,11 +38,10 @@ const FilterForm = () => {
               type="text"
               name="author"
               className={
-                "w-full rounded border  border-input-border-light bg-bg-secondary-light  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-1.5  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>
-
           <div className="flex w-full items-center ">
             <div className="relative w-full">
               <div className="pointer-events-none absolute inset-y-0 left-0 z-40 flex items-center pl-3">
@@ -55,7 +53,7 @@ const FilterForm = () => {
                 selected={startDate}
                 onChange={(date: Date) => setStartDate(date)}
                 className={
-                  "!dark:text-input-label-dark w-full rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
+                  "!dark:text-input-label-dark w-full  rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
                 }
               />
             </div>
