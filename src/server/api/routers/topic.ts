@@ -102,4 +102,16 @@ export const topicRouter = createTRPCRouter({
       return null;
     }
   }),
+  removeTopic: protectedProcedure
+    .input(z.string().nullable())
+    .mutation(async ({ ctx, input }) => {
+      //*If there is no entry inside topic
+      if (input) {
+        const deleteTopic = await ctx.prisma.topic.delete({
+          where: {
+            id: input,
+          },
+        });
+      }
+    }),
 });

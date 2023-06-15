@@ -16,6 +16,7 @@ interface TextRendererProps {
   id: string;
   topic: {
     topicTitle: string;
+    id: string;
   };
   user: {
     avatar: string | null;
@@ -35,6 +36,7 @@ const TextRenderer = ({
     topic.topicTitle
   );
   const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
+  const { mutate: removeLastTopic } = api.topic.removeTopic.useMutation();
   const json = JSON.parse(content) as string[];
   const [showMore, setShowMore] = useState<number>(250);
   const [edit, setEdit] = useState(false);
@@ -55,6 +57,10 @@ const TextRenderer = ({
     removeEntry(entryId, {
       onSuccess: (data) => {
         if (data.success == true) {
+          if (data.count === 1) {
+            console.info(data.count);
+            removeLastTopic(topic.id);
+          }
           console.info(data.message);
           refetchEntry().catch((err) => console.error(err));
         } else {

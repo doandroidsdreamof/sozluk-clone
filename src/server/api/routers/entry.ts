@@ -86,9 +86,17 @@ export const entryRouter = createTRPCRouter({
           },
         });
         if (removeSingleEntry.count > 0) {
-          return { success: true, message: "entry is removed" };
+          return {
+            success: true,
+            message: "entry is removed",
+            count: removeSingleEntry.count,
+          };
         } else {
-          return { success: false, message: "entry is not removed" };
+          return {
+            success: false,
+            message: "entry is not removed",
+            count: removeSingleEntry.count,
+          };
         }
       } else {
         return { success: false, message: "entry is not removed" };
