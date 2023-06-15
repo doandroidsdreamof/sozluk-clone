@@ -10,8 +10,8 @@ interface ProfileCardProps {
 const ProfileCard = ({ imageURL, date, name }: ProfileCardProps) => {
   return (
     <>
-      <div className="">
-        <h1 className="text-[0.80rem] font-bold text-typography-body-light dark:text-typography-body-dark">
+      <div className="mt-0.5">
+        <h1 className="text-[0.80rem]   font-bold text-typography-body-light dark:text-typography-body-dark">
           {name}
         </h1>
         <p className="font-helvetica text-[0.75em] font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">

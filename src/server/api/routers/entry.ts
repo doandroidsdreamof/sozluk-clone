@@ -25,30 +25,32 @@ export const entryRouter = createTRPCRouter({
   getEntries: publicProcedure
     .input(z.string().nullable())
     .query(async ({ ctx, input }) => {
-      const findEntrysAndToic = await ctx.prisma.entry.findMany({
-        where: {
-          topic: {
-            topicTitle: input || "",
-          },
-        },
-        select: {
-          content: true,
-          topic: true,
-          id: true,
-          createdAt: true,
-          user: {
-            select: {
-              avatar: true,
-              name: true,
-              id: true,
+      if (input) {
+        const findEntrysAndToic = await ctx.prisma.entry.findMany({
+          where: {
+            topic: {
+              topicTitle: input || "",
             },
           },
-        },
-      });
-      if (findEntrysAndToic) {
-        return findEntrysAndToic;
-      } else {
-        return null;
+          select: {
+            content: true,
+            topic: true,
+            id: true,
+            createdAt: true,
+            user: {
+              select: {
+                avatar: true,
+                name: true,
+                id: true,
+              },
+            },
+          },
+        });
+        if (findEntrysAndToic) {
+          return findEntrysAndToic;
+        } else {
+          return null;
+        }
       }
     }),
   updateEntry: protectedProcedure
