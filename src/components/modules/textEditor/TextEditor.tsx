@@ -51,69 +51,64 @@ const TextEditor = ({
     },
   }) as Editor;
 
-  const handlePost = async () => {
-    try {
-      if (editor.getText().length > 0) {
-        if (getData == null) {
-          const newEntryAndTopic = {
-            topicTitle: topicTitle,
-            entry: JSON.stringify(editor.getJSON()),
-          };
-          mutate(newEntryAndTopic, {
-            onSuccess: () => {
-              refetchTopic().catch((err) => console.error(err));
-              refetchGetAllTopics().catch((err) => console.error(err));
-            },
-
-            onError: (error) => {
-              console.error(error);
-            },
-          });
-          editor.commands.clearContent(true);
-          return;
-        } else {
-          const newEntry = {
-            topicId: entryId ? entryId : getData.id,
-            content: JSON.stringify(editor.getJSON()),
-          };
-          if (entry && handleClose) {
-            const { topicId: entryId, content } = newEntry;
-            updateEntry(
-              { entryId, content },
-              {
-                onSuccess: (data) => {
-                  utils.entry.getEntries
-                    .invalidate()
-                    .catch((err) => console.log(err));
-                },
-                onError: (error) => {
-                  console.error(error);
-                },
-              }
-            );
+  const handlePost = () => {
+    if (editor.getText().length > 0) {
+      if (entry && handleClose && entryId) {
+        const newEntryUpdate = {
+          entryId: entryId,
+          content: JSON.stringify(editor.getJSON()),
+        };
+        updateEntry(newEntryUpdate, {
+          onSuccess: (data) => {
+            console.info("entry updated", data);
+            utils.entry.getEntries
+              .invalidate(topicTitle)
+              .catch((err) => console.log(err));
             handleClose();
-            editor.commands.clearContent(true);
-            return;
-          } else {
-            createEntry(newEntry, {
-              onSuccess: () => {
-                refetchTopic().catch((err) => console.error(err));
-                refetchGetAllTopics().catch((err) => console.error(err));
-              },
-              onError: (error) => {
-                console.error(error);
-              },
-            });
-            editor.commands.clearContent(true);
-          }
-        }
+          },
+          onError: (error) => {
+            console.error(error);
+          },
+        });
+
+        editor.commands.clearContent(true);
+        return;
       }
-    } catch (err) {
-      console.log("🚀 ~ file: TextEditor.tsx:118 ~ handlePost ~ err:", err);
-    } finally {
-      await refetch()
-        .then((get) => console.info("refetched====>", get))
-        .catch((err) => console.error(err));
+      if (getData == null) {
+        const newEntryAndTopic = {
+          topicTitle: topicTitle,
+          entry: JSON.stringify(editor.getJSON()),
+        };
+        mutate(newEntryAndTopic, {
+          onSuccess: () => {
+            console.info("topic & entry created");
+            refetchTopic().catch((err) => console.error(err));
+            refetchGetAllTopics().catch((err) => console.error(err));
+          },
+
+          onError: (error) => {
+            console.error(error);
+          },
+        });
+        editor.commands.clearContent(true);
+        return;
+      } else {
+        const newEntry = {
+          topicId: getData.id,
+          content: JSON.stringify(editor.getJSON()),
+        };
+        createEntry(newEntry, {
+          onSuccess: () => {
+            console.info("entry created");
+            refetchTopic().catch((err) => console.error(err));
+            refetchGetAllTopics().catch((err) => console.error(err));
+          },
+          onError: (error) => {
+            console.error(error);
+          },
+        });
+        editor.commands.clearContent(true);
+      }
     }
   };
 
@@ -124,7 +119,7 @@ const TextEditor = ({
         buttonText={entry ? "edit" : "comment"}
         editor={editor}
         handleFunc={() => {
-          handlePost().catch((err) => console.log(err));
+          handlePost();
         }}
       />
     </div>

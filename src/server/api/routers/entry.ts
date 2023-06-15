@@ -74,12 +74,10 @@ export const entryRouter = createTRPCRouter({
           },
         });
         if (updateSingleEntry) {
-          return { data: { success: true, message: "entry is updated" } };
+          return { success: true, message: "entry is updated" };
         } else {
-          return { data: { success: false, message: "entry is not updated" } };
+          return { success: false, message: "entry is not updated" };
         }
-      } else {
-        return { data: { success: false, message: "entry is not updated" } };
       }
     }),
 });
