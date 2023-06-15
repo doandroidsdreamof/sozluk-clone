@@ -68,7 +68,7 @@ const AutoSearch = () => {
                 onChange={(event) => {
                   setInput(event.target.value);
                 }}
-                placeholder="başlık,#entry,@yazar"
+                placeholder="topic,#entry,@author"
               />
               <button
                 onClick={() => setUp(!up)}

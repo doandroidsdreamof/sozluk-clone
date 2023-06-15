@@ -19,7 +19,7 @@ const Aside = () => {
         <div className="flex w-52 flex-col  overflow-y-auto  border-r border-input-border-light bg-bg-primary-light dark:bg-bg-primary-dark lg:w-56">
           <div className="flex   h-16  items-center  px-4 pt-2 text-left">
             <span className="px-4 text-lg font-semibold  text-gray-800 dark:text-white">
-              Gündem
+              Trending
             </span>
             <IoIosSettings className="-translate-x-2 cursor-pointer  text-gray-800 dark:text-white" />
           </div>
