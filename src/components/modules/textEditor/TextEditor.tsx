@@ -26,6 +26,7 @@ const TextEditor = ({
   const { refetch: refetchGetAllTopics } = api.topic.getAllTopics.useQuery();
   const { mutate: updateEntry } = api.entry.updateEntry.useMutation();
   const utils = api.useContext();
+
   const {
     refetch: refetchTopic,
     data: getData,

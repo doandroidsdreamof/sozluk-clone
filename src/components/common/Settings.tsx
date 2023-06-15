@@ -7,9 +7,12 @@ import { useAppDispatch } from "~/lib/store/hooks";
 interface SettingsProps {
   userId: string;
   handleEdit: () => void;
+  handleRemoveEntry: () => void;
 }
 
-const Settings = ({ userId, handleEdit }: SettingsProps) => {
+// TODO session.data?.user.id === userId => bu kısım için ayrı bir route oluşturup backend'den kontrol edilmeli
+
+const Settings = ({ userId, handleEdit, handleRemoveEntry }: SettingsProps) => {
   const session = useSession();
 
   return (
@@ -51,6 +54,7 @@ const Settings = ({ userId, handleEdit }: SettingsProps) => {
                   <Menu.Item>
                     {({ active }) => (
                       <button
+                        onClick={handleRemoveEntry}
                         className={`${
                           active ? "bg-violet-500 text-white" : "text-gray-900"
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm`}

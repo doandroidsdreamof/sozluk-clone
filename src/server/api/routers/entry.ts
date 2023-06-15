@@ -80,4 +80,23 @@ export const entryRouter = createTRPCRouter({
         }
       }
     }),
+  removeEntry: protectedProcedure
+    .input(z.string().nullable())
+    .mutation(async ({ ctx, input }) => {
+      if (input != null) {
+        const removeSingleEntry = await ctx.prisma.entry.deleteMany({
+          where: {
+            id: input,
+            userId: ctx.session.user.id,
+          },
+        });
+        if (removeSingleEntry.count > 0) {
+          return { success: true, message: "entry is removed" };
+        } else {
+          return { success: false, message: "entry is not removed" };
+        }
+      } else {
+        return { success: false, message: "entry is not removed" };
+      }
+    }),
 });

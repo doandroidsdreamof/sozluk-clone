@@ -9,13 +9,13 @@ const TopicEditorContainer: FC<TopicEditorContainerProps> = (props) => {
   const session = useSession();
 
   return (
-    <div>
+    <>
       {session.data?.user ? (
-        <div className="w-full lg:w-[42rem]">{props.textEditor}</div>
+        <div className="mt-auto w-full lg:w-[42rem]">{props.textEditor}</div>
       ) : (
         <></>
       )}
-    </div>
+    </>
   );
 };
 

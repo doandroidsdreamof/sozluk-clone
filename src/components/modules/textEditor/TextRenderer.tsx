@@ -8,6 +8,7 @@ import { Settings } from "~/components/common/index";
 import { useAppSelector } from "~/lib/store/hooks";
 import { TextEditor } from "../index";
 import { api } from "~/utils/api";
+import DOMPurify from "isomorphic-dompurify";
 
 interface TextRendererProps {
   content: string;
@@ -31,13 +32,14 @@ const TextRenderer = ({
   id: entryId,
 }: TextRendererProps) => {
   const { refetch } = api.entry.getEntries.useQuery(topic.topicTitle);
+  const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
   const json = JSON.parse(content) as string[];
   const [showMore, setShowMore] = useState<number>(250);
   const [edit, setEdit] = useState(false);
-  const utils = api.useContext();
 
   const output = useMemo(() => {
-    return generateHTML(json, [StarterKit]);
+    const purfied = DOMPurify.sanitize(generateHTML(json, [StarterKit]));
+    return purfied;
   }, [json]);
 
   const handleEdit = () => {
@@ -45,6 +47,22 @@ const TextRenderer = ({
   };
   const handleClose = () => {
     setEdit(false);
+  };
+  // const sanitizedBlog=DOMPurify.sanitize(blog)
+  const handleRemoveEntry = () => {
+    removeEntry(entryId, {
+      onSuccess: (data) => {
+        if (data.success == true) {
+          console.info(data.message);
+        } else {
+          console.info(data.message);
+        }
+        setEdit(false);
+      },
+      onError: (error) => {
+        console.error(error);
+      },
+    });
   };
 
   return (
@@ -56,6 +74,7 @@ const TextRenderer = ({
             key={entryId}
             handleEdit={() => handleEdit()}
             userId={user.id}
+            handleRemoveEntry={() => handleRemoveEntry()}
           />
         </div>
         {!edit && typeof output === "string" ? (
