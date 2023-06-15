@@ -13,13 +13,11 @@ const Avatar = ({ src, fallbackSrc, width, height, alt }: AvatarProps) => {
   const [imgSrc, setImgSrc] = useState(src);
 
   return (
-    <Image
-      className="mx-4 block h-10 w-10 cursor-pointer  rounded-full object-cover "
-      alt={alt}
+    <img
+      className="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover "
+      alt={`${alt}`}
       src={imgSrc}
       loading="lazy"
-      width={width}
-      height={height}
       onError={() => {
         setImgSrc(fallbackSrc);
       }}
