@@ -79,7 +79,7 @@ model Entry{
     userId    String
     entryId   String
     user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    topic     Topic    @relation(fields: [entryId], references: [id])
+    topic     Topic    @relation(fields: [entryId], references: [id], onDelete: Cascade)
     likes     Likes[]
     avatar    String?
     postUrl   String?
@@ -107,7 +107,7 @@ model Likes {
 model Topic{
     id        String   @id @default(cuid())
     createdAt DateTime @default(now())
-    topicTitle String  
+    topicTitle String
     userId    String
     // tagId     String
     user      User     @relation(fields: [userId], references: [id])

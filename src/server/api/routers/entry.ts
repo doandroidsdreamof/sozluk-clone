@@ -59,12 +59,7 @@ export const entryRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const checkCurrentUser = await ctx.prisma.entry.findFirst({
-        where: {
-          userId: ctx.session?.user?.id,
-        },
-      });
-      if (checkCurrentUser) {
+      if (ctx.session.user.id === input.entryId) {
         const updateSingleEntry = await ctx.prisma.entry.update({
           where: {
             id: input.entryId,
