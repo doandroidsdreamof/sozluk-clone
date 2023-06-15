@@ -53,6 +53,7 @@ const coolGray = {
 export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
+  important: true,
   theme: {
     extend: {
       fontFamily: {

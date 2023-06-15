@@ -1,20 +1,17 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { FilterForm } from "../forms/index";
 
-export default function FilterModal() {
-  const [isOpen, setIsOpen] = useState(true);
+interface FilterModalProps {
+  closeModal: () => void;
+  isOpen: boolean;
+}
 
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
+export default function FilterModal({ isOpen, closeModal }: FilterModalProps) {
   return (
     <>
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={true} as={Fragment}>
         <Dialog as="div" className="relative z-[2000]" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -29,7 +26,7 @@ export default function FilterModal() {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto ">
-            <div className="flex min-h-full  items-start justify-center p-3 text-center md:p-4 md:px-2">
+            <div className="flex min-h-full   items-start justify-center p-3 text-center md:p-4 md:px-2 lg:-translate-x-3 lg:px-0">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -39,7 +36,14 @@ export default function FilterModal() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="relative   top-14 w-full  transform  overflow-hidden  rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all md:top-12 lg:w-[38rem]"></Dialog.Panel>
+                <Dialog.Panel className="relative  top-14 flex   min-h-fit w-full   transform    rounded-sm bg-white p-4 align-middle  shadow-xl transition-all dark:bg-bg-alt-dark md:top-9 lg:w-[38rem]">
+                  <div className=" w-full pr-4 text-right">
+                    <button className="  inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
+                      <AiOutlineClose size={20} onClick={closeModal} />
+                    </button>
+                    <FilterForm />
+                  </div>
+                </Dialog.Panel>
               </Transition.Child>
             </div>
           </div>

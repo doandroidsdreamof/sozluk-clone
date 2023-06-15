@@ -15,3 +15,35 @@
 .dark .sbui-btn-primary {
   text-shadow: 0px 0px 4px rgba(38 111 78 / 50%);
 }
+.react-datepicker__month-container > div {
+  padding: 0rem !important;
+  font-size: 12px;
+  background-color: #2a2a2a;
+  color: white !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker__header,
+.react-datepicker__day-names {
+  font-size: 15px;
+  background-color: #2a2a2a !important;
+  color: white !important;
+}
+.react-datepicker__month-container {
+  background-color: #2a2a2a !important;
+}
+.react-datepicker__day-names > div {
+  color: white !important;
+}
+
+.react-datepicker__week > div {
+  color: #e0e0e0 !important;
+}
+.react-datepicker__month-container {
+  padding: 0.35rem !important;
+  border: 0.2px solid #e0e0e0 !important;
+}
+
+.react-datepicker__week > div:hover {
+  color: #2a2a2a !important;
+}

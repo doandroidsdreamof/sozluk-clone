@@ -16,7 +16,7 @@ const AutoSearch = () => {
   const router = useRouter();
   const [data, setData] = useState<SearchOptions[]>([]);
   const [input, setInput] = useState<string>("");
-  const [up, setUp] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const {
     data: getData,
     refetch,
@@ -50,6 +50,13 @@ const AutoSearch = () => {
         });
   };
 
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
   return (
     <>
       <div className=" mx-auto w-full   lg:w-[38rem] ">
@@ -72,10 +79,10 @@ const AutoSearch = () => {
                 placeholder="topic,#entry,@author"
               />
               <button
-                onClick={() => setUp(!up)}
+                onClick={() => openModal()}
                 className=" top-1 z-[2] inline-block items-center  border-b border-t  border-solid border-neutral-300 bg-transparent px-2  text-xs font-medium uppercase dark:border-neutral-600 "
               >
-                {up ? (
+                {isOpen ? (
                   <BsFillCaretUpFill className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
                 ) : (
                   <BsFillCaretDownFill className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
@@ -85,7 +92,7 @@ const AutoSearch = () => {
                 <HiOutlineSearch className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
               </button>
             </div>
-            {up ? <FilterModal /> : <></>}
+            <FilterModal isOpen={isOpen} closeModal={() => closeModal()} />
             <Transition
               as={Fragment}
               leave="transition ease-in duration-100"
