@@ -31,7 +31,9 @@ const TextRenderer = ({
   topic,
   id: entryId,
 }: TextRendererProps) => {
-  const { refetch } = api.entry.getEntries.useQuery(topic.topicTitle);
+  const { refetch: refetchEntry } = api.entry.getEntries.useQuery(
+    topic.topicTitle
+  );
   const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
   const json = JSON.parse(content) as string[];
   const [showMore, setShowMore] = useState<number>(250);
@@ -48,12 +50,13 @@ const TextRenderer = ({
   const handleClose = () => {
     setEdit(false);
   };
-  // const sanitizedBlog=DOMPurify.sanitize(blog)
+
   const handleRemoveEntry = () => {
     removeEntry(entryId, {
       onSuccess: (data) => {
         if (data.success == true) {
           console.info(data.message);
+          refetchEntry().catch((err) => console.error(err));
         } else {
           console.info(data.message);
         }

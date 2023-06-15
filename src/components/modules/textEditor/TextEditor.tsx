@@ -7,6 +7,8 @@ import { api } from "~/utils/api";
 
 import TextEditorMenu from "./TextEditorMenu";
 
+// TODO: refactoring
+
 interface TextEditorProps {
   topicTitle: string;
   entry?: string;
@@ -21,7 +23,7 @@ const TextEditor = ({
 }: TextEditorProps) => {
   const { mutate } = api.topic.createTopic.useMutation();
   const { mutate: createEntry } = api.entry.createEntry.useMutation();
-  const { refetch } = api.entry.getEntries.useQuery(topicTitle);
+  const { refetch: refetchEntry } = api.entry.getEntries.useQuery(topicTitle);
   const [content, setContent] = useState("");
   const { refetch: refetchGetAllTopics } = api.topic.getAllTopics.useQuery();
   const { mutate: updateEntry } = api.entry.updateEntry.useMutation();
@@ -83,8 +85,7 @@ const TextEditor = ({
         mutate(newEntryAndTopic, {
           onSuccess: () => {
             console.info("topic & entry created");
-            refetchTopic().catch((err) => console.error(err));
-            refetchGetAllTopics().catch((err) => console.error(err));
+            updateUI();
           },
 
           onError: (error) => {
@@ -101,8 +102,7 @@ const TextEditor = ({
         createEntry(newEntry, {
           onSuccess: () => {
             console.info("entry created");
-            refetchTopic().catch((err) => console.error(err));
-            refetchGetAllTopics().catch((err) => console.error(err));
+            updateUI();
           },
           onError: (error) => {
             console.error(error);
@@ -112,6 +112,11 @@ const TextEditor = ({
       }
     }
   };
+  function updateUI() {
+    refetchEntry().catch((err) => console.error(err));
+    refetchTopic().catch((err) => console.error(err));
+    refetchGetAllTopics().catch((err) => console.error(err));
+  }
 
   return (
     <div className="mb-24 w-full  border border-gray-200   bg-gray-50 dark:border-input-border-dark dark:bg-dark-300   ">
