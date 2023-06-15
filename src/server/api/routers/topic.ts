@@ -87,6 +87,7 @@ export const topicRouter = createTRPCRouter({
     }),
   getAllTopics: publicProcedure.query(async ({ ctx }) => {
     const getAll = await ctx.prisma.topic.findMany({
+      take: 12,
       orderBy: {
         createdAt: "desc",
       },

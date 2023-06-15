@@ -7,6 +7,7 @@ import Hamburger from "./Hamburger";
 import AutoSearch from "./AutoSearch";
 import Avatar from "./Avatar";
 import Settings from "./Settings";
+import Paginate from "./Paginate";
 
 export {
   AlertMessage,
@@ -18,4 +19,5 @@ export {
   Hamburger,
   Avatar,
   Settings,
+  Paginate,
 };

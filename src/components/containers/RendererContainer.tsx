@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { api } from "~/utils/api";
 import { TextRenderer } from "../modules/index";
+import { Paginate } from "../common/index";
 
 interface RendererContainerProps {
   topicTitle: string;

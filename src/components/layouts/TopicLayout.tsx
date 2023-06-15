@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { TopicHeader, TextEditor } from "../modules/index";
 import { TopicEditorContainer, RendererContainer } from "../containers/index";
+import { Paginate } from "../common/index";
 
 interface TopicLayoutProps {
   topicTitle: string;
@@ -28,6 +29,9 @@ const TopicLayout = ({ topicTitle, topicUid, isLoading }: TopicLayoutProps) => {
       <TopicEditorContainer
         textEditor={<TextEditor topicTitle={topicTitle} />}
       />
+      <div className=" mx-auto flex w-full justify-center lg:w-[42rem]">
+        <Paginate itemsPerPage={6} />
+      </div>
     </div>
   );
 };

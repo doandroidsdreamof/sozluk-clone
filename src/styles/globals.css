@@ -43,3 +43,17 @@
   padding: 0.35rem !important;
   border: 0.2px solid #e0e0e0 !important;
 }
+
+.page-number {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.35rem;
+  padding-right: 0.35rem;
+  border-radius: 0.15rem;
+  background-color: #24b47e;
+  font-size: 12px;
+}
+
+.page-number > a:hover {
+  background-color: #f3f4f6;
+}
