@@ -3,18 +3,19 @@ import { FormButton } from "../elements/index";
 import { AiFillCalendar } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { SelectBox } from "./index";
 
 const FilterForm = () => {
   const [startDate, setStartDate] = useState(new Date());
 
   return (
     <>
-      <form className="text-left" action="#">
-        <div className="flex flex-col gap-4 p-1 md:p-2 ">
+      <form className="text-left">
+        <div className="flex flex-col gap-4 p-1  ">
           <div>
             <label
               htmlFor="keywords"
-              className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
+              className="mb-2 inline-block  text-xs  text-input-label-light dark:text-input-label-dark "
             >
               Keywords
             </label>
@@ -22,7 +23,7 @@ const FilterForm = () => {
               type="text"
               name="keywords"
               className={
-                "w-full rounded border border-input-border-light bg-bg-secondary-light px-3 py-2 text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-1.5 text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>
@@ -30,7 +31,7 @@ const FilterForm = () => {
           <div>
             <label
               htmlFor="author"
-              className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
+              className="mb-2 inline-block text-xs text-input-label-light dark:text-input-label-dark "
             >
               Author
             </label>
@@ -38,7 +39,7 @@ const FilterForm = () => {
               type="text"
               name="author"
               className={
-                "w-full rounded border  border-input-border-light  bg-bg-secondary-light px-3 py-2 text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border  border-input-border-light bg-bg-secondary-light  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>
@@ -58,7 +59,7 @@ const FilterForm = () => {
                 }
               />
             </div>
-            <span className="mx-4 text-gray-500">to</span>
+            <span className="1 mx-4 text-xs text-gray-500">to</span>
             <div className="relative  w-full">
               <div className="pointer-events-none  absolute inset-y-0 left-0 z-40 flex items-center pl-3 ">
                 <AiFillCalendar className="text-brandGreen-800 dark:text-typography-body-dark" />
@@ -74,6 +75,7 @@ const FilterForm = () => {
               />
             </div>
           </div>
+          <SelectBox />
           <FormButton
             text={"Search"}
             style={

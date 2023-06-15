@@ -11,7 +11,7 @@ interface FilterModalProps {
 export default function FilterModal({ isOpen, closeModal }: FilterModalProps) {
   return (
     <>
-      <Transition appear show={true} as={Fragment}>
+      <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-[2000]" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -36,7 +36,7 @@ export default function FilterModal({ isOpen, closeModal }: FilterModalProps) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="relative  top-14 flex   min-h-fit w-full   transform    rounded-sm bg-white p-4 align-middle  shadow-xl transition-all dark:bg-bg-alt-dark md:top-9 lg:w-[38rem]">
+                <Dialog.Panel className="relative  top-14 flex   min-h-fit w-full   transform    rounded-md bg-white p-4 align-middle  shadow-xl transition-all dark:bg-bg-alt-dark md:top-10 lg:w-[38rem]">
                   <div className=" w-full pr-4 text-right">
                     <button className="  inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
                       <AiOutlineClose size={20} onClick={closeModal} />

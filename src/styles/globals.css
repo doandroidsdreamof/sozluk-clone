@@ -37,13 +37,9 @@
 }
 
 .react-datepicker__week > div {
-  color: #e0e0e0 !important;
+  color: #bbbbbb !important;
 }
 .react-datepicker__month-container {
   padding: 0.35rem !important;
   border: 0.2px solid #e0e0e0 !important;
-}
-
-.react-datepicker__week > div:hover {
-  color: #2a2a2a !important;
 }
