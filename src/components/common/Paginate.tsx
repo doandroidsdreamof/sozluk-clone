@@ -64,6 +64,7 @@ const Paginate = ({
       </select>
       /
       <button
+        disabled={pageNum + 1 == totalPage ? true : false}
         onClick={() => handleFetchNextPage()}
         className="sbui-btn-primary dark ml-2  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
       >
