@@ -47,12 +47,22 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
     setPage(total - 1);
   };
 
+  function refetchQuery() {
+    refetch({
+      refetchPage: (el, index) => index === page,
+    }).catch((err) => console.error(err));
+  }
+
   return (
     <>
       <div>
         {data != null ? (
           data?.pages[page]?.infiniteEntries.map((items) => (
-            <TextRenderer {...items} key={items.id} />
+            <TextRenderer
+              refetchQuery={() => refetchQuery()}
+              {...items}
+              key={items.id}
+            />
           ))
         ) : (
           <></>
@@ -60,7 +70,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
         <></>
       </div>
       <div className=" order-3   flex w-full justify-center md:justify-end  lg:w-[42rem]">
-        {total >= 1 ? (
+        {total > 1 ? (
           <Paginate
             limit={limit}
             totalPage={total}
