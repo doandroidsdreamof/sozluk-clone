@@ -117,7 +117,9 @@ export const topicRouter = createTRPCRouter({
     }),
   getRandomEntriesAndTopics: publicProcedure.query(async ({ ctx }) => {
     const totalRecords = await ctx.prisma.topic.count();
-    const randomSkip = Math.floor(Math.random() * (totalRecords - 10));
+    const randomSkip = Math.floor(
+      Math.random() * (totalRecords > 15 ? totalRecords - 10 : 1)
+    );
     const randomTake = 10;
     const records = await ctx.prisma.topic.findMany({
       skip: randomSkip,

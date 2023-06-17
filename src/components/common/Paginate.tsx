@@ -25,7 +25,7 @@ const Paginate = ({
 
   useEffect(() => {
     populateArr(totalPage);
-  }, [totalPage]);
+  }, [totalPage, pageNum]);
 
   function populateArr(param: number) {
     const parseNum = [];
@@ -35,9 +35,6 @@ const Paginate = ({
     }
     setArr(parseNum);
   }
-  console.info("page", pageNum);
-  console.info("total", totalPage);
-  console.info("limit", limit);
 
   return (
     <div className="flex   items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark ">
@@ -53,7 +50,7 @@ const Paginate = ({
       >
         {totalPage ? (
           arr.map((items: number, i) => (
-            <option key={i} value={items}>
+            <option key={i} selected={items === pageNum} value={items}>
               {items + 1}
             </option>
           ))

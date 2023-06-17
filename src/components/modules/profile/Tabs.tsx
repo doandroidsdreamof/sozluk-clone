@@ -31,6 +31,7 @@ function Tabs() {
     <div className="flex  h-full w-full flex-col pb-10">
       <div className="relative  top-0 mx-auto mt-4 w-full max-w-md px-2 sm:px-0 ">
         <Tab.Group
+          as="div"
           onChange={(e) => {
             handleChange(e);
           }}
@@ -49,22 +50,13 @@ function Tabs() {
                   )
                 }
               >
-                {category}
+                <div>test 1</div>
               </Tab>
             ))}
           </Tab.List>
           <Tab.Panels className="mt-2" />
         </Tab.Group>
       </div>
-      {logic === 0 ? (
-        <div>test 1</div>
-      ) : logic === 1 ? (
-        <div>test 2</div>
-      ) : logic === 2 ? (
-        <div>test 3</div>
-      ) : (
-        <></>
-      )}
     </div>
   );
 }

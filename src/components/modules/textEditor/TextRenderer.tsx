@@ -11,6 +11,7 @@ import { api } from "~/utils/api";
 import DOMPurify from "isomorphic-dompurify";
 
 interface TextRendererProps {
+  refetchData?: () => void;
   content: string;
   createdAt: Date;
   id: string;
@@ -27,6 +28,7 @@ interface TextRendererProps {
 
 const TextRenderer = ({
   content,
+  refetchData,
   user,
   createdAt,
   topic,
@@ -52,6 +54,12 @@ const TextRenderer = ({
   const handleClose = () => {
     setEdit(false);
   };
+
+  useEffect(() => {
+    if (refetchData) {
+      refetchData();
+    }
+  }, [entryId]);
 
   const handleRemoveEntry = () => {
     removeEntry(entryId, {

@@ -10,34 +10,30 @@ interface RendererContainerProps {
 const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const [page, setPage] = useState(0);
   const [total, setTotalPage] = useState(0);
+  const [fetch, setFetch] = useState(false);
 
   const limit = 5;
-  const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
-    {
-      limit: limit,
-      topicTitle: topicTitle || null,
-    },
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-    }
-  );
+  const { data, fetchNextPage, refetch } =
+    api.entry.getInfitineEntries.useInfiniteQuery(
+      {
+        limit: limit,
+        topicTitle: topicTitle || null,
+      },
+      {
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+      }
+    );
 
   useEffect(() => {
     if (data?.pages[0]?.entryCount) {
-      console.info(
-        "🚀 ~ file: RendererContainer.tsx:28 ~ useEffect ~ data?.pages[0]?.entryCount:",
-        data?.pages[0]?.entryCount
-      );
       const pageNumber = Math.ceil(data?.pages[0]?.entryCount / limit);
       setTotalPage(pageNumber);
     }
-  }, [page]);
+  }, [page, fetch]);
 
   const handleFetchNextPage = () => {
     fetchNextPage().catch((err) => console.error(err));
     setPage((prev) => (page < total ? prev + 1 : total));
-    console.log(page);
-    console.log(data?.pages);
   };
 
   const handleFetchPreviousPage = () => {
@@ -47,13 +43,20 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const handleSelect = (targetVal: string) => {
     setPage(parseInt(targetVal));
   };
-
+  const handleRefetch = () => {
+    // alert('ok')
+    void refetch({ refetchPage: (page, index) => index === 0 });
+  };
   return (
     <>
       <div>
         {data != null ? (
           data?.pages[page]?.infiniteEntries.map((items) => (
-            <TextRenderer {...items} key={items.id} />
+            <TextRenderer
+              refetchData={() => handleRefetch()}
+              {...items}
+              key={items.id}
+            />
           ))
         ) : (
           <></>
