@@ -29,8 +29,8 @@ const TopicLayout = ({ topicTitle, topicUid, isLoading }: TopicLayoutProps) => {
       <TopicEditorContainer
         textEditor={<TextEditor topicTitle={topicTitle} />}
       />
-      <div className=" mx-auto flex w-full justify-center lg:w-[42rem]">
-        <Paginate itemsPerPage={6} />
+      <div className=" mx-auto flex w-full  justify-center lg:w-[42rem]">
+        <Paginate />
       </div>
     </div>
   );

@@ -18,7 +18,7 @@ const Settings = ({ userId, handleEdit, handleRemoveEntry }: SettingsProps) => {
   return (
     <>
       {session.data?.user.id === userId ? (
-        <div className="z-40">
+        <div className="z-30">
           <Menu as="div" className="relative inline-block text-left ">
             <div>
               <Menu.Button className="is-active  right-0 flex  cursor-pointer rounded  p-2 text-typography-body-light hover:bg-gray-100 hover:text-gray-900  dark:text-typography-body-strong-dark dark:hover:bg-gray-600 dark:hover:text-white">

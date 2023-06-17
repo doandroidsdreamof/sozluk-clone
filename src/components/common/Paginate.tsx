@@ -1,76 +1,38 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import ReactPaginate from "react-paginate";
+import React from "react";
+import Link from "next/link";
+import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
 
-// Example items, to simulate fetching from another resources.
-const items = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-];
-
-interface ItemsProps {
-  currentItems: number[];
-}
-
-function Items({ currentItems }: ItemsProps) {
-  return (
-    <>
-      {currentItems &&
-        currentItems.map((item: number) => (
-          <div key={item} className="">
-            <h3>Item #{item}</h3>
-          </div>
-        ))}
-    </>
-  );
-}
 interface PaginateProps {
-  itemsPerPage: number;
+  lastPage: string;
+  optionNum: string;
 }
 
-function Paginate({ itemsPerPage }: PaginateProps) {
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
-  const [itemOffset, setItemOffset] = useState(0);
-
-  // Simulate fetching items from another resources.
-  // (This could be items from props; or items loaded in a local state
-  // from an API endpoint with useEffect and useState)
-  const endOffset: number = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
-
-  const handlePageClick = (event: any) => {
-    if (event) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      const selectedEl = event.selected as number;
-      const newOffset = (selectedEl * itemsPerPage) % items.length;
-      console.log(
-        `User requested page number ${selectedEl}, which is offset ${newOffset}`
-      );
-      setItemOffset(newOffset);
-    }
-  };
-
+const Paginate = () => {
   return (
-    <div className="pagination mx-auto  ">
-      <Items currentItems={currentItems} />
-      <ReactPaginate
-        className="flex flex-row gap-3 dark:text-white "
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={1}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        renderOnZeroPageCount={null}
-        containerClassName={"pagination"}
-        pageLinkClassName={"page-number"}
-        previousLinkClassName={"page-number"}
-        nextLinkClassName={"page-number"}
-        activeLinkClassName={"active"}
-      />
+    <div className="flex  items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark ">
+      <button className="sbui-btn-primary dark ml-auto  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900">
+        <MdNavigateBefore size={18} />
+      </button>
+      <select className="ml-2 mr-2 items-center rounded-sm border border-input-border-light bg-bg-primary-light py-1.5 text-center text-sm  dark:border-input-border-dark dark:bg-bg-primary-dark">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+      </select>
+      /
+      <button
+        className="sbui-btn-primary m dark ml-2 max-w-fit cursor-pointer rounded-sm border border-input-border-light p-2.5   py-1.5 text-sm dark:border-input-border-dark dark:bg-dark-700 dark:text-typography-body-dark dark:hover:bg-dark-500"
+        title="son sayfa"
+      >
+        6
+      </button>
+      <button className="sbui-btn-primary dark ml-2  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900">
+        <MdNavigateNext size={18} />
+      </button>
     </div>
   );
-}
+};
+
 export default Paginate;
