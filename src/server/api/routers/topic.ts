@@ -115,4 +115,33 @@ export const topicRouter = createTRPCRouter({
         });
       }
     }),
+  getRandomEntriesAndTopics: publicProcedure.query(async ({ ctx }) => {
+    const totalRecords = await ctx.prisma.topic.count();
+    const randomSkip = Math.floor(Math.random() * (totalRecords - 10));
+    const randomTake = 10;
+    const records = await ctx.prisma.topic.findMany({
+      skip: randomSkip,
+      take: randomTake,
+      select: {
+        topicTitle: true,
+        id: true,
+        createdAt: true,
+        entry: {
+          select: {
+            content: true,
+            id: true,
+            createdAt: true,
+          },
+        },
+        user: {
+          select: {
+            avatar: true,
+            name: true,
+            id: true,
+          },
+        },
+      },
+    });
+    return records;
+  }),
 });

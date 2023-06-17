@@ -7,7 +7,7 @@ import { api } from "~/utils/api";
 import { useState, useEffect } from "react";
 
 const Home: NextPage = () => {
-  const { data } = api.entry.getRandomEntries.useQuery();
+  const { data } = api.topic.getRandomEntriesAndTopics.useQuery();
   const session = useSession();
 
   const [hasMounted, setHasMounted] = useState(false);
