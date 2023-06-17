@@ -27,6 +27,8 @@ const TextEditor = ({
   const [content, setContent] = useState("");
   const { refetch: refetchGetAllTopics } = api.topic.getAllTopics.useQuery();
   const { mutate: updateEntry } = api.entry.updateEntry.useMutation();
+  const { refetch: refetchSingleTopic } =
+    api.topic.getSingleTopic.useQuery(topicTitle);
   const utils = api.useContext();
 
   const {
@@ -113,6 +115,7 @@ const TextEditor = ({
     }
   };
   function updateUI() {
+    refetchSingleTopic().catch((err) => console.error(err));
     refetchEntry().catch((err) => console.error(err));
     refetchTopic().catch((err) => console.error(err));
     refetchGetAllTopics().catch((err) => console.error(err));

@@ -45,7 +45,7 @@ const TextRenderer = ({
     const purfied = DOMPurify.sanitize(generateHTML(json, [StarterKit]));
     return purfied;
   }, [json]);
-
+  console.info(entryId);
   const handleEdit = () => {
     setEdit(!edit);
   };

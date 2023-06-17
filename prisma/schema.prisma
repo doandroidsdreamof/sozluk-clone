@@ -78,8 +78,8 @@ model Entry{
     content   String
     userId    String
     entryId   String
-    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    topic     Topic    @relation(fields: [entryId], references: [id], onDelete: Cascade)
+    user      User     @relation(fields: [userId], references: [id])
+    topic     Topic    @relation(fields: [entryId], references: [id])
     likes     Likes[]
     avatar    String?
     postUrl   String?
