@@ -1,3 +1,4 @@
+import { string, z } from "zod";
 import { hash } from "bcrypt";
 import { registerSchema } from "~/schemas";
 import {
@@ -53,4 +54,32 @@ export const userRouter = createTRPCRouter({
       console.error(err);
     }
   }),
+  getUser: protectedProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) => {
+      try {
+        const userInfo = await prisma.user.findUnique({
+          where: {
+            name: input,
+          },
+          select: {
+            email: true,
+            id: true,
+            avatar: true,
+            topic: {
+              select: {
+                id: true,
+                topicTitle: true,
+                entry: true,
+              },
+            },
+          },
+        });
+        if (userInfo != null) {
+          return userInfo;
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }),
 });

@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { TopicLayout } from "~/components/layouts/index";
+import { ProfileLayout } from "~/components/layouts/index";
 import { api } from "~/utils/api";
 
 const Profile: NextPage = () => {
@@ -9,7 +9,7 @@ const Profile: NextPage = () => {
     userName: string;
   };
 
-  return <></>;
+  return <ProfileLayout />;
 };
 
 export default Profile;

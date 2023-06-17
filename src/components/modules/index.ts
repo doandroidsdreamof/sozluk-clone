@@ -10,6 +10,8 @@ import ProfileCard from "./profile/ProfileCard";
 import EntryCard from "./entry/EntryCard";
 import ShareButton from "./entry/ShareButton";
 import RendererFeed from "./textEditor/RendererFeed";
+import Tabs from "./profile/Tabs";
+import ProfileHeader from "./profile/ProfileHeader";
 
 export {
   Navbar,
@@ -24,4 +26,6 @@ export {
   EntryCard,
   ShareButton,
   RendererFeed,
+  Tabs,
+  ProfileHeader,
 };

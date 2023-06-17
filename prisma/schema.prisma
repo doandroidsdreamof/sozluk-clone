@@ -60,6 +60,8 @@ model User {
     followingCount    Int        @default(0)
     messagesSent  Message[]    @relation("sender")
     messagesReceived Message[]    @relation("recipient")
+    followers        Follower[] @relation("follower")
+    following        Follower[] @relation("following")
 
 }
 
@@ -95,7 +97,7 @@ model Feed{
 }
 
 model Likes {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
   entry     Entry    @relation(fields: [LikeId], references: [id])
@@ -109,9 +111,9 @@ model Topic{
     createdAt DateTime @default(now())
     topicTitle String
     userId    String
-    // tagId     String
+    tagId     String
     user      User     @relation(fields: [userId], references: [id])
-    // tag       Tag      @relation(fields: [tagId], references: [id])
+    tag       Tag      @relation(fields: [tagId], references: [id])
     titleEntryCount      Int        @default(0)
     entry     Entry[]
 
@@ -119,14 +121,14 @@ model Topic{
 
  model Tag {
     id String @id @default(cuid())
-    // title Topic[]
+    title Topic[]
     name String
     slug String @unique
 
     }
 
 model Message {
-  id          String   @id @default(uuid())
+  id        String   @id @default(cuid())
   sender      User     @relation("sender", fields: [senderId], references: [id])
   senderId    String
   recipient   User     @relation("recipient", fields: [recipientId], references: [id])
@@ -140,4 +142,14 @@ model Message {
 enum Role {
   Noob
   Author
+}
+
+
+model Follower {
+  id        String   @id @default(cuid())
+  follower    User     @relation("follower", fields: [followerId], references: [id])
+  followerId  String
+  following   User     @relation("following", fields: [followingId], references: [id])
+  followingId String
+  createdAt   DateTime @default(now())
 }

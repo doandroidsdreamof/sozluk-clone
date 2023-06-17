@@ -8,7 +8,10 @@ import Button from "../modules/button/Button";
 const ButtonContainer = () => {
   const session = useSession();
   const router = useRouter();
-  const registerLink = session.data == null ? "/register" : "/profile";
+  const registerLink =
+    session.data == null
+      ? "/register"
+      : `/profile/${session?.data?.user?.name || ""}`;
   const loginLink = session.data == null ? "/login" : "/";
   const registerButton = session.data == null ? "register" : "profile";
   const loginButton = session.data == null ? "login" : "sign out";
@@ -20,6 +23,7 @@ const ButtonContainer = () => {
       return false;
     }
   };
+
   return (
     <div className="flex gap-x-2 ">
       <Link href={loginLink}>
