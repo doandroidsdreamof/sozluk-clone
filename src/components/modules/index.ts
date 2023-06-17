@@ -9,6 +9,7 @@ import TextRenderer from "./textEditor/TextRenderer";
 import ProfileCard from "./profile/ProfileCard";
 import EntryCard from "./entry/EntryCard";
 import ShareButton from "./entry/ShareButton";
+import RendererFeed from "./textEditor/RendererFeed";
 
 export {
   Navbar,
@@ -22,4 +23,5 @@ export {
   ProfileCard,
   EntryCard,
   ShareButton,
+  RendererFeed,
 };

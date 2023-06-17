@@ -164,20 +164,21 @@ export const entryRouter = createTRPCRouter({
       }
     }),
   getRandomEntries: publicProcedure.query(async ({ ctx }) => {
-    const totalRecords = await ctx.prisma.entry.count();
+    const totalRecords = await ctx.prisma.topic.count();
     const randomSkip = Math.floor(Math.random() * (totalRecords - 10));
     const randomTake = 10;
-    const records = await ctx.prisma.entry.findMany({
+    const records = await ctx.prisma.topic.findMany({
       skip: randomSkip,
       take: randomTake,
       select: {
-        content: true,
+        topicTitle: true,
         id: true,
         createdAt: true,
-        topic: {
+        entry: {
           select: {
-            topicTitle: true,
+            content: true,
             id: true,
+            createdAt: true,
           },
         },
         user: {

@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
-import { TopicHeader, TextEditor, TextRenderer } from "../modules/index";
+import { TopicHeader, TextEditor, RendererFeed } from "../modules/index";
 import { TopicEditorContainer, RendererContainer } from "../containers/index";
 import Link from "next/link";
 import router from "next/router";
+
+interface Entry {
+  content: string;
+  id: string;
+  createdAt: Date;
+}
 
 interface FeedLayoutProps {
   user: {
@@ -10,13 +16,9 @@ interface FeedLayoutProps {
     id: string;
     avatar: string | null;
   };
-  topic: {
-    topicTitle: string;
-    id: string;
-  };
-  content: string;
+  entry: Entry[];
+  topicTitle: string;
   id: string;
-  createdAt: Date;
 }
 interface FeedProps {
   data: FeedLayoutProps[];
@@ -39,15 +41,12 @@ const FeedLayout = (data: FeedProps) => {
             data.data.map((items) => (
               <div key={items.id}>
                 <button
-                  onClick={() => handleClick(items.topic.topicTitle)}
+                  onClick={() => handleClick(items.topicTitle)}
                   className="h-full w-full cursor-pointer text-left"
                 >
-                  <TopicHeader
-                    key={items.topic.id}
-                    headerOne={items.topic.topicTitle}
-                  />
+                  <TopicHeader key={items.id} headerOne={items.topicTitle} />
                 </button>
-                <TextRenderer {...items} />
+                <RendererFeed {...items} />
               </div>
             ))
           ) : (

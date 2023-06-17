@@ -4,7 +4,7 @@ import { Avatar } from "~/components/common/index";
 interface ProfileCardProps {
   imageURL: string;
   name: string;
-  date: Date;
+  date?: Date;
 }
 
 const ProfileCard = ({ imageURL, date, name }: ProfileCardProps) => {
@@ -15,7 +15,7 @@ const ProfileCard = ({ imageURL, date, name }: ProfileCardProps) => {
           {name}
         </h1>
         <p className="font-helvetica text-[0.75em] font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
-          {date.toDateString()}
+          {date?.toDateString()}
         </p>
       </div>
       <Avatar
