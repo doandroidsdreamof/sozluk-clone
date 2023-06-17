@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { TopicHeader, TextEditor } from "../modules/index";
 import { TopicEditorContainer, RendererContainer } from "../containers/index";
 import { Paginate } from "../common/index";
@@ -23,15 +23,12 @@ const TopicLayout = ({ topicTitle, topicUid, isLoading }: TopicLayoutProps) => {
       ) : (
         <></>
       )}
-      <div className="">
+      <>
         <RendererContainer topicTitle={topicTitle} />
-      </div>
+      </>
       <TopicEditorContainer
         textEditor={<TextEditor topicTitle={topicTitle} />}
       />
-      <div className=" mx-auto flex w-full  justify-center lg:w-[42rem]">
-        <Paginate />
-      </div>
     </div>
   );
 };

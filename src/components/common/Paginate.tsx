@@ -9,7 +9,7 @@ interface PaginateProps {
 
 const Paginate = () => {
   return (
-    <div className="flex  items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark ">
+    <div className="flex   items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark ">
       <button className="sbui-btn-primary dark ml-auto  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900">
         <MdNavigateBefore size={18} />
       </button>

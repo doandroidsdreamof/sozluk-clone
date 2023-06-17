@@ -53,6 +53,53 @@ export const entryRouter = createTRPCRouter({
         }
       }
     }),
+  getInfitineEntries: publicProcedure
+    .input(
+      z.object({
+        cursor: z.string().nullish(),
+        limit: z.number(),
+        topicTitle: z.string().nullish(),
+        skip: z.number().optional(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { limit, skip, topicTitle, cursor } = input;
+      const infiniteEntries = await ctx.prisma.entry.findMany({
+        take: limit + 1,
+        skip: skip,
+        cursor: cursor ? { id: cursor } : undefined,
+        where: {
+          topic: {
+            topicTitle: topicTitle ? topicTitle : "",
+          },
+        },
+        orderBy: {
+          id: "asc",
+        },
+        select: {
+          content: true,
+          topic: true,
+          id: true,
+          createdAt: true,
+          user: {
+            select: {
+              avatar: true,
+              name: true,
+              id: true,
+            },
+          },
+        },
+      });
+      let nextCursor: typeof infiniteEntries | undefined | string = undefined;
+      if (infiniteEntries.length > limit) {
+        const nextItem = infiniteEntries.pop();
+        nextCursor = nextItem?.id;
+      }
+      return {
+        infiniteEntries,
+        nextCursor,
+      };
+    }),
   updateEntry: protectedProcedure
     .input(
       z.object({
