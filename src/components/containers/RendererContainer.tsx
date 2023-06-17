@@ -10,59 +10,50 @@ interface RendererContainerProps {
 const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const [page, setPage] = useState(0);
   const [total, setTotalPage] = useState(0);
+
   const limit = 5;
-  const { data, fetchNextPage, refetch } =
-    api.entry.getInfitineEntries.useInfiniteQuery(
-      {
-        limit: limit,
-        topicTitle: topicTitle || null,
-      },
-      {
-        getNextPageParam: (lastPage) => lastPage.nextCursor,
-      }
-    );
+  const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
+    {
+      limit: limit,
+      topicTitle: topicTitle || null,
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+    }
+  );
 
   useEffect(() => {
     if (data?.pages[0]?.entryCount) {
+      console.info(
+        "🚀 ~ file: RendererContainer.tsx:28 ~ useEffect ~ data?.pages[0]?.entryCount:",
+        data?.pages[0]?.entryCount
+      );
       const pageNumber = Math.ceil(data?.pages[0]?.entryCount / limit);
       setTotalPage(pageNumber);
     }
-  }, [data?.pages[0]?.entryCount]);
+  }, [page]);
 
   const handleFetchNextPage = () => {
     fetchNextPage().catch((err) => console.error(err));
-    setPage((prev) => prev + 1);
+    setPage((prev) => (page < total ? prev + 1 : total));
     console.log(page);
     console.log(data?.pages);
   };
 
   const handleFetchPreviousPage = () => {
-    setPage((prev) => (prev > 0 ? prev - 1 : prev));
+    setPage((prev) => (page > 0 ? prev - 1 : page * 0));
   };
 
   const handleSelect = (targetVal: string) => {
     setPage(parseInt(targetVal));
   };
-  const handleLastPage = () => {
-    setPage(total - 1);
-  };
-
-  function refetchQuery() {
-    refetch({
-      refetchPage: (el, index) => index === page,
-    }).catch((err) => console.error(err));
-  }
 
   return (
     <>
       <div>
         {data != null ? (
           data?.pages[page]?.infiniteEntries.map((items) => (
-            <TextRenderer
-              refetchQuery={() => refetchQuery()}
-              {...items}
-              key={items.id}
-            />
+            <TextRenderer {...items} key={items.id} />
           ))
         ) : (
           <></>
@@ -78,7 +69,6 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
             handleSelect={handleSelect}
             handleFetchNextPage={handleFetchNextPage}
             handleFetchPreviousPage={handleFetchPreviousPage}
-            handleLastPage={handleLastPage}
           />
         ) : (
           <></>

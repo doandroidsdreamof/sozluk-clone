@@ -11,7 +11,6 @@ import { api } from "~/utils/api";
 import DOMPurify from "isomorphic-dompurify";
 
 interface TextRendererProps {
-  refetchQuery: () => void;
   content: string;
   createdAt: Date;
   id: string;
@@ -32,7 +31,6 @@ const TextRenderer = ({
   createdAt,
   topic,
   id: entryId,
-  refetchQuery,
 }: TextRendererProps) => {
   const { refetch: refetchEntry } = api.entry.getEntries.useQuery(
     topic.topicTitle
@@ -44,7 +42,6 @@ const TextRenderer = ({
   const [edit, setEdit] = useState(false);
 
   const output = useMemo(() => {
-    refetchQuery();
     const purfied = DOMPurify.sanitize(generateHTML(json, [StarterKit]));
     return purfied;
   }, [json]);
