@@ -10,6 +10,8 @@ import {
 import { BsCodeSquare, BsTextParagraph } from "react-icons/bs";
 import { MdHorizontalRule, MdRedo, MdUndo } from "react-icons/md";
 import { RxListBullet, RxQuote } from "react-icons/rx";
+import { refetchTopic } from "~/lib/store/reducers/refetchSlice";
+import { useAppDispatch } from "~/lib/store/hooks";
 
 interface MenuProps {
   editor: Editor;
@@ -21,9 +23,16 @@ const buttonStyle =
   "is-active p-2 text-gray-200  rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
 const TextEditorMenu = ({ editor, handleFunc, buttonText }: MenuProps) => {
+  const dispatch = useAppDispatch();
   if (!editor) {
     return null;
   }
+
+  const handleClick = () => {
+    handleFunc();
+    console.info("dispatch handle refetch ===========>");
+    dispatch(refetchTopic());
+  };
 
   return (
     <div className="flex flex-wrap  items-center  border-t bg-editorHead   px-3 py-2 dark:border-gray-600 dark:bg-bg-alt-dark">
@@ -208,7 +217,7 @@ const TextEditorMenu = ({ editor, handleFunc, buttonText }: MenuProps) => {
         <MdRedo />
       </button>
       <button
-        onClick={() => handleFunc()}
+        onClick={() => handleClick()}
         disabled={editor.getText().length === 0 ? true : false}
         className="sbui-btn-primary dark ml-auto mt-3 max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 px-2.5 py-1.5 text-xs text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
       >

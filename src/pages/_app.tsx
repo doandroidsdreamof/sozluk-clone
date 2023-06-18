@@ -13,16 +13,14 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <>
-      <Provider store={store}>
-        <SessionProvider session={session}>
-          <BaseLayout>
-            <Component {...pageProps} />
-          </BaseLayout>
-          <ReactQueryDevtools initialIsOpen={false} />
-        </SessionProvider>
-      </Provider>
-    </>
+    <Provider store={store}>
+      <SessionProvider session={session}>
+        <BaseLayout>
+          <Component {...pageProps} />
+        </BaseLayout>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </SessionProvider>
+    </Provider>
   );
 };
 

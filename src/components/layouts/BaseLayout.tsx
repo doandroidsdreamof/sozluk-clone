@@ -3,9 +3,12 @@ import { type ILayoutProps } from "~/@types/interface";
 import { DocHead, ScrollUpButton } from "../common/index";
 import { NotificationContainer } from "../containers/index";
 import { Aside, Navbar, Footer } from "../modules/index";
+import { useAppSelector } from "~/lib/store/hooks";
+import { useEffect } from "react";
 
 function BaseLayout({ children }: ILayoutProps) {
   const router = useRouter();
+
   if (
     router.pathname == "/404" ||
     router.pathname == "/reset" ||

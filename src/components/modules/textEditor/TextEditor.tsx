@@ -23,19 +23,10 @@ const TextEditor = ({
 }: TextEditorProps) => {
   const { mutate } = api.topic.createTopic.useMutation();
   const { mutate: createEntry } = api.entry.createEntry.useMutation();
-  const { refetch: refetchEntry } = api.entry.getEntries.useQuery(topicTitle);
-  const [content, setContent] = useState("");
-  const { refetch: refetchGetAllTopics } = api.topic.getAllTopics.useQuery();
+  const [text, setText] = useState("");
   const { mutate: updateEntry } = api.entry.updateEntry.useMutation();
-  const { refetch: refetchSingleTopic } =
-    api.topic.getSingleTopic.useQuery(topicTitle);
+  const { data: getData } = api.topic.getSingleTopic.useQuery(topicTitle);
   const utils = api.useContext();
-
-  const {
-    refetch: refetchTopic,
-    data: getData,
-    isLoading,
-  } = api.topic.getSingleTopic.useQuery(topicTitle);
 
   const editor = useEditor({
     extensions: [StarterKit, TextStyle, Color],
@@ -52,73 +43,76 @@ const TextEditor = ({
     },
 
     onUpdate({ editor }) {
-      setContent(editor.getText());
+      setText(editor.getText());
     },
   }) as Editor;
 
   const handlePost = () => {
-    if (editor.getText().length > 0) {
+    if (text.length > 0) {
       if (entry && handleClose && entryId) {
-        const newEntryUpdate = {
-          entryId: entryId,
-          content: JSON.stringify(editor.getJSON()),
-        };
-        updateEntry(newEntryUpdate, {
-          onSuccess: (data) => {
-            console.info("entry updated", data);
-            utils.entry.getEntries
-              .invalidate(topicTitle)
-              .catch((err) => console.log(err));
-            handleClose();
+        updateEntry(
+          {
+            entryId: entryId,
+            content: JSON.stringify(editor.getJSON()),
           },
-          onError: (error) => {
-            console.error(error);
-          },
-        });
+          {
+            onSuccess: (data) => {
+              console.info("entry updated", data);
+              handleClose();
+            },
+            onError: (error) => {
+              console.error(error);
+            },
+          }
+        );
 
         editor.commands.clearContent(true);
         return;
       }
       if (getData == null) {
-        const newEntryAndTopic = {
-          topicTitle: topicTitle,
-          entry: JSON.stringify(editor.getJSON()),
-        };
-        mutate(newEntryAndTopic, {
-          onSuccess: () => {
-            console.info("topic & entry created");
-            updateUI();
+        mutate(
+          {
+            topicTitle: topicTitle,
+            entry: JSON.stringify(editor.getJSON()),
           },
+          {
+            onSuccess: () => {
+              updateUI();
+              console.info("topic & entry created");
+            },
 
-          onError: (error) => {
-            console.error(error);
-          },
-        });
+            onError: (error) => {
+              console.error(error);
+            },
+          }
+        );
         editor.commands.clearContent(true);
         return;
       } else {
-        const newEntry = {
-          topicId: getData.id,
-          content: JSON.stringify(editor.getJSON()),
-        };
-        createEntry(newEntry, {
-          onSuccess: () => {
-            console.info("entry created");
-            updateUI();
+        createEntry(
+          {
+            topicId: getData.id,
+            content: JSON.stringify(editor.getJSON()),
           },
-          onError: (error) => {
-            console.error(error);
-          },
-        });
+          {
+            onSuccess: () => {
+              updateUI();
+              console.info("entry created");
+            },
+            onError: (error) => {
+              console.error(error);
+            },
+          }
+        );
         editor.commands.clearContent(true);
       }
     }
   };
+
   function updateUI() {
-    refetchSingleTopic().catch((err) => console.error(err));
-    refetchEntry().catch((err) => console.error(err));
-    refetchTopic().catch((err) => console.error(err));
-    refetchGetAllTopics().catch((err) => console.error(err));
+    void utils.topic.getSingleTopic.invalidate(topicTitle);
+    void utils.topic.getAllTopics.invalidate();
+    void utils.entry.getInfitineEntries.invalidate({});
   }
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { z } from "zod";
 import {
   createTRPCRouter,
@@ -64,16 +65,19 @@ export const entryRouter = createTRPCRouter({
     )
     .query(async ({ ctx, input }) => {
       const { limit, skip, topicTitle, cursor } = input;
-      const totalCount = await ctx.prisma.entry.findMany({
-        where: {
-          topic: {
-            topicTitle: topicTitle || "",
+      const [entries, totalCount] = await ctx.prisma.$transaction([
+        ctx.prisma.entry.count(),
+        ctx.prisma.entry.findMany({
+          orderBy: {
+            id: "asc",
           },
-        },
-        select: {
-          id: true,
-        },
-      });
+          where: {
+            topic: {
+              topicTitle: topicTitle || "",
+            },
+          },
+        }),
+      ]);
       const infiniteEntries = await ctx.prisma.entry.findMany({
         take: limit + 1,
         skip: skip,
@@ -101,7 +105,7 @@ export const entryRouter = createTRPCRouter({
         },
       });
       let nextCursor: typeof infiniteEntries | undefined | string = undefined;
-      const entryCount = totalCount.length;
+      const entryCountPerTopic: number = totalCount.length;
       if (infiniteEntries.length > limit) {
         const nextItem = infiniteEntries.pop();
         nextCursor = nextItem?.id;
@@ -109,7 +113,7 @@ export const entryRouter = createTRPCRouter({
       return {
         infiniteEntries,
         nextCursor,
-        entryCount,
+        entryCountPerTopic,
       };
     }),
   updateEntry: protectedProcedure

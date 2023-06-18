@@ -2,6 +2,7 @@ import { useAppSelector } from "~/lib/store/hooks";
 import { IoIosSettings } from "react-icons/io";
 import { api } from "~/utils/api";
 import { TopicLink } from "../index";
+import { useEffect } from "react";
 
 const Aside = () => {
   const toggleState = useAppSelector((state) => state.toggle.navbarState);

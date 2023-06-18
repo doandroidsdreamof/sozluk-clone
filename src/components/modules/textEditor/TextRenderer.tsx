@@ -2,16 +2,13 @@
 import { generateHTML } from "@tiptap/html";
 // Option 1: Browser + server-side
 import StarterKit from "@tiptap/starter-kit";
-import React, { useEffect, useMemo, useState } from "react";
-import { ProfileCard, EntryCard, ShareButton } from "../index";
-import { Settings } from "~/components/common/index";
-import { useAppSelector } from "~/lib/store/hooks";
-import { TextEditor } from "../index";
-import { api } from "~/utils/api";
 import DOMPurify from "isomorphic-dompurify";
+import { useMemo, useState } from "react";
+import { Settings } from "~/components/common/index";
+import { api } from "~/utils/api";
+import { EntryCard, ProfileCard, ShareButton, TextEditor } from "../index";
 
 interface TextRendererProps {
-  refetchData?: () => void;
   content: string;
   createdAt: Date;
   id: string;
@@ -28,15 +25,11 @@ interface TextRendererProps {
 
 const TextRenderer = ({
   content,
-  refetchData,
   user,
   createdAt,
   topic,
   id: entryId,
 }: TextRendererProps) => {
-  const { refetch: refetchEntry } = api.entry.getEntries.useQuery(
-    topic.topicTitle
-  );
   const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
   const { mutate: removeLastTopic } = api.topic.removeTopic.useMutation();
   const json = JSON.parse(content) as string[];
@@ -55,12 +48,6 @@ const TextRenderer = ({
     setEdit(false);
   };
 
-  useEffect(() => {
-    if (refetchData) {
-      refetchData();
-    }
-  }, [entryId]);
-
   const handleRemoveEntry = () => {
     removeEntry(entryId, {
       onSuccess: (data) => {
@@ -70,7 +57,6 @@ const TextRenderer = ({
             removeLastTopic(topic.id);
           }
           console.info(data.message);
-          refetchEntry().catch((err) => console.error(err));
         } else {
           console.info(data.message);
         }

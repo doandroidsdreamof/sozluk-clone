@@ -12,6 +12,7 @@ import ShareButton from "./entry/ShareButton";
 import RendererFeed from "./textEditor/RendererFeed";
 import Tabs from "./profile/Tabs";
 import ProfileHeader from "./profile/ProfileHeader";
+import TopicStatus from "./topic/TopicStatus";
 
 export {
   Navbar,
@@ -28,4 +29,5 @@ export {
   RendererFeed,
   Tabs,
   ProfileHeader,
+  TopicStatus,
 };

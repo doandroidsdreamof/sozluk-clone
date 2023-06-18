@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api } from "~/utils/api";
 import { TextRenderer } from "../modules/index";
 import { Paginate } from "../common/index";
+import { useAppSelector } from "~/lib/store/hooks";
 
 interface RendererContainerProps {
   topicTitle: string;
@@ -10,26 +11,30 @@ interface RendererContainerProps {
 const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const [page, setPage] = useState(0);
   const [total, setTotalPage] = useState(0);
-  const [fetch, setFetch] = useState(false);
-
   const limit = 5;
-  const { data, fetchNextPage, refetch } =
-    api.entry.getInfitineEntries.useInfiniteQuery(
-      {
-        limit: limit,
-        topicTitle: topicTitle || null,
-      },
-      {
-        getNextPageParam: (lastPage) => lastPage.nextCursor,
-      }
-    );
+
+  const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
+    {
+      limit: limit,
+      topicTitle: topicTitle || null,
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+    }
+  );
 
   useEffect(() => {
-    if (data?.pages[0]?.entryCount) {
-      const pageNumber = Math.ceil(data?.pages[0]?.entryCount / limit);
+    if (data?.pages[page]?.entryCountPerTopic && data?.pages[0]) {
+      const { entryCountPerTopic } = data.pages[0];
+      const pageNumber = Math.ceil(entryCountPerTopic / limit);
+      console.info(
+        "🚀 ~ file: RendererContainer.tsx:32 ~ useEffect ~ totalCount:",
+        entryCountPerTopic
+      );
+
       setTotalPage(pageNumber);
     }
-  }, [page, fetch]);
+  }, [page]);
 
   const handleFetchNextPage = () => {
     fetchNextPage().catch((err) => console.error(err));
@@ -43,20 +48,13 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const handleSelect = (targetVal: string) => {
     setPage(parseInt(targetVal));
   };
-  const handleRefetch = () => {
-    // alert('ok')
-    void refetch({ refetchPage: (page, index) => index === 0 });
-  };
+
   return (
     <>
       <div>
         {data != null ? (
           data?.pages[page]?.infiniteEntries.map((items) => (
-            <TextRenderer
-              refetchData={() => handleRefetch()}
-              {...items}
-              key={items.id}
-            />
+            <TextRenderer {...items} key={items.id} />
           ))
         ) : (
           <></>
@@ -64,7 +62,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
         <></>
       </div>
       <div className=" order-3   flex w-full justify-center md:justify-end  lg:w-[42rem]">
-        {total > 1 ? (
+        {total >= 2 ? (
           <Paginate
             limit={limit}
             totalPage={total}
