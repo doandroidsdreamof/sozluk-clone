@@ -37,12 +37,20 @@ const ProfileHeader = () => {
         </button>
 
         <DumbModal closeDumbOpen={() => setDumbOpen(false)} dumbOpen={dumbOpen}>
-          <div className="h-36 w-96 border border-white">
+          <div className="flex h-36 w-96 flex-col items-center justify-center ">
             <img
-              className="mx-4 block h-16  w-16 cursor-pointer rounded-full object-cover"
+              className="mx-4  block h-20  w-20 rounded-full object-cover"
               alt="avatar"
               src="/images/default-avatar.png"
             />
+          </div>
+          <div className="flex flex-row gap-x-3 pb-2 pl-2">
+            <Button size="tiny" type="primary">
+              image upload
+            </Button>
+            <Button size="tiny" type="secondary">
+              remove image
+            </Button>
           </div>
         </DumbModal>
       </div>
