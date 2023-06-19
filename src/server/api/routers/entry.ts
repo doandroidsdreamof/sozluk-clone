@@ -54,6 +54,28 @@ export const entryRouter = createTRPCRouter({
         }
       }
     }),
+  getUserEntries: protectedProcedure.query(async ({ ctx }) => {
+    const findEntrysAndToic = await ctx.prisma.entry.findMany({
+      select: {
+        content: true,
+        topic: true,
+        id: true,
+        createdAt: true,
+        user: {
+          select: {
+            avatar: true,
+            name: true,
+            id: true,
+          },
+        },
+      },
+    });
+    if (findEntrysAndToic) {
+      return findEntrysAndToic;
+    } else {
+      return null;
+    }
+  }),
   getInfitineEntries: publicProcedure
     .input(
       z.object({

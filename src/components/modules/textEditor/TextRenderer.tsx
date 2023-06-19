@@ -35,6 +35,7 @@ const TextRenderer = ({
   const json = JSON.parse(content) as string[];
   const [showMore, setShowMore] = useState<number>(250);
   const [edit, setEdit] = useState(false);
+  const utils = api.useContext();
 
   const output = useMemo(() => {
     const purfied = DOMPurify.sanitize(generateHTML(json, [StarterKit]));
@@ -55,6 +56,7 @@ const TextRenderer = ({
           if (data.count === 1) {
             console.info(data.count);
             removeLastTopic(topic.id);
+            updateUI();
           }
           console.info(data.message);
         } else {
@@ -67,6 +69,10 @@ const TextRenderer = ({
       },
     });
   };
+
+  function updateUI() {
+    void utils.entry.getUserEntries.invalidate();
+  }
 
   return (
     <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[42rem]  ">

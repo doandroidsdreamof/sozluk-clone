@@ -14,7 +14,7 @@ interface TextEditorProps {
   entry?: string;
   entryId?: string;
   handleClose?: () => void;
-  userId: string;
+  userId?: string;
 }
 const TextEditor = ({
   topicTitle,
@@ -51,7 +51,7 @@ const TextEditor = ({
 
   const handlePost = () => {
     if (text.length > 0) {
-      if (entry && handleClose && entryId) {
+      if (entry && handleClose && entryId && userId) {
         updateEntry(
           {
             entryId: entryId,
@@ -61,6 +61,7 @@ const TextEditor = ({
           {
             onSuccess: (data) => {
               console.info("entry updated", data);
+              void utils.entry.getUserEntries.invalidate();
               updateUI();
               handleClose();
             },
