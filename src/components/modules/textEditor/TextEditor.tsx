@@ -14,11 +14,13 @@ interface TextEditorProps {
   entry?: string;
   entryId?: string;
   handleClose?: () => void;
+  userId: string;
 }
 const TextEditor = ({
   topicTitle,
   entry,
   entryId,
+  userId,
   handleClose,
 }: TextEditorProps) => {
   const { mutate } = api.topic.createTopic.useMutation();
@@ -54,10 +56,12 @@ const TextEditor = ({
           {
             entryId: entryId,
             content: JSON.stringify(editor.getJSON()),
+            userId: userId,
           },
           {
             onSuccess: (data) => {
               console.info("entry updated", data);
+              updateUI();
               handleClose();
             },
             onError: (error) => {

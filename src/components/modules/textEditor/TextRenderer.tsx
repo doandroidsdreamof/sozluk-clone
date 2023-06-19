@@ -93,6 +93,7 @@ const TextRenderer = ({
             handleClose={() => handleClose()}
             entryId={entryId}
             key={user.id}
+            userId={user.id}
             entry={output}
             topicTitle={topic.topicTitle}
           />

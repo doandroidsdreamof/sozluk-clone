@@ -121,10 +121,11 @@ export const entryRouter = createTRPCRouter({
       z.object({
         entryId: z.string(),
         content: z.string(),
+        userId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      if (ctx.session.user.id === input.entryId) {
+      if (ctx.session.user.id === input.userId) {
         const updateSingleEntry = await ctx.prisma.entry.update({
           where: {
             id: input.entryId,

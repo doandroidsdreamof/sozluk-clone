@@ -20,12 +20,9 @@ const ProfileIndicator = ({
 
   return (
     <div className="flex flex-row">
-      <Link
-        href={"/"}
-        className="flex max-w-fit cursor-pointer rounded-md px-2.5 py-1.5 text-xs text-blue-600  hover:underline dark:text-brandGreen-600"
-      >
+      <span className="flex max-w-fit  rounded-md px-2.5 py-1.5 text-xs text-blue-600   dark:text-brandGreen-600">
         {insertElipsis(entryCount)} entry
-      </Link>
+      </span>
       <Link
         href={"/"}
         className="flex max-w-fit cursor-pointer rounded-md px-2.5 py-1.5 text-xs text-blue-600  hover:underline dark:text-brandGreen-600"

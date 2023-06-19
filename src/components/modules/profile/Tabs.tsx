@@ -8,9 +8,9 @@ function classNames(...classes: string[]) {
 function Tabs() {
   const [logic, setLogic] = useState(0);
   const [categories] = useState({
-    Overview: [{ id: 0 }, { name: "Overview" }],
-    Cast: [{ id: 1 }, { name: "Cast" }],
-    Comments: [{ id: 2 }, { name: "Comments" }],
+    entries: [{ id: 0 }, { name: "entries" }],
+    favorites: [{ id: 1 }, { name: "favorites" }],
+    images: [{ id: 2 }, { name: "images" }],
   });
 
   function handleChange(idx: number) {
@@ -50,7 +50,7 @@ function Tabs() {
                   )
                 }
               >
-                <div>test 1</div>
+                <div>{category}</div>
               </Tab>
             ))}
           </Tab.List>
