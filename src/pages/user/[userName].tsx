@@ -1,15 +1,15 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { ProfileLayout } from "~/components/layouts/index";
+import { UserLayout } from "~/components/layouts/index";
 import { api } from "~/utils/api";
 
-const Profile: NextPage = () => {
+const User: NextPage = () => {
   const router = useRouter();
   const { userName } = router.query as {
     userName: string;
   };
 
-  return <ProfileLayout />;
+  return <UserLayout />;
 };
 
-export default Profile;
+export default User;

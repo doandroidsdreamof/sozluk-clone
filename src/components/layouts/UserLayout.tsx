@@ -2,11 +2,11 @@ import React from "react";
 import { Tabs, ProfileHeader } from "../modules/index";
 import { useSession } from "next-auth/react";
 
-interface ProfileLayoutProps {
+interface UserLayoutProps {
   children: React.ReactNode;
 }
 
-const ProfileLayout = () => {
+const UserLayout = () => {
   const session = useSession();
 
   return (
@@ -17,4 +17,4 @@ const ProfileLayout = () => {
   );
 };
 
-export default ProfileLayout;
+export default UserLayout;
