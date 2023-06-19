@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { Tab } from "@headlessui/react";
+import {
+  FavoritesContainer,
+  EntriesContainer,
+  ImagesContainer,
+} from "~/components/containers";
+import { TabSelector } from "../index";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 function Tabs() {
-  const [logic, setLogic] = useState(0);
+  const [indexEl, setIndexEl] = useState("");
   const [categories] = useState({
     entries: [{ id: 0 }, { name: "entries" }],
     favorites: [{ id: 1 }, { name: "favorites" }],
@@ -14,17 +20,8 @@ function Tabs() {
   });
 
   function handleChange(idx: number) {
-    switch (idx) {
-      case 0:
-        setLogic(0);
-        break;
-      case 1:
-        setLogic(1);
-        break;
-      case 2:
-        setLogic(2);
-        break;
-    }
+    const convertToStr = idx.toString();
+    setIndexEl(convertToStr);
   }
 
   return (
@@ -54,8 +51,10 @@ function Tabs() {
               </Tab>
             ))}
           </Tab.List>
+
           <Tab.Panels className="mt-2" />
         </Tab.Group>
+        <TabSelector status={indexEl} />
       </div>
     </div>
   );
