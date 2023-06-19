@@ -25,13 +25,13 @@ const ProfileHeader = () => {
         </Button>
         <ProfileIndicator entryCount="9" followers="2" following="5" />
       </div>
-      <div className="ml-auto">
+      <div className="ml-auto  pr-8 pt-3">
         <button
           onClick={() => setDumbOpen(true)}
           className=" flex w-16  cursor-pointer items-center justify-center rounded-full "
         >
           <Avatar
-            style="mx-4 block cursor-pointer  h-16 w-16 rounded-full object-cover"
+            style="mx-4 block cursor-pointer h-16 w-16 rounded-full object-cover"
             alt="avatar"
             src="/images/default-avatar.png"
             fallbackSrc="/images/default-avatar.png"

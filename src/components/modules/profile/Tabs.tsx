@@ -24,7 +24,7 @@ function Tabs() {
   }
 
   return (
-    <div className="flex   h-full w-full flex-col pb-10">
+    <div className="flex     h-full w-full flex-col pb-10">
       <div className="relative  top-0 mx-auto mt-4 w-full   sm:px-0 ">
         <Tab.Group
           as="div"
@@ -51,7 +51,7 @@ function Tabs() {
             ))}
           </Tab.List>
 
-          <Tab.Panels className="mt-2" />
+          <Tab.Panels className="mt-2 " />
         </Tab.Group>
         <TabSelector status={indexEl} />
       </div>
