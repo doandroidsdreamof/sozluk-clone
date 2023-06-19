@@ -4,17 +4,16 @@ import { useState } from "react";
 interface AvatarProps {
   src: string;
   fallbackSrc: string;
-  width: number;
-  height: number;
   alt: string;
+  style: string;
 }
 
-const Avatar = ({ src, fallbackSrc, width, height, alt }: AvatarProps) => {
+const Avatar = ({ src, fallbackSrc, alt, style }: AvatarProps) => {
   const [imgSrc, setImgSrc] = useState(src);
 
   return (
     <img
-      className="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover "
+      className={style}
       alt={`${alt}`}
       src={imgSrc}
       loading="lazy"

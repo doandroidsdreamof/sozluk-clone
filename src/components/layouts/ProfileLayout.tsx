@@ -10,7 +10,7 @@ const ProfileLayout = () => {
   const session = useSession();
 
   return (
-    <div className=" top-0 flex min-h-screen w-full flex-col justify-between gap-4 border p-3  md:mx-auto  lg:w-[46rem]  lg:pl-20">
+    <div className=" top-0 flex min-h-screen w-full  flex-col justify-between gap-4 p-3  md:mx-auto  lg:w-[46rem]  lg:pl-14  lg:pr-12">
       <ProfileHeader />
       <Tabs />
     </div>

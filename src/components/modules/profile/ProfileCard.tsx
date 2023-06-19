@@ -19,9 +19,8 @@ const ProfileCard = ({ imageURL, date, name }: ProfileCardProps) => {
         </p>
       </div>
       <Avatar
+        style="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover"
         alt="avatar"
-        width={144}
-        height={144}
         src="/images/default-avatar.png"
         fallbackSrc="/images/default-avatar.png"
       />
