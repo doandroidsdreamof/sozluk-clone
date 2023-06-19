@@ -13,6 +13,7 @@ import RendererFeed from "./textEditor/RendererFeed";
 import Tabs from "./profile/Tabs";
 import ProfileHeader from "./profile/ProfileHeader";
 import TopicStatus from "./topic/TopicStatus";
+import ProfileIndicator from "./profile/ProfileIndicator";
 
 export {
   Navbar,
@@ -30,4 +31,5 @@ export {
   Tabs,
   ProfileHeader,
   TopicStatus,
+  ProfileIndicator,
 };

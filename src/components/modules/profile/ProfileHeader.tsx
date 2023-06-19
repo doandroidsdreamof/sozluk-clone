@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "../index";
 import { Avatar } from "~/components/common/index";
 import { DumbModal } from "~/components/modals/index";
+import { ProfileIndicator } from "../index";
 
 interface ProfileHeaderProps {
   entryCount: string;
@@ -22,6 +23,7 @@ const ProfileHeader = () => {
         <Button size="tiny" type="primary">
           Noob
         </Button>
+        <ProfileIndicator entryCount="9" followers="2" following="5" />
       </div>
       <div className="ml-auto">
         <button
@@ -35,7 +37,6 @@ const ProfileHeader = () => {
             fallbackSrc="/images/default-avatar.png"
           />
         </button>
-
         <DumbModal closeDumbOpen={() => setDumbOpen(false)} dumbOpen={dumbOpen}>
           <div className="flex h-36 w-96 flex-col items-center justify-center ">
             <img
