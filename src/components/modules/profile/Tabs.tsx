@@ -12,7 +12,7 @@ function classNames(...classes: string[]) {
 }
 
 function Tabs() {
-  const [indexEl, setIndexEl] = useState("");
+  const [indexEl, setIndexEl] = useState<number>(0);
   const [categories] = useState({
     entries: [{ id: 0 }, { name: "entries" }],
     favorites: [{ id: 1 }, { name: "favorites" }],
@@ -20,8 +20,7 @@ function Tabs() {
   });
 
   function handleChange(idx: number) {
-    const convertToStr = idx.toString();
-    setIndexEl(convertToStr);
+    setIndexEl(idx);
   }
 
   return (

@@ -5,20 +5,24 @@ import {
   ImagesContainer,
 } from "~/components/containers";
 
-type Status = "0" | "1" | "2";
+interface EL {
+  [key: number]: JSX.Element;
+}
 
 interface TabSelectorProps {
-  status: Status;
+  status: number;
 }
 
 function TabSelector({ status }: TabSelectorProps) {
-  const SELECT_ELEMENTS = {
-    "0": <EntriesContainer />,
-    "1": <FavoritesContainer />,
-    "2": <ImagesContainer />,
+  const SELECT_ELEMENTS: EL = {
+    0: <EntriesContainer />,
+    1: <FavoritesContainer />,
+    2: <ImagesContainer />,
   };
 
-  return <div>{SELECT_ELEMENTS[status]}</div>;
+  return (
+    <div>{status <= 2 && status >= 0 ? SELECT_ELEMENTS[status] : null}</div>
+  );
 }
 
 export default TabSelector;
