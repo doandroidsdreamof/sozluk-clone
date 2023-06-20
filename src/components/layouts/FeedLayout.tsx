@@ -42,7 +42,7 @@ const FeedLayout = (data: FeedProps) => {
               <div key={items.id}>
                 <button
                   onClick={() => handleClick(items.topicTitle)}
-                  className="h-full w-full cursor-pointer text-left"
+                  className="h-full w-full cursor-pointer text-left text-typography-body-secondary-light underline dark:text-typography-body-dark"
                 >
                   <TopicHeader key={items.id} headerOne={items.topicTitle} />
                 </button>

@@ -22,6 +22,7 @@ const TopicLayout = ({
       <TopicHeader headerOne={topicTitle} />
       <TopicStatus statusText={createdTopic ? "" : "There is nothing here"} />
       <RendererContainer topicTitle={topicTitle} />
+
       <TopicEditorContainer>
         <TextEditor topicTitle={topicTitle} />
       </TopicEditorContainer>
