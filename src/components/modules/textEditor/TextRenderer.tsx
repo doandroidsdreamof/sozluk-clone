@@ -19,11 +19,16 @@ interface User {
   name: string;
   id: string;
 }
+interface Favorites {
+  id: string;
+  favorite: boolean;
+}
 
 interface TextRendererProps {
   content: string;
   createdAt: Date;
   id: string;
+  favorites: Favorites[];
   topic: {
     topicTitle: string;
     id: string;
@@ -36,6 +41,7 @@ const TextRenderer = ({
   user,
   createdAt,
   topic,
+  favorites,
   id: entryId,
 }: TextRendererProps) => {
   const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
@@ -83,7 +89,7 @@ const TextRenderer = ({
   }
 
   return (
-    <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[38rem]  ">
+    <div className="my-4 flex min-h-[10rem] w-full flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[38rem]  ">
       <div className="mt-2">
         <div className="flex flex-row  justify-end">
           <ShareButton />
@@ -119,7 +125,12 @@ const TextRenderer = ({
         showMore={showMore}
         outputLength={output.length}
       >
-        <FavoriteButton entryId={entryId} favoriteCount="1" />
+        <FavoriteButton
+          id={""}
+          favorite={false}
+          {...favorites}
+          entryId={entryId}
+        />
         <ProfileCard
           key={user.id}
           name={user.name}

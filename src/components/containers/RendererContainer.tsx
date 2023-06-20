@@ -28,7 +28,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       const pageNumber = Math.ceil(entryCountPerTopic / limit);
       console.info(
         "🚀 ~ file: RendererContainer.tsx:32 ~ useEffect ~ totalCount:",
-        entryCountPerTopic
+        data?.pages[page]
       );
 
       setTotalPage(pageNumber);
@@ -53,14 +53,18 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       <div>
         {data != null ? (
           data?.pages[page]?.infiniteEntries.map((items) => (
-            <TextRenderer {...items} key={items.id} />
+            <TextRenderer
+              {...items}
+              favorites={items.favorites}
+              key={items.id}
+            />
           ))
         ) : (
           <></>
         )}
         <></>
       </div>
-      <div className=" order-3   flex w-full justify-center md:justify-end  lg:w-[42rem]">
+      <div className=" order-3   flex w-full justify-center md:justify-end  lg:w-[38rem]">
         {total >= 2 ? (
           <Paginate
             limit={limit}

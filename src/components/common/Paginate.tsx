@@ -25,7 +25,7 @@ const Paginate = ({
 
   useEffect(() => {
     populateArr(totalPage);
-  }, [totalPage, pageNum]);
+  }, [pageNum]);
 
   function populateArr(param: number) {
     const parseNum = [];
