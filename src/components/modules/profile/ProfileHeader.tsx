@@ -23,7 +23,7 @@ const ProfileHeader = () => {
         <Button size="tiny" type="primary">
           Noob
         </Button>
-        <ProfileIndicator entryCount="9" followers="2" following="5" />
+        <ProfileIndicator entryCount="9999999" followers="2" following="5" />
       </div>
       <div className="ml-auto  pr-8 pt-3">
         <button

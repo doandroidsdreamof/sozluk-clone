@@ -1,5 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import { insertElipsis } from "~/utils/elipsis";
+
+//TODO refactor
 
 interface ProfileIndicatorProps {
   entryCount: string;
@@ -12,28 +15,24 @@ const ProfileIndicator = ({
   followers,
   following,
 }: ProfileIndicatorProps) => {
-  const insertElipsis = (param: string) => {
-    const result =
-      param.length >= 6 ? param.substring(0, 6).concat("...") : param;
-    return result;
-  };
+  const elipsisOffset = 6;
 
   return (
     <div className="flex flex-row">
       <span className="flex max-w-fit  rounded-md px-2.5 py-1.5 text-xs text-blue-600   dark:text-brandGreen-600">
-        {insertElipsis(entryCount)} entry
+        {insertElipsis(entryCount, elipsisOffset)} entry
       </span>
       <Link
         href={"/"}
         className="flex max-w-fit cursor-pointer rounded-md px-2.5 py-1.5 text-xs text-blue-600  hover:underline dark:text-brandGreen-600"
       >
-        {insertElipsis(followers)} followers
+        {insertElipsis(followers, elipsisOffset)} followers
       </Link>
       <Link
         href={"/"}
         className="flex max-w-fit cursor-pointer truncate text-ellipsis rounded-md px-2.5 py-1.5 text-xs text-blue-600  hover:underline dark:text-brandGreen-600"
       >
-        {insertElipsis(following)} following
+        {insertElipsis(following, elipsisOffset)} following
       </Link>
     </div>
   );

@@ -121,7 +121,7 @@ const TextEditor = ({
   }
 
   return (
-    <div className="mb-24 w-full  border border-gray-200   bg-gray-50 dark:border-input-border-dark dark:bg-dark-300   ">
+    <div className="mb-24 w-full border  border-gray-200 bg-gray-50   dark:border-input-border-dark dark:bg-dark-300 lg:w-[38rem]   ">
       <EditorContent editor={editor} />
       <TextEditorMenu
         buttonText={entry ? "edit" : "comment"}

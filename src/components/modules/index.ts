@@ -15,6 +15,8 @@ import ProfileHeader from "./profile/ProfileHeader";
 import TopicStatus from "./topic/TopicStatus";
 import ProfileIndicator from "./profile/ProfileIndicator";
 import TabSelector from "./profile/TabSelector";
+import Settings from "./entry/Settings";
+import FavoriteButton from "./entry/FavoriteButton";
 
 export {
   Navbar,
@@ -34,4 +36,6 @@ export {
   TopicStatus,
   ProfileIndicator,
   TabSelector,
+  Settings,
+  FavoriteButton,
 };

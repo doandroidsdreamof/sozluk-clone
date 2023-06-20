@@ -54,7 +54,7 @@ model User {
     sessions      Session[]
     entry         Entry[]
     feed          Feed[]
-    likes         Likes[]
+    favorites         Favorites[]
     topic         Topic[]
     tag           Tag[]
     followersCount    Int        @default(0)
@@ -83,7 +83,7 @@ model Entry{
     entryId   String
     user      User     @relation(fields: [userId], references: [id])
     topic     Topic    @relation(fields: [entryId], references: [id])
-    likes     Likes[]
+    favorites Favorites[]
     avatar    String?
     postUrl   String?
     likeCount Int        @default(0)
@@ -97,12 +97,12 @@ model Feed{
     user      User     @relation(fields: [userId], references: [id])
 }
 
-model Likes {
+model Favorites {
   id        String   @id @default(cuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  entry     Entry    @relation(fields: [LikeId], references: [id])
-  LikeId    String
+  entry     Entry    @relation(fields: [favoriteId], references: [id])
+  favoriteId    String
   createdAt DateTime @default(now())
 
 }

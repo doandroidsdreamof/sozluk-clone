@@ -9,7 +9,7 @@ interface ProfileCardProps {
 
 const ProfileCard = ({ imageURL, date, name }: ProfileCardProps) => {
   return (
-    <>
+    <div className="ml-auto flex flex-row">
       <div className="mt-0.5">
         <h1 className="text-[0.80rem]   font-bold text-typography-body-light dark:text-typography-body-dark">
           {name}
@@ -24,7 +24,7 @@ const ProfileCard = ({ imageURL, date, name }: ProfileCardProps) => {
         src="/images/default-avatar.png"
         fallbackSrc="/images/default-avatar.png"
       />
-    </>
+    </div>
   );
 };
 

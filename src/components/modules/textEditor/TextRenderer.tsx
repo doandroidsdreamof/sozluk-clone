@@ -4,9 +4,15 @@ import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import DOMPurify from "isomorphic-dompurify";
 import { useMemo, useState } from "react";
-import { Settings } from "~/components/common/index";
+import { Settings } from "~/components/modules/index";
 import { api } from "~/utils/api";
-import { EntryCard, ProfileCard, ShareButton, TextEditor } from "../index";
+import {
+  EntryCard,
+  ProfileCard,
+  ShareButton,
+  TextEditor,
+  FavoriteButton,
+} from "../index";
 
 interface TextRendererProps {
   content: string;
@@ -75,7 +81,7 @@ const TextRenderer = ({
   }
 
   return (
-    <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[42rem]  ">
+    <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[38rem]  ">
       <div className="mt-2">
         <div className="flex flex-row  justify-end">
           <ShareButton />
@@ -105,11 +111,13 @@ const TextRenderer = ({
           />
         )}
       </div>
+
       <EntryCard
         setShowMore={setShowMore}
         showMore={showMore}
         outputLength={output.length}
       >
+        <FavoriteButton favorite={true} favoriteCount="1" />
         <ProfileCard
           key={user.id}
           name={user.name}
