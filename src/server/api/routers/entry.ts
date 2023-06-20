@@ -15,15 +15,16 @@ export const entryRouter = createTRPCRouter({
           user: { connect: { id: ctx.session?.user?.id } },
           topic: { connect: { id: input.topicId } },
           content: input.content,
+          favorites: {
+            createMany: {
+              data: {
+                userId: ctx.session?.user?.id,
+              },
+            },
+          },
         },
       });
 
-      const ceateFavorite = await ctx.prisma.favorites.create({
-        data: {
-          user: { connect: { id: ctx.session?.user?.id } },
-          entry: { connect: { id: insertEntry.id } },
-        },
-      });
       if (insertEntry) {
         return { data: { success: true, message: "entry is created" } };
       } else {
@@ -62,7 +63,7 @@ export const entryRouter = createTRPCRouter({
       }
     }),
   getUserEntries: protectedProcedure.query(async ({ ctx }) => {
-    const findEntrysAndToic = await ctx.prisma.entry.findMany({
+    const findEntryAndTopic = await ctx.prisma.entry.findMany({
       select: {
         content: true,
         topic: true,
@@ -77,8 +78,8 @@ export const entryRouter = createTRPCRouter({
         },
       },
     });
-    if (findEntrysAndToic) {
-      return findEntrysAndToic;
+    if (findEntryAndTopic) {
+      return findEntryAndTopic;
     } else {
       return null;
     }

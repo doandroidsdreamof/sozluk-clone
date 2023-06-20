@@ -9,14 +9,14 @@ interface FavoriteButtonProps {
   favorite: boolean;
 }
 
-const FavoriteButton = ({ entryId, favorite, id }: FavoriteButtonProps) => {
+const FavoriteButton = ({ favorite, id }: FavoriteButtonProps) => {
   const insertFavorite = api.favorite.ceateFavorite.useMutation();
 
   const handleClick = () => {
-    insertFavorite.mutate({
-      entryId: entryId,
-      favoriteId: id,
-    });
+    // insertFavorite.mutate({
+    //   entryId: entryId,
+    //   favoriteId: id,
+    // });
   };
 
   return (

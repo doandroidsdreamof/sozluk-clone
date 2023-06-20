@@ -67,6 +67,7 @@ const TextRenderer = ({
     removeEntry(entryId, {
       onSuccess: (data) => {
         if (data.success == true) {
+          updateUI();
           if (data.count === 1) {
             console.info(data.count);
             removeLastTopic(topic.id);
@@ -86,6 +87,8 @@ const TextRenderer = ({
 
   function updateUI() {
     void utils.entry.getUserEntries.invalidate();
+    void utils.entry.getInfitineEntries.invalidate({});
+    void utils.topic.getSingleTopic.invalidate(topic.topicTitle);
   }
 
   return (

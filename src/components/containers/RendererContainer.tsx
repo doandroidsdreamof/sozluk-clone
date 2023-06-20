@@ -45,7 +45,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   };
 
   const handleSelect = (targetVal: string) => {
-    setPage(parseInt(targetVal));
+    setPage((prev) => parseInt(targetVal));
   };
 
   return (
