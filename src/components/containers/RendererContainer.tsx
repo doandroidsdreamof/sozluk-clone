@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "~/utils/api";
-import { TextRenderer } from "../modules/index";
 import { Paginate } from "../common/index";
-import { useAppSelector } from "~/lib/store/hooks";
+import { TextRenderer } from "../modules/index";
 
 interface RendererContainerProps {
   topicTitle: string;

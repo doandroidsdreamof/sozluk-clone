@@ -8,11 +8,17 @@ import { Settings } from "~/components/modules/index";
 import { api } from "~/utils/api";
 import {
   EntryCard,
+  FavoriteButton,
   ProfileCard,
   ShareButton,
   TextEditor,
-  FavoriteButton,
 } from "../index";
+
+interface User {
+  avatar: string | null;
+  name: string;
+  id: string;
+}
 
 interface TextRendererProps {
   content: string;
@@ -22,11 +28,7 @@ interface TextRendererProps {
     topicTitle: string;
     id: string;
   };
-  user: {
-    avatar: string | null;
-    name: string;
-    id: string;
-  };
+  user: User;
 }
 
 const TextRenderer = ({
@@ -117,7 +119,7 @@ const TextRenderer = ({
         showMore={showMore}
         outputLength={output.length}
       >
-        <FavoriteButton favorite={true} favoriteCount="1" />
+        <FavoriteButton entryId={entryId} favoriteCount="1" />
         <ProfileCard
           key={user.id}
           name={user.name}
