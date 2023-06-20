@@ -125,12 +125,15 @@ const TextRenderer = ({
         showMore={showMore}
         outputLength={output.length}
       >
-        <FavoriteButton
-          id={""}
-          favorite={false}
-          {...favorites}
-          entryId={entryId}
-        />
+        {favorites &&
+          favorites.map((el, index) => (
+            <FavoriteButton
+              entryId={entryId}
+              favorite={el.favorite}
+              key={el.id}
+              id={index.toString()}
+            />
+          ))}
         <ProfileCard
           key={user.id}
           name={user.name}

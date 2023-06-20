@@ -123,7 +123,13 @@ export const entryRouter = createTRPCRouter({
           content: true,
           topic: true,
           id: true,
-          favorites: true,
+          favorites: {
+            select: {
+              favorite: true,
+              id: true,
+              entryId: true,
+            },
+          },
           createdAt: true,
           user: {
             select: {
