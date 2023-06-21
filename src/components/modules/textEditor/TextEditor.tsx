@@ -23,11 +23,12 @@ const TextEditor = ({
   userId,
   handleClose,
 }: TextEditorProps) => {
-  const { mutate } = api.topic.createTopic.useMutation();
+  const { mutate: createTopicAndEntry } = api.topic.createTopic.useMutation();
   const { mutate: createEntry } = api.entry.createEntry.useMutation();
   const [text, setText] = useState("");
   const { mutate: updateEntry } = api.entry.updateEntry.useMutation();
   const { data: getData } = api.topic.getSingleTopic.useQuery(topicTitle);
+  const { mutate: createFavorite } = api.favorite.ceateFavorite.useMutation();
   const utils = api.useContext();
 
   const editor = useEditor({
@@ -75,7 +76,7 @@ const TextEditor = ({
         return;
       }
       if (getData == null) {
-        mutate(
+        createTopicAndEntry(
           {
             topicTitle: topicTitle,
             entry: JSON.stringify(editor.getJSON()),
@@ -83,7 +84,7 @@ const TextEditor = ({
           {
             onSuccess: () => {
               updateUI();
-              console.info("topic & entry created");
+              console.info("topic & entry created", entryId);
             },
 
             onError: (error) => {

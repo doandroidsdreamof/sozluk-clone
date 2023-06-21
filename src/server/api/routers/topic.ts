@@ -57,19 +57,24 @@ export const topicRouter = createTRPCRouter({
           data: {
             user: { connect: { id: ctx.session.user.id } },
             topicTitle: input.topicTitle,
-            entry: {
-              createMany: {
-                data: [
-                  {
-                    content: input.entry,
-                    userId: ctx.session.user.id,
-                  },
-                ],
-              },
-            },
           },
         });
+
         if (insertTopic) {
+          const insertEntry = await ctx.prisma.entry.create({
+            data: {
+              user: { connect: { id: ctx.session?.user?.id } },
+              topic: { connect: { id: insertTopic.id } },
+              content: input.entry,
+              favorites: {
+                createMany: {
+                  data: {
+                    userId: ctx.session?.user?.id,
+                  },
+                },
+              },
+            },
+          });
           return { success: true, message: "topic and first entry is created" };
         } else {
           return {

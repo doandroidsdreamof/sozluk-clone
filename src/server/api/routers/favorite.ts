@@ -6,21 +6,12 @@ export const favoriteRouter = createTRPCRouter({
     .input(
       z.object({
         entryId: z.string(),
-        favoriteId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { favoriteId, entryId } = input;
-
-      const ceateFavorite = await ctx.prisma.favorites.upsert({
-        where: {
-          id: favoriteId,
-        },
-        update: {
-          entry: { connect: { id: entryId } },
-          user: { connect: { id: ctx.session?.user?.id } },
-        },
-        create: {
+      const { entryId } = input;
+      const ceateFavorite = await ctx.prisma.favorites.create({
+        data: {
           entry: { connect: { id: entryId } },
           user: { connect: { id: ctx.session?.user?.id } },
         },
