@@ -47,7 +47,7 @@ const Paginate = ({
         onChange={(e) => handleSelect(e.target.value)}
         className="ml-2 mr-2 items-center rounded-sm border border-input-border-light bg-bg-primary-light py-1.5 text-center text-sm  dark:border-input-border-dark dark:bg-bg-primary-dark"
       >
-        {totalPage ? (
+        {arr ? (
           arr.map((items: number, i) => (
             <option key={i} selected={items === pageNum} value={items}>
               {items + 1}
