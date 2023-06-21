@@ -4,15 +4,13 @@ import { generateHTML } from "@tiptap/html";
 import StarterKit from "@tiptap/starter-kit";
 import DOMPurify from "isomorphic-dompurify";
 import { useMemo, useState } from "react";
-import { Settings } from "~/components/modules/index";
 import { api } from "~/utils/api";
-import {
-  EntryCard,
-  FavoriteButton,
-  ProfileCard,
-  ShareButton,
-  TextEditor,
-} from "../index";
+import EntryCard from "../entry/EntryCard";
+import FavoriteButton from "../entry/FavoriteButton";
+import Settings from "../entry/Settings";
+import ShareButton from "../entry/ShareButton";
+import ProfileCard from "../profile/ProfileCard";
+import TextEditor from "./TextEditor";
 
 interface User {
   avatar: string | null;
@@ -28,7 +26,7 @@ interface TextRendererProps {
   content: string;
   createdAt: Date;
   id: string;
-  favorites: Favorites[];
+  favorites?: Favorites[];
   topic: {
     topicTitle: string;
     id: string;
@@ -97,7 +95,6 @@ const TextRenderer = ({
         <div className="flex flex-row  justify-end">
           <ShareButton />
           <Settings
-            key={entryId}
             handleEdit={() => handleEdit()}
             userId={user.id}
             handleRemoveEntry={() => handleRemoveEntry()}
@@ -105,7 +102,6 @@ const TextRenderer = ({
         </div>
         {!edit && typeof output === "string" ? (
           <div
-            key={entryId}
             className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white "
             dangerouslySetInnerHTML={{
               __html: output.length > 200 ? output.slice(0, showMore) : output,
@@ -115,7 +111,6 @@ const TextRenderer = ({
           <TextEditor
             handleClose={() => handleClose()}
             entryId={entryId}
-            key={user.id}
             userId={user.id}
             entry={output}
             topicTitle={topic.topicTitle}
@@ -138,7 +133,6 @@ const TextRenderer = ({
             />
           ))}
         <ProfileCard
-          key={user.id}
           name={user.name}
           date={createdAt}
           imageURL={user.avatar || ""}

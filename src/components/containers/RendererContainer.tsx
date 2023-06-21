@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "~/utils/api";
-import { Paginate } from "../common/index";
-import { TextRenderer } from "../modules/index";
+import Paginate from "../common/Paginate";
+import TextRenderer from "../modules/textEditor/TextRenderer";
 
 interface RendererContainerProps {
   topicTitle: string;
@@ -26,11 +26,6 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
     if (data?.pages[page]?.entryCountPerTopic && data?.pages[0]) {
       const { entryCountPerTopic } = data.pages[0];
       const pageNumber = Math.ceil(entryCountPerTopic / limit);
-      console.info(
-        "🚀 ~ file: RendererContainer.tsx:32 ~ useEffect ~ totalCount:",
-        data?.pages[page]
-      );
-
       setTotalPage(pageNumber);
     }
   }, [page]);
@@ -48,11 +43,16 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
     setPage((prev) => parseInt(targetVal));
   };
 
+  const output = useMemo(() => {
+    const memoizedData = data?.pages[page]?.infiniteEntries || null;
+    return memoizedData;
+  }, [data]);
+
   return (
     <>
       <div>
-        {data != null ? (
-          data?.pages[page]?.infiniteEntries.map((items) => (
+        {output != null && data ? (
+          output?.map((items) => (
             <TextRenderer
               {...items}
               favorites={items.favorites}

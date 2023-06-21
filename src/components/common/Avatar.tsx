@@ -12,11 +12,12 @@ const Avatar = ({ src, fallbackSrc, alt, style }: AvatarProps) => {
   const [imgSrc, setImgSrc] = useState(src);
 
   return (
-    <img
+    <Image
       className={style}
+      width={72}
+      height={72}
       alt={`${alt}`}
       src={imgSrc}
-      loading="lazy"
       onError={() => {
         setImgSrc(fallbackSrc);
       }}

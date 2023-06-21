@@ -1,9 +1,7 @@
 import React from "react";
-import {
-  FavoritesContainer,
-  EntriesContainer,
-  ImagesContainer,
-} from "~/components/containers";
+import EntriesContainer from "~/components/containers/EntriesContainer";
+import FavoritesContainer from "~/components/containers/FavoritesContainer";
+import ImagesContainer from "~/components/containers/ImagesContainer";
 
 interface EL {
   [key: number]: JSX.Element;

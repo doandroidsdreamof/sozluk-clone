@@ -1,6 +1,6 @@
 import { string, z } from "zod";
 import { hash } from "bcrypt";
-import { registerSchema } from "~/schemas";
+import { registerSchema } from "~/schemas/registerSchema";
 import {
   createTRPCRouter,
   protectedProcedure,

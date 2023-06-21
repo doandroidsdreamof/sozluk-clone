@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { api } from "~/utils/api";
-import { TextRenderer } from "../modules/index";
-import { Button } from "../modules/index";
+import TextRenderer from "../modules/textEditor/TextRenderer";
+import dynamic from "next/dynamic";
+
+const Button = dynamic(() => import("~/components/modules/button/Button"), {
+  ssr: true,
+});
 
 interface EntriesContainerProps {
   children: React.ReactNode;

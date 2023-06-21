@@ -9,7 +9,7 @@ import {
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { type ILogin } from "~/@types/interface";
-import { loginSchema } from "~/schemas";
+import { loginSchema } from "~/schemas/loginSchema";
 import { prisma } from "~/server/db";
 
 /**

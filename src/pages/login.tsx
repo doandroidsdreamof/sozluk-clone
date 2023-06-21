@@ -1,7 +1,13 @@
 import { type NextPage } from "next";
-import { useSession } from "next-auth/react";
-import { LoginForm } from "~/components/forms/index";
-import { FormLayout } from "~/components/layouts";
+import dynamic from "next/dynamic";
+
+const FormLayout = dynamic(() => import("~/components/layouts/FormLayout"), {
+  ssr: false,
+});
+
+const LoginForm = dynamic(() => import("~/components/forms/LoginForm"), {
+  ssr: false,
+});
 
 const Login: NextPage = () => {
   return (

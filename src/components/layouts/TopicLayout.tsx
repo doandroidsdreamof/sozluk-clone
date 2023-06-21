@@ -1,6 +1,21 @@
-import { RendererContainer, TopicEditorContainer } from "../containers/index";
-import { TextEditor, TopicHeader } from "../modules/index";
-import { TopicStatus } from "../modules/index";
+import dynamic from "next/dynamic";
+import TopicEditorContainer from "../containers/TopicEditorContainer";
+import TopicHeader from "../modules/topic/TopicHeader";
+import TopicStatus from "../modules/topic/TopicStatus";
+
+const TextEditor = dynamic(
+  () => import("~/components/modules/textEditor/TextEditor"),
+  {
+    ssr: true,
+  }
+);
+
+const RendererContainer = dynamic(
+  () => import("~/components/containers/RendererContainer"),
+  {
+    ssr: true,
+  }
+);
 
 interface TopicLayoutProps {
   topicTitle: string;

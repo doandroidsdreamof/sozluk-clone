@@ -1,8 +1,14 @@
-import { useAppSelector } from "~/lib/store/hooks";
 import { IoIosSettings } from "react-icons/io";
+import { useAppSelector } from "~/lib/store/hooks";
 import { api } from "~/utils/api";
-import { TopicLink } from "../index";
-import { useEffect } from "react";
+import dynamic from "next/dynamic";
+
+const TopicLink = dynamic(
+  () => import("~/components/modules/topic/TopicLink"),
+  {
+    ssr: true,
+  }
+);
 
 const Aside = () => {
   const toggleState = useAppSelector((state) => state.toggle.navbarState);

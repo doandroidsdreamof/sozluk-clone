@@ -3,7 +3,7 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "react-redux";
-import { BaseLayout } from "~/components/layouts/index";
+import BaseLayout from "~/components/layouts/BaseLayout";
 import { store } from "~/lib/store/store";
 import "~/styles/globals.css";
 import { api } from "~/utils/api";

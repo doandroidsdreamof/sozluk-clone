@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { ProfileCard } from "../index";
+import React from "react";
 
 interface EntryCardProps {
   outputLength: number;

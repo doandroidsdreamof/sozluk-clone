@@ -1,6 +1,5 @@
-import React, { use, useEffect, useState } from "react";
-import Link from "next/link";
-import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
 interface PaginateProps {
   lastPage?: string;

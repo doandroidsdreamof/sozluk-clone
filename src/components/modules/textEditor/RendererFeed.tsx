@@ -2,13 +2,11 @@
 import { generateHTML } from "@tiptap/html";
 // Option 1: Browser + server-side
 import StarterKit from "@tiptap/starter-kit";
-import React, { useEffect, useMemo, useState } from "react";
-import { ProfileCard, EntryCard, ShareButton } from "../index";
-import { Settings } from "~/components/common/index";
-import { useAppSelector } from "~/lib/store/hooks";
-import { TextEditor } from "../index";
-import { api } from "~/utils/api";
 import DOMPurify from "isomorphic-dompurify";
+import { useMemo, useState } from "react";
+import EntryCard from "../entry/EntryCard";
+import ShareButton from "../entry/ShareButton";
+import ProfileCard from "../profile/ProfileCard";
 
 interface Entry {
   content: string;
@@ -50,7 +48,6 @@ const RendererFeed = ({
         </div>
         {typeof output === "string" ? (
           <div
-            key={parseContent.id}
             className="prose  prose-sm  m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white "
             dangerouslySetInnerHTML={{
               __html: output.length > 200 ? output.slice(0, showMore) : output,
@@ -66,7 +63,6 @@ const RendererFeed = ({
         outputLength={output.length}
       >
         <ProfileCard
-          key={user.id}
           name={user.name}
           date={parseContent.createdAt}
           imageURL={user.avatar || ""}

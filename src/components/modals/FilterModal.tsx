@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { FilterForm } from "../forms/index";
+import FilterForm from "../forms/FilterForm";
 
 interface FilterModalProps {
   closeModal: () => void;

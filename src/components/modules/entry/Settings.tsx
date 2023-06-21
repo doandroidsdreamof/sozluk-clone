@@ -1,8 +1,7 @@
-import React, { Fragment } from "react";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { useSession } from "next-auth/react";
 import { Menu, Transition } from "@headlessui/react";
-import { useAppDispatch } from "~/lib/store/hooks";
+import { useSession } from "next-auth/react";
+import { Fragment } from "react";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 interface SettingsProps {
   userId: string;

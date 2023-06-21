@@ -5,6 +5,7 @@
   "scripts": {
     "build": "next build",
     "dev": "NODE_OPTIONS=\"--max_old_space_size=2048\" next",
+    "analyze": "ANALYZE=true next build",
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
@@ -15,6 +16,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@next-auth/prisma-adapter": "^1.0.5",
+    "@next/bundle-analyzer": "^13.4.6",
     "@prisma/client": "^4.11.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@storybook/addon-postcss": "^2.0.0",

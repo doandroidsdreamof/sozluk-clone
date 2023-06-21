@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { Tab } from "@headlessui/react";
-import {
-  FavoritesContainer,
-  EntriesContainer,
-  ImagesContainer,
-} from "~/components/containers";
-import { TabSelector } from "../index";
+import TabSelector from "./TabSelector";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

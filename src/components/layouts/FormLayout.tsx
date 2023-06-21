@@ -1,5 +1,9 @@
 import React from "react";
-import Modal from "../modals/Modal";
+import dynamic from "next/dynamic";
+
+const Modal = dynamic(() => import("~/components/modals/Modal"), {
+  ssr: true,
+});
 
 interface FormLayoutProps {
   children: React.ReactNode;

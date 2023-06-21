@@ -1,6 +1,10 @@
 import React from "react";
 import { useAppSelector } from "~/lib/store/hooks";
-import { AlertMessage } from "../common/index";
+import dynamic from "next/dynamic";
+
+const AlertMessage = dynamic(() => import("~/components/common/AlertMessage"), {
+  ssr: true,
+});
 
 const NotificationContainer = () => {
   const alerts = useAppSelector((state) => state.notification);

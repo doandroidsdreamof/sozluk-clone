@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Combobox, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { HiOutlineSearch } from "react-icons/hi";
 import { api } from "~/utils/api";
-import { FilterModal } from "../modals/index";
+import FilterModal from "../modals/FilterModal";
 
 interface SearchOptions {
   id: string;

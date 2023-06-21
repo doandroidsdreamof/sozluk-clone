@@ -1,6 +1,6 @@
 import { Field } from "formik";
 import { type FC } from "react";
-import { FormError } from "../forms";
+import FormError from "../forms/FormError";
 
 interface FormInputProps {
   type: string;

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { BsFillDropletFill, BsDroplet } from "react-icons/bs";
-import { insertElipsis } from "~/utils/elipsis";
+import { BsDroplet, BsFillDropletFill } from "react-icons/bs";
 import { api } from "~/utils/api";
+import { insertElipsis } from "~/utils/elipsis";
 
 interface FavoriteButtonProps {
   entryId: string;

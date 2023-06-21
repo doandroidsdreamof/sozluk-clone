@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { FormButton } from "../elements/index";
 import { AiFillCalendar } from "react-icons/ai";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { SelectBox } from "./index";
+import FormButton from "../elements/FormButton";
+import SelectBox from "./SelectBox";
 
 const FilterForm = () => {
   const [startDate, setStartDate] = useState(new Date());

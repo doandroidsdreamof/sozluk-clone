@@ -20,9 +20,6 @@ const Hamburger = ({ breakPoint, mobile }: HamburgerProps) => {
     <>
       <button
         onClick={handleClick}
-        data-drawer-target="logo-sidebar"
-        data-drawer-toggle="logo-sidebar"
-        aria-controls="logo-sidebar"
         type="button"
         className={
           mobile === "md"
@@ -33,7 +30,6 @@ const Hamburger = ({ breakPoint, mobile }: HamburgerProps) => {
               }:hidden`
         }
       >
-        <span className="sr-only">Open sidebar</span>
         {toggleState ? (
           <AiOutlineClose size={20} />
         ) : (

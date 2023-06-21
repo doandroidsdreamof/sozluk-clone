@@ -1,10 +1,29 @@
 import { useRouter } from "next/router";
 import { type ILayoutProps } from "~/@types/interface";
-import { DocHead, ScrollUpButton } from "../common/index";
-import { NotificationContainer } from "../containers/index";
-import { Aside, Navbar, Footer } from "../modules/index";
-import { useAppSelector } from "~/lib/store/hooks";
-import { useEffect } from "react";
+import DocHead from "../common/DocHead";
+import dynamic from "next/dynamic";
+
+const ScrollUpButton = dynamic(
+  () => import("~/components/common/ScrollUpButton"),
+  { ssr: false }
+);
+
+const NotificationContainer = dynamic(
+  () => import("~/components/containers/NotificationContainer"),
+  { ssr: false }
+);
+
+const Navbar = dynamic(() => import("~/components/modules/navbar/Navbar"), {
+  ssr: false,
+});
+
+const Aside = dynamic(() => import("~/components/modules/aside/Aside"), {
+  ssr: false,
+});
+
+const Footer = dynamic(() => import("~/components/modules/footer/Footer"), {
+  ssr: false,
+});
 
 function BaseLayout({ children }: ILayoutProps) {
   const router = useRouter();

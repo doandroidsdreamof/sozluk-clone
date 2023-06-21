@@ -1,5 +1,4 @@
-import React from "react";
-import { Avatar } from "~/components/common/index";
+import Avatar from "~/components/common/Avatar";
 
 interface ProfileCardProps {
   imageURL: string;

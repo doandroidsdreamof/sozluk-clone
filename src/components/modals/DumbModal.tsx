@@ -1,8 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import { NotificationContainer } from "../containers/index";
+import NotificationContainer from "../containers/NotificationContainer";
 
 interface DumbModalProps {
   children: React.ReactNode;

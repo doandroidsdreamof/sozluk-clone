@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { MdWaterDrop } from "react-icons/md";
-import { AutoSearch, Hamburger } from "../../common/index";
-import { ButtonContainer } from "../../containers/index";
-import { Logo } from "../../elements/index";
+import Hamburger from "~/components/common/Hamburger";
+import ButtonContainer from "~/components/containers/ButtonContainer";
+import Logo from "~/components/elements/Logo";
+import dynamic from "next/dynamic";
+
+const AutoSearch = dynamic(() => import("~/components/common/AutoSearch"), {
+  ssr: false,
+});
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

@@ -1,7 +1,3 @@
-import React from "react";
-import { Logo } from "~/components/elements";
-import { MdWaterDrop } from "react-icons/md";
-
 const Footer = () => {
   return (
     <>

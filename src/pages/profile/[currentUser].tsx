@@ -1,7 +1,11 @@
 import { type NextPage } from "next";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { ProfileLayout } from "~/components/layouts/index";
-import { api } from "~/utils/api";
+
+const ProfileLayout = dynamic(
+  () => import("~/components/layouts/ProfileLayout"),
+  { ssr: false }
+);
 
 const Profile: NextPage = () => {
   const router = useRouter();

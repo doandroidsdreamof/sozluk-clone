@@ -1,4 +1,4 @@
-import { DarkMode } from "~/components/common";
+import DarkMode from "~/components/common/DarkMode";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Login from "../components/forms/LoginForm";

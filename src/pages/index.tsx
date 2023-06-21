@@ -1,10 +1,9 @@
-import { type GetServerSideProps, type NextPage } from "next";
+import { type NextPage } from "next";
 
-import { getSession, useSession } from "next-auth/react";
-import { getServerAuthSession } from "~/server/auth";
-import { FeedLayout } from "~/components/layouts/index";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import FeedLayout from "~/components/layouts/FeedLayout";
 import { api } from "~/utils/api";
-import { useState, useEffect } from "react";
 
 const Home: NextPage = () => {
   const { data } = api.topic.getRandomEntriesAndTopics.useQuery();

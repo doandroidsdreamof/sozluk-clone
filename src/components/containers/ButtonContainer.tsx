@@ -2,8 +2,12 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { logoutClick } from "~/lib/auth-helpers/logout";
-import { DarkMode } from "../common/index";
-import Button from "../modules/button/Button";
+import dynamic from "next/dynamic";
+import DarkMode from "../common/DarkMode";
+
+const Button = dynamic(() => import("~/components/modules/button/Button"), {
+  ssr: true,
+});
 
 const ButtonContainer = () => {
   const session = useSession();

@@ -1,6 +1,7 @@
 import React from "react";
-import { Tabs, ProfileHeader } from "../modules/index";
 import { useSession } from "next-auth/react";
+import ProfileHeader from "../modules/profile/ProfileHeader";
+import Tabs from "../modules/profile/Tabs";
 
 interface UserLayoutProps {
   children: React.ReactNode;

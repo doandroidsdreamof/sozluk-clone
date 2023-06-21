@@ -2,16 +2,17 @@ import { Form, Formik } from "formik";
 import { nanoid } from "nanoid";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import { type IRegister } from "~/@types/interface";
-import { FormButton, Input } from "~/components/elements/index";
+import FormButton from "../elements/FormButton";
+import Input from "../elements/Input";
 import { useAppDispatch } from "~/lib/store/hooks";
 import {
   insertNotification,
   removeNotification,
   type AlertType,
 } from "~/lib/store/reducers/notificationSlice";
-import { clientRegisterSchema } from "~/schemas/index";
+import { clientRegisterSchema } from "~/schemas/clientRegisterSchema";
 import { api } from "~/utils/api";
-import { FormFooter } from "./index";
+import FormFooter from "./FormFooter";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 

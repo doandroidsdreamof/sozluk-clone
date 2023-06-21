@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button } from "../index";
-import { Avatar } from "~/components/common/index";
-import { DumbModal } from "~/components/modals/index";
-import { ProfileIndicator } from "../index";
+import Avatar from "~/components/common/Avatar";
+import DumbModal from "~/components/modals/DumbModal";
+import Button from "../button/Button";
+import ProfileIndicator from "./ProfileIndicator";
 
 interface ProfileHeaderProps {
   entryCount: string;

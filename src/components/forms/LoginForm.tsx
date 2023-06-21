@@ -1,8 +1,5 @@
 import { Form, Formik } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
-import { Input, FormButton } from "~/components/elements/index";
-import { loginSchema } from "~/schemas/index";
-import { SocialButton, FormFooter } from "./index";
 import { type ILogin } from "~/@types/interface";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -13,6 +10,11 @@ import {
   insertNotification,
   removeNotification,
 } from "~/lib/store/reducers/notificationSlice";
+import { loginSchema } from "~/schemas/loginSchema";
+import Input from "../elements/Input";
+import FormButton from "../elements/FormButton";
+import FormFooter from "./FormFooter";
+import SocialButton from "./SocialButton";
 
 const loginValues = {
   email: "",

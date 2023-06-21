@@ -1,8 +1,21 @@
-import React, { useEffect } from "react";
-import { TopicHeader, TextEditor, RendererFeed } from "../modules/index";
-import { TopicEditorContainer, RendererContainer } from "../containers/index";
-import Link from "next/link";
-import router from "next/router";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+
+const RendererFeed = dynamic(
+  () => import("~/components/modules/textEditor/RendererFeed"),
+  {
+    ssr: true,
+    loading: () => <p>Loading...</p>,
+  }
+);
+
+const TopicHeader = dynamic(
+  () => import("~/components/modules/topic/TopicHeader"),
+  {
+    ssr: true,
+    loading: () => <p>Loading...</p>,
+  }
+);
 
 interface Entry {
   content: string;
@@ -25,6 +38,7 @@ interface FeedProps {
 }
 
 const FeedLayout = (data: FeedProps) => {
+  const router = useRouter();
   if (!data) {
     return <></>;
   }
@@ -44,7 +58,7 @@ const FeedLayout = (data: FeedProps) => {
                   onClick={() => handleClick(items.topicTitle)}
                   className="h-full w-full cursor-pointer text-left text-typography-body-secondary-light underline dark:text-typography-body-dark"
                 >
-                  <TopicHeader key={items.id} headerOne={items.topicTitle} />
+                  <TopicHeader headerOne={items.topicTitle} />
                 </button>
                 <RendererFeed {...items} />
               </div>

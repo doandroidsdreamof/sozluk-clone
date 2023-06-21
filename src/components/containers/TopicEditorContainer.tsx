@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import React, { type FC } from "react";
+import React from "react";
 
 interface TopicEditorContainerProps {
   children: React.ReactNode;

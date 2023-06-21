@@ -1,5 +1,6 @@
 import React from "react";
-import { Tabs, ProfileHeader } from "../modules/index";
+import Tabs from "../modules/profile/Tabs";
+import ProfileHeader from "../modules/profile/ProfileHeader";
 import { useSession } from "next-auth/react";
 
 interface ProfileLayoutProps {
