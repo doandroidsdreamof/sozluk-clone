@@ -2,7 +2,6 @@ import { Color } from "@tiptap/extension-color";
 import TextStyle from "@tiptap/extension-text-style";
 import { EditorContent, useEditor, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useState } from "react";
 import { api } from "~/utils/api";
 
 import TextEditorMenu from "./TextEditorMenu";
@@ -25,7 +24,6 @@ const TextEditor = ({
 }: TextEditorProps) => {
   const { mutate: createTopicAndEntry } = api.topic.createTopic.useMutation();
   const { mutate: createEntry } = api.entry.createEntry.useMutation();
-  const [text, setText] = useState("");
   const { mutate: updateEntry } = api.entry.updateEntry.useMutation();
   const { data: getData } = api.topic.getSingleTopic.useQuery(topicTitle);
   const { mutate: createFavorite } = api.favorite.ceateFavorite.useMutation();
@@ -44,18 +42,14 @@ const TextEditor = ({
         editor.commands.setContent(entry);
       }
     },
-
-    onUpdate({ editor }) {
-      setText(editor.getText());
-    },
   }) as Editor;
 
   const handlePost = () => {
-    if (text.length > 0) {
+    if (editor.getText().length > 0) {
       if (entry && handleClose && entryId && userId) {
         updateEntry(
           {
-            entryId: entryId,
+            entryId: BigInt(entryId),
             content: JSON.stringify(editor.getJSON()),
             userId: userId,
           },
@@ -84,7 +78,6 @@ const TextEditor = ({
           {
             onSuccess: () => {
               updateUI();
-              console.info("topic & entry created", entryId);
             },
 
             onError: (error) => {
@@ -97,7 +90,7 @@ const TextEditor = ({
       } else {
         createEntry(
           {
-            topicId: getData.id,
+            topicId: BigInt(getData.id),
             content: JSON.stringify(editor.getJSON()),
           },
           {

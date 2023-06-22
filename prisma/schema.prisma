@@ -12,6 +12,7 @@ model Widget {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 }
 
+
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -53,12 +54,11 @@ model User {
     accounts      Account[]
     sessions      Session[]
     entry         Entry[]
-    feed          Feed[]
     favorites     Favorites[]
     topic         Topic[]
-    tag           Tag[]
-    followersCount    Int         @default(0)
-    followingCount    Int         @default(0)
+    followersCount    BigInt  @default(0)
+    followingCount    BigInt  @default(0)
+    image            String?
     messagesSent     Message[]    @relation("sender")
     messagesReceived Message[]    @relation("recipient")
     followers        Follower[]   @relation("follower")
@@ -76,11 +76,11 @@ model VerificationToken {
 
 
 model Entry{
-    id        String   @id @default(cuid())
+    id         BigInt          @id @default(autoincrement())
     createdAt DateTime @default(now())
     content   String
     userId    String
-    entryId   String
+    entryId   BigInt
     user      User     @relation(fields: [userId], references: [id])
     topic     Topic    @relation(fields: [entryId], references: [id], onDelete: Cascade)
     favorites Favorites[]
@@ -89,20 +89,14 @@ model Entry{
     likeCount Int        @default(0)
 }
 
-model Feed{
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    content   String
-    userId    String
-    user      User     @relation(fields: [userId], references: [id])
-}
+
 
 model Favorites {
-  id      String   @id @default(cuid())
+  id        BigInt          @id @default(autoincrement())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
   createdAt DateTime @default(now())
-  entryId   String
+  entryId   BigInt
   entry     Entry  @relation(fields: [entryId], references: [id], onDelete: Cascade)
   favorite  Boolean  @default(false)
 
@@ -111,29 +105,25 @@ model Favorites {
 }
 
 model Topic{
-    id        String   @id @default(cuid())
+    id            BigInt          @id @default(autoincrement())
     createdAt DateTime @default(now())
     topicTitle String
     userId    String
     user      User     @relation(fields: [userId], references: [id])
-    titleEntryCount      Int        @default(0)
+    titleEntryCount      BigInt        @default(0)
     entry     Entry[]
-    tag       Tag[]
 
 }
 
  model Tag {
-    id        String @id @default(cuid())
-    tagId     String
-    userId    String
-    topic     Topic      @relation(fields: [tagId], references: [id])
-    user      User       @relation(fields: [userId], references: [id])
+    id        BigInt          @id @default(autoincrement())
+    tagId     BigInt
     tagName   String
 
     }
 
 model Message {
-  id          String     @id @default(cuid())
+  id            BigInt          @id @default(autoincrement())
   sender      User     @relation("sender", fields: [senderId], references: [id])
   senderId    String
   recipient   User     @relation("recipient", fields: [recipientId], references: [id])
@@ -151,7 +141,7 @@ enum Role {
 
 
 model Follower {
-  id          String   @id @default(cuid())
+  id          BigInt          @id @default(autoincrement())
   follower    User     @relation("follower", fields: [followerId], references: [id])
   followerId  String
   following   User     @relation("following", fields: [followingId], references: [id])

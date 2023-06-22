@@ -10,8 +10,6 @@ import {
 import { BsCodeSquare, BsTextParagraph } from "react-icons/bs";
 import { MdHorizontalRule, MdRedo, MdUndo } from "react-icons/md";
 import { RxListBullet, RxQuote } from "react-icons/rx";
-import { refetchTopic } from "~/lib/store/reducers/refetchSlice";
-import { useAppDispatch } from "~/lib/store/hooks";
 
 interface MenuProps {
   editor: Editor;
@@ -23,7 +21,6 @@ const buttonStyle =
   "is-active p-2 text-gray-200  rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
 const TextEditorMenu = ({ editor, handleFunc, buttonText }: MenuProps) => {
-  const dispatch = useAppDispatch();
   if (!editor) {
     return null;
   }
@@ -31,7 +28,6 @@ const TextEditorMenu = ({ editor, handleFunc, buttonText }: MenuProps) => {
   const handleClick = () => {
     handleFunc();
     console.info("dispatch handle refetch ===========>");
-    dispatch(refetchTopic());
   };
 
   return (

@@ -39,35 +39,41 @@ const RegisterForm = () => {
 
   // eslint-disable-next-line @typescript-eslint/require-await
   async function handleRegister(data: IRegister) {
-    const { confirmPassword, ...state } = data;
-    const { email, password } = data;
+    const { email, password, userName } = data;
     try {
-      mutate(state, {
-        onError: (err) => {
-          console.log(err);
-          setAlert("başarısız", "DANGER", 5000);
+      mutate(
+        {
+          email: email,
+          password: password,
+          userName: userName,
         },
-        onSuccess: (data) => {
-          if (data.success === false) {
-            setAlert(data.message, "DANGER", 5000);
-          } else {
-            signIn("credentials", {
-              email: email,
-              password: password,
-              redirect: false,
-            })
-              .then((res) => {
-                if (res?.ok === true) {
-                  router.push("/");
-                  setAlert(data.message, "SUCCESS", 5000);
-                }
+        {
+          onError: (err) => {
+            console.log(err);
+            setAlert("başarısız", "DANGER", 5000);
+          },
+          onSuccess: (data) => {
+            if (data.success === false) {
+              setAlert(data.message, "DANGER", 5000);
+            } else {
+              signIn("credentials", {
+                email: email,
+                password: password,
+                redirect: false,
               })
-              .catch((err) => {
-                console.error(err);
-              });
-          }
-        },
-      });
+                .then((res) => {
+                  if (res?.ok === true) {
+                    setAlert(data.message, "SUCCESS", 5000);
+                    router.push("/");
+                  }
+                })
+                .catch((err) => {
+                  console.error(err);
+                });
+            }
+          },
+        }
+      );
     } catch (err) {
       console.log("🚀 ~ file: Register.tsx:39 ~ Register ~ err:", err);
     }

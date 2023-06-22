@@ -8,7 +8,7 @@ import {
 
 export const entryRouter = createTRPCRouter({
   createEntry: protectedProcedure
-    .input(z.object({ content: z.string().min(2), topicId: z.string() }))
+    .input(z.object({ content: z.string().min(2), topicId: z.bigint() }))
     .mutation(async ({ ctx, input }) => {
       const insertEntry = await ctx.prisma.entry.create({
         data: {
@@ -84,7 +84,7 @@ export const entryRouter = createTRPCRouter({
   getInfitineEntries: publicProcedure
     .input(
       z.object({
-        cursor: z.string().nullish(),
+        cursor: z.bigint().nullish(),
         limit: z.number(),
         topicTitle: z.string().nullish(),
         skip: z.number().optional(),
@@ -127,12 +127,13 @@ export const entryRouter = createTRPCRouter({
           },
         },
       });
-      let nextCursor: typeof infiniteEntries | undefined | string = undefined;
+      let nextCursor: typeof infiniteEntries | undefined | bigint = undefined;
       const entryCountPerTopic: number = totalCount.length;
       if (infiniteEntries.length > limit) {
         const nextItem = infiniteEntries.pop();
         nextCursor = nextItem?.id;
       }
+
       return {
         infiniteEntries,
         nextCursor,
@@ -142,7 +143,7 @@ export const entryRouter = createTRPCRouter({
   updateEntry: protectedProcedure
     .input(
       z.object({
-        entryId: z.string(),
+        entryId: z.bigint(),
         content: z.string(),
         userId: z.string(),
       })
@@ -165,7 +166,7 @@ export const entryRouter = createTRPCRouter({
       }
     }),
   removeEntry: protectedProcedure
-    .input(z.string().nullable())
+    .input(z.bigint().nullable())
     .mutation(async ({ ctx, input }) => {
       if (input != null) {
         const removeSingleEntry = await ctx.prisma.entry.deleteMany({
