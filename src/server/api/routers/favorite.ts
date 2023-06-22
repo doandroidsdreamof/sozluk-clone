@@ -5,7 +5,7 @@ export const favoriteRouter = createTRPCRouter({
   ceateFavorite: protectedProcedure
     .input(
       z.object({
-        entryId: z.string(),
+        entryId: z.bigint(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -21,7 +21,7 @@ export const favoriteRouter = createTRPCRouter({
   getFavorites: protectedProcedure
     .input(
       z.object({
-        entryId: z.string(),
+        entryId: z.bigint(),
       })
     )
     .query(async ({ ctx, input }) => {

@@ -30,7 +30,7 @@ const EntriesContainer = () => {
       {data &&
         data
           .slice(0, showMore)
-          .map((el) => <TextRenderer key={el.id} {...el} />)}
+          .map((el) => <TextRenderer key={el.id.toString()} {...el} />)}
       {data ? (
         <div className=" flex items-center justify-center">
           <Button

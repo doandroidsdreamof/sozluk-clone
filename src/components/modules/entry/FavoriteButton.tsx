@@ -3,7 +3,7 @@ import { api } from "~/utils/api";
 import { insertElipsis } from "~/utils/elipsis";
 
 interface FavoriteButtonProps {
-  entryId: string;
+  entryId: bigint;
   id: string;
   favorite: boolean;
 }

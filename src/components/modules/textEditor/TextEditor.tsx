@@ -11,7 +11,7 @@ import TextEditorMenu from "./TextEditorMenu";
 interface TextEditorProps {
   topicTitle: string;
   entry?: string;
-  entryId?: string;
+  entryId?: bigint;
   handleClose?: () => void;
   userId?: string;
 }

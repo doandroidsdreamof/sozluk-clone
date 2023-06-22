@@ -18,18 +18,18 @@ interface User {
   id: string;
 }
 interface Favorites {
-  id: string;
+  id: bigint;
   favorite: boolean;
 }
 
 interface TextRendererProps {
   content: string;
   createdAt: Date;
-  id: string;
+  id: bigint;
   favorites?: Favorites[];
   topic: {
     topicTitle: string;
-    id: string;
+    id: bigint;
   };
   user: User;
 }
@@ -128,7 +128,7 @@ const TextRenderer = ({
             <FavoriteButton
               entryId={entryId}
               favorite={el.favorite}
-              key={el.id}
+              key={el.id.toString()}
               id={index.toString()}
             />
           ))}

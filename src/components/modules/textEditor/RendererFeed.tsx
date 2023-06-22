@@ -10,7 +10,7 @@ import ProfileCard from "../profile/ProfileCard";
 
 interface Entry {
   content: string;
-  id: string;
+  id: bigint;
   createdAt: Date;
 }
 
@@ -22,7 +22,7 @@ interface TextRendererProps {
   };
   entry: Entry[];
   topicTitle: string;
-  id: string;
+  id: bigint;
 }
 
 const RendererFeed = ({

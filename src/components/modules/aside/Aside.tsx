@@ -34,7 +34,7 @@ const Aside = () => {
             {data &&
               data.map((items) => (
                 <TopicLink
-                  key={items.id}
+                  key={items.id.toString()}
                   text={items.topicTitle}
                   url={items.topicTitle}
                 />

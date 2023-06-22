@@ -55,7 +55,9 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
     <>
       <div>
         {output != null && data ? (
-          output?.map((items) => <TextRenderer {...items} key={items.id} />)
+          output?.map((items) => (
+            <TextRenderer {...items} key={items.id.toString()} />
+          ))
         ) : (
           <></>
         )}
