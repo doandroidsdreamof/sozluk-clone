@@ -25,7 +25,12 @@ export const topicRouter = createTRPCRouter({
         },
       });
       if (findTopics) {
-        return findTopics;
+        return findTopics.map((el) => {
+          return {
+            id: el.id.toString(),
+            topicTitle: el.topicTitle,
+          };
+        });
       } else {
         return null;
       }
@@ -100,7 +105,7 @@ export const topicRouter = createTRPCRouter({
     }
   }),
   removeTopic: protectedProcedure
-    .input(z.string().nullable())
+    .input(z.bigint().nullable())
     .mutation(async ({ ctx, input }) => {
       //*If there is no entry inside topic
       if (input) {
