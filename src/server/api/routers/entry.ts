@@ -35,7 +35,7 @@ export const entryRouter = createTRPCRouter({
     .input(z.string().nullable())
     .query(async ({ ctx, input }) => {
       if (input) {
-        const findEntrysAndToic = await ctx.prisma.entry.findMany({
+        const findEntrysAndTopic = await ctx.prisma.entry.findMany({
           where: {
             topic: {
               topicTitle: input || "",
@@ -55,8 +55,8 @@ export const entryRouter = createTRPCRouter({
             },
           },
         });
-        if (findEntrysAndToic) {
-          return findEntrysAndToic;
+        if (findEntrysAndTopic) {
+          return findEntrysAndTopic;
         } else {
           return null;
         }
@@ -64,11 +64,8 @@ export const entryRouter = createTRPCRouter({
     }),
   getUserEntries: protectedProcedure.query(async ({ ctx }) => {
     const findEntryAndTopic = await ctx.prisma.entry.findMany({
-      select: {
-        content: true,
+      include: {
         topic: true,
-        id: true,
-        createdAt: true,
         user: {
           select: {
             avatar: true,
@@ -98,9 +95,6 @@ export const entryRouter = createTRPCRouter({
       const [entries, totalCount] = await ctx.prisma.$transaction([
         ctx.prisma.entry.count(),
         ctx.prisma.entry.findMany({
-          orderBy: {
-            id: "asc",
-          },
           where: {
             topic: {
               topicTitle: topicTitle || "",
@@ -120,23 +114,15 @@ export const entryRouter = createTRPCRouter({
         orderBy: {
           id: "asc",
         },
-        select: {
-          content: true,
+        include: {
+          favorites: true,
           topic: true,
-          id: true,
-          favorites: {
-            select: {
-              favorite: true,
-              id: true,
-              entryId: true,
-            },
-          },
-          createdAt: true,
           user: {
             select: {
-              avatar: true,
-              name: true,
               id: true,
+              avatar: true,
+              email: true,
+              name: true,
             },
           },
         },

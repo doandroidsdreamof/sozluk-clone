@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { type NextPage } from "next";
 import NextLink from "next/link";
 

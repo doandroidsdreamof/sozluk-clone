@@ -92,11 +92,6 @@ export const topicRouter = createTRPCRouter({
       orderBy: {
         createdAt: "desc",
       },
-      select: {
-        userId: true,
-        topicTitle: true,
-        id: true,
-      },
     });
     if (getAll != null) {
       return getAll;
@@ -125,17 +120,8 @@ export const topicRouter = createTRPCRouter({
     const records = await ctx.prisma.topic.findMany({
       skip: randomSkip,
       take: randomTake,
-      select: {
-        topicTitle: true,
-        id: true,
-        createdAt: true,
-        entry: {
-          select: {
-            content: true,
-            id: true,
-            createdAt: true,
-          },
-        },
+      include: {
+        entry: true,
         user: {
           select: {
             avatar: true,

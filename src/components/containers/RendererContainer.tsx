@@ -29,6 +29,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       const { entryCountPerTopic } = data.pages[0];
       const pageNumber = Math.ceil(entryCountPerTopic / limit);
       setTotalPage(pageNumber);
+      console.info(data);
     }
   }, [page]);
 
@@ -54,13 +55,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
     <>
       <div>
         {output != null && data ? (
-          output?.map((items) => (
-            <TextRenderer
-              {...items}
-              favorites={items.favorites}
-              key={items.id}
-            />
-          ))
+          output?.map((items) => <TextRenderer {...items} key={items.id} />)
         ) : (
           <></>
         )}

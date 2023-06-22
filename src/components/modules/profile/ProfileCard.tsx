@@ -1,4 +1,5 @@
 import Avatar from "~/components/common/Avatar";
+import { useState } from "react";
 
 interface ProfileCardProps {
   imageURL: string;
