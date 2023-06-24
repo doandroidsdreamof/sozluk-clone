@@ -2,9 +2,8 @@ import { Color } from "@tiptap/extension-color";
 import TextStyle from "@tiptap/extension-text-style";
 import { EditorContent, useEditor, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import dynamic from "next/dynamic";
 import { api } from "~/utils/api";
-
-import TextEditorMenu from "./TextEditorMenu";
 
 // TODO: refactoring
 
@@ -15,6 +14,14 @@ interface TextEditorProps {
   handleClose?: () => void;
   userId?: string;
 }
+
+const TextEditorMenu = dynamic(
+  () => import("~/components/modules/textEditor/TextEditorMenu"),
+  {
+    ssr: false,
+  }
+);
+
 const TextEditor = ({
   topicTitle,
   entry,

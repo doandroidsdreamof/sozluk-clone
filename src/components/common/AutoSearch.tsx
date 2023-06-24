@@ -1,6 +1,6 @@
 import { Combobox, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { HiOutlineSearch } from "react-icons/hi";
 import { api } from "~/utils/api";
@@ -40,14 +40,13 @@ const AutoSearch = () => {
     }
   };
 
-  const filteredTopics = () => {
-    console.info(data);
+  const filteredTopics = useCallback(() => {
     input === ""
       ? data
       : data.filter((items) => {
           return items.topicTitle.toLowerCase().includes(input.toLowerCase());
         });
-  };
+  }, [data]);
 
   function closeModal() {
     setIsOpen(false);

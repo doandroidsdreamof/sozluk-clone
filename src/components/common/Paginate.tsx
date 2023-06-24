@@ -24,7 +24,7 @@ const Paginate = ({
 
   useEffect(() => {
     populateArr(totalPage);
-  }, [pageNum]);
+  }, [pageNum, totalPage]);
 
   function populateArr(param: number) {
     const parseNum = [];
@@ -36,36 +36,42 @@ const Paginate = ({
   }
 
   return (
-    <div className="flex   items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark ">
-      <button
-        onClick={() => handleFetchPreviousPage()}
-        className="sbui-btn-primary dark ml-auto  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
-      >
-        <MdNavigateBefore size={18} />
-      </button>
-      <select
-        onChange={(e) => handleSelect(e.target.value)}
-        className="ml-2 mr-2 items-center rounded-sm border border-input-border-light bg-bg-primary-light py-1.5 text-center text-sm  dark:border-input-border-dark dark:bg-bg-primary-dark"
-      >
-        {arr ? (
-          arr.map((items: number, i) => (
-            <option key={i} selected={items === pageNum} value={items}>
-              {items + 1}
-            </option>
-          ))
-        ) : (
-          <></>
-        )}
-      </select>
-      /
-      <button
-        disabled={pageNum + 1 == totalPage ? true : false}
-        onClick={() => handleFetchNextPage()}
-        className="sbui-btn-primary dark ml-2  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
-      >
-        <MdNavigateNext size={18} />
-      </button>
-    </div>
+    <>
+      {totalPage >= 2 ? (
+        <div className="flex   items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark ">
+          <button
+            onClick={() => handleFetchPreviousPage()}
+            className="sbui-btn-primary dark ml-auto  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
+          >
+            <MdNavigateBefore size={18} />
+          </button>
+          <select
+            onChange={(e) => handleSelect(e.target.value)}
+            className="ml-2 mr-2 items-center rounded-sm border border-input-border-light bg-bg-primary-light py-1.5 text-center text-sm  dark:border-input-border-dark dark:bg-bg-primary-dark"
+          >
+            {arr ? (
+              arr.map((items: number, i) => (
+                <option key={i} selected={items === pageNum} value={items}>
+                  {items + 1}
+                </option>
+              ))
+            ) : (
+              <></>
+            )}
+          </select>
+          /
+          <button
+            disabled={pageNum + 1 == totalPage ? true : false}
+            onClick={() => handleFetchNextPage()}
+            className="sbui-btn-primary dark ml-2  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
+          >
+            <MdNavigateNext size={18} />
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 

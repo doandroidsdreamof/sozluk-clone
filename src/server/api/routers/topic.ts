@@ -38,9 +38,10 @@ export const topicRouter = createTRPCRouter({
   getSingleTopic: publicProcedure
     .input(z.string())
     .query(async ({ ctx, input }) => {
+      const title = input.replace(/\+/g, " ");
       const findSingle = await ctx.prisma.topic.findFirst({
         where: {
-          topicTitle: input.replace(/\+/g, " "),
+          topicTitle: title,
         },
         select: {
           topicTitle: true,

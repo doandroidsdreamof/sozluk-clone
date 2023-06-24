@@ -29,9 +29,8 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       const { entryCountPerTopic } = data.pages[0];
       const pageNumber = Math.ceil(entryCountPerTopic / limit);
       setTotalPage(pageNumber);
-      console.info(data);
     }
-  }, [page]);
+  }, [data, page]);
 
   const handleFetchNextPage = () => {
     fetchNextPage().catch((err) => console.error(err));
@@ -64,18 +63,14 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
         <></>
       </div>
       <div className=" order-3   flex w-full justify-center md:justify-end  lg:w-[38rem]">
-        {total >= 2 ? (
-          <Paginate
-            limit={limit}
-            totalPage={total}
-            pageNum={page}
-            handleSelect={handleSelect}
-            handleFetchNextPage={handleFetchNextPage}
-            handleFetchPreviousPage={handleFetchPreviousPage}
-          />
-        ) : (
-          <></>
-        )}
+        <Paginate
+          limit={limit}
+          totalPage={total}
+          pageNum={page}
+          handleSelect={handleSelect}
+          handleFetchNextPage={handleFetchNextPage}
+          handleFetchPreviousPage={handleFetchPreviousPage}
+        />
       </div>
     </>
   );

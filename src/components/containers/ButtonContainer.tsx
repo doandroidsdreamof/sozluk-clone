@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import DarkMode from "../common/DarkMode";
 
 const Button = dynamic(() => import("~/components/modules/button/Button"), {
-  ssr: true,
+  ssr: false,
 });
 
 const ButtonContainer = () => {

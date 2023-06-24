@@ -133,7 +133,6 @@ export const entryRouter = createTRPCRouter({
         const nextItem = infiniteEntries.pop();
         nextCursor = nextItem?.id;
       }
-
       return {
         infiniteEntries,
         nextCursor,

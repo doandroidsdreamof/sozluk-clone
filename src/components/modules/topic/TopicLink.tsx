@@ -8,7 +8,11 @@ interface TopicsProps {
 
 const TopicLink = ({ text, url }: TopicsProps) => {
   const handleClick = () => {
-    void router.push(`/topic/${encodeURIComponent(url.replace(/ /g, "+"))}`);
+    void router.push(
+      `/topic/${encodeURIComponent(url.replace(/ /g, "+"))}`,
+      undefined,
+      { shallow: true }
+    );
   };
   return (
     <button onClick={handleClick}>
