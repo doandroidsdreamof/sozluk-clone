@@ -27,7 +27,6 @@ const TextEditorMenu = ({ editor, handleFunc, buttonText }: MenuProps) => {
 
   const handleClick = () => {
     handleFunc();
-    console.info("dispatch handle refetch ===========>");
   };
 
   return (

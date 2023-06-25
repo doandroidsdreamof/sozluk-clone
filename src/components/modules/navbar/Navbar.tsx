@@ -1,9 +1,8 @@
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import { MdWaterDrop } from "react-icons/md";
 import Hamburger from "~/components/common/Hamburger";
 import ButtonContainer from "~/components/containers/ButtonContainer";
 import Logo from "~/components/elements/Logo";
-import dynamic from "next/dynamic";
 
 const AutoSearch = dynamic(() => import("~/components/common/AutoSearch"), {
   ssr: false,

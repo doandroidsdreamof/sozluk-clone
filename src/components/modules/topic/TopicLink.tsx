@@ -1,6 +1,8 @@
 import router from "next/router";
 import { useCallback } from "react";
 import { api } from "~/utils/api";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
+import { refetchData } from "~/lib/store/reducers/refetchSlice";
 
 interface TopicsProps {
   text: string;
@@ -9,13 +11,16 @@ interface TopicsProps {
 
 const TopicLink = ({ text, url }: TopicsProps) => {
   const utils = api.useContext();
+  const dispatch = useAppDispatch();
 
   const handleClick = useCallback(() => {
     void router.push(`/topic/${encodeURIComponent(url.replace(/ /g, "+"))}`);
+    void utils.entry.getInfitineEntries.invalidate({});
     void utils.entry.getInfitineEntries.prefetchInfinite({
       limit: 5,
       topicTitle: url || null,
     });
+    dispatch(refetchData("entry"));
   }, []);
 
   return (

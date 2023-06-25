@@ -3,6 +3,7 @@ import { api } from "~/utils/api";
 import Paginate from "../common/Paginate";
 import TextRenderer from "../modules/textEditor/TextRenderer";
 import SkeletonCard from "SkeletonCard";
+import { useAppSelector } from "~/lib/store/hooks";
 
 interface RendererContainerProps {
   topicTitle: string;
@@ -14,6 +15,8 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const [page, setPage] = useState(0);
   const [total, setTotalPage] = useState(0);
   const limit = 5;
+  const utils = api.useContext();
+  const stateEntry = useAppSelector((state) => state.refetch);
 
   const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
     {
@@ -31,7 +34,10 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       const pageNumber = Math.ceil(entryCountPerTopic / limit);
       setTotalPage(pageNumber);
     }
-  }, [data, page]);
+    if (stateEntry.entry) {
+      setPage((prev) => page * 0);
+    }
+  }, [data, page, stateEntry.entry]);
 
   const handleSelect = (targetVal: string) => {
     setPage((prev) => parseInt(targetVal));

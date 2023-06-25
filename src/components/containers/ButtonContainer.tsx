@@ -1,8 +1,7 @@
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { logoutClick } from "~/lib/auth-helpers/logout";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { logoutClick } from "~/lib/auth-helpers/logout";
 import DarkMode from "../common/DarkMode";
 
 const Button = dynamic(() => import("~/components/modules/button/Button"), {
@@ -11,7 +10,6 @@ const Button = dynamic(() => import("~/components/modules/button/Button"), {
 
 const ButtonContainer = () => {
   const session = useSession();
-  const router = useRouter();
   const registerLink =
     session.data == null
       ? "/register"

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
+import { useAppSelector } from "~/lib/store/hooks";
 
 // TODO refactor
 

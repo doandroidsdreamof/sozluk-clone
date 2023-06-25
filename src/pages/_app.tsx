@@ -13,9 +13,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  useReportWebVitals((metric) => {
-    console.info(metric);
-  });
+  // useReportWebVitals((metric) => {
+  //   console.info(metric);
+  // });
 
   return (
     <Provider store={store}>
