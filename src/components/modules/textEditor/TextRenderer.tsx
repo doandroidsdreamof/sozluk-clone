@@ -3,7 +3,7 @@ import { generateHTML } from "@tiptap/html";
 // Option 1: Browser + server-side
 import StarterKit from "@tiptap/starter-kit";
 import DOMPurify from "isomorphic-dompurify";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "~/utils/api";
 import EntryCard from "../entry/EntryCard";
 import FavoriteButton from "../entry/FavoriteButton";
@@ -18,18 +18,18 @@ interface User {
   id: string;
 }
 interface Favorites {
-  id: bigint;
+  id: string;
   favorite: boolean;
 }
 
 interface TextRendererProps {
   content: string;
   createdAt: Date;
-  id: bigint;
+  id: string;
   favorites?: Favorites[];
   topic: {
     topicTitle: string;
-    id: bigint;
+    id: string;
   };
   user: User;
 }
@@ -44,14 +44,15 @@ const TextRenderer = ({
 }: TextRendererProps) => {
   const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
   const { mutate: removeLastTopic } = api.topic.removeTopic.useMutation();
+  const [data, setData] = useState("");
   const json = JSON.parse(content) as string[];
   const [showMore, setShowMore] = useState<number>(250);
   const [edit, setEdit] = useState(false);
   const utils = api.useContext();
 
-  const output = useMemo(() => {
+  useEffect(() => {
     const purfied = DOMPurify.sanitize(generateHTML(json, [StarterKit]));
-    return purfied;
+    setData(purfied);
   }, [json]);
 
   const handleEdit = () => {
@@ -100,11 +101,11 @@ const TextRenderer = ({
             handleRemoveEntry={() => handleRemoveEntry()}
           />
         </div>
-        {!edit && typeof output === "string" ? (
+        {!edit && typeof data === "string" ? (
           <div
             className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white "
             dangerouslySetInnerHTML={{
-              __html: output.length > 200 ? output.slice(0, showMore) : output,
+              __html: data.length > 200 ? data.slice(0, showMore) : data,
             }}
           ></div>
         ) : (
@@ -112,7 +113,7 @@ const TextRenderer = ({
             handleClose={() => handleClose()}
             entryId={entryId}
             userId={user.id}
-            entry={output}
+            entry={data}
             topicTitle={topic.topicTitle}
           />
         )}
@@ -121,7 +122,7 @@ const TextRenderer = ({
       <EntryCard
         setShowMore={setShowMore}
         showMore={showMore}
-        outputLength={output.length}
+        outputLength={data.length}
       >
         {favorites &&
           favorites.map((el, index) => (

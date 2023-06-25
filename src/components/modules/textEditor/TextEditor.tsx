@@ -10,7 +10,7 @@ import { api } from "~/utils/api";
 interface TextEditorProps {
   topicTitle: string;
   entry?: string;
-  entryId?: bigint;
+  entryId?: string;
   handleClose?: () => void;
   userId?: string;
 }
@@ -33,7 +33,6 @@ const TextEditor = ({
   const { mutate: createEntry } = api.entry.createEntry.useMutation();
   const { mutate: updateEntry } = api.entry.updateEntry.useMutation();
   const { data: getData } = api.topic.getSingleTopic.useQuery(topicTitle);
-  const { mutate: createFavorite } = api.favorite.ceateFavorite.useMutation();
   const utils = api.useContext();
 
   const editor = useEditor({
@@ -56,7 +55,7 @@ const TextEditor = ({
       if (entry && handleClose && entryId && userId) {
         updateEntry(
           {
-            entryId: BigInt(entryId),
+            entryId: entryId,
             content: JSON.stringify(editor.getJSON()),
             userId: userId,
           },
@@ -97,7 +96,7 @@ const TextEditor = ({
       } else {
         createEntry(
           {
-            topicId: BigInt(getData.id),
+            topicId: getData.id,
             content: JSON.stringify(editor.getJSON()),
           },
           {

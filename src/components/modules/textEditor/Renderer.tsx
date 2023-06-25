@@ -4,7 +4,7 @@ import TextEditor from "./TextEditor";
 interface RendererProps {
   topicTitle: string;
   entry?: string;
-  entryId?: bigint;
+  entryId?: string;
   userId: string;
   output: string;
   showMore: number;

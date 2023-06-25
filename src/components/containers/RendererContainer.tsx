@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { api } from "~/utils/api";
 import Paginate from "../common/Paginate";
 import TextRenderer from "../modules/textEditor/TextRenderer";
+import SkeletonCard from "SkeletonCard";
 
 interface RendererContainerProps {
   topicTitle: string;
@@ -14,21 +15,24 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const [total, setTotalPage] = useState(0);
   const limit = 5;
 
-  const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
-    {
-      limit: limit,
-      topicTitle: topicTitle || null,
-    },
-    {
-      getNextPageParam: (lastPage) => lastPage.nextCursor,
-    }
-  );
+  const { data, fetchNextPage, isLoading } =
+    api.entry.getInfitineEntries.useInfiniteQuery(
+      {
+        limit: limit,
+        topicTitle: topicTitle || null,
+      },
+      {
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
+      }
+    );
 
   useEffect(() => {
     if (data?.pages[page]?.entryCountPerTopic && data?.pages[0]) {
       const { entryCountPerTopic } = data.pages[0];
       const pageNumber = Math.ceil(entryCountPerTopic / limit);
       setTotalPage(pageNumber);
+    } else {
+      setPage(0);
     }
   }, [data, page]);
 
@@ -54,9 +58,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
     <>
       <div>
         {output != null && data ? (
-          output?.map((items) => (
-            <TextRenderer {...items} key={items.id.toString()} />
-          ))
+          output?.map((items) => <TextRenderer {...items} key={items.id} />)
         ) : (
           <></>
         )}

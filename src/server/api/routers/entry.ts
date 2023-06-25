@@ -8,7 +8,7 @@ import {
 
 export const entryRouter = createTRPCRouter({
   createEntry: protectedProcedure
-    .input(z.object({ content: z.string().min(2), topicId: z.bigint() }))
+    .input(z.object({ content: z.string().min(2), topicId: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const insertEntry = await ctx.prisma.entry.create({
         data: {
@@ -84,17 +84,53 @@ export const entryRouter = createTRPCRouter({
   getInfitineEntries: publicProcedure
     .input(
       z.object({
-        cursor: z.bigint().nullish(),
+        cursor: z.string().nullish(),
         limit: z.number(),
         topicTitle: z.string().nullish(),
         skip: z.number().optional(),
       })
     )
+
     .query(async ({ ctx, input }) => {
       const { limit, skip, topicTitle, cursor } = input;
-      const [entries, totalCount] = await ctx.prisma.$transaction([
-        ctx.prisma.entry.count(),
+      console.time("time");
+      const [infiniteEntries, totalCount] = await ctx.prisma.$transaction([
         ctx.prisma.entry.findMany({
+          take: limit + 1,
+          skip: skip,
+          cursor: cursor ? { id: cursor } : undefined,
+          where: {
+            topic: {
+              topicTitle: topicTitle || "",
+            },
+          },
+          orderBy: {
+            id: "asc",
+          },
+          include: {
+            favorites: {
+              select: {
+                id: true,
+                favorite: true,
+              },
+            },
+            topic: {
+              select: {
+                topicTitle: true,
+                id: true,
+              },
+            },
+            user: {
+              select: {
+                id: true,
+                avatar: true,
+                email: true,
+                name: true,
+              },
+            },
+          },
+        }),
+        ctx.prisma.entry.count({
           where: {
             topic: {
               topicTitle: topicTitle || "",
@@ -102,37 +138,14 @@ export const entryRouter = createTRPCRouter({
           },
         }),
       ]);
-      const infiniteEntries = await ctx.prisma.entry.findMany({
-        take: limit + 1,
-        skip: skip,
-        cursor: cursor ? { id: cursor } : undefined,
-        where: {
-          topic: {
-            topicTitle: topicTitle || "",
-          },
-        },
-        orderBy: {
-          id: "asc",
-        },
-        include: {
-          favorites: true,
-          topic: true,
-          user: {
-            select: {
-              id: true,
-              avatar: true,
-              email: true,
-              name: true,
-            },
-          },
-        },
-      });
-      let nextCursor: typeof infiniteEntries | undefined | bigint = undefined;
-      const entryCountPerTopic: number = totalCount.length;
+
+      let nextCursor: typeof infiniteEntries | undefined | string = undefined;
+      const entryCountPerTopic: number = infiniteEntries.length;
       if (infiniteEntries.length > limit) {
         const nextItem = infiniteEntries.pop();
         nextCursor = nextItem?.id;
       }
+      console.timeEnd("time");
       return {
         infiniteEntries,
         nextCursor,
@@ -142,7 +155,7 @@ export const entryRouter = createTRPCRouter({
   updateEntry: protectedProcedure
     .input(
       z.object({
-        entryId: z.bigint(),
+        entryId: z.string(),
         content: z.string(),
         userId: z.string(),
       })
@@ -165,7 +178,7 @@ export const entryRouter = createTRPCRouter({
       }
     }),
   removeEntry: protectedProcedure
-    .input(z.bigint().nullable())
+    .input(z.string().nullable())
     .mutation(async ({ ctx, input }) => {
       if (input != null) {
         const removeSingleEntry = await ctx.prisma.entry.deleteMany({

@@ -1,14 +1,7 @@
 import { IoIosSettings } from "react-icons/io";
 import { useAppSelector } from "~/lib/store/hooks";
 import { api } from "~/utils/api";
-import dynamic from "next/dynamic";
-
-const TopicLink = dynamic(
-  () => import("~/components/modules/topic/TopicLink"),
-  {
-    ssr: true,
-  }
-);
+import TopicLink from "../topic/TopicLink";
 
 const Aside = () => {
   const toggleState = useAppSelector((state) => state.toggle.navbarState);
@@ -34,7 +27,7 @@ const Aside = () => {
             {data &&
               data.map((items) => (
                 <TopicLink
-                  key={items.id.toString()}
+                  key={items.id}
                   text={items.topicTitle}
                   url={items.topicTitle}
                 />

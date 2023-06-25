@@ -29,11 +29,7 @@ const Navbar = () => {
             <div className="flex flex-col  flex-wrap justify-between gap-y-3 md:flex-row md:items-center">
               <div className="ml-0   flex w-full items-center justify-between md:w-fit md:justify-start">
                 <Hamburger mobile="md" />
-                <Logo
-                  logo={<MdWaterDrop size={25} />}
-                  text={"Ekşi"}
-                  textYellow={"Sözlük"}
-                />
+                <Logo text={"Ekşi"} textYellow={"Sözlük"} />
               </div>
               <AutoSearch />
               <div className="flex  w-full items-center  lg:w-fit">

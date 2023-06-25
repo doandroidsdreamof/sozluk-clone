@@ -19,7 +19,7 @@ const TopicHeader = dynamic(
 
 interface Entry {
   content: string;
-  id: bigint;
+  id: string;
   createdAt: Date;
 }
 
@@ -31,7 +31,7 @@ interface FeedLayoutProps {
   };
   entry: Entry[];
   topicTitle: string;
-  id: bigint;
+  id: string;
 }
 interface FeedProps {
   data: FeedLayoutProps[];
@@ -53,7 +53,7 @@ const FeedLayout = (data: FeedProps) => {
         <div>
           {data != null ? (
             data.data.map((items) => (
-              <div key={items.id.toString()}>
+              <div key={items.id}>
                 <button
                   onClick={() => handleClick(items.topicTitle)}
                   className="h-full w-full cursor-pointer text-left text-typography-body-secondary-light underline dark:text-typography-body-dark"

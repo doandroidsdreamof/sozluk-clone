@@ -106,7 +106,7 @@ export const topicRouter = createTRPCRouter({
     }
   }),
   removeTopic: protectedProcedure
-    .input(z.bigint().nullable())
+    .input(z.string().nullable())
     .mutation(async ({ ctx, input }) => {
       //*If there is no entry inside topic
       if (input) {

@@ -1,14 +1,14 @@
 import React from "react";
 import Link from "next/link";
+import { MdWaterDrop } from "react-icons/md";
 
 interface LogoProps {
   text: string;
   textYellow: string;
-  logo: React.ReactNode;
   footer?: boolean;
 }
 
-const Logo = ({ text, logo, textYellow, footer }: LogoProps) => {
+const Logo = ({ text, textYellow, footer }: LogoProps) => {
   return (
     <Link href={"/"}>
       <div
@@ -18,7 +18,9 @@ const Logo = ({ text, logo, textYellow, footer }: LogoProps) => {
             : " ml-4   hidden items-center justify-center lg:flex"
         }
       >
-        <div className="text-logo ">{logo}</div>
+        <div className="text-logo ">
+          <MdWaterDrop size={25} />
+        </div>
         <h1
           className={
             footer
