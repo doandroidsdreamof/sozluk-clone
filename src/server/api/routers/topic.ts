@@ -1,8 +1,8 @@
 import { z } from "zod";
 import {
   createTRPCRouter,
-  publicProcedure,
   protectedProcedure,
+  publicProcedure,
 } from "~/server/api/trpc";
 
 export const topicRouter = createTRPCRouter({
@@ -25,12 +25,9 @@ export const topicRouter = createTRPCRouter({
         },
       });
       if (findTopics) {
-        return findTopics.map((el) => {
-          return {
-            id: el.id.toString(),
-            topicTitle: el.topicTitle,
-          };
-        });
+        return {
+          findTopics,
+        };
       } else {
         return null;
       }

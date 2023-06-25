@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import TextEditor from "./TextEditor";
 
 interface RendererProps {

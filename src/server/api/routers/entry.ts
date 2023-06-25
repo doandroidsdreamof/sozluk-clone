@@ -93,7 +93,6 @@ export const entryRouter = createTRPCRouter({
 
     .query(async ({ ctx, input }) => {
       const { limit, skip, topicTitle, cursor } = input;
-      console.time("time");
       const [infiniteEntries, totalCount] = await ctx.prisma.$transaction([
         ctx.prisma.entry.findMany({
           take: limit + 1,
@@ -105,7 +104,7 @@ export const entryRouter = createTRPCRouter({
             },
           },
           orderBy: {
-            id: "asc",
+            createdAt: "asc",
           },
           include: {
             favorites: {
@@ -145,7 +144,6 @@ export const entryRouter = createTRPCRouter({
         const nextItem = infiniteEntries.pop();
         nextCursor = nextItem?.id;
       }
-      console.timeEnd("time");
       return {
         infiniteEntries,
         nextCursor,
@@ -203,5 +201,80 @@ export const entryRouter = createTRPCRouter({
       } else {
         return { success: false, message: "entry is not removed" };
       }
+    }),
+
+  getInfitineTopics: publicProcedure
+    .input(
+      z.object({
+        cursor: z.string().nullish(),
+        limit: z.number(),
+        topicTitle: z.string().nullish(),
+        skip: z.number().optional(),
+      })
+    )
+
+    .query(async ({ ctx, input }) => {
+      const { limit, skip, topicTitle, cursor } = input;
+      const findTopic = await ctx.prisma.topic.findFirst({
+        where: {
+          topicTitle: topicTitle || "",
+        },
+      });
+      const [infiniteEntries, totalCount] = await ctx.prisma.$transaction([
+        ctx.prisma.entry.findMany({
+          take: limit + 1,
+          skip: skip,
+          cursor: cursor ? { id: cursor } : undefined,
+          where: {
+            topic: {
+              topicTitle: topicTitle || "",
+            },
+          },
+          orderBy: {
+            id: "asc",
+          },
+          include: {
+            favorites: {
+              select: {
+                id: true,
+                favorite: true,
+              },
+            },
+            topic: {
+              select: {
+                topicTitle: true,
+                id: true,
+              },
+            },
+            user: {
+              select: {
+                id: true,
+                avatar: true,
+                email: true,
+                name: true,
+              },
+            },
+          },
+        }),
+        ctx.prisma.entry.count({
+          where: {
+            topic: {
+              topicTitle: topicTitle || "",
+            },
+          },
+        }),
+      ]);
+
+      let nextCursor: typeof infiniteEntries | undefined | string = undefined;
+      const entryCountPerTopic: number = infiniteEntries.length;
+      if (infiniteEntries.length > limit) {
+        const nextItem = infiniteEntries.pop();
+        nextCursor = nextItem?.id;
+      }
+      return {
+        infiniteEntries,
+        nextCursor,
+        entryCountPerTopic,
+      };
     }),
 });

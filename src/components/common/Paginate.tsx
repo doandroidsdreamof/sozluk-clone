@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
+// TODO refactor
+
 interface PaginateProps {
   lastPage?: string;
   totalPage: number;

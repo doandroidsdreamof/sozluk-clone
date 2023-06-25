@@ -1,6 +1,5 @@
-import React, { useCallback } from "react";
 import router from "next/router";
-import Link from "next/link";
+import { useCallback } from "react";
 import { api } from "~/utils/api";
 
 interface TopicsProps {
@@ -13,7 +12,10 @@ const TopicLink = ({ text, url }: TopicsProps) => {
 
   const handleClick = useCallback(() => {
     void router.push(`/topic/${encodeURIComponent(url.replace(/ /g, "+"))}`);
-    void utils.entry.getInfitineEntries.invalidate({});
+    void utils.entry.getInfitineEntries.prefetchInfinite({
+      limit: 5,
+      topicTitle: url || null,
+    });
   }, []);
 
   return (

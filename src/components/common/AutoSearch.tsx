@@ -24,7 +24,7 @@ const AutoSearch = () => {
 
   useEffect(() => {
     if (getData != null && status === "success") {
-      setData(getData);
+      setData(getData.findTopics);
     }
   }, [status, input]);
 

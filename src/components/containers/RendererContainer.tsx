@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { api } from "~/utils/api";
 import Paginate from "../common/Paginate";
 import TextRenderer from "../modules/textEditor/TextRenderer";
@@ -15,38 +15,35 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const [total, setTotalPage] = useState(0);
   const limit = 5;
 
-  const { data, fetchNextPage, isLoading } =
-    api.entry.getInfitineEntries.useInfiniteQuery(
-      {
-        limit: limit,
-        topicTitle: topicTitle || null,
-      },
-      {
-        getNextPageParam: (lastPage) => lastPage.nextCursor,
-      }
-    );
+  const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
+    {
+      limit: limit,
+      topicTitle: topicTitle || null,
+    },
+    {
+      getNextPageParam: (lastPage) => lastPage.nextCursor,
+    }
+  );
 
   useEffect(() => {
     if (data?.pages[page]?.entryCountPerTopic && data?.pages[0]) {
       const { entryCountPerTopic } = data.pages[0];
       const pageNumber = Math.ceil(entryCountPerTopic / limit);
       setTotalPage(pageNumber);
-    } else {
-      setPage(0);
     }
   }, [data, page]);
+
+  const handleSelect = (targetVal: string) => {
+    setPage((prev) => parseInt(targetVal));
+  };
+
+  const handleFetchPreviousPage = useCallback(() => {
+    setPage((prev) => (page > 0 ? prev - 1 : page * 0));
+  }, [page]);
 
   const handleFetchNextPage = () => {
     fetchNextPage().catch((err) => console.error(err));
     setPage((prev) => (page < total ? prev + 1 : total));
-  };
-
-  const handleFetchPreviousPage = () => {
-    setPage((prev) => (page > 0 ? prev - 1 : page * 0));
-  };
-
-  const handleSelect = (targetVal: string) => {
-    setPage((prev) => parseInt(targetVal));
   };
 
   const output = useMemo(() => {
