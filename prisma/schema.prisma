@@ -82,14 +82,14 @@ model Entry {
   favorites Favorites[]
   avatar    String?
   postUrl   String?
-  likeCount Int         @default(0)
+  favoriteCount Int         @default(0)
 
   @@index([entryId])
 
 }
 
 model Favorites {
-   id       String   @id @default(uuid())
+  id       String    @id @default(uuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
   createdAt DateTime @default(now())
@@ -98,6 +98,7 @@ model Favorites {
   favorite  Boolean  @default(false)
 
   @@index([entryId])
+  @@unique([userId, entryId])
 
 }
 

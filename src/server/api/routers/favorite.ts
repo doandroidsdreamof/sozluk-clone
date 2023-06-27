@@ -6,16 +6,45 @@ export const favoriteRouter = createTRPCRouter({
     .input(
       z.object({
         entryId: z.string(),
+        favoriteId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const { entryId } = input;
-      const ceateFavorite = await ctx.prisma.favorites.create({
-        data: {
-          entry: { connect: { id: entryId } },
-          user: { connect: { id: ctx.session?.user?.id } },
+      const { entryId, favoriteId } = input;
+
+      const isFavoriteExist = await ctx.prisma.favorites.findFirst({
+        where: {
+          userId: ctx.session?.user?.id,
+          entryId: entryId,
+          id: favoriteId,
+        },
+        select: {
+          favorite: true,
+          id: true,
         },
       });
+      if (!isFavoriteExist) {
+        const ceateFavorite = await ctx.prisma.favorites.create({
+          data: {
+            user: { connect: { id: ctx.session?.user?.id } },
+            entry: { connect: { id: entryId } },
+            favorite: true,
+          },
+        });
+      } else {
+        const removeFavorite = await ctx.prisma.entry.update({
+          where: {
+            id: entryId,
+          },
+          data: {
+            favorites: {
+              delete: {
+                id: isFavoriteExist.id,
+              },
+            },
+          },
+        });
+      }
     }),
 
   getFavorites: protectedProcedure

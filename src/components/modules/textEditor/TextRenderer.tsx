@@ -3,7 +3,7 @@ import { generateHTML } from "@tiptap/html";
 // Option 1: Browser + server-side
 import StarterKit from "@tiptap/starter-kit";
 import DOMPurify from "isomorphic-dompurify";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "~/utils/api";
 import EntryCard from "../entry/EntryCard";
 import FavoriteButton from "../entry/FavoriteButton";
@@ -20,6 +20,7 @@ interface User {
 interface Favorites {
   id: string;
   favorite: boolean;
+  entryId: string;
 }
 
 interface TextRendererProps {
@@ -109,13 +110,15 @@ const TextRenderer = ({
             }}
           ></div>
         ) : (
-          <TextEditor
-            handleClose={() => handleClose()}
-            entryId={entryId}
-            userId={user.id}
-            entry={data}
-            topicTitle={topic.topicTitle}
-          />
+          <div className="flex items-center overflow-hidden border lg:w-[36rem]">
+            <TextEditor
+              handleClose={() => handleClose()}
+              entryId={entryId}
+              userId={user.id}
+              entry={data}
+              topicTitle={topic.topicTitle}
+            />
+          </div>
         )}
       </div>
 
@@ -124,15 +127,23 @@ const TextRenderer = ({
         showMore={showMore}
         outputLength={data.length}
       >
-        {favorites &&
+        {favorites?.length ? (
           favorites.map((el, index) => (
             <FavoriteButton
-              entryId={entryId}
+              entryId={el.entryId}
               favorite={el.favorite}
-              key={el.id.toString()}
-              id={index.toString()}
+              key={el.id}
+              favoriteCount={index.toString()}
+              favoriteId={el.id}
             />
-          ))}
+          ))
+        ) : (
+          <FavoriteButton
+            entryId={entryId}
+            favorite={false}
+            favoriteCount={"0"}
+          />
+        )}
         <ProfileCard
           name={user.name}
           date={createdAt}

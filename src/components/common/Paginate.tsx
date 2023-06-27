@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
-import { useAppSelector } from "~/lib/store/hooks";
 
 // TODO refactor
 
 interface PaginateProps {
-  lastPage?: string;
   totalPage: number;
-  limit: number;
   pageNum: number;
   handleFetchPreviousPage: () => void;
   handleFetchNextPage: () => void;
@@ -18,9 +15,7 @@ const Paginate = ({
   handleFetchNextPage,
   handleFetchPreviousPage,
   handleSelect,
-  lastPage,
   totalPage,
-  limit,
   pageNum,
 }: PaginateProps) => {
   const [arr, setArr] = useState<number[]>([]);

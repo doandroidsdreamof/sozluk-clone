@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { api } from "~/utils/api";
 import Paginate from "../common/Paginate";
 import TextRenderer from "../modules/textEditor/TextRenderer";
-import SkeletonCard from "SkeletonCard";
 import { useAppSelector } from "~/lib/store/hooks";
 
 interface RendererContainerProps {
@@ -69,7 +68,6 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       </div>
       <div className=" order-3   flex w-full justify-center md:justify-end  lg:w-[38rem]">
         <Paginate
-          limit={limit}
           totalPage={total}
           pageNum={page}
           handleSelect={handleSelect}
