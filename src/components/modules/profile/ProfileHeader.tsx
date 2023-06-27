@@ -9,21 +9,32 @@ interface ProfileHeaderProps {
   followers: string;
   following: string;
   role: string;
+  userName: string;
 }
 
-const ProfileHeader = () => {
+const ProfileHeader = ({
+  entryCount,
+  followers,
+  following,
+  role,
+  userName,
+}: ProfileHeaderProps) => {
   const [dumbOpen, setDumbOpen] = useState(false);
 
   return (
     <div className="flex w-full flex-row  ">
       <div className="flex flex-col gap-y-3">
         <span className="text-2xl font-bold text-typography-body-light dark:text-typography-body-dark ">
-          UserName
+          {userName}
         </span>
         <Button size="tiny" type="primary">
-          Noob
+          {role}
         </Button>
-        <ProfileIndicator entryCount="9999999" followers="2" following="5" />
+        <ProfileIndicator
+          entryCount={entryCount}
+          followers={followers}
+          following={following}
+        />
       </div>
       <div className="ml-auto  pr-8 pt-3">
         <button

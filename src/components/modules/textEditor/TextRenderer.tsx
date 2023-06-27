@@ -110,7 +110,7 @@ const TextRenderer = ({
             }}
           ></div>
         ) : (
-          <div className="flex items-center overflow-hidden border lg:w-[36rem]">
+          <div className="flex items-center overflow-hidden lg:w-[36rem]">
             <TextEditor
               handleClose={() => handleClose()}
               entryId={entryId}

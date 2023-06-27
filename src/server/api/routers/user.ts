@@ -1,5 +1,5 @@
-import { string, z } from "zod";
 import { hash } from "bcrypt";
+import { z } from "zod";
 import { registerSchema } from "~/schemas/registerSchema";
 import {
   createTRPCRouter,
@@ -41,45 +41,57 @@ export const userRouter = createTRPCRouter({
     }),
 
   getUserSession: protectedProcedure.query(async ({ ctx }) => {
-    try {
-      const user = await prisma.user.findUnique({
-        where: {
-          id: ctx.session?.user?.id,
-        },
-      });
-      if (user != null) {
-        return user;
-      }
-    } catch (err) {
-      console.error(err);
+    const user = await prisma.user.findUnique({
+      where: {
+        id: ctx.session?.user?.id,
+      },
+    });
+    if (user != null) {
+      return user;
     }
   }),
+  getUserProfileData: protectedProcedure
+    .input(z.object({ userName: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { userName } = input;
+      const profileInfo = await prisma.user.findUnique({
+        where: {
+          name: userName,
+        },
+        select: {
+          email: true,
+          id: true,
+          avatar: true,
+          followersCount: true,
+          following: true,
+        },
+      });
+      if (profileInfo != null) {
+        return profileInfo;
+      }
+    }),
   getUser: protectedProcedure
     .input(z.string())
     .query(async ({ ctx, input }) => {
-      try {
-        const userInfo = await prisma.user.findUnique({
-          where: {
-            name: input,
-          },
-          select: {
-            email: true,
-            id: true,
-            avatar: true,
-            topic: {
-              select: {
-                id: true,
-                topicTitle: true,
-                entry: true,
-              },
+      const userInfo = await prisma.user.findUnique({
+        where: {
+          name: input,
+        },
+        select: {
+          email: true,
+          id: true,
+          avatar: true,
+          topic: {
+            select: {
+              id: true,
+              topicTitle: true,
+              entry: true,
             },
           },
-        });
-        if (userInfo != null) {
-          return userInfo;
-        }
-      } catch (err) {
-        console.error(err);
+        },
+      });
+      if (userInfo != null) {
+        return userInfo;
       }
     }),
 });

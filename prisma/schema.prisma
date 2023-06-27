@@ -57,6 +57,7 @@ model User {
   followersCount   BigInt      @default(0)
   followingCount   BigInt      @default(0)
   image            String?
+  role             Role        @default(Noob)
   messagesSent     Message[]   @relation("sender")
   messagesReceived Message[]   @relation("recipient")
   followers        Follower[]  @relation("follower")
@@ -83,6 +84,8 @@ model Entry {
   avatar    String?
   postUrl   String?
   favoriteCount Int         @default(0)
+  entryCount   Int        @default(0)
+
 
   @@index([entryId])
 
