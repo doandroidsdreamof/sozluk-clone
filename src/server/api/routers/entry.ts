@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { z } from "zod";
 import {
   createTRPCRouter,
@@ -78,6 +77,34 @@ export const entryRouter = createTRPCRouter({
     });
     if (findEntryAndTopic) {
       return findEntryAndTopic;
+    } else {
+      return null;
+    }
+  }),
+  getFavorites: protectedProcedure.query(async ({ ctx }) => {
+    const findFavoritedEntries = await ctx.prisma.entry.findMany({
+      where: {
+        favorites: {
+          some: {
+            favorite: true,
+          },
+        },
+      },
+      include: {
+        topic: true,
+        favorites: true,
+        user: {
+          select: {
+            avatar: true,
+            name: true,
+            id: true,
+            email: true,
+          },
+        },
+      },
+    });
+    if (findFavoritedEntries) {
+      return findFavoritedEntries;
     } else {
       return null;
     }

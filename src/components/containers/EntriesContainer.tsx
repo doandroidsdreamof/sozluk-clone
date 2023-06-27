@@ -1,15 +1,11 @@
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { api } from "~/utils/api";
 import TextRenderer from "../modules/textEditor/TextRenderer";
-import dynamic from "next/dynamic";
 
 const Button = dynamic(() => import("~/components/modules/button/Button"), {
-  ssr: true,
+  ssr: false,
 });
-
-interface EntriesContainerProps {
-  children: React.ReactNode;
-}
 
 const EntriesContainer = () => {
   const { data } = api.entry.getUserEntries.useQuery();
@@ -28,11 +24,9 @@ const EntriesContainer = () => {
   return (
     <div className="">
       {data &&
-        data.slice(0, showMore).map((el) => (
-          <TextRenderer key={el.id} {...el}>
-            {" "}
-          </TextRenderer>
-        ))}
+        data
+          .slice(0, showMore)
+          .map((el) => <TextRenderer key={el.id} {...el} />)}
       {data ? (
         <div className=" flex items-center justify-center">
           <Button
