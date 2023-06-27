@@ -11,18 +11,14 @@ const Button = dynamic(() => import("~/components/modules/button/Button"), {
 
 const FavoritesContainer = () => {
   const { data } = api.entry.getFavorites.useQuery();
-  console.info(
-    "🚀 ~ file: FavoritesContainer.tsx:16 ~ FavoritesContainer ~ data:",
-    data
-  );
-  const [showMore, setShowMore] = useState(10);
+  const [showMore, setShowMore] = useState(5);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newValue = e.currentTarget.innerText;
-    if (newValue === "show all") {
-      setShowMore(data?.length || 600);
+    if (newValue === "show all" && data) {
+      setShowMore(data.length);
     } else {
-      setShowMore(10);
+      setShowMore(5);
     }
   };
 
@@ -33,7 +29,11 @@ const FavoritesContainer = () => {
           .slice(0, showMore)
           .map((el) => <TextRenderer key={el.id} {...el} />)}
       {data && data.length > 0 ? (
-        <div className=" flex items-center justify-center">
+        <div
+          className={
+            data.length > 10 ? " flex items-center justify-center" : "hidden"
+          }
+        >
           <Button
             onClick={(e) => {
               handleClick(e);
@@ -42,7 +42,7 @@ const FavoritesContainer = () => {
             size="tiny"
             type="primary"
           >
-            {showMore == 10 ? "show all" : "show less"}
+            {showMore == 5 ? "show all" : "show less"}
           </Button>
         </div>
       ) : (

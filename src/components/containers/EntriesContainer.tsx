@@ -9,15 +9,16 @@ const Button = dynamic(() => import("~/components/modules/button/Button"), {
 
 const EntriesContainer = () => {
   const { data } = api.entry.getUserEntries.useQuery();
-  const [showMore, setShowMore] = useState(10);
+  const [showMore, setShowMore] = useState(5);
+  const utils = api.useContext();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newValue = e.currentTarget.innerText;
     console.info(e.currentTarget);
-    if (newValue === "show all") {
-      setShowMore(data?.length || 600);
+    if (newValue === "show all" && data) {
+      setShowMore(data.length);
     } else {
-      setShowMore(10);
+      setShowMore(5);
     }
   };
 
@@ -28,7 +29,11 @@ const EntriesContainer = () => {
           .slice(0, showMore)
           .map((el) => <TextRenderer key={el.id} {...el} />)}
       {data ? (
-        <div className=" flex items-center justify-center">
+        <div
+          className={
+            data.length > 10 ? " flex items-center justify-center" : "hidden"
+          }
+        >
           <Button
             onClick={(e) => {
               handleClick(e);
@@ -37,7 +42,7 @@ const EntriesContainer = () => {
             size="tiny"
             type="primary"
           >
-            {showMore == 10 ? "show all" : "show less"}
+            {showMore == 5 ? "show all" : "show less"}
           </Button>
         </div>
       ) : (
