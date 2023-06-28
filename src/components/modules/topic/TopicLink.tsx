@@ -17,7 +17,8 @@ const TopicLink = ({ text, url }: TopicsProps) => {
     void router.push(`/topic/${encodeURIComponent(url.replace(/ /g, "+"))}`);
     void utils.entry.getInfitineEntries.invalidate({});
     void utils.entry.getInfitineEntries.prefetchInfinite({
-      limit: 5,
+      skip: 0,
+      take: 5,
       topicTitle: url || null,
     });
     dispatch(refetchData("entry"));

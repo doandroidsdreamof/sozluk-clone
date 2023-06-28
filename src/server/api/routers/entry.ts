@@ -112,7 +112,7 @@ export const entryRouter = createTRPCRouter({
   getInfitineEntries: publicProcedure
     .input(
       z.object({
-        cursor: z.string().nullish(),
+        cursor: z.number().nullish(),
         take: z.number(),
         topicTitle: z.string().nullish(),
         skip: z.number().optional(),
@@ -120,7 +120,9 @@ export const entryRouter = createTRPCRouter({
     )
 
     .query(async ({ ctx, input }) => {
-      const { take, skip, topicTitle, cursor } = input;
+      console.time("test");
+      const { take, skip, topicTitle } = input;
+      console.log("🚀 ~ file: entry.ts:125 ~ .query ~ input:", input);
       const [infiniteEntries, totalCount] = await ctx.prisma.$transaction([
         ctx.prisma.entry.findMany({
           take: take,
@@ -165,6 +167,7 @@ export const entryRouter = createTRPCRouter({
           },
         }),
       ]);
+      console.timeEnd("test");
 
       return {
         infiniteEntries,

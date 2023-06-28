@@ -87,7 +87,10 @@ model Entry {
   entryCount   Int          @default(0)
 
 
+
   @@index([entryId])
+  @@index([userId])
+
 
 }
 
@@ -100,10 +103,11 @@ model Favorites {
   entry     Entry    @relation(fields: [entryId], references: [id], onDelete: Cascade)
   favorite  Boolean  @default(false)
 
-  @@index([entryId])
-  @@unique([userId, entryId])
+  @@unique([userId])
+
 
 }
+
 
 model Topic {
   id              String   @id @default(uuid())
@@ -114,7 +118,6 @@ model Topic {
   entry           Entry[]
 
   @@index([topicTitle])
-
 
 }
 
@@ -148,3 +151,5 @@ model Follower {
   followingId String
   createdAt   DateTime @default(now())
 }
+
+

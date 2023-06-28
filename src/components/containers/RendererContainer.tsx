@@ -19,7 +19,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
 
   const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
     {
-      take: take, //* resultsPerPage
+      take: take,
       skip: skip,
       topicTitle: topicTitle || null,
     }
