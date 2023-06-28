@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { api } from "~/utils/api";
 import Paginate from "../common/Paginate";
 import TextRenderer from "../modules/textEditor/TextRenderer";
-import { useAppSelector } from "~/lib/store/hooks";
+import { useAppSelector, useAppDispatch } from "~/lib/store/hooks";
+import { refetchData } from "~/lib/store/reducers/refetchSlice";
 
 interface RendererContainerProps {
   topicTitle: string;
@@ -16,6 +17,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const limit = 5;
   const utils = api.useContext();
   const stateEntry = useAppSelector((state) => state.refetch);
+  const dispatch = useAppDispatch();
 
   const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
     {
@@ -29,8 +31,8 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
 
   useEffect(() => {
     if (data?.pages[page]?.entryCountPerTopic && data?.pages[0]) {
-      const { entryCountPerTopic } = data.pages[0];
-      const pageNumber = Math.ceil(entryCountPerTopic / limit);
+      const { totalCount } = data.pages[0];
+      const pageNumber = Math.ceil(totalCount / limit);
       setTotalPage(pageNumber);
     }
     if (stateEntry.entry) {

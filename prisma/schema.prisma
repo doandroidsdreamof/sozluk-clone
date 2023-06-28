@@ -84,7 +84,7 @@ model Entry {
   avatar    String?
   postUrl   String?
   favoriteCount Int         @default(0)
-  entryCount   Int        @default(0)
+  entryCount   Int          @default(0)
 
 
   @@index([entryId])

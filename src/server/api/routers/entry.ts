@@ -177,6 +177,7 @@ export const entryRouter = createTRPCRouter({
         infiniteEntries,
         nextCursor,
         entryCountPerTopic,
+        totalCount,
       };
     }),
   updateEntry: protectedProcedure
