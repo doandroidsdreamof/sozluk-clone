@@ -29,37 +29,7 @@ export const entryRouter = createTRPCRouter({
         return { data: { success: false, message: "entry is not created" } };
       }
     }),
-  getEntries: publicProcedure
-    .input(z.string().nullable())
-    .query(async ({ ctx, input }) => {
-      if (input) {
-        const findEntrysAndTopic = await ctx.prisma.entry.findMany({
-          where: {
-            topic: {
-              topicTitle: input || "",
-            },
-          },
-          select: {
-            content: true,
-            topic: true,
-            id: true,
-            createdAt: true,
-            user: {
-              select: {
-                avatar: true,
-                name: true,
-                id: true,
-              },
-            },
-          },
-        });
-        if (findEntrysAndTopic) {
-          return findEntrysAndTopic;
-        } else {
-          return null;
-        }
-      }
-    }),
+
   getUserEntries: protectedProcedure.query(async ({ ctx }) => {
     const findEntryAndTopic = await ctx.prisma.entry.findMany({
       include: {
@@ -120,9 +90,7 @@ export const entryRouter = createTRPCRouter({
     )
 
     .query(async ({ ctx, input }) => {
-      console.time("test");
       const { take, skip, topicTitle } = input;
-      console.log("🚀 ~ file: entry.ts:125 ~ .query ~ input:", input);
       const [infiniteEntries, totalCount] = await ctx.prisma.$transaction([
         ctx.prisma.entry.findMany({
           take: take,
@@ -167,8 +135,6 @@ export const entryRouter = createTRPCRouter({
           },
         }),
       ]);
-      console.timeEnd("test");
-
       return {
         infiniteEntries,
         totalCount,

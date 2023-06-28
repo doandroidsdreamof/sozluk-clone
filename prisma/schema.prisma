@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+
 }
 
 datasource db {
@@ -84,7 +85,7 @@ model Entry {
   avatar    String?
   postUrl   String?
   favoriteCount Int         @default(0)
-  entryCount   Int          @default(0)
+
 
 
 
@@ -103,7 +104,6 @@ model Favorites {
   entry     Entry    @relation(fields: [entryId], references: [id], onDelete: Cascade)
   favorite  Boolean  @default(false)
 
-  @@unique([userId])
 
 
 }
@@ -118,6 +118,7 @@ model Topic {
   entry           Entry[]
 
   @@index([topicTitle])
+  @@unique([topicTitle])
 
 }
 

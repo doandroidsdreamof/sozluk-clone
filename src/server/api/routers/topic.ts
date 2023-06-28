@@ -36,7 +36,7 @@ export const topicRouter = createTRPCRouter({
     .input(z.string())
     .query(async ({ ctx, input }) => {
       const title = input.replace(/\+/g, " ");
-      const findSingle = await ctx.prisma.topic.findFirst({
+      const findSingle = await ctx.prisma.topic.findUnique({
         where: {
           topicTitle: title,
         },
@@ -50,7 +50,7 @@ export const topicRouter = createTRPCRouter({
   createTopic: protectedProcedure
     .input(z.object({ topicTitle: z.string(), entry: z.string().min(2) }))
     .mutation(async ({ ctx, input }) => {
-      const findTopic = await ctx.prisma.topic.findFirst({
+      const findTopic = await ctx.prisma.topic.findUnique({
         where: {
           topicTitle: input.topicTitle,
         },

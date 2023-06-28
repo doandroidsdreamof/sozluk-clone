@@ -1,7 +1,11 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import TopicLayout from "~/components/layouts/TopicLayout";
 import { api } from "~/utils/api";
+import dynamic from "next/dynamic";
+
+const TopicLayout = dynamic(() => import("~/components/layouts/TopicLayout"), {
+  ssr: true,
+});
 
 const Topic: NextPage = () => {
   const router = useRouter();

@@ -7,7 +7,5 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "eslint.workingDirectories": ["./src"],
-  "WillLuke.nextjs.hasPrompted": true,
-  "search.maxResults": 2000
+  "eslint.workingDirectories": ["./src"]
 }

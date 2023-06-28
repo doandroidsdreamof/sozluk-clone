@@ -8,7 +8,6 @@ import { api } from "~/utils/api";
 const Home: NextPage = () => {
   const { data } = api.topic.getRandomEntriesAndTopics.useQuery();
   const session = useSession();
-  console.log("🚀 ~ file: index.tsx:11 ~ session:", session);
 
   const [hasMounted, setHasMounted] = useState(false);
   useEffect(() => {

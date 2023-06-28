@@ -5,24 +5,24 @@ import dynamic from "next/dynamic";
 
 const ScrollUpButton = dynamic(
   () => import("~/components/common/ScrollUpButton"),
-  { ssr: true }
+  { ssr: false }
 );
 
 const NotificationContainer = dynamic(
   () => import("~/components/containers/NotificationContainer"),
-  { ssr: true }
+  { ssr: false }
 );
 
 const Navbar = dynamic(() => import("~/components/modules/navbar/Navbar"), {
-  ssr: true,
+  ssr: false,
 });
 
 const Aside = dynamic(() => import("~/components/modules/aside/Aside"), {
-  ssr: true,
+  ssr: false,
 });
 
 const Footer = dynamic(() => import("~/components/modules/footer/Footer"), {
-  ssr: true,
+  ssr: false,
 });
 
 function BaseLayout({ children }: ILayoutProps) {
