@@ -113,19 +113,18 @@ export const entryRouter = createTRPCRouter({
     .input(
       z.object({
         cursor: z.string().nullish(),
-        limit: z.number(),
+        take: z.number(),
         topicTitle: z.string().nullish(),
         skip: z.number().optional(),
       })
     )
 
     .query(async ({ ctx, input }) => {
-      const { limit, skip, topicTitle, cursor } = input;
+      const { take, skip, topicTitle, cursor } = input;
       const [infiniteEntries, totalCount] = await ctx.prisma.$transaction([
         ctx.prisma.entry.findMany({
-          take: limit + 1,
+          take: take,
           skip: skip,
-          cursor: cursor ? { id: cursor } : undefined,
           where: {
             topic: {
               topicTitle: topicTitle || "",
@@ -167,16 +166,8 @@ export const entryRouter = createTRPCRouter({
         }),
       ]);
 
-      let nextCursor: typeof infiniteEntries | undefined | string = undefined;
-      const entryCountPerTopic: number = infiniteEntries.length;
-      if (infiniteEntries.length > limit) {
-        const nextItem = infiniteEntries.pop();
-        nextCursor = nextItem?.id;
-      }
       return {
         infiniteEntries,
-        nextCursor,
-        entryCountPerTopic,
         totalCount,
       };
     }),

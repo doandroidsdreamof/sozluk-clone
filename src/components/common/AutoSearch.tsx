@@ -1,10 +1,12 @@
 import { Combobox, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
-import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { HiOutlineSearch } from "react-icons/hi";
 import { api } from "~/utils/api";
 import FilterModal from "../modals/FilterModal";
+import { useAppDispatch } from "~/lib/store/hooks";
+import { refetchData } from "~/lib/store/reducers/refetchSlice";
 
 interface SearchOptions {
   id: string;
@@ -16,6 +18,8 @@ const AutoSearch = () => {
   const [data, setData] = useState<SearchOptions[]>([]);
   const [input, setInput] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const utils = api.useContext();
   const {
     data: getData,
     refetch,
@@ -35,7 +39,6 @@ const AutoSearch = () => {
         e.target as HTMLInputElement;
       if (typeof value === "string" && typeof id === "string") {
         setData([]);
-        void router.push(`/topic/${value.replace(/\s/g, "")}`);
       }
     }
   };
@@ -55,6 +58,18 @@ const AutoSearch = () => {
   function openModal() {
     setIsOpen(true);
   }
+
+  const handleNavigation = () => {
+    if (input.length > 0) {
+      dispatch(refetchData("entry"));
+      void utils.entry.getInfitineEntries.invalidate({});
+      void router.push(
+        `/topic/${encodeURIComponent(input.replace(/ /g, "+"))}`
+      );
+      setInput("");
+    }
+  };
+
   return (
     <>
       <div className=" mx-auto w-full   lg:w-[38rem] ">
@@ -63,11 +78,8 @@ const AutoSearch = () => {
             <div className="relative  flex w-full flex-wrap items-stretch">
               <Combobox.Input
                 onKeyUp={(e) => {
-                  if (e.key === "Enter" && input.length > 0) {
-                    void router.push(
-                      `/topic/${encodeURIComponent(input.replace(/ /g, "+"))}`
-                    );
-                    setInput("");
+                  if (e.key === "Enter") {
+                    handleNavigation();
                   }
                 }}
                 className="focus:border-primary dark:focus:border-primary relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-r-0 border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out placeholder:text-xs focus:z-[3] focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
@@ -86,7 +98,10 @@ const AutoSearch = () => {
                   <BsFillCaretDownFill className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
                 )}
               </button>
-              <button className="bg-primary relative   z-[2] flex items-center rounded-r bg-brandGreen-900 px-6 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md hover:bg-brandGreen-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg">
+              <button
+                onClick={handleNavigation}
+                className="bg-primary relative   z-[2] flex items-center rounded-r bg-brandGreen-900 px-6 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md hover:bg-brandGreen-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+              >
                 <HiOutlineSearch className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
               </button>
             </div>
