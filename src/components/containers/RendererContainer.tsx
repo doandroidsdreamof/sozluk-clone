@@ -31,8 +31,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       const pageNumber = Math.ceil(totalCount / take);
       setTotalPage(pageNumber);
       setSkip(take * page);
-    }
-    if (stateEntry.entry) {
+    } else if (stateEntry.entry) {
       setPage((prev) => page * 0);
     }
   }, [data, page, stateEntry.entry]);
@@ -47,13 +46,11 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
 
   const handleFetchPreviousPage = useCallback(() => {
     setPage((prev) => (page > 0 ? prev - 1 : page * 0));
-    setSkip(take * page);
   }, [page]);
 
   const handleFetchNextPage = () => {
     fetchNextPage().catch((err) => console.error(err));
     setPage((prev) => (page < total ? prev + 1 : total));
-    setSkip(take * page);
   };
 
   const output = useMemo(() => {
