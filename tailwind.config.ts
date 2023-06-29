@@ -218,6 +218,7 @@ export default {
       },
       width: {
         onehundred: "100%",
+        nintyEight: "98%",
         nintyfive: "94%",
         nintyfour: "94%",
         nintythree: "93%",

@@ -57,6 +57,7 @@ model User {
   topic            Topic[]
   followersCount   BigInt      @default(0)
   followingCount   BigInt      @default(0)
+  entryCount       BigInt         @default(0)
   image            String?
   role             Role        @default(Noob)
   messagesSent     Message[]   @relation("sender")
@@ -104,10 +105,7 @@ model Favorites {
   entry     Entry    @relation(fields: [entryId], references: [id], onDelete: Cascade)
   favorite  Boolean  @default(false)
 
-
-
 }
-
 
 model Topic {
   id              String   @id @default(uuid())
