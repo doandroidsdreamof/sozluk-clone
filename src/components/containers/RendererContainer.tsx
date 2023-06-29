@@ -38,10 +38,6 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
 
   const handleSelect = (targetVal: string) => {
     setPage((prev) => parseInt(targetVal));
-    console.info(
-      "🚀 ~ file: RendererContainer.tsx:44 ~ handleSelect ~ targetVal:",
-      targetVal
-    );
   };
 
   const handleFetchPreviousPage = useCallback(() => {

@@ -9,11 +9,11 @@ const ProfileLayout = dynamic(
 
 const Profile: NextPage = () => {
   const router = useRouter();
-  const { userName: currentUser } = router.query as {
-    userName: string;
+  const { currentUser: userName } = router.query as {
+    currentUser: string;
   };
 
-  return <ProfileLayout />;
+  return <ProfileLayout userName={userName} />;
 };
 
 export default Profile;

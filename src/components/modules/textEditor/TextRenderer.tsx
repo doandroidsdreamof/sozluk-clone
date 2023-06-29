@@ -65,18 +65,10 @@ const TextRenderer = ({
 
   const handleRemoveEntry = () => {
     removeEntry(entryId, {
-      onSuccess: (data) => {
-        if (data.success == true) {
-          updateUI();
-          if (data.count === 1) {
-            console.info(data.count);
-            removeLastTopic(topic.id);
-            updateUI();
-          }
-          console.info(data.message);
-        } else {
-          console.info(data.message);
-        }
+      onSuccess: () => {
+        updateUI();
+        // removeLastTopic(topic.id);
+
         setEdit(false);
       },
       onError: (error) => {

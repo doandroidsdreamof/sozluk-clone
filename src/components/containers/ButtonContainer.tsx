@@ -10,10 +10,11 @@ const Button = dynamic(() => import("~/components/modules/button/Button"), {
 
 const ButtonContainer = () => {
   const session = useSession();
+
   const registerLink =
     session.data == null
       ? "/register"
-      : `/profile/${session?.data?.user?.name || ""}`;
+      : `/profile/${session?.data.user.name || ""}`;
   const loginLink = session.data == null ? "/login" : "/";
   const registerButton = session.data == null ? "register" : "profile";
   const loginButton = session.data == null ? "login" : "sign out";

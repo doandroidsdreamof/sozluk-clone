@@ -5,17 +5,17 @@ import Button from "../button/Button";
 import ProfileIndicator from "./ProfileIndicator";
 
 interface ProfileHeaderProps {
-  entryCount: string;
-  followers: string;
-  following: string;
+  entryCount: bigint;
+  followersCount: bigint;
+  followingCount: bigint;
   role: string;
   userName: string;
 }
 
 const ProfileHeader = ({
   entryCount,
-  followers,
-  following,
+  followersCount,
+  followingCount,
   role,
   userName,
 }: ProfileHeaderProps) => {
@@ -27,13 +27,17 @@ const ProfileHeader = ({
         <span className="text-2xl font-bold text-typography-body-light dark:text-typography-body-dark ">
           {userName}
         </span>
-        <Button size="tiny" type="primary">
+        <Button
+          className={"cursor-default hover:bg-brandGreen-800"}
+          size="tiny"
+          type="primary"
+        >
           {role}
         </Button>
         <ProfileIndicator
-          entryCount={entryCount}
-          followers={followers}
-          following={following}
+          entryCount={entryCount.toString()}
+          followers={followersCount.toString()}
+          following={followingCount.toString()}
         />
       </div>
       <div className="ml-auto  pr-8 pt-3">

@@ -50,7 +50,7 @@ export const userRouter = createTRPCRouter({
       return user;
     }
   }),
-  getUserProfileData: publicProcedure
+  getUserProfileData: protectedProcedure
     .input(z.object({ userName: z.string() }))
     .query(async ({ ctx, input }) => {
       const { userName } = input;
@@ -61,9 +61,11 @@ export const userRouter = createTRPCRouter({
         select: {
           email: true,
           avatar: true,
+          name: true,
           followersCount: true,
-          following: true,
+          followingCount: true,
           entryCount: true,
+          role: true,
         },
       });
       if (profileInfo != null) {

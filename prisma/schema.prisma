@@ -57,7 +57,7 @@ model User {
   topic            Topic[]
   followersCount   BigInt      @default(0)
   followingCount   BigInt      @default(0)
-  entryCount       BigInt         @default(0)
+  entryCount       BigInt      @default(0)
   image            String?
   role             Role        @default(Noob)
   messagesSent     Message[]   @relation("sender")

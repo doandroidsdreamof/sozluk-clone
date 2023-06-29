@@ -9,14 +9,19 @@ export const entryRouter = createTRPCRouter({
   createEntry: protectedProcedure
     .input(z.object({ content: z.string().min(2), topicId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      const insertEntry = await ctx.prisma.entry.create({
-        data: {
-          user: { connect: { id: ctx.session?.user?.id } },
-          topic: { connect: { id: input.topicId } },
-          content: input.content,
-        },
-      });
-
+      const [insertEntry, incrementEntry] = await ctx.prisma.$transaction([
+        ctx.prisma.entry.create({
+          data: {
+            user: { connect: { id: ctx.session?.user?.id } },
+            topic: { connect: { id: input.topicId } },
+            content: input.content,
+          },
+        }),
+        ctx.prisma.user.update({
+          where: { id: ctx.session.user.id },
+          data: { entryCount: { increment: 1 } },
+        }),
+      ]);
       if (insertEntry) {
         const checkUserLiked = await ctx.prisma.favorites.create({
           data: {
@@ -30,55 +35,72 @@ export const entryRouter = createTRPCRouter({
       }
     }),
 
-  getUserEntries: protectedProcedure.query(async ({ ctx }) => {
-    const findEntryAndTopic = await ctx.prisma.entry.findMany({
-      include: {
-        topic: true,
-        favorites: true,
-        user: {
-          select: {
-            avatar: true,
-            name: true,
-            id: true,
-            email: true,
+  getUserEntries: protectedProcedure
+    .input(z.object({ userName: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { userName } = input;
+      const findEntryAndTopic = await ctx.prisma.entry.findMany({
+        where: {
+          user: {
+            name: userName,
           },
         },
-      },
-    });
-    if (findEntryAndTopic) {
-      return findEntryAndTopic;
-    } else {
-      return null;
-    }
-  }),
-  getFavorites: protectedProcedure.query(async ({ ctx }) => {
-    const findFavoritedEntries = await ctx.prisma.entry.findMany({
-      where: {
-        favorites: {
-          some: {
-            favorite: true,
+        include: {
+          topic: true,
+          favorites: true,
+          user: {
+            select: {
+              avatar: true,
+              name: true,
+              id: true,
+              email: true,
+            },
           },
         },
-      },
-      include: {
-        topic: true,
-        favorites: true,
-        user: {
-          select: {
-            avatar: true,
-            name: true,
-            id: true,
-            email: true,
+      });
+      if (findEntryAndTopic) {
+        return findEntryAndTopic;
+      } else {
+        return null;
+      }
+    }),
+  getFavorites: protectedProcedure
+    .input(z.object({ userName: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { userName } = input;
+      const findFavoritedEntries = await ctx.prisma.entry.findMany({
+        where: {
+          favorites: {
+            every: {
+              userId: ctx.session?.user?.id,
+              user: {
+                name: userName,
+              },
+            },
+            some: {
+              favorite: true,
+            },
           },
         },
-      },
-    });
-    if (findFavoritedEntries) {
-      return findFavoritedEntries;
-    } else {
-      return null;
-    }
-  }),
+        include: {
+          topic: true,
+          favorites: true,
+          user: {
+            select: {
+              avatar: true,
+              name: true,
+              id: true,
+              email: true,
+            },
+          },
+        },
+      });
+      if (findFavoritedEntries) {
+        return findFavoritedEntries;
+      } else {
+        return null;
+      }
+    }),
   getInfitineEntries: publicProcedure
     .input(
       z.object({
@@ -169,25 +191,17 @@ export const entryRouter = createTRPCRouter({
     .input(z.string().nullable())
     .mutation(async ({ ctx, input }) => {
       if (input != null) {
-        const removeSingleEntry = await ctx.prisma.entry.deleteMany({
-          where: {
-            id: input,
-            userId: ctx.session.user.id,
-          },
-        });
-        if (removeSingleEntry.count > 0) {
-          return {
-            success: true,
-            message: "entry is removed",
-            count: removeSingleEntry.count,
-          };
-        } else {
-          return {
-            success: false,
-            message: "entry is not removed",
-            count: removeSingleEntry.count,
-          };
-        }
+        const [removeSingleEntry] = await ctx.prisma.$transaction([
+          ctx.prisma.entry.delete({
+            where: {
+              id: input,
+            },
+          }),
+          ctx.prisma.user.update({
+            where: { id: ctx.session.user.id },
+            data: { entryCount: { increment: -1 } },
+          }),
+        ]);
       } else {
         return { success: false, message: "entry is not removed" };
       }

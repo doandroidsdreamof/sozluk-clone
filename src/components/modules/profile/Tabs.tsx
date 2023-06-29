@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Tab } from "@headlessui/react";
 import TabSelector from "./TabSelector";
+import { type IUserName } from "~/@types/interface";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-function Tabs() {
+function Tabs({ userName }: IUserName) {
   const [indexEl, setIndexEl] = useState<number>(0);
   const [categories] = useState({
     entries: [{ id: 0 }, { name: "entries" }],
@@ -48,7 +49,7 @@ function Tabs() {
 
           <Tab.Panels className="mt-2 " />
         </Tab.Group>
-        <TabSelector status={indexEl} />
+        <TabSelector userName={userName} status={indexEl} />
       </div>
     </div>
   );

@@ -56,12 +56,18 @@ export const topicRouter = createTRPCRouter({
         },
       });
       if (!findTopic) {
-        const insertTopic = await ctx.prisma.topic.create({
-          data: {
-            user: { connect: { id: ctx.session.user.id } },
-            topicTitle: input.topicTitle,
-          },
-        });
+        const [insertTopic, decreaseEntry] = await ctx.prisma.$transaction([
+          ctx.prisma.topic.create({
+            data: {
+              user: { connect: { id: ctx.session.user.id } },
+              topicTitle: input.topicTitle,
+            },
+          }),
+          ctx.prisma.user.update({
+            where: { id: ctx.session.user.id },
+            data: { entryCount: { increment: 1 } },
+          }),
+        ]);
         if (insertTopic) {
           const insertEntry = await ctx.prisma.entry.create({
             data: {

@@ -2,13 +2,20 @@ import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { api } from "~/utils/api";
 import TextRenderer from "../modules/textEditor/TextRenderer";
+import { useRouter } from "next/router";
 
 const Button = dynamic(() => import("~/components/modules/button/Button"), {
   ssr: false,
 });
 
 const EntriesContainer = () => {
-  const { data } = api.entry.getUserEntries.useQuery();
+  const router = useRouter();
+  const { currentUser: userName } = router.query as {
+    currentUser: string;
+  };
+  const { data } = api.entry.getUserEntries.useQuery({
+    userName: userName,
+  });
   const [showMore, setShowMore] = useState(5);
   const utils = api.useContext();
 

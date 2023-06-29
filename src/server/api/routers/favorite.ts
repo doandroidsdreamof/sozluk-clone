@@ -11,10 +11,8 @@ export const favoriteRouter = createTRPCRouter({
     )
     .mutation(async ({ ctx, input }) => {
       const { entryId, favoriteId } = input;
-
       const isFavoriteExist = await ctx.prisma.favorites.findFirst({
         where: {
-          userId: ctx.session?.user?.id,
           entryId: entryId,
           id: favoriteId,
         },
