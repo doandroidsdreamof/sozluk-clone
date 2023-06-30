@@ -2,6 +2,7 @@ import React from "react";
 import EntriesContainer from "~/components/containers/EntriesContainer";
 import FavoritesContainer from "~/components/containers/FavoritesContainer";
 import ImagesContainer from "~/components/containers/ImagesContainer";
+import FollowersContainer from "~/components/containers/FollowersContainer";
 
 interface EL {
   [key: number]: JSX.Element;
@@ -9,9 +10,10 @@ interface EL {
 
 interface TabSelectorProps {
   status: number;
+  profilePage: boolean;
 }
 
-function TabSelector({ status }: TabSelectorProps) {
+function TabSelector({ status, profilePage }: TabSelectorProps) {
   const SELECT_ELEMENTS: EL = {
     0: <EntriesContainer />,
     1: <FavoritesContainer />,
@@ -19,7 +21,13 @@ function TabSelector({ status }: TabSelectorProps) {
   };
 
   return (
-    <div>{status <= 2 && status >= 0 ? SELECT_ELEMENTS[status] : null}</div>
+    <>
+      {profilePage ? (
+        <div>{status <= 2 && status >= 0 ? SELECT_ELEMENTS[status] : null}</div>
+      ) : (
+        <FollowersContainer />
+      )}
+    </>
   );
 }
 

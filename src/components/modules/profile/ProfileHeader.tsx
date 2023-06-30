@@ -40,6 +40,7 @@ const ProfileHeader = ({
           entryCount={entryCount.toString()}
           followers={followersCount.toString()}
           following={followingCount.toString()}
+          userName={userName}
         />
       </div>
       <div className="ml-auto  pr-8 pt-3">

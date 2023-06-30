@@ -3,6 +3,7 @@ import themeSlice from "./reducers/themeSlice";
 import notificationSlice from "./reducers/notificationSlice";
 import toggleSlice from "./reducers/toggleSlice";
 import refetchSlice from "./reducers/refetchSlice";
+import followersSlice from "./reducers/followersSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     notification: notificationSlice,
     toggle: toggleSlice,
     refetch: refetchSlice,
+    activeFollowers: followersSlice,
   },
 });
 

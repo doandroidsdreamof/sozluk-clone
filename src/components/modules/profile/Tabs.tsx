@@ -1,29 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import TabSelector from "./TabSelector";
 import { type IUserName } from "~/@types/interface";
+import { useAppDispatch } from "~/lib/store/hooks";
+import { setFollowers } from "~/lib/store/reducers/followersSlice";
+import { useAppSelector } from "~/lib/store/hooks";
+
+interface Data {
+  id?: number;
+  name?: string;
+}
+
+interface ITabsProps {
+  profilePage: boolean;
+  categories: {
+    entries?: Data[];
+    favorites?: Data[];
+    images?: Data[];
+    followers?: Data[];
+    following?: Data[];
+  };
+}
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-function Tabs({ userName }: IUserName) {
+function Tabs({ categories, profilePage }: ITabsProps) {
   const [indexEl, setIndexEl] = useState<number>(0);
-  const [categories] = useState({
-    entries: [{ id: 0 }, { name: "entries" }],
-    favorites: [{ id: 1 }, { name: "favorites" }],
-    images: [{ id: 2 }, { name: "images" }],
-  });
+  const dispatch = useAppDispatch();
+  const tabState = useAppSelector((state) => state.activeFollowers.followers);
+
+  useEffect(() => {
+    if (!tabState && !profilePage) {
+      setIndexEl(1);
+    } else {
+      setIndexEl(0);
+    }
+  }, [tabState]);
 
   function handleChange(idx: number) {
-    setIndexEl(idx);
+    if (!profilePage) {
+      dispatch(setFollowers(idx === 0 ? "followers" : "following"));
+      setIndexEl(idx);
+    } else {
+      setIndexEl(idx);
+    }
   }
 
   return (
-    <div className="flex     h-full w-full flex-col pb-10">
+    <div className="flex  h-full w-full flex-col pb-10">
       <div className="relative  top-0 mx-auto mt-4 w-full   sm:px-0 ">
         <Tab.Group
           as="div"
+          selectedIndex={indexEl}
           onChange={(e) => {
             handleChange(e);
           }}
@@ -46,10 +76,9 @@ function Tabs({ userName }: IUserName) {
               </Tab>
             ))}
           </Tab.List>
-
           <Tab.Panels className="mt-2 " />
         </Tab.Group>
-        <TabSelector userName={userName} status={indexEl} />
+        <TabSelector profilePage={profilePage} status={indexEl} />
       </div>
     </div>
   );

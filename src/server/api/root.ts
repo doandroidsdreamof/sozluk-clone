@@ -4,6 +4,7 @@ import { entryRouter } from "./routers/entry";
 import { topicRouter } from "./routers/topic";
 import { messageRouter } from "./routers/message";
 import { favoriteRouter } from "./routers/favorite";
+import { followRouter } from "./routers/follow";
 
 export const appRouter = createTRPCRouter({
   user: userRouter,
@@ -11,6 +12,7 @@ export const appRouter = createTRPCRouter({
   topic: topicRouter,
   entry: entryRouter,
   favorite: favoriteRouter,
+  followUser: followRouter,
 });
 
 export type AppRouter = typeof appRouter;
