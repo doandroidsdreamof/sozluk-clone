@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../button/Button";
 import { api } from "~/utils/api";
 
@@ -8,7 +8,19 @@ interface FollowButtonProps {
 
 const FollowButton = ({ userId }: FollowButtonProps) => {
   const { mutate: followUser } = api.follow.followUser.useMutation();
+  const { data: followServerState } = api.follow.checkFollow.useQuery({
+    followerId: userId,
+  });
   const [follow, setFollow] = useState(true);
+  const utils = api.useContext();
+
+  useEffect(() => {
+    setFollow(followServerState ? true : false);
+  }, [followServerState]);
+  console.log(
+    "🚀 ~ file: FollowButton.tsx:20 ~ useEffect ~ followServerState:",
+    followServerState
+  );
 
   const handleClick = () => {
     followUser(
@@ -16,10 +28,13 @@ const FollowButton = ({ userId }: FollowButtonProps) => {
         followerId: userId,
       },
       {
-        onSuccess: (data) => {
-          if (data.alreadyFollow === false) {
-            setFollow(false);
-          }
+        onSuccess: () => {
+          utils.follow.checkFollow
+            .invalidate()
+            .catch((err) => console.error(err));
+          utils.user.getUserProfileData
+            .invalidate()
+            .catch((err) => console.error(err));
         },
         onError: (error) => {
           console.error(error);
@@ -30,7 +45,7 @@ const FollowButton = ({ userId }: FollowButtonProps) => {
 
   return (
     <Button onClick={handleClick} size="tiny" type="primary">
-      {follow ? "follow user" : "unfollow user"}
+      {follow ? "unfollow user" : "follow user"}
     </Button>
   );
 };

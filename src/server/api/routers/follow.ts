@@ -6,15 +6,19 @@ import {
 } from "~/server/api/trpc";
 
 export const followRouter = createTRPCRouter({
-  getFollowers: publicProcedure
-    .input(z.object({ userName: z.string() }))
+  checkFollow: protectedProcedure
+    .input(z.object({ followerId: z.string() }))
     .query(async ({ ctx, input }) => {
-      const { userName } = input;
-      const findFavoritedEntries = await ctx.prisma.follower.findMany({
+      const { followerId } = input;
+      const isUserAlreadyFollow = await ctx.prisma.follower.findFirst({
         where: {
-          id: userName,
+          AND: [
+            { followingId: { equals: ctx.session.user.id } },
+            { followerId: { equals: followerId } },
+          ],
         },
       });
+      return isUserAlreadyFollow ? true : false;
     }),
   followUser: protectedProcedure
     .input(z.object({ followerId: z.string() }))
@@ -29,19 +33,48 @@ export const followRouter = createTRPCRouter({
         },
       });
       if (!isUserAlreadyFollow) {
-        const createFollower = await ctx.prisma.follower.create({
-          data: {
-            followingId: ctx.session.user.id,
-            followerId: followerId,
-          },
-        });
-        return {
-          alreadyFollow: false,
-        };
+        const [createFollower, increaseFollower] =
+          await ctx.prisma.$transaction([
+            ctx.prisma.follower.create({
+              data: {
+                followingId: ctx.session.user.id,
+                followerId: followerId,
+              },
+            }),
+            ctx.prisma.user.update({
+              where: {
+                id: ctx.session?.user?.id,
+              },
+              data: { followingCount: { increment: 1 } },
+            }),
+            ctx.prisma.user.update({
+              where: {
+                id: followerId,
+              },
+              data: { followersCount: { increment: 1 } },
+            }),
+          ]);
       } else {
-        return {
-          alreadyFollow: true,
-        };
+        const [removeFollower, decreaseFollower] =
+          await ctx.prisma.$transaction([
+            ctx.prisma.follower.delete({
+              where: {
+                id: isUserAlreadyFollow.id,
+              },
+            }),
+            ctx.prisma.user.update({
+              where: {
+                id: ctx.session?.user?.id,
+              },
+              data: { followingCount: { decrement: 1 } },
+            }),
+            ctx.prisma.user.update({
+              where: {
+                id: followerId,
+              },
+              data: { followersCount: { decrement: 1 } },
+            }),
+          ]);
       }
     }),
 });
