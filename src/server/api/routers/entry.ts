@@ -90,14 +90,6 @@ export const entryRouter = createTRPCRouter({
             createdAt: "asc",
           },
           include: {
-            favorites: {
-              select: {
-                id: true,
-                favorite: true,
-                entryId: true,
-                userId: true,
-              },
-            },
             topic: {
               select: {
                 topicTitle: true,

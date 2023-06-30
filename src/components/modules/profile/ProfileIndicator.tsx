@@ -41,8 +41,8 @@ const ProfileIndicator = ({
   }, []);
 
   return (
-    <div className="flex flex-row">
-      <span className="flex max-w-fit  rounded-md px-2.5 py-1.5 text-xs text-blue-600   dark:text-brandGreen-600">
+    <div className="flex flex-row ">
+      <span className="flex max-w-fit  rounded-md py-1.5 text-xs text-blue-600   dark:text-brandGreen-600">
         {insertElipsis(entryCount, elipsisOffset)} entry
       </span>
       <button

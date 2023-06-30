@@ -3,6 +3,7 @@ import { generateHTML } from "@tiptap/html";
 // Option 1: Browser + server-side
 import StarterKit from "@tiptap/starter-kit";
 import DOMPurify from "isomorphic-dompurify";
+import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { api } from "~/utils/api";
 import EntryCard from "../entry/EntryCard";
@@ -11,7 +12,6 @@ import Settings from "../entry/Settings";
 import ShareButton from "../entry/ShareButton";
 import ProfileCard from "../profile/ProfileCard";
 import TextEditor from "./TextEditor";
-import { useSession } from "next-auth/react";
 
 interface User {
   avatar: string | null;
@@ -29,7 +29,7 @@ interface TextRendererProps {
   content: string;
   createdAt: Date;
   id: string;
-  favorites?: Favorites[];
+  favoriteCount: number;
   topic: {
     topicTitle: string;
     id: string;
@@ -42,11 +42,14 @@ const TextRenderer = ({
   user,
   createdAt,
   topic,
-  favorites,
+  favoriteCount,
   id: entryId,
 }: TextRendererProps) => {
   const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
   const { mutate: removeLastTopic } = api.topic.removeTopic.useMutation();
+  const { data: favoriteData } = api.favorite.getSingleFavorite.useQuery({
+    entryId: entryId,
+  });
   const [data, setData] = useState("");
   const json = JSON.parse(content) as string[];
   const [showMore, setShowMore] = useState<number>(250);
@@ -122,24 +125,13 @@ const TextRenderer = ({
         outputLength={data.length}
       >
         {session.data?.user?.id ? (
-          favorites?.length ? (
-            favorites.map((el, index) => (
-              <FavoriteButton
-                entryId={el.entryId}
-                favorite={el.favorite}
-                key={el.id}
-                favoriteCount={index.toString()}
-                favoriteId={el.id}
-                userId={el.userId}
-              />
-            ))
-          ) : (
-            <FavoriteButton
-              entryId={entryId}
-              favorite={false}
-              favoriteCount={"0"}
-            />
-          )
+          <FavoriteButton
+            entryId={entryId}
+            favorite={favoriteData?.findSingleFavorite.favorite || false}
+            favoriteCount={favoriteCount.toString()}
+            favoriteId={favoriteData?.findSingleFavorite.id}
+            userId={favoriteData?.findSingleFavorite.userId}
+          />
         ) : (
           <></>
         )}

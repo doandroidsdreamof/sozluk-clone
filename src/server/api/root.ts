@@ -12,7 +12,7 @@ export const appRouter = createTRPCRouter({
   topic: topicRouter,
   entry: entryRouter,
   favorite: favoriteRouter,
-  followUser: followRouter,
+  follow: followRouter,
 });
 
 export type AppRouter = typeof appRouter;

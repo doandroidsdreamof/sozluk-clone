@@ -6,7 +6,7 @@ import { refetchData } from "~/lib/store/reducers/refetchSlice";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
-//TODO function refactor
+//TODO function refactor && favorite increment
 
 interface FavoriteButtonProps {
   entryId: string;
@@ -30,6 +30,12 @@ const FavoriteButton = ({
 
   useEffect(() => {
     setFavorited(favorite === true ? true : false);
+    if (favorite === true) {
+      utils
+        .invalidate()
+        .then((data) => console.log(data))
+        .catch((err) => console.error(err));
+    }
   }, [favorite]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

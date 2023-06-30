@@ -17,6 +17,7 @@ const ProfileHeaderContainer = ({ userName }: IUserName) => {
           followingCount={data.followingCount}
           role={data.role}
           userName={data.name}
+          userId={data.id}
         />
       ) : (
         <></>

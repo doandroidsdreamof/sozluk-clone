@@ -49,6 +49,32 @@ export const favoriteRouter = createTRPCRouter({
         });
       }
     }),
+  getSingleFavorite: protectedProcedure
+    .input(z.object({ entryId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { entryId } = input;
+      const findSingleFavorite = await ctx.prisma.favorites.findFirst({
+        where: {
+          AND: [
+            { entryId: { equals: entryId } },
+            { userId: { equals: ctx.session?.user?.id } },
+          ],
+        },
+        select: {
+          entryId: true,
+          id: true,
+          userId: true,
+          favorite: true,
+        },
+      });
+      if (findSingleFavorite) {
+        return {
+          findSingleFavorite,
+        };
+      } else {
+        return null;
+      }
+    }),
 
   getFavorites: publicProcedure
     .input(z.object({ userName: z.string() }))

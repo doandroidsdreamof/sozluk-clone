@@ -147,11 +147,14 @@ enum Role {
 
 model Follower {
   id          String   @id @default(uuid())
-  follower    User     @relation("follower", fields: [followerId], references: [id])
+  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
   followerId  String
-  following   User     @relation("following", fields: [followingId], references: [id])
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId String
   createdAt   DateTime @default(now())
+
+  @@index([followerId])
+  @@index([followingId])
 }
 
 

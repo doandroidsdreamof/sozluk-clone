@@ -66,6 +66,7 @@ export const userRouter = createTRPCRouter({
           followingCount: true,
           entryCount: true,
           role: true,
+          id: true,
         },
       });
       if (profileInfo != null) {

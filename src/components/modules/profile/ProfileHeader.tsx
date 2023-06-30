@@ -4,6 +4,7 @@ import DumbModal from "~/components/modals/DumbModal";
 import Button from "../button/Button";
 import ProfileIndicator from "./ProfileIndicator";
 import { useSession } from "next-auth/react";
+import FollowButton from "./FollowButton";
 
 interface ProfileHeaderProps {
   entryCount: bigint;
@@ -11,6 +12,7 @@ interface ProfileHeaderProps {
   followingCount: bigint;
   role: string;
   userName: string;
+  userId: string;
 }
 
 const ProfileHeader = ({
@@ -19,23 +21,32 @@ const ProfileHeader = ({
   followingCount,
   role,
   userName,
+  userId,
 }: ProfileHeaderProps) => {
   const session = useSession();
   const [dumbOpen, setDumbOpen] = useState(false);
 
   return (
     <div className="flex w-full flex-row  ">
-      <div className="flex flex-col gap-y-3">
+      <div className="flex  flex-col gap-y-3">
         <span className="text-2xl font-bold text-typography-body-light dark:text-typography-body-dark ">
           {userName}
         </span>
-        <Button
-          className={"cursor-default hover:bg-brandGreen-800"}
-          size="tiny"
-          type="primary"
-        >
-          {role}
-        </Button>
+        <div className="flex flex-row gap-2">
+          <span
+            className={
+              "cursor-default bg-none text-lg font-medium  text-brandGreen-800 hover:bg-transparent "
+            }
+          >
+            {role}
+          </span>
+          {session.data?.user?.name !== userName ? (
+            <FollowButton userId={userId} />
+          ) : (
+            <></>
+          )}
+        </div>
+
         <ProfileIndicator
           entryCount={entryCount.toString()}
           followers={followersCount.toString()}
