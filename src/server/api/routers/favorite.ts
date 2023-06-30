@@ -19,6 +19,7 @@ export const favoriteRouter = createTRPCRouter({
         where: {
           entryId: entryId,
           id: favoriteId,
+          userId: ctx.session?.user?.id,
         },
         select: {
           favorite: true,
@@ -56,14 +57,10 @@ export const favoriteRouter = createTRPCRouter({
       const findFavoritedEntries = await ctx.prisma.entry.findMany({
         where: {
           favorites: {
-            every: {
-              userId: ctx.session?.user?.id,
+            some: {
               user: {
                 name: userName,
               },
-            },
-            some: {
-              favorite: true,
             },
           },
         },

@@ -95,6 +95,7 @@ export const entryRouter = createTRPCRouter({
                 id: true,
                 favorite: true,
                 entryId: true,
+                userId: true,
               },
             },
             topic: {

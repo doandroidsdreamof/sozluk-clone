@@ -4,6 +4,7 @@ import { insertElipsis } from "~/utils/elipsis";
 import { useAppDispatch } from "~/lib/store/hooks";
 import { refetchData } from "~/lib/store/reducers/refetchSlice";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 //TODO function refactor
 
@@ -12,6 +13,7 @@ interface FavoriteButtonProps {
   favoriteId?: string;
   favorite: boolean;
   favoriteCount: string;
+  userId?: string;
 }
 
 const FavoriteButton = ({
@@ -19,10 +21,12 @@ const FavoriteButton = ({
   favoriteId,
   entryId,
   favoriteCount,
+  userId,
 }: FavoriteButtonProps) => {
   const { mutate: insertFavorite } = api.favorite.ceateFavorite.useMutation();
   const utils = api.useContext();
   const [favorited, setFavorited] = useState(false);
+  const session = useSession();
 
   useEffect(() => {
     setFavorited(favorite === true ? true : false);
@@ -78,7 +82,11 @@ const FavoriteButton = ({
         }}
         className="is-active     mr-auto flex cursor-pointer flex-row rounded  p-2  text-typography-body-light hover:bg-gray-100 hover:text-gray-900  dark:text-typography-body-strong-dark dark:hover:bg-gray-600 dark:hover:text-white"
       >
-        {favorited ? <BsFillDropletFill /> : <BsDroplet />}
+        {favorited && userId === session.data?.user.id ? (
+          <BsFillDropletFill />
+        ) : (
+          <BsDroplet />
+        )}
       </button>
       {parseInt(favoriteCount) >= 0 ? (
         <span className=" flex max-w-fit cursor-pointer truncate text-ellipsis rounded-md py-1.5 text-sm text-blue-600  hover:underline dark:text-brandGreen-600">

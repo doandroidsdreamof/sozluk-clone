@@ -22,6 +22,7 @@ interface Favorites {
   id: string;
   favorite: boolean;
   entryId: string;
+  userId: string;
 }
 
 interface TextRendererProps {
@@ -129,6 +130,7 @@ const TextRenderer = ({
                 key={el.id}
                 favoriteCount={index.toString()}
                 favoriteId={el.id}
+                userId={el.userId}
               />
             ))
           ) : (
