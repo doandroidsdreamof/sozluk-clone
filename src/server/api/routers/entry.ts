@@ -23,12 +23,6 @@ export const entryRouter = createTRPCRouter({
         }),
       ]);
       if (insertEntry) {
-        const checkUserLiked = await ctx.prisma.favorites.create({
-          data: {
-            entry: { connect: { id: insertEntry.id } },
-            user: { connect: { id: ctx.session?.user?.id } },
-          },
-        });
         return { data: { success: true, message: "entry is created" } };
       } else {
         return { data: { success: false, message: "entry is not created" } };

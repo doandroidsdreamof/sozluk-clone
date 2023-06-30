@@ -38,14 +38,16 @@ const EntriesContainer = () => {
       {data ? (
         <div
           className={
-            data.length > 10 ? " flex items-center justify-center" : "hidden"
+            data.length > 5
+              ? " flex w-full items-center  justify-center"
+              : "hidden"
           }
         >
           <Button
             onClick={(e) => {
               handleClick(e);
             }}
-            className="w-40"
+            className="w-72 "
             size="tiny"
             type="primary"
           >

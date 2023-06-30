@@ -88,8 +88,6 @@ model Entry {
   favoriteCount Int         @default(0)
 
 
-
-
   @@index([entryId])
   @@index([userId])
 
@@ -98,12 +96,12 @@ model Entry {
 
 model Favorites {
   id        String    @id @default(uuid())
-  user      User     @relation(fields: [userId], references: [id])
+  user      User      @relation(fields: [userId], references: [id])
   userId    String
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
   entryId   String
-  entry     Entry    @relation(fields: [entryId], references: [id], onDelete: Cascade)
-  favorite  Boolean  @default(false)
+  entry     Entry     @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  favorite  Boolean   @default(false)
 
   @@index([entryId])
   @@index([userId])

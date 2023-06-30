@@ -31,7 +31,9 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       const pageNumber = Math.ceil(totalCount / take);
       setTotalPage(pageNumber);
       setSkip(take * page);
-    } else if (stateEntry.entry) {
+    }
+    if (stateEntry.entry) {
+      setSkip(0);
       setPage((prev) => page * 0);
     }
   }, [data, page, stateEntry.entry]);
