@@ -150,7 +150,7 @@ export const entryRouter = createTRPCRouter({
           }),
           ctx.prisma.user.update({
             where: { id: ctx.session.user.id },
-            data: { entryCount: { increment: -1 } },
+            data: { entryCount: { decrement: 1 } },
           }),
         ]);
       } else {

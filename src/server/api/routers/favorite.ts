@@ -27,26 +27,44 @@ export const favoriteRouter = createTRPCRouter({
         },
       });
       if (!isFavoriteExist) {
-        const ceateFavorite = await ctx.prisma.favorites.create({
-          data: {
-            user: { connect: { id: ctx.session?.user?.id } },
-            entry: { connect: { id: entryId } },
-            favorite: true,
-          },
-        });
-      } else {
-        const removeFavorite = await ctx.prisma.entry.update({
-          where: {
-            id: entryId,
-          },
-          data: {
-            favorites: {
-              delete: {
-                id: isFavoriteExist.id,
+        const [ceateFavorite, incrementFavoriteCount] =
+          await ctx.prisma.$transaction([
+            ctx.prisma.favorites.create({
+              data: {
+                user: { connect: { id: ctx.session?.user?.id } },
+                entry: { connect: { id: entryId } },
+                favorite: true,
               },
-            },
-          },
-        });
+            }),
+            ctx.prisma.entry.update({
+              where: {
+                id: entryId,
+              },
+              data: { favoriteCount: { increment: 1 } },
+            }),
+          ]);
+      } else {
+        const [removeFavorite, decreaseFavorite] =
+          await ctx.prisma.$transaction([
+            ctx.prisma.entry.update({
+              where: {
+                id: entryId,
+              },
+              data: {
+                favorites: {
+                  delete: {
+                    id: isFavoriteExist.id,
+                  },
+                },
+              },
+            }),
+            ctx.prisma.entry.update({
+              where: {
+                id: entryId,
+              },
+              data: { favoriteCount: { decrement: 1 } },
+            }),
+          ]);
       }
     }),
   getSingleFavorite: protectedProcedure
