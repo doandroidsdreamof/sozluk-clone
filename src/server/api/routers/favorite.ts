@@ -1,5 +1,9 @@
 import { z } from "zod";
-import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 export const favoriteRouter = createTRPCRouter({
   ceateFavorite: protectedProcedure
@@ -45,23 +49,41 @@ export const favoriteRouter = createTRPCRouter({
       }
     }),
 
-  getFavorites: protectedProcedure
-    .input(
-      z.object({
-        entryId: z.string(),
-      })
-    )
+  getFavorites: publicProcedure
+    .input(z.object({ userName: z.string() }))
     .query(async ({ ctx, input }) => {
-      const { entryId } = input;
-      const findFavorites = await ctx.prisma.favorites.findMany({
+      const { userName } = input;
+      const findFavoritedEntries = await ctx.prisma.entry.findMany({
         where: {
-          user: {
-            id: ctx.session?.user?.id,
+          favorites: {
+            every: {
+              userId: ctx.session?.user?.id,
+              user: {
+                name: userName,
+              },
+            },
+            some: {
+              favorite: true,
+            },
           },
-          entry: {
-            id: entryId,
+        },
+        include: {
+          topic: true,
+          favorites: true,
+          user: {
+            select: {
+              avatar: true,
+              name: true,
+              id: true,
+              email: true,
+            },
           },
         },
       });
+      if (findFavoritedEntries) {
+        return findFavoritedEntries;
+      } else {
+        return null;
+      }
     }),
 });

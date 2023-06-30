@@ -11,6 +11,7 @@ import Settings from "../entry/Settings";
 import ShareButton from "../entry/ShareButton";
 import ProfileCard from "../profile/ProfileCard";
 import TextEditor from "./TextEditor";
+import { useSession } from "next-auth/react";
 
 interface User {
   avatar: string | null;
@@ -50,6 +51,7 @@ const TextRenderer = ({
   const [showMore, setShowMore] = useState<number>(250);
   const [edit, setEdit] = useState(false);
   const utils = api.useContext();
+  const session = useSession();
 
   useEffect(() => {
     const purfied = DOMPurify.sanitize(generateHTML(json, [StarterKit]));
@@ -113,28 +115,31 @@ const TextRenderer = ({
           </div>
         )}
       </div>
-
       <EntryCard
         setShowMore={setShowMore}
         showMore={showMore}
         outputLength={data.length}
       >
-        {favorites?.length ? (
-          favorites.map((el, index) => (
+        {session.data?.user?.id ? (
+          favorites?.length ? (
+            favorites.map((el, index) => (
+              <FavoriteButton
+                entryId={el.entryId}
+                favorite={el.favorite}
+                key={el.id}
+                favoriteCount={index.toString()}
+                favoriteId={el.id}
+              />
+            ))
+          ) : (
             <FavoriteButton
-              entryId={el.entryId}
-              favorite={el.favorite}
-              key={el.id}
-              favoriteCount={index.toString()}
-              favoriteId={el.id}
+              entryId={entryId}
+              favorite={false}
+              favoriteCount={"0"}
             />
-          ))
+          )
         ) : (
-          <FavoriteButton
-            entryId={entryId}
-            favorite={false}
-            favoriteCount={"0"}
-          />
+          <></>
         )}
         <ProfileCard
           name={user.name}

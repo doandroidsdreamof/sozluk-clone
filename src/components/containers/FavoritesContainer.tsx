@@ -15,7 +15,7 @@ const FavoritesContainer = () => {
   const { currentUser: userName } = router.query as {
     currentUser: string;
   };
-  const { data } = api.entry.getFavorites.useQuery({
+  const { data } = api.favorite.getFavorites.useQuery({
     userName: userName,
   });
   const [showMore, setShowMore] = useState(5);

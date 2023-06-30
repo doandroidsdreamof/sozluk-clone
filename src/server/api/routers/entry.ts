@@ -35,7 +35,7 @@ export const entryRouter = createTRPCRouter({
       }
     }),
 
-  getUserEntries: protectedProcedure
+  getUserEntries: publicProcedure
     .input(z.object({ userName: z.string() }))
     .query(async ({ ctx, input }) => {
       const { userName } = input;
@@ -64,43 +64,7 @@ export const entryRouter = createTRPCRouter({
         return null;
       }
     }),
-  getFavorites: protectedProcedure
-    .input(z.object({ userName: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const { userName } = input;
-      const findFavoritedEntries = await ctx.prisma.entry.findMany({
-        where: {
-          favorites: {
-            every: {
-              userId: ctx.session?.user?.id,
-              user: {
-                name: userName,
-              },
-            },
-            some: {
-              favorite: true,
-            },
-          },
-        },
-        include: {
-          topic: true,
-          favorites: true,
-          user: {
-            select: {
-              avatar: true,
-              name: true,
-              id: true,
-              email: true,
-            },
-          },
-        },
-      });
-      if (findFavoritedEntries) {
-        return findFavoritedEntries;
-      } else {
-        return null;
-      }
-    }),
+
   getInfitineEntries: publicProcedure
     .input(
       z.object({
