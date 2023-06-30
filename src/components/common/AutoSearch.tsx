@@ -39,6 +39,9 @@ const AutoSearch = () => {
         e.target as HTMLInputElement;
       if (typeof value === "string" && typeof id === "string") {
         setData([]);
+        void router.push(
+          `/topic/${encodeURIComponent(value.replace(/\s/g, ""))}`
+        );
       }
     }
   };
@@ -59,15 +62,11 @@ const AutoSearch = () => {
     setIsOpen(true);
   }
 
-  const handleNavigation = () => {
-    if (input.length > 0) {
-      dispatch(refetchData("entry"));
-      void utils.entry.getInfitineEntries.invalidate({});
-      void router.push(
-        `/topic/${encodeURIComponent(input.replace(/ /g, "+"))}`
-      );
-      setInput("");
-    }
+  // TODO keyboard navigation
+
+  const handleNavigation = (e: React.KeyboardEvent<HTMLElement>) => {
+    void router.push(`/topic/${encodeURIComponent(input.replace(/\s/g, ""))}`);
+    setInput("");
   };
 
   return (
@@ -78,8 +77,8 @@ const AutoSearch = () => {
             <div className="relative  flex w-full flex-wrap items-stretch">
               <Combobox.Input
                 onKeyUp={(e) => {
-                  if (e.key === "Enter") {
-                    handleNavigation();
+                  if (e.key === "Enter" && input.length > 0) {
+                    handleNavigation(e);
                   }
                 }}
                 className="focus:border-primary dark:focus:border-primary relative m-0 -mr-0.5 block w-[1px] min-w-0 flex-auto rounded-l border border-r-0 border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out placeholder:text-xs focus:z-[3] focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
@@ -98,10 +97,7 @@ const AutoSearch = () => {
                   <BsFillCaretDownFill className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
                 )}
               </button>
-              <button
-                onClick={handleNavigation}
-                className="bg-primary relative   z-[2] flex items-center rounded-r bg-brandGreen-900 px-6 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md hover:bg-brandGreen-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-              >
+              <button className="bg-primary relative   z-[2] flex items-center rounded-r bg-brandGreen-900 px-6 py-2 text-xs font-medium uppercase leading-tight text-white shadow-md hover:bg-brandGreen-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg">
                 <HiOutlineSearch className="  z-40  h-3 w-4  dark:text-bg-primary-light " />
               </button>
             </div>
