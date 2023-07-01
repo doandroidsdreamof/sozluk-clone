@@ -136,7 +136,7 @@ const TextRenderer = ({
           <></>
         )}
         <ProfileCard
-          name={user.name}
+          userName={user.name}
           date={createdAt}
           imageURL={user.avatar || ""}
         />

@@ -65,7 +65,7 @@ const AutoSearch = () => {
   // TODO keyboard navigation
 
   const handleNavigation = (e: React.KeyboardEvent<HTMLElement>) => {
-    void router.push(`/topic/${encodeURIComponent(input.replace(/\s/g, ""))}`);
+    void router.push(`/topic/${encodeURIComponent(input.replace(/\s/g, " "))}`);
     setInput("");
   };
 

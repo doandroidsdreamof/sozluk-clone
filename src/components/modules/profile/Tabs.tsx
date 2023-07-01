@@ -49,7 +49,13 @@ function Tabs({ categories, profilePage }: ITabsProps) {
   }
 
   return (
-    <div className="flex  h-full w-full flex-col pb-10">
+    <div
+      className={
+        profilePage
+          ? "flex  h-full w-full flex-col pb-10"
+          : "flex   w-full flex-col pb-10"
+      }
+    >
       <div className="relative  top-0 mx-auto mt-4 w-full   sm:px-0 ">
         <Tab.Group
           as="div"

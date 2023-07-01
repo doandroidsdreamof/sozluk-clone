@@ -25,7 +25,7 @@ function TabSelector({ status, profilePage }: TabSelectorProps) {
       {profilePage ? (
         <div>{status <= 2 && status >= 0 ? SELECT_ELEMENTS[status] : null}</div>
       ) : (
-        <FollowersContainer />
+        <></>
       )}
     </>
   );

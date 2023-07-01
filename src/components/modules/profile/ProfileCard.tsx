@@ -3,25 +3,46 @@ import { useState } from "react";
 import Link from "next/link";
 
 interface ProfileCardProps {
-  imageURL: string;
-  name: string;
+  imageURL?: string | null;
+  userName: string;
   date?: Date;
+  followCard?: boolean;
+  email?: string;
 }
 
-const ProfileCard = ({ imageURL, date, name }: ProfileCardProps) => {
+const ProfileCard = ({
+  imageURL,
+  date,
+  userName,
+  followCard,
+  email,
+}: ProfileCardProps) => {
   return (
-    <div className="ml-auto  flex flex-row">
+    <div
+      className={
+        followCard
+          ? "ml-auto  flex flex-row-reverse items-center"
+          : "ml-auto  flex flex-row"
+      }
+    >
       <div className="mt-0.5">
-        <Link href={`/profile/${name}`}>
+        <Link href={`/profile/${userName}`}>
           <h1 className="cursor-pointer text-[0.80rem] font-bold  text-typography-body-light hover:underline dark:text-typography-body-dark">
-            {name}
+            {userName}
           </h1>
         </Link>
         <p className="font-helvetica text-[0.75em]  font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
           {date?.toDateString()}
         </p>
+        {email ? (
+          <p className="font-helvetica text-[0.75em]  font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
+            {email}
+          </p>
+        ) : (
+          <></>
+        )}
       </div>
-      <Link href={`/profile/${name}`}>
+      <Link href={`/profile/${userName}`}>
         <Avatar
           style="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover"
           alt="avatar"

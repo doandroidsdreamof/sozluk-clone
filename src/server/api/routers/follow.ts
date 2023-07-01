@@ -20,6 +20,60 @@ export const followRouter = createTRPCRouter({
       });
       return isUserAlreadyFollow ? true : false;
     }),
+  getFollowers: publicProcedure
+    .input(z.object({ userName: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { userName } = input;
+      const findFollowers = await ctx.prisma.follower.findMany({
+        where: {
+          following: {
+            name: userName,
+          },
+        },
+        select: {
+          follower: {
+            select: {
+              avatar: true,
+              name: true,
+              email: true,
+              id: true,
+            },
+          },
+        },
+      });
+      if (findFollowers) {
+        return findFollowers;
+      } else {
+        return null;
+      }
+    }),
+  getFollowing: publicProcedure
+    .input(z.object({ userName: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { userName } = input;
+      const findFollowing = await ctx.prisma.follower.findMany({
+        where: {
+          follower: {
+            name: userName,
+          },
+        },
+        select: {
+          following: {
+            select: {
+              avatar: true,
+              name: true,
+              email: true,
+              id: true,
+            },
+          },
+        },
+      });
+      if (findFollowing) {
+        return findFollowing;
+      } else {
+        return null;
+      }
+    }),
   followUser: protectedProcedure
     .input(z.object({ followerId: z.string() }))
     .mutation(async ({ ctx, input }) => {

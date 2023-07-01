@@ -34,7 +34,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
     }
     if (stateEntry.entry) {
       setSkip(0);
-      setPage((prev) => page * 0);
+      setPage((prev) => 0);
     }
   }, [data, page, stateEntry.entry]);
 

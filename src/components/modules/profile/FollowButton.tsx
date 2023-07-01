@@ -17,10 +17,6 @@ const FollowButton = ({ userId }: FollowButtonProps) => {
   useEffect(() => {
     setFollow(followServerState ? true : false);
   }, [followServerState]);
-  console.log(
-    "🚀 ~ file: FollowButton.tsx:20 ~ useEffect ~ followServerState:",
-    followServerState
-  );
 
   const handleClick = () => {
     followUser(
@@ -45,7 +41,7 @@ const FollowButton = ({ userId }: FollowButtonProps) => {
 
   return (
     <Button onClick={handleClick} size="tiny" type="primary">
-      {follow ? "unfollow user" : "follow user"}
+      {!follow ? "follow user" : "unfollow user"}
     </Button>
   );
 };
