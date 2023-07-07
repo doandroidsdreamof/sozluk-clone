@@ -58,7 +58,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
 
   return (
     <>
-      <div>
+      <div className="mb-auto">
         {output != null ? (
           output?.map((items) => <TextRenderer {...items} key={items.id} />)
         ) : (

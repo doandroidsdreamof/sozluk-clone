@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "NODE_OPTIONS=\"--max_old_space_size=2048\" next",
+    "dev": "next",
     "analyze": "ANALYZE=true next build",
     "postinstall": "prisma generate",
     "lint": "next lint",
