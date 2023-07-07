@@ -9,8 +9,6 @@ interface RendererContainerProps {
   topicTitle: string;
 }
 
-// TODO total page global state
-
 const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const [page, setPage] = useState(0);
   const [total, setTotalPage] = useState(0);
