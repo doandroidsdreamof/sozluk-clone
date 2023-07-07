@@ -13,7 +13,7 @@ const TopicLink = ({ text, url }: TopicsProps) => {
   const utils = api.useContext();
   const dispatch = useAppDispatch();
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     void router.push(`/topic/${encodeURIComponent(url.replace(/ /g, "+"))}`);
     void utils.entry.getInfitineEntries.invalidate({});
     void utils.entry.getInfitineEntries.prefetchInfinite({
@@ -21,8 +21,7 @@ const TopicLink = ({ text, url }: TopicsProps) => {
       take: 5,
       topicTitle: url || null,
     });
-    dispatch(refetchData("entry"));
-  }, []);
+  };
 
   return (
     <button onClick={handleClick}>

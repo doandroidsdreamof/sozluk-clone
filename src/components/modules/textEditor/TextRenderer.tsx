@@ -74,7 +74,6 @@ const TextRenderer = ({
       onSuccess: () => {
         updateUI();
         // removeLastTopic(topic.id);
-
         setEdit(false);
       },
       onError: (error) => {

@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useAppSelector } from "~/lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
 import { api } from "~/utils/api";
 import Paginate from "../common/Paginate";
 import TextRenderer from "../modules/textEditor/TextRenderer";
+import { refetchData } from "~/lib/store/reducers/refetchSlice";
 
 interface RendererContainerProps {
   topicTitle: string;
@@ -13,9 +14,11 @@ interface RendererContainerProps {
 const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
   const [page, setPage] = useState(0);
   const [total, setTotalPage] = useState(0);
+  const [take, setTake] = useState(5); //* resultsPerPage
   const [skip, setSkip] = useState(0);
-  const take = 5; //* resultsPerPage
   const stateEntry = useAppSelector((state) => state.refetch);
+  const dispatch = useAppDispatch();
+  const utils = api.useContext();
 
   const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
     {
@@ -32,11 +35,13 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
       setTotalPage(pageNumber);
       setSkip(take * page);
     }
-    if (stateEntry.entry) {
+    if (data?.pages[0]?.infiniteEntries.length === 0) {
       setSkip(0);
-      setPage((prev) => 0);
+      setTake(5);
+      setPage(0);
+      return;
     }
-  }, [data, page, stateEntry.entry]);
+  }, [data, page]);
 
   const handleSelect = (targetVal: string) => {
     setPage((prev) => parseInt(targetVal));
