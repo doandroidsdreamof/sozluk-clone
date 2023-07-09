@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import dynamic from "next/dynamic";
 import { api } from "~/utils/api";
 
-// TODO: refactoring
+// TODO: refactoring && debouncing
 
 interface TextEditorProps {
   topicTitle: string;

@@ -3,9 +3,14 @@ import { useAppSelector } from "~/lib/store/hooks";
 import { api } from "~/utils/api";
 import TopicLink from "../topic/TopicLink";
 
+// TODO topic not found notification
+
 const Aside = () => {
   const toggleState = useAppSelector((state) => state.toggle.navbarState);
-  const { data } = api.topic.getAllTopics.useQuery();
+  const filterQueryState = useAppSelector((state) => state.filter);
+  const { data } = api.topic.getAllTopics.useQuery({
+    ...filterQueryState,
+  });
 
   return (
     <aside>

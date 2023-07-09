@@ -5,6 +5,7 @@ import { FiShare2 } from "react-icons/fi";
 import {
   FacebookIcon,
   FacebookShareButton,
+  RedditIcon,
   RedditShareButton,
   TelegramIcon,
   TelegramShareButton,
@@ -99,6 +100,22 @@ const ShareButton = () => {
                   share facebook
                   <FacebookIcon size={22} round={true} />
                 </FacebookShareButton>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <RedditShareButton
+                  url={pathname}
+                  onClick={() => {
+                    setOpen(!open);
+                  }}
+                  className={`${
+                    active ? "bg-brandGreen-800 text-white" : "text-gray-900"
+                  } group flex w-full items-center justify-between rounded-md px-2 py-2 text-sm`}
+                >
+                  share reddit
+                  <RedditIcon size={22} round={true} />
+                </RedditShareButton>
               )}
             </Menu.Item>
           </div>

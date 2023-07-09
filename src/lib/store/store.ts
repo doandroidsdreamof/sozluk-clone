@@ -4,6 +4,7 @@ import notificationSlice from "./reducers/notificationSlice";
 import toggleSlice from "./reducers/toggleSlice";
 import refetchSlice from "./reducers/refetchSlice";
 import followersSlice from "./reducers/followersSlice";
+import filterSlice from "./reducers/filterSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     toggle: toggleSlice,
     refetch: refetchSlice,
     activeFollowers: followersSlice,
+    filter: filterSlice,
   },
 });
 

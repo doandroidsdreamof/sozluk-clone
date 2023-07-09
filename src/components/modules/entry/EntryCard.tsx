@@ -22,7 +22,7 @@ const EntryCard = ({
     }
   };
   return (
-    <div className="mt-4 flex  items-center justify-between   ">
+    <div className="mt-4 flex items-center   justify-between pb-2   ">
       <button
         onClick={(e) => {
           handleClick(e);
@@ -30,7 +30,7 @@ const EntryCard = ({
         className={
           outputLength < 250
             ? "hidden"
-            : " mr-auto  flex min-w-fit   cursor-pointer rounded-md px-2.5 py-1.5 text-xs text-blue-600  hover:underline dark:text-brandGreen-600  "
+            : " mr-auto   flex min-w-fit   cursor-pointer rounded-md px-2.5 py-1.5 text-xs text-blue-600  hover:underline dark:text-brandGreen-600  "
         }
       >
         {showMore === 250 ? "show more" : "show less"}

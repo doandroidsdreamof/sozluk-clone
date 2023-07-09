@@ -87,19 +87,63 @@ export const topicRouter = createTRPCRouter({
         return { success: false, message: "topic already exist" };
       }
     }),
-  getAllTopics: publicProcedure.query(async ({ ctx }) => {
-    const getAll = await ctx.prisma.topic.findMany({
-      take: 12,
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-    if (getAll != null) {
-      return getAll;
-    } else {
-      return null;
-    }
-  }),
+  getAllTopics: publicProcedure
+    .input(
+      z.object({
+        startDate: z.string().nullable(),
+        endDate: z.string().nullable(),
+        author: z.string(),
+        keywords: z.string(),
+        selected: z.string().nullable(),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      const { selected, endDate, author, keywords, startDate } = input;
+      if (selected === null) {
+        const getAll = await ctx.prisma.topic.findMany({
+          take: 12,
+          orderBy: {
+            createdAt: "desc",
+          },
+        });
+        return getAll;
+      } else {
+        const orderItems = (param: string) => {
+          switch (param) {
+            case "decrease":
+              return "desc";
+            case "increase":
+              return "asc";
+            default:
+              return "asc";
+          }
+        };
+        const getAllFiltered = await ctx.prisma.topic.findMany({
+          take: 12,
+          where: {
+            OR: [
+              { topicTitle: { contains: keywords } },
+              { user: { name: { contains: author } } },
+            ],
+          },
+          orderBy: {
+            createdAt: orderItems(selected),
+          },
+        });
+        if (selected === "alphabetical")
+          getAllFiltered.sort((a, b) =>
+            a.topicTitle.localeCompare(b.topicTitle)
+          );
+        if (typeof startDate == "string" && typeof endDate == "string")
+          return getAllFiltered.filter(
+            (item) =>
+              item.createdAt >= new Date(startDate) &&
+              item.createdAt <= new Date(endDate)
+          );
+
+        return getAllFiltered;
+      }
+    }),
   removeTopic: protectedProcedure
     .input(z.string().nullable())
     .mutation(async ({ ctx, input }) => {

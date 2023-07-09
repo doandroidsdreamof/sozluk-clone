@@ -21,7 +21,7 @@ const ProfileCard = ({
     <div
       className={
         followCard
-          ? "ml-auto  flex flex-row-reverse items-center"
+          ? "ml-auto   flex flex-row-reverse items-center"
           : "ml-auto  flex flex-row"
       }
     >

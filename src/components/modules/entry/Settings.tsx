@@ -10,8 +10,6 @@ interface SettingsProps {
   handleRemoveEntry: () => void;
 }
 
-// TODO session.data?.user.id === userId => bu kısım için ayrı bir route oluşturup backend'den kontrol edilmeli
-
 const Settings = ({ userId, handleEdit, handleRemoveEntry }: SettingsProps) => {
   const session = useSession();
 

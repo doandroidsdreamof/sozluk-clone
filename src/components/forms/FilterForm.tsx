@@ -1,12 +1,41 @@
-import React, { useState } from "react";
-import { AiFillCalendar } from "react-icons/ai";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import FormButton from "../elements/FormButton";
+import { AiFillCalendar } from "react-icons/ai";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
+import Button from "../modules/button/Button";
 import SelectBox from "./SelectBox";
+import { setFilterData } from "~/lib/store/reducers/filterSlice";
+import { api } from "~/utils/api";
+import { resetFilterData } from "~/lib/store/reducers/filterSlice";
+
+// TODO extra local reducer
 
 const FilterForm = () => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState<null | Date>(null);
+  const [endDate, setEndDate] = useState<null | Date>(null);
+  const [author, setAuthor] = useState("");
+  const [keywords, setKeywords] = useState("");
+  const [selected, setSelected] = useState<null | string>(null);
+  const dispatch = useAppDispatch();
+  const utils = api.useContext();
+
+  const handleSelected = (selectedValue: string) => {
+    setSelected(selectedValue);
+  };
+
+  const handleClick = () => {
+    dispatch(
+      setFilterData({
+        startDate: startDate?.toUTCString() || null,
+        endDate: endDate?.toUTCString() || null,
+        author: author,
+        keywords: keywords,
+        selected: selected || "increase",
+      })
+    );
+    void utils.topic.getAllTopics.invalidate();
+  };
 
   return (
     <>
@@ -22,6 +51,7 @@ const FilterForm = () => {
             <input
               type="text"
               name="keywords"
+              onChange={(e) => setKeywords(e.target.value)}
               className={
                 "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2.5 text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
@@ -37,6 +67,7 @@ const FilterForm = () => {
             <input
               type="text"
               name="author"
+              onChange={(e) => setAuthor(e.target.value)}
               className={
                 "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2.5  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
@@ -50,7 +81,7 @@ const FilterForm = () => {
               <DatePicker
                 placeholderText="Choose a date"
                 popperPlacement="top"
-                selected={startDate}
+                selected={new Date()}
                 onChange={(date: Date) => setStartDate(date)}
                 className={
                   "!dark:text-input-label-dark w-full  rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2.5  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
@@ -65,21 +96,24 @@ const FilterForm = () => {
               <DatePicker
                 placeholderText="Choose a date"
                 popperPlacement="top"
-                selected={startDate}
-                onChange={(date: Date) => setStartDate(date)}
+                selected={endDate}
+                onChange={(date: Date) => setEndDate(date)}
                 className={
                   "!dark:text-input-label-dark w-full rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2.5  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
                 }
               />
             </div>
           </div>
-          <SelectBox />
-          <FormButton
-            text={"Search"}
-            style={
-              "block rounded-sm bg-brandGreen-800 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
-            }
-          />
+          <SelectBox handleSelected={handleSelected} />
+          <Button
+            onClick={handleClick}
+            className="block w-full rounded-sm bg-brandGreen-800 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
+            size="xlarge"
+            type="primary"
+            htmlType="button"
+          >
+            Search
+          </Button>
         </div>
       </form>
     </>

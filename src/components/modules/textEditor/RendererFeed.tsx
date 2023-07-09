@@ -63,7 +63,7 @@ const RendererFeed = ({
         outputLength={output.length}
       >
         <ProfileCard
-          name={user.name}
+          userName={user.name}
           date={parseContent.createdAt}
           imageURL={user.avatar || ""}
         />
