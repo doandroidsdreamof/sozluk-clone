@@ -23,7 +23,7 @@ const FilterForm = () => {
               type="text"
               name="keywords"
               className={
-                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2 text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2.5 text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>
@@ -38,7 +38,7 @@ const FilterForm = () => {
               type="text"
               name="author"
               className={
-                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2.5  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>
@@ -53,7 +53,7 @@ const FilterForm = () => {
                 selected={startDate}
                 onChange={(date: Date) => setStartDate(date)}
                 className={
-                  "!dark:text-input-label-dark w-full  rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
+                  "!dark:text-input-label-dark w-full  rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2.5  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
                 }
               />
             </div>
@@ -68,7 +68,7 @@ const FilterForm = () => {
                 selected={startDate}
                 onChange={(date: Date) => setStartDate(date)}
                 className={
-                  "!dark:text-input-label-dark w-full rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
+                  "!dark:text-input-label-dark w-full rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2.5  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
                 }
               />
             </div>

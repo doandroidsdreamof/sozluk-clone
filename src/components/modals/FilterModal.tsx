@@ -26,7 +26,7 @@ export default function FilterModal({ isOpen, closeModal }: FilterModalProps) {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto ">
-            <div className="flex min-h-full   items-start justify-center p-3 text-center md:p-4 md:px-2 lg:-translate-x-6 lg:px-0">
+            <div className="flex min-h-full   items-start justify-center p-3 text-center md:p-4 md:px-2 lg:-translate-x-5 lg:px-0">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"

@@ -1,16 +1,16 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
-const people = ["decrease", "increase", "alphabetical"];
+const selectOptions = ["decrease", "increase", "alphabetical"];
 
 export default function SelectBox() {
-  const [selected, setSelected] = useState(people[0]);
+  const [selected, setSelected] = useState(selectOptions[0]);
 
   return (
     <div className="relative z-0">
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
-          <Listbox.Button className="w-full rounded border border-input-border-light  bg-bg-secondary-light px-3  py-2 text-left text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white">
+          <Listbox.Button className="w-full rounded border border-input-border-light  bg-bg-secondary-light px-3  py-2.5 text-left text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white">
             <span className="block truncate">{selected}</span>
           </Listbox.Button>
           <Transition
@@ -20,9 +20,9 @@ export default function SelectBox() {
             leaveTo="opacity-0"
           >
             <Listbox.Options className="absolute mt-1 max-h-60 w-full  overflow-auto rounded-md bg-white  py-1 text-xs shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-bg-alt-dark sm:text-sm">
-              {people.map((person, personIdx) => (
+              {selectOptions.map((selectOptions, selectOptionsIdx) => (
                 <Listbox.Option
-                  key={personIdx}
+                  key={selectOptionsIdx}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 pl-3 pr-4 text-left ${
                       active
@@ -30,7 +30,7 @@ export default function SelectBox() {
                         : "text-gray-900 dark:text-typography-body-dark"
                     }`
                   }
-                  value={person}
+                  value={selectOptions}
                 >
                   {({ selected }) => (
                     <>
@@ -39,7 +39,7 @@ export default function SelectBox() {
                           selected ? "font-medium" : "font-normal"
                         }`}
                       >
-                        {person}
+                        {selectOptions}
                       </span>
                     </>
                   )}
