@@ -5,7 +5,7 @@ import StarterKit from "@tiptap/starter-kit";
 import dynamic from "next/dynamic";
 import { api } from "~/utils/api";
 
-// TODO: refactoring && debouncing
+// TODO: refactoring && debouncing && image upload icon
 
 interface TextEditorProps {
   topicTitle: string;
