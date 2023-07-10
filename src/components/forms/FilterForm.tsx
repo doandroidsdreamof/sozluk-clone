@@ -2,12 +2,11 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AiFillCalendar } from "react-icons/ai";
-import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
+import { useAppDispatch } from "~/lib/store/hooks";
 import Button from "../modules/button/Button";
 import SelectBox from "./SelectBox";
 import { setFilterData } from "~/lib/store/reducers/filterSlice";
 import { api } from "~/utils/api";
-import { resetFilterData } from "~/lib/store/reducers/filterSlice";
 
 // TODO extra local reducer
 
