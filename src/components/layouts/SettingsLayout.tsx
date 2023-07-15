@@ -1,7 +1,5 @@
 import React from "react";
 import { useSession } from "next-auth/react";
-import ProfileHeader from "../modules/profile/ProfileHeader";
-import Tabs from "../modules/profile/Tabs";
 
 const SettingsLayout = () => {
   const session = useSession();

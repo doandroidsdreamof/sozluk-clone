@@ -81,7 +81,7 @@ const FavoriteButton = ({
   };
 
   return (
-    <div className="ml-2 flex flex-row items-center ">
+    <div className="flex flex-row items-center ">
       <button
         onClick={(e) => {
           handleClick(e);

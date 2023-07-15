@@ -10,8 +10,8 @@ import EntryCard from "../entry/EntryCard";
 import FavoriteButton from "../entry/FavoriteButton";
 import Settings from "../entry/Settings";
 import ShareButton from "../entry/ShareButton";
-import ProfileCard from "../profile/ProfileCard";
 import TextEditor from "./TextEditor";
+import UserCard from "~/components/common/UserCard";
 
 interface User {
   avatar: string | null;
@@ -89,7 +89,7 @@ const TextRenderer = ({
   }
 
   return (
-    <div className="my-4 flex min-h-[10rem] w-full flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[38rem]  ">
+    <div className="my-4 flex min-h-[10rem] w-full flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-secondary-dark   lg:w-[38rem]">
       <div className="mt-2">
         <div className="flex flex-row  justify-end">
           <ShareButton />
@@ -134,10 +134,11 @@ const TextRenderer = ({
         ) : (
           <></>
         )}
-        <ProfileCard
+        <UserCard
           userName={user.name}
           date={createdAt}
           imageURL={user.avatar || ""}
+          urlPath="profile"
         />
       </EntryCard>
     </div>

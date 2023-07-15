@@ -6,7 +6,7 @@ import DOMPurify from "isomorphic-dompurify";
 import { useMemo, useState } from "react";
 import EntryCard from "../entry/EntryCard";
 import ShareButton from "../entry/ShareButton";
-import ProfileCard from "../profile/ProfileCard";
+import UserCard from "~/components/common/UserCard";
 
 interface Entry {
   content: string;
@@ -41,7 +41,7 @@ const RendererFeed = ({
   }, [json]);
 
   return (
-    <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[38rem]  ">
+    <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-secondary-dark   lg:w-[38rem]  ">
       <div className="mt-2">
         <div className="flex flex-row  justify-end">
           <ShareButton />
@@ -62,10 +62,11 @@ const RendererFeed = ({
         showMore={showMore}
         outputLength={output.length}
       >
-        <ProfileCard
+        <UserCard
           userName={user.name}
           date={parseContent.createdAt}
           imageURL={user.avatar || ""}
+          urlPath="profile"
         />
       </EntryCard>
     </div>

@@ -32,12 +32,13 @@ function BaseLayout({ children }: ILayoutProps) {
     router.pathname == "/404" ||
     router.pathname == "/reset" ||
     router.pathname == "/login" ||
-    router.pathname == "/register"
+    router.pathname == "/register" ||
+    router.pathname == "/message"
   ) {
     return (
       <>
         <DocHead />
-        <main className=" bg-bg-primary-light dark:bg-bg-primary-dark">
+        <main className="bg-bg-primary-light dark:bg-bg-primary-dark">
           {children}
         </main>
       </>
@@ -47,7 +48,7 @@ function BaseLayout({ children }: ILayoutProps) {
       <>
         <DocHead />
         <main>
-          <div className=" flex min-h-screen  w-full flex-col bg-bg-primary-light dark:bg-bg-primary-dark">
+          <div className="flex min-h-screen  w-full flex-col bg-bg-primary-light dark:bg-bg-primary-dark">
             <div className="sticky top-0 z-40 w-full">
               <Navbar />
             </div>

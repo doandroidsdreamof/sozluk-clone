@@ -2,31 +2,33 @@ import Avatar from "~/components/common/Avatar";
 import { useState } from "react";
 import Link from "next/link";
 
-interface ProfileCardProps {
+interface UserCardProps {
   imageURL?: string | null;
   userName: string;
   date?: Date;
-  followCard?: boolean;
+  reverse?: boolean;
   email?: string;
+  urlPath: string;
 }
 
-const ProfileCard = ({
+const UserCard = ({
   imageURL,
   date,
   userName,
-  followCard,
+  reverse,
   email,
-}: ProfileCardProps) => {
+  urlPath,
+}: UserCardProps) => {
   return (
     <div
       className={
-        followCard
-          ? "ml-auto   flex flex-row-reverse items-center"
-          : "ml-auto  flex flex-row"
+        reverse
+          ? "ml-auto flex flex-row-reverse items-center"
+          : "ml-auto flex flex-row"
       }
     >
       <div className="mt-0.5">
-        <Link href={`/profile/${userName}`}>
+        <Link href={`/${urlPath}/${userName}`}>
           <h1 className="cursor-pointer text-[0.80rem] font-bold  text-typography-body-light hover:underline dark:text-typography-body-dark">
             {userName}
           </h1>
@@ -42,7 +44,7 @@ const ProfileCard = ({
           <></>
         )}
       </div>
-      <Link href={`/profile/${userName}`}>
+      <Link href={`/${urlPath}/${userName}`}>
         <Avatar
           style="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover"
           alt="avatar"
@@ -54,4 +56,4 @@ const ProfileCard = ({
   );
 };
 
-export default ProfileCard;
+export default UserCard;

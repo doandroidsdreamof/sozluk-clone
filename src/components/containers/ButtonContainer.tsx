@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { logoutClick } from "~/lib/auth-helpers/logout";
 import DarkMode from "../common/DarkMode";
+import ChatButton from "~/components/modules/chat/ChatButton";
 
 const Button = dynamic(() => import("~/components/modules/button/Button"), {
   ssr: false,
@@ -44,6 +45,16 @@ const ButtonContainer = () => {
           {registerButton}
         </Button>
       </Link>
+      {session.data?.user ? (
+        <Link href={"/message"}>
+          <Button className="p-2" size="tiny" type="primary">
+            <ChatButton />
+          </Button>
+        </Link>
+      ) : (
+        <></>
+      )}
+
       <DarkMode />
     </div>
   );

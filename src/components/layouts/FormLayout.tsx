@@ -11,7 +11,7 @@ interface FormLayoutProps {
 
 const FormLayout = ({ children }: FormLayoutProps) => {
   return (
-    <div className="z-50  h-screen w-full bg-black opacity-75">
+    <div className="z-50 h-screen w-full bg-black opacity-75">
       <Modal>{children}</Modal>
     </div>
   );

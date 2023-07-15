@@ -41,7 +41,7 @@ export const userRouter = createTRPCRouter({
     }),
 
   getUserSession: protectedProcedure.query(async ({ ctx }) => {
-    const user = await prisma.user.findUnique({
+    const user = await ctx.prisma.user.findUnique({
       where: {
         id: ctx.session?.user?.id,
       },
@@ -54,7 +54,7 @@ export const userRouter = createTRPCRouter({
     .input(z.object({ userName: z.string() }))
     .query(async ({ ctx, input }) => {
       const { userName } = input;
-      const profileInfo = await prisma.user.findUnique({
+      const profileInfo = await ctx.prisma.user.findUnique({
         where: {
           name: userName,
         },
@@ -73,10 +73,30 @@ export const userRouter = createTRPCRouter({
         return profileInfo;
       }
     }),
+  getUserMessageData: protectedProcedure
+    .input(z.object({ userName: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const { userName } = input;
+      const getMessageData = await ctx.prisma.user.findMany({
+        where: {
+          name: userName,
+        },
+        select: {
+          avatar: true,
+          name: true,
+          id: true,
+          email: true,
+          messagesReceived: true,
+        },
+      });
+      if (getMessageData != null) {
+        return getMessageData;
+      }
+    }),
   getUser: protectedProcedure
     .input(z.string())
     .query(async ({ ctx, input }) => {
-      const userInfo = await prisma.user.findUnique({
+      const userInfo = await ctx.prisma.user.findUnique({
         where: {
           name: input,
         },

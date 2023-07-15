@@ -1,7 +1,6 @@
-import React from "react";
-import ProfileCard from "./ProfileCard";
-import FollowButton from "./FollowButton";
 import { useSession } from "next-auth/react";
+import FollowButton from "./FollowButton";
+import UserCard from "~/components/common/UserCard";
 
 interface IFollowersProps {
   avatar: string | null;
@@ -19,15 +18,16 @@ const FollowersCard = ({
   const session = useSession();
 
   return (
-    <div className="relative flex min-h-[6rem]  w-full   flex-col justify-center rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-alt-dark   lg:w-[35rem]  ">
+    <div className="relative flex min-h-[6rem]  w-full   flex-col justify-center rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-secondary-dark   lg:w-[35rem]  ">
       <div className="flex flex-row  items-center  justify-between ">
         <div>
           {userName && (
-            <ProfileCard
+            <UserCard
               email={email}
-              followCard={true}
+              reverse={true}
               userName={userName}
               imageURL={avatar}
+              urlPath="profile"
             />
           )}
         </div>

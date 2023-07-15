@@ -5,8 +5,6 @@ import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { HiOutlineSearch } from "react-icons/hi";
 import { api } from "~/utils/api";
 import FilterModal from "../modals/FilterModal";
-import { useAppDispatch } from "~/lib/store/hooks";
-import { refetchData } from "~/lib/store/reducers/refetchSlice";
 
 interface SearchOptions {
   id: string;
@@ -18,13 +16,7 @@ const AutoSearch = () => {
   const [data, setData] = useState<SearchOptions[]>([]);
   const [input, setInput] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useAppDispatch();
-  const utils = api.useContext();
-  const {
-    data: getData,
-    refetch,
-    status,
-  } = api.topic.filterTopic.useQuery(input);
+  const { data: getData, status } = api.topic.filterTopic.useQuery(input);
 
   useEffect(() => {
     if (getData != null && status === "success") {
@@ -71,10 +63,10 @@ const AutoSearch = () => {
 
   return (
     <>
-      <div className=" mx-auto w-full   lg:w-[38rem] ">
+      <div className=" mx-auto w-full lg:w-[38rem]  lg:translate-x-4">
         <Combobox value={data} onChange={filteredTopics}>
-          <div className="relative mt-1 ">
-            <div className="relative  flex w-full flex-wrap items-stretch">
+          <div className="relative mt-1">
+            <div className="relative flex w-full flex-wrap items-stretch">
               <Combobox.Input
                 onKeyUp={(e) => {
                   if (e.key === "Enter" && input.length > 0) {
@@ -127,7 +119,7 @@ const AutoSearch = () => {
                       className={({ active }) =>
                         `relative  cursor-pointer select-none   text-sm ${
                           active
-                            ? "bg-button-light bg-brandGreen-800  text-white dark:text-typography-body-strong-dark  "
+                            ? "bg-button-light bg-brandGreen-800  text-white dark:text-typography-body-strong-dark "
                             : " dark:text-typography-body-strong-dark "
                         }`
                       }

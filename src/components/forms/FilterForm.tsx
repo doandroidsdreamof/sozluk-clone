@@ -39,11 +39,11 @@ const FilterForm = () => {
   return (
     <>
       <form className="text-left">
-        <div className="flex flex-col gap-3 p-1  ">
+        <div className="flex flex-col gap-3 p-1">
           <div>
             <label
               htmlFor="keywords"
-              className="mb-2 inline-block  text-xs  text-input-label-light dark:text-input-label-dark "
+              className="mb-2 inline-block text-xs  text-input-label-light dark:text-input-label-dark "
             >
               Keywords
             </label>
