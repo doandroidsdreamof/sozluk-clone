@@ -45,16 +45,7 @@ const ButtonContainer = () => {
           {registerButton}
         </Button>
       </Link>
-      {session.data?.user ? (
-        <Link href={"/message"}>
-          <Button className="p-2" size="tiny" type="primary">
-            <ChatButton />
-          </Button>
-        </Link>
-      ) : (
-        <></>
-      )}
-
+      {session.data?.user ? <ChatButton /> : <></>}
       <DarkMode />
     </div>
   );

@@ -1,7 +1,9 @@
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { type ILayoutProps } from "~/@types/interface";
 import DocHead from "../common/DocHead";
-import dynamic from "next/dynamic";
+import ChatInterface from "../modules/chat/ChatInterface";
+import ChatBox from "../modules/chat/ChatBox";
 
 const ScrollUpButton = dynamic(
   () => import("~/components/common/ScrollUpButton"),
@@ -32,13 +34,12 @@ function BaseLayout({ children }: ILayoutProps) {
     router.pathname == "/404" ||
     router.pathname == "/reset" ||
     router.pathname == "/login" ||
-    router.pathname == "/register" ||
-    router.pathname == "/message"
+    router.pathname == "/register"
   ) {
     return (
       <>
         <DocHead />
-        <main className="bg-bg-primary-light dark:bg-bg-primary-dark">
+        <main className="bg-bg-primary-light  dark:bg-bg-primary-dark">
           {children}
         </main>
       </>
@@ -57,6 +58,7 @@ function BaseLayout({ children }: ILayoutProps) {
               {children}
             </div>
             <div>
+              <ChatInterface />
               <NotificationContainer />
               <ScrollUpButton />
             </div>

@@ -6,7 +6,6 @@ import {
   protectedProcedure,
   publicProcedure,
 } from "~/server/api/trpc";
-import { prisma } from "~/server/db";
 
 export const userRouter = createTRPCRouter({
   createUser: publicProcedure
@@ -73,26 +72,6 @@ export const userRouter = createTRPCRouter({
         return profileInfo;
       }
     }),
-  getUserMessageData: protectedProcedure
-    .input(z.object({ userName: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const { userName } = input;
-      const getMessageData = await ctx.prisma.user.findMany({
-        where: {
-          name: userName,
-        },
-        select: {
-          avatar: true,
-          name: true,
-          id: true,
-          email: true,
-          messagesReceived: true,
-        },
-      });
-      if (getMessageData != null) {
-        return getMessageData;
-      }
-    }),
   getUser: protectedProcedure
     .input(z.string())
     .query(async ({ ctx, input }) => {
@@ -111,6 +90,60 @@ export const userRouter = createTRPCRouter({
               entry: true,
             },
           },
+        },
+      });
+      if (userInfo != null) {
+        return userInfo;
+      }
+    }),
+  filterUser: protectedProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) => {
+      const findUsers = await ctx.prisma.user.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        take: 10,
+        where: {
+          name: {
+            startsWith: input,
+          },
+        },
+        select: {
+          id: true,
+          name: true,
+        },
+      });
+      if (findUsers) {
+        const result = findUsers.filter(
+          (item) =>
+            item.name.toLowerCase() !== ctx.session.user.name?.toLowerCase()
+        );
+
+        return {
+          result,
+        };
+      } else {
+        return null;
+      }
+    }),
+  getReciever: protectedProcedure
+    .input(
+      z.object({
+        userName: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { userName } = input;
+      const userInfo = await ctx.prisma.user.findUnique({
+        where: {
+          name: userName,
+        },
+        select: {
+          email: true,
+          id: true,
+          avatar: true,
+          name: true,
         },
       });
       if (userInfo != null) {

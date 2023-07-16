@@ -1,7 +1,5 @@
 import router from "next/router";
-import { useCallback } from "react";
 import { useAppDispatch } from "~/lib/store/hooks";
-import { refetchData } from "~/lib/store/reducers/refetchSlice";
 import { api } from "~/utils/api";
 
 interface TopicsProps {

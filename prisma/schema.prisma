@@ -54,6 +54,7 @@ model User {
   sessions         Session[]
   entry            Entry[]
   favorites        Favorites[]
+  chatRoom         ChatRoom[]
   topic            Topic[]
   followersCount   BigInt      @default(0)
   followingCount   BigInt      @default(0)
@@ -61,7 +62,7 @@ model User {
   image            String?
   role             Role        @default(Noob)
   messagesSent     Message[]   @relation("sender")
-  messagesReceived Message[]   @relation("recipient")
+  messagesReceived Message[]   @relation("receiver")
   followers        Follower[]  @relation("follower")
   following        Follower[]  @relation("following")
 }
@@ -131,11 +132,13 @@ model Message {
   id          String   @id @default(uuid())
   sender      User     @relation("sender", fields: [senderId], references: [id])
   senderId    String
-  recipient   User     @relation("recipient", fields: [recipientId], references: [id])
-  recipientId String
+  receiver   User     @relation("receiver", fields: [receiverId], references: [id])
+  receiverId String
   message     String
   image       String?
   createdAt   DateTime @default(now())
+  chatRoom   ChatRoom? @relation(fields: [chatRoomId], references: [id])
+  chatRoomId String
 }
 
 enum Role {
@@ -156,3 +159,12 @@ model Follower {
 }
 
 
+model ChatRoom {
+    id         String    @id @default(cuid())
+    name       String?
+    senderId   String
+    receiverId String
+    users      User[]
+    messages   Message[]
+    createdAt  DateTime  @default(now())
+}

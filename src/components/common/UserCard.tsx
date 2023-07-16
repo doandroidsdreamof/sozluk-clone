@@ -1,6 +1,7 @@
 import Avatar from "~/components/common/Avatar";
 import { useState } from "react";
 import Link from "next/link";
+import router from "next/router";
 
 interface UserCardProps {
   imageURL?: string | null;
@@ -8,7 +9,8 @@ interface UserCardProps {
   date?: Date;
   reverse?: boolean;
   email?: string;
-  urlPath: string;
+  urlPath?: string;
+  chatbox?: boolean;
 }
 
 const UserCard = ({
@@ -18,7 +20,11 @@ const UserCard = ({
   reverse,
   email,
   urlPath,
+  chatbox,
 }: UserCardProps) => {
+  const handleNavigation = () => {
+    if (urlPath) void router.push(`/${urlPath}/${userName}`);
+  };
   return (
     <div
       className={
@@ -28,11 +34,17 @@ const UserCard = ({
       }
     >
       <div className="mt-0.5">
-        <Link href={`/${urlPath}/${userName}`}>
-          <h1 className="cursor-pointer text-[0.80rem] font-bold  text-typography-body-light hover:underline dark:text-typography-body-dark">
+        <button onClick={handleNavigation}>
+          <h1
+            className={
+              !chatbox
+                ? "cursor-pointer text-[0.80rem] font-bold   text-typography-body-light hover:underline dark:text-typography-body-dark"
+                : "cursor-pointer text-[0.80rem] font-bold   text-typography-body-light hover:underline"
+            }
+          >
             {userName}
           </h1>
-        </Link>
+        </button>
         <p className="font-helvetica text-[0.75em]  font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
           {date?.toDateString()}
         </p>
@@ -44,14 +56,14 @@ const UserCard = ({
           <></>
         )}
       </div>
-      <Link href={`/${urlPath}/${userName}`}>
+      <button onClick={handleNavigation}>
         <Avatar
           style="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover"
           alt="avatar"
           src="/images/default-avatar.png"
           fallbackSrc="/images/default-avatar.png"
         />
-      </Link>
+      </button>
     </div>
   );
 };
