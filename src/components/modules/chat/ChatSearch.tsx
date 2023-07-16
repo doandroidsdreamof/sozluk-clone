@@ -3,7 +3,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "~/lib/store/hooks";
 import {
   chatInterfaceClose,
-  setRecieverName,
+  setReceiverName,
   chatBoxToggle,
 } from "~/lib/store/reducers/messageSlice";
 import { api } from "~/utils/api";
@@ -46,7 +46,7 @@ function ChatSearch() {
         e.target as HTMLInputElement;
       if (typeof value === "string" && typeof id === "string") {
         setData([]);
-        dispatch(setRecieverName(value));
+        dispatch(setReceiverName(value));
         dispatch(chatInterfaceClose());
         dispatch(chatBoxToggle());
       }

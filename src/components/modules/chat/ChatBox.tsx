@@ -4,7 +4,8 @@ import ChatContent from "./ChatContent";
 import { useSession } from "next-auth/react";
 import ChatInput from "./ChatInput";
 import { api } from "~/utils/api";
-import { useAppSelector } from "~/lib/store/hooks";
+import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
+import { setReceiverName } from "~/lib/store/reducers/messageSlice";
 
 const ChatBox = () => {
   const session = useSession();
@@ -12,10 +13,36 @@ const ChatBox = () => {
   const { data: receiverData } = api.user.getReceiver.useQuery({
     userName: recieverName,
   });
+  const dispatch = useAppDispatch();
   const { data: chatRoom } = api.message.getChatRoom.useQuery({
     receiverId: receiverData?.id || null,
     senderId: session.data?.user.id || null,
   });
+  const utils = api.useContext();
+  const { mutate: sendMessage } = api.message.postMessage.useMutation();
+
+  const handleClick = (receiverId: string, message: string) => {
+    if (receiverId) {
+      sendMessage(
+        {
+          message: message,
+          receiverId: receiverId,
+        },
+        {
+          onSuccess: () => {
+            void utils.message.getChatRoom.invalidate({
+              receiverId: receiverData?.id,
+              senderId: session.data?.user.id,
+            });
+            void utils.invalidate();
+          },
+          onError: (error) => {
+            console.error(error);
+          },
+        }
+      );
+    }
+  };
 
   return (
     <div className="m fixed bottom-3 right-3 z-[500]  mx-auto  mt-32 w-full max-w-sm rounded-t-md border sm:min-w-[30rem]">
@@ -31,10 +58,7 @@ const ChatBox = () => {
                 messageText={items.message}
                 senderUserID={items.sender.id}
                 isChatOwner={
-                  session?.data?.user.id == items.receiver.id ||
-                  session?.data?.user.id == items.sender.id
-                    ? true
-                    : false
+                  session?.data?.user.id == items.sender.id ? true : false
                 }
                 senderName={items.sender.name}
                 receiverName={items.receiver.name}
@@ -46,7 +70,10 @@ const ChatBox = () => {
             <></>
           )}
         </div>
-        <ChatInput receiverId={receiverData?.id || null} />
+        <ChatInput
+          handleClick={handleClick}
+          receiverId={receiverData?.id || null}
+        />
       </div>
     </div>
   );

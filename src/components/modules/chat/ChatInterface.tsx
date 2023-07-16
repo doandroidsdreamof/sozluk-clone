@@ -2,7 +2,11 @@ import { useSession } from "next-auth/react";
 import { AiOutlineClose } from "react-icons/ai";
 import UserCard from "~/components/common/UserCard";
 import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
-import { chatInterfaceClose } from "~/lib/store/reducers/messageSlice";
+import {
+  chatBoxOpen,
+  chatInterfaceClose,
+  setReceiverName,
+} from "~/lib/store/reducers/messageSlice";
 import { api } from "~/utils/api";
 import ChatSearch from "./ChatSearch";
 import ChatBox from "./ChatBox";
@@ -17,6 +21,8 @@ const ChatInterface = () => {
   const { data } = api.message.getUserMessageData.useQuery({
     userName: session.data?.user.name || null,
   });
+  const utils = api.useContext();
+  const { mutate: sendMessage } = api.message.postMessage.useMutation();
 
   return (
     <>
@@ -41,21 +47,26 @@ const ChatInterface = () => {
           <ChatSearch />
         </div>
         <div className="flex  max-h-[20rem] w-full flex-col overflow-y-auto">
-          {data?.users.length ? (
+          {data?.length ? (
             <>
               {data &&
-                data.users.map((item) => (
-                  <div
+                data.map((item) => (
+                  <button
+                    onClick={() => {
+                      dispatch(setReceiverName(item.users[0]?.name));
+                      dispatch(chatInterfaceClose());
+                      dispatch(chatBoxOpen());
+                    }}
                     className="relative  flex   min-h-[6rem] w-full  cursor-pointer   items-center    bg-white  text-sm  shadow-sm  hover:bg-brandGreen-500"
-                    key={item.id}
+                    key={item.users[0]?.id}
                   >
                     <UserCard
                       reverse={true}
-                      userName={item.name}
-                      imageURL={item.avatar}
+                      userName={item.users[0]?.name || ""}
+                      imageURL={item.users[0]?.avatar}
                       chatBox={true}
                     />
-                  </div>
+                  </button>
                 ))}
             </>
           ) : (

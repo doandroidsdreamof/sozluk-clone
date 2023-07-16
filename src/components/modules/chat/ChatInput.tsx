@@ -8,23 +8,11 @@ import { api } from "~/utils/api";
 
 interface IChatInputProps {
   receiverId: string | null;
+  handleClick: (param1: string, param2: string) => void;
 }
 
-const ChatInput = ({ receiverId }: IChatInputProps) => {
+const ChatInput = ({ receiverId, handleClick }: IChatInputProps) => {
   const [message, setMessage] = useState("");
-  const utils = api.useContext();
-  const { mutate: sendMessage } = api.message.postMessage.useMutation();
-
-  const handleClick = () => {
-    if (receiverId) {
-      sendMessage({
-        message: message,
-        receiverId: receiverId,
-      });
-      void utils.message.getChatRoom.invalidate({});
-      setMessage("");
-    }
-  };
 
   return (
     <div className="flex  w-full   flex-row items-center  bg-white  px-4 shadow-md ">
@@ -46,7 +34,12 @@ const ChatInput = ({ receiverId }: IChatInputProps) => {
       <div className="ml-4">
         <button
           disabled={receiverId ? false : true}
-          onClick={handleClick}
+          onClick={() => {
+            if (receiverId) {
+              handleClick(receiverId, message);
+              setMessage("");
+            }
+          }}
           className="sbui-btn-primary dark mb-2.5  ml-auto mt-3 flex  max-w-fit cursor-pointer flex-row-reverse items-center gap-x-2  rounded-md bg-brandGreen-800  px-4 py-1.5 text-sm font-medium text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
         >
           Send

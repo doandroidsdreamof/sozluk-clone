@@ -71,7 +71,7 @@ export const messageRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const { userName } = input;
       if (userName) {
-        const getMessageData = await ctx.prisma.chatRoom.findFirst({
+        const getMessageData = await ctx.prisma.chatRoom.findMany({
           where: {
             OR: [
               {
@@ -82,21 +82,27 @@ export const messageRouter = createTRPCRouter({
           },
           select: {
             id: true,
+            receiverId: true,
+            senderId: true,
             users: {
-              where: {
-                name: {
-                  not: userName,
-                },
-              },
               select: {
                 avatar: true,
                 name: true,
                 id: true,
               },
+              where: {
+                name: {
+                  not: userName,
+                },
+              },
             },
           },
         });
-        return getMessageData;
+        return getMessageData.filter(
+          (item) =>
+            item.receiverId != ctx.session.user.id ||
+            item.senderId != ctx.session.user.id
+        );
       }
     }),
   getChatRoom: protectedProcedure
@@ -110,9 +116,6 @@ export const messageRouter = createTRPCRouter({
       const { receiverId, senderId } = input;
       if (receiverId && senderId) {
         const findChatRoom = await ctx.prisma.chatRoom.findFirst({
-          orderBy: {
-            createdAt: "desc",
-          },
           where: {
             AND: [
               {
@@ -133,6 +136,9 @@ export const messageRouter = createTRPCRouter({
           },
           include: {
             messages: {
+              orderBy: {
+                createdAt: "asc",
+              },
               select: {
                 createdAt: true,
                 message: true,

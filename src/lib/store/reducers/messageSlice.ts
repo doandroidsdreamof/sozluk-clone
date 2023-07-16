@@ -11,7 +11,7 @@ const messageSlice = createSlice({
     chatInterface: false,
   },
   reducers: {
-    setRecieverName: (state, action) => {
+    setReceiverName: (state, action) => {
       if (typeof action.payload === "string") {
         state.recieverName = action.payload;
       }
@@ -26,6 +26,9 @@ const messageSlice = createSlice({
     chatBoxClose: (state) => {
       state.chatboxState = false;
     },
+    chatBoxOpen: (state) => {
+      state.chatboxState = true;
+    },
     chatInterfaceToggle: (state) => {
       state.chatInterface = !state.chatInterface;
     },
@@ -36,12 +39,13 @@ const messageSlice = createSlice({
 });
 
 export const {
-  setRecieverName,
+  setReceiverName,
   resetReciever,
   chatInterfaceClose,
   chatInterfaceToggle,
   chatBoxClose,
   chatBoxToggle,
+  chatBoxOpen,
 } = messageSlice.actions;
 
 export default messageSlice.reducer;

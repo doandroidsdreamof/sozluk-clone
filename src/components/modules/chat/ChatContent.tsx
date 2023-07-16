@@ -34,7 +34,7 @@ const ChatContent = ({
         />
       </div>
       <div
-        className={`flex w-fit flex-col rounded-lg  px-2 py-3  ${
+        className={`flex w-fit flex-col rounded-lg  px-2 py-1   ${
           isChatOwner
             ? "order-1 mr-2 bg-brandGreen-600 text-white"
             : "order-2 ml-2 bg-[#717ff8] text-typography-body-strong-dark"
