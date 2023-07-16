@@ -14,7 +14,6 @@ const ChatInterface = () => {
     (state) => state.message.chatInterface
   );
   const chatBoxState = useAppSelector((state) => state.message.chatboxState);
-
   const { data } = api.message.getUserMessageData.useQuery({
     userName: session.data?.user.name || null,
   });

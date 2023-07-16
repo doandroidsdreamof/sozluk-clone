@@ -97,8 +97,65 @@ export const messageRouter = createTRPCRouter({
             },
           },
         });
-        if (getMessageData != null) {
-          return getMessageData;
+        return getMessageData;
+      }
+    }),
+  getChatRoom: protectedProcedure
+    .input(
+      z.object({
+        recieverId: z.string().nullable(),
+        senderId: z.string().nullable(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const { recieverId, senderId } = input;
+      if (recieverId && senderId) {
+        const findChatRoom = await ctx.prisma.chatRoom.findFirst({
+          where: {
+            AND: [
+              {
+                users: {
+                  some: {
+                    id: senderId,
+                  },
+                },
+              },
+              {
+                users: {
+                  some: {
+                    id: recieverId,
+                  },
+                },
+              },
+            ],
+          },
+          include: {
+            messages: {
+              select: {
+                message: true,
+                id: true,
+                receiver: {
+                  select: {
+                    avatar: true,
+                    name: true,
+                    id: true,
+                  },
+                },
+                sender: {
+                  select: {
+                    avatar: true,
+                    name: true,
+                    id: true,
+                  },
+                },
+              },
+            },
+          },
+        });
+        if (findChatRoom) {
+          return findChatRoom;
+        } else {
+          return null;
         }
       }
     }),

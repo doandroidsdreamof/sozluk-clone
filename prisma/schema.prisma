@@ -132,13 +132,13 @@ model Message {
   id          String   @id @default(uuid())
   sender      User     @relation("sender", fields: [senderId], references: [id])
   senderId    String
-  receiver   User     @relation("receiver", fields: [receiverId], references: [id])
-  receiverId String
+  receiver    User     @relation("receiver", fields: [receiverId], references: [id])
+  receiverId  String
   message     String
   image       String?
   createdAt   DateTime @default(now())
-  chatRoom   ChatRoom? @relation(fields: [chatRoomId], references: [id])
-  chatRoomId String
+  chatRoom    ChatRoom? @relation(fields: [chatRoomId], references: [id])
+  chatRoomId  String
 }
 
 enum Role {

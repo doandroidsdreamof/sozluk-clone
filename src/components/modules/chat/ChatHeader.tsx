@@ -5,11 +5,14 @@ import { chatBoxClose } from "~/lib/store/reducers/messageSlice";
 import { useAppDispatch } from "~/lib/store/hooks";
 
 interface ChatHeaderProps {
-  name: string;
+  recieverName?: string;
   numberOfMessages: number;
 }
 
-const ChatHeader = ({ name, numberOfMessages = 0 }: ChatHeaderProps) => {
+const ChatHeader = ({
+  recieverName,
+  numberOfMessages = 0,
+}: ChatHeaderProps) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -22,7 +25,7 @@ const ChatHeader = ({ name, numberOfMessages = 0 }: ChatHeaderProps) => {
           fallbackSrc="/images/default-avatar.png"
         />
         <div className="flex flex-col">
-          <p className="text-xs text-gray-600">{name}</p>
+          <p className="text-xs text-gray-600">{recieverName}</p>
           <p className="text-xs text-gray-400">{numberOfMessages} messages</p>
         </div>
       </div>
