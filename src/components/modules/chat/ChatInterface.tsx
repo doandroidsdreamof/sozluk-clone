@@ -40,23 +40,24 @@ const ChatInterface = () => {
         <div className="mb-4">
           <ChatSearch />
         </div>
-        <div className="flex max-h-[20rem] flex-col overflow-y-auto">
-          {data?.length ? (
-            <div className="relative flex min-h-[6rem]  w-full cursor-pointer flex-row   justify-between   bg-white  text-sm  shadow-sm dark:bg-bg-secondary-dark dark:hover:bg-bg-alt-dark  ">
-              <div className="flex">
-                {data &&
-                  data.map((item) => (
+        <div className="flex  max-h-[20rem] w-full flex-col overflow-y-auto">
+          {data?.users.length ? (
+            <>
+              {data &&
+                data.users.map((item) => (
+                  <div
+                    className="relative  flex   min-h-[6rem] w-full  cursor-pointer   items-center    bg-white  text-sm  shadow-sm  hover:bg-brandGreen-500"
+                    key={item.id}
+                  >
                     <UserCard
-                      email={item.sender.email}
                       reverse={true}
-                      userName={item.sender.name}
-                      imageURL={item.sender.avatar}
-                      urlPath={item.id}
-                      key={item.id}
+                      userName={item.name}
+                      imageURL={item.avatar}
+                      chatBox={true}
                     />
-                  ))}
-              </div>
-            </div>
+                  </div>
+                ))}
+            </>
           ) : (
             <div className="relative flex h-[5rem] cursor-default select-none items-center justify-center bg-bg-primary-light px-4 py-4 text-center  text-gray-700  ">
               Nothing found.

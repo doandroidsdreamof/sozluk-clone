@@ -139,6 +139,7 @@ model Message {
   createdAt   DateTime @default(now())
   chatRoom    ChatRoom? @relation(fields: [chatRoomId], references: [id])
   chatRoomId  String
+
 }
 
 enum Role {
@@ -161,10 +162,10 @@ model Follower {
 
 model ChatRoom {
     id         String    @id @default(cuid())
-    name       String?
     senderId   String
     receiverId String
     users      User[]
     messages   Message[]
     createdAt  DateTime  @default(now())
+
 }

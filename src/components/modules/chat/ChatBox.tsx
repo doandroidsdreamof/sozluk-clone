@@ -9,18 +9,21 @@ import { useAppSelector } from "~/lib/store/hooks";
 const ChatBox = () => {
   const session = useSession();
   const recieverName = useAppSelector((state) => state.message.recieverName);
-  const { data } = api.user.getReciever.useQuery({
+  const { data: receiverData } = api.user.getReceiver.useQuery({
     userName: recieverName,
   });
   const { data: chatRoom } = api.message.getChatRoom.useQuery({
-    recieverId: data?.id || null,
+    receiverId: receiverData?.id || null,
     senderId: session.data?.user.id || null,
   });
 
   return (
     <div className="m fixed bottom-3 right-3 z-[500]  mx-auto  mt-32 w-full max-w-sm rounded-t-md border sm:min-w-[30rem]">
       <div className="relative   bg-bg-secondary-light  shadow-md dark:shadow-none">
-        <ChatHeader recieverName={data?.name} numberOfMessages={0} />
+        <ChatHeader
+          recieverName={receiverData?.name}
+          numberOfMessages={chatRoom?.messages?.length || null}
+        />
         <div className=" max-h-[25rem] min-h-[15rem] overflow-auto px-6 py-1">
           {chatRoom ? (
             chatRoom.messages.map((items) => (
@@ -35,7 +38,7 @@ const ChatBox = () => {
                 }
                 senderName={items.sender.name}
                 receiverName={items.receiver.name}
-                sentDate={new Date()}
+                sentDate={items.createdAt}
                 key={items.id}
               />
             ))
@@ -43,7 +46,7 @@ const ChatBox = () => {
             <></>
           )}
         </div>
-        <ChatInput />
+        <ChatInput receiverId={receiverData?.id || null} />
       </div>
     </div>
   );

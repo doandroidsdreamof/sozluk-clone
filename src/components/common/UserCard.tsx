@@ -10,7 +10,7 @@ interface UserCardProps {
   reverse?: boolean;
   email?: string;
   urlPath?: string;
-  chatbox?: boolean;
+  chatBox?: boolean;
 }
 
 const UserCard = ({
@@ -20,7 +20,7 @@ const UserCard = ({
   reverse,
   email,
   urlPath,
-  chatbox,
+  chatBox,
 }: UserCardProps) => {
   const handleNavigation = () => {
     if (urlPath) void router.push(`/${urlPath}/${userName}`);
@@ -29,7 +29,7 @@ const UserCard = ({
     <div
       className={
         reverse
-          ? "ml-auto flex flex-row-reverse items-center"
+          ? `mr-auto  flex flex-row-reverse items-center`
           : "ml-auto flex flex-row"
       }
     >
@@ -37,7 +37,7 @@ const UserCard = ({
         <button onClick={handleNavigation}>
           <h1
             className={
-              !chatbox
+              !chatBox
                 ? "cursor-pointer text-[0.80rem] font-bold   text-typography-body-light hover:underline dark:text-typography-body-dark"
                 : "cursor-pointer text-[0.80rem] font-bold   text-typography-body-light hover:underline"
             }

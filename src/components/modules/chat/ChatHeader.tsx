@@ -6,13 +6,10 @@ import { useAppDispatch } from "~/lib/store/hooks";
 
 interface ChatHeaderProps {
   recieverName?: string;
-  numberOfMessages: number;
+  numberOfMessages: number | null;
 }
 
-const ChatHeader = ({
-  recieverName,
-  numberOfMessages = 0,
-}: ChatHeaderProps) => {
+const ChatHeader = ({ recieverName, numberOfMessages }: ChatHeaderProps) => {
   const dispatch = useAppDispatch();
 
   return (
@@ -26,7 +23,9 @@ const ChatHeader = ({
         />
         <div className="flex flex-col">
           <p className="text-xs text-gray-600">{recieverName}</p>
-          <p className="text-xs text-gray-400">{numberOfMessages} messages</p>
+          <p className="text-xs text-gray-400">
+            {numberOfMessages ? numberOfMessages : 0} messages
+          </p>
         </div>
       </div>
       <div className="space-x-1">
