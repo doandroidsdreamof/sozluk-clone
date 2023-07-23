@@ -45,7 +45,7 @@ export default function Modal({ children }: ModalProps) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           ></Transition.Child>
-          <div className="fixed inset-0 grid h-full w-full place-content-center border  px-4   sm:px-12 ">
+          <div className="fixed inset-0 grid h-full w-full place-content-center  px-4 sm:px-12 ">
             <Transition.Child
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
