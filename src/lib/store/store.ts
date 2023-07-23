@@ -6,6 +6,7 @@ import refetchSlice from "./reducers/refetchSlice";
 import followersSlice from "./reducers/followersSlice";
 import filterSlice from "./reducers/filterSlice";
 import messageSlice from "./reducers/messageSlice";
+import navigationSlice from "./reducers/navigationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     activeFollowers: followersSlice,
     filter: filterSlice,
     message: messageSlice,
+    navigation: navigationSlice,
   },
 });
 

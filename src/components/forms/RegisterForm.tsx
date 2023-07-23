@@ -15,6 +15,8 @@ import { api } from "~/utils/api";
 import FormFooter from "./FormFooter";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useAppSelector } from "~/lib/store/hooks";
+import { setNavigation } from "~/lib/store/reducers/navigationSlice";
 
 const loginValues = {
   userName: "",
@@ -27,6 +29,7 @@ const RegisterForm = () => {
   const { mutate } = api.user.createUser.useMutation();
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const parsedState = useAppSelector((state) => state.navigation.parsed);
 
   const setAlert = (message: string, alertRaw: AlertType, timeout = 5000) => {
     const uid = nanoid();
@@ -40,6 +43,7 @@ const RegisterForm = () => {
   // eslint-disable-next-line @typescript-eslint/require-await
   async function handleRegister(data: IRegister) {
     const { email, password, userName } = data;
+    if (email !== parsedState) dispatch(setNavigation(false));
     try {
       mutate(
         {
@@ -50,7 +54,7 @@ const RegisterForm = () => {
         {
           onError: (err) => {
             console.log(err);
-            setAlert("başarısız", "DANGER", 5000);
+            setAlert("error", "DANGER", 5000);
           },
           onSuccess: (data) => {
             if (data.success === false) {
@@ -88,10 +92,10 @@ const RegisterForm = () => {
           handleRegister(values).catch((err) => console.error(err));
         }}
       >
-        <div className="w-full ">
-          <div className="mx-auto max-h-fit max-w-screen-2xl px-4 md:px-8">
+        <div className="w-full">
+          <div className="mx-auto max-h-fit px-4">
             <Form className="mx-auto max-w-lg rounded-lg  ">
-              <div className="flex flex-col gap-4 p-4 md:p-8 ">
+              <div className="flex flex-col gap-4 p-4  ">
                 <div>
                   <label
                     htmlFor="user name"
@@ -159,7 +163,7 @@ const RegisterForm = () => {
                 <FormButton
                   text={"Register"}
                   style={
-                    "block rounded-sm bg-brandGreen-800 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
+                    "block rounded-sm bg-brandGreen-800 px-8 py-2 mt-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
                   }
                 />
               </div>

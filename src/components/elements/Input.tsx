@@ -17,24 +17,13 @@ const Input: FC<FormInputProps> = ({
 }: FormInputProps) => {
   return (
     <>
-      {name === "test" ? (
-        <input
-          type={type}
-          name={name}
-          placeholder={placeholder || ""}
-          className={style}
-        />
-      ) : (
-        <div className="">
-          <Field
-            type={type}
-            name={name}
-            placeholder={placeholder || ""}
-            className={style}
-          />
-          <FormError name={name} />
-        </div>
-      )}
+      <Field
+        type={type}
+        name={name}
+        placeholder={placeholder || ""}
+        className={style}
+      />
+      <FormError name={name} />
     </>
   );
 };

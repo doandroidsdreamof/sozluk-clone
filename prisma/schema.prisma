@@ -1,11 +1,13 @@
 generator client {
-  provider = "prisma-client-js"
-
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
 }
 
+
 datasource db {
-  provider = "cockroachdb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Widget {
@@ -118,7 +120,7 @@ model Topic {
   entry           Entry[]
 
   @@index([topicTitle])
-  @@unique([topicTitle])
+  @@unique([topicTitle,userId])
 
 }
 

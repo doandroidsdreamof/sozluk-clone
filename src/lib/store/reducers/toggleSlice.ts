@@ -4,6 +4,7 @@ const toggleSlice = createSlice({
   name: "toggle",
   initialState: {
     navbarState: false,
+    navigationState: false,
   },
   reducers: {
     navbarToggle: (state) => {

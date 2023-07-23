@@ -52,7 +52,7 @@ const FilterForm = () => {
               name="keywords"
               onChange={(e) => setKeywords(e.target.value)}
               className={
-                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2.5 text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-3 text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>
@@ -68,7 +68,7 @@ const FilterForm = () => {
               name="author"
               onChange={(e) => setAuthor(e.target.value)}
               className={
-                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2.5  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-3  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>

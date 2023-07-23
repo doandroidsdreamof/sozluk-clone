@@ -8,6 +8,9 @@ export const env = createEnv({
     GOOGLE_CLIENT_ID: z.string(),
     GOOGLE_CLIENT_SECRET: z.string(),
     IMAGE_SERVER: z.string(),
+    PGPASSWORD: z.string(),
+    PGUSER: z.string(),
+    MAGIC_SECRET_KEY: z.string(),
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === "production" ? z.string().min(1) : z.string(),
     NEXTAUTH_URL: z.preprocess(
@@ -22,11 +25,14 @@ export const env = createEnv({
   client: {
     NEXT_PUBLIC_SUPABASE_URL: z.string(),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
+    NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY: z.string(),
   },
 
   runtimeEnv: {
     DATABASE_URL: process.env.DATABASE_URL,
+    PGUSER: process.env.PGUSER,
     NODE_ENV: process.env.NODE_ENV,
+    PGPASSWORD: process.env.PGPASSWORD,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
@@ -34,5 +40,8 @@ export const env = createEnv({
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     IMAGE_SERVER: process.env.IMAGE_SERVER,
+    MAGIC_SECRET_KEY: process.env.MAGIC_SECRET_KEY,
+    NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY,
   },
 });

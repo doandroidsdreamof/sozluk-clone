@@ -66,10 +66,10 @@ const LoginForm = () => {
           handleLogin(values).catch((err) => console.error(err));
         }}
       >
-        <div className="w-full ">
-          <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-            <Form className="mx-auto max-w-lg rounded-lg ">
-              <div className="flex flex-col gap-4 p-4 md:p-8 ">
+        <div className="w-full">
+          <div className="mx-auto max-w-screen-2xl px-4">
+            <Form className="mx-auto max-w-lg rounded-lg">
+              <div className="flex flex-col gap-4 p-4">
                 <div>
                   <label
                     htmlFor="email"
