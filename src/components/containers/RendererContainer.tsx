@@ -69,7 +69,7 @@ const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
         )}
         <></>
       </div>
-      <div className=" order-3   flex w-full justify-center md:justify-end  lg:w-[38rem]">
+      <div className="order-3 flex w-full justify-center md:justify-end lg:w-[38rem]">
         <Paginate
           totalPage={total}
           pageNum={page}

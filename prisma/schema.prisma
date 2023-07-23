@@ -1,17 +1,14 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["jsonProtocol"]
+
 }
 
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
-
-model Widget {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  url = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 // Necessary for Next auth
@@ -91,8 +88,7 @@ model Entry {
   favoriteCount Int         @default(0)
 
 
-  @@index([entryId])
-  @@index([userId])
+  @@index([entryId,userId])
 
 
 }
@@ -157,8 +153,7 @@ model Follower {
   followingId String
   createdAt   DateTime @default(now())
 
-  @@index([followerId])
-  @@index([followingId])
+  @@index([followerId,followingId])
 }
 
 

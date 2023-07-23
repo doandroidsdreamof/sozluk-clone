@@ -1,9 +1,3 @@
-import NextBundleAnalyzer from "@next/bundle-analyzer";
-
-const withBundleAnalyzer = NextBundleAnalyzer({
-  enabled: process.env.ANALYZE === "true",
-});
-
 await import("./src/env.mjs");
 
 /** @type {import("next").NextConfig} */

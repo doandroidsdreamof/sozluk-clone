@@ -39,6 +39,7 @@
     "@trpc/react-query": "^10.18.0",
     "@trpc/server": "^10.18.0",
     "@types/dompurify": "^3.0.2",
+    "@vercel/postgres": "^0.4.0",
     "bcrypt": "^5.1.0",
     "formik": "^2.2.9",
     "isomorphic-dompurify": "^1.6.0",
