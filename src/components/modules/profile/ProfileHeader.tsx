@@ -40,7 +40,7 @@ const ProfileHeader = ({
           >
             {role}
           </span>
-          {session.data?.user?.name !== userName ? (
+          {session.data?.user.name && session.data?.user?.name !== userName ? (
             <FollowButton userId={userId} />
           ) : (
             <></>
