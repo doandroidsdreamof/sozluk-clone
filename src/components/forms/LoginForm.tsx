@@ -53,7 +53,7 @@ const LoginForm = () => {
           setAlert("login is not success", "DANGER", 5000);
         });
     } catch (err) {
-      console.log("🚀 ~ file: Login.tsx:27 ~ handleRegister ~ err:", err);
+      console.error("🚀 ~ file: Login.tsx:27 ~ handleRegister ~ err:", err);
     }
   }
 

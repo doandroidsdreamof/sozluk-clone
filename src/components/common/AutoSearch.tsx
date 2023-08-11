@@ -5,6 +5,7 @@ import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { HiOutlineSearch } from "react-icons/hi";
 import { api } from "~/utils/api";
 import FilterModal from "../modals/FilterModal";
+import { useSession } from "next-auth/react";
 
 interface SearchOptions {
   id: string;
@@ -17,6 +18,7 @@ const AutoSearch = () => {
   const [input, setInput] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
   const { data: getData, status } = api.topic.filterTopic.useQuery(input);
+  const session = useSession();
 
   useEffect(() => {
     if (getData != null && status === "success") {
@@ -63,7 +65,13 @@ const AutoSearch = () => {
 
   return (
     <>
-      <div className=" mx-auto w-full lg:w-[38rem]  lg:translate-x-4">
+      <div
+        className={
+          session.data?.user
+            ? "mx-auto w-full lg:w-[38.5rem]  lg:translate-x-5"
+            : "mx-auto w-full lg:w-[39.5rem]  lg:translate-x-4"
+        }
+      >
         <Combobox value={data} onChange={filteredTopics}>
           <div className="relative mt-1">
             <div className="relative flex w-full flex-wrap items-stretch">

@@ -79,7 +79,7 @@ const RegisterForm = () => {
         }
       );
     } catch (err) {
-      console.log("🚀 ~ file: Register.tsx:39 ~ Register ~ err:", err);
+      console.error("🚀 ~ file: Register.tsx:39 ~ Register ~ err:", err);
     }
   }
 

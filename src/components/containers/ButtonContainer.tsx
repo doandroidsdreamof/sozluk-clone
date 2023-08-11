@@ -18,7 +18,7 @@ const ButtonContainer = () => {
       : `/profile/${session?.data.user.name || ""}`;
   const loginLink = session.data == null ? "/login" : "/";
   const registerButton = session.data == null ? "register" : "profile";
-  const loginButton = session.data == null ? "login" : "sign out";
+  const loginButton = session.data == null ? "sign in" : "sign out";
 
   const handleSignout = () => {
     if (loginButton === "sign out") {

@@ -106,7 +106,7 @@ export const authOptions: NextAuthOptions = {
             };
           }
         } catch (err) {
-          console.log("🚀 ~ file: auth.ts:167 ~ authorize ~ err:", err);
+          console.error("🚀 ~ file: auth.ts:167 ~ authorize ~ err:", err);
           return null;
         }
       },

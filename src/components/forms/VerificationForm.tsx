@@ -32,8 +32,7 @@ const VerificationForm = () => {
       dispatch(setNavigation(true));
       dispatch(setParsed(parsedData));
       return () => {
-        console.log("==========> cleanup success");
-        magicLogout().catch((err) => console.log(err));
+        magicLogout().catch((err) => console.error(err));
       };
     }
   }, [killMagic, data]);
@@ -55,7 +54,7 @@ const VerificationForm = () => {
       if (!magic) throw new Error(`magic not defined`);
       await magic?.user?.logout();
     } catch (err) {
-      console.log(
+      console.error(
         "🚀 ~ file: MagicVerification.tsx:64 ~ magicLogout ~ err:",
         err
       );

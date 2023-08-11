@@ -13,7 +13,7 @@ const SocialButton = ({ icon, text, style }: SocialButtonProps) => {
       onClick={(e) => {
         e.preventDefault();
         void signIn("google", { callbackUrl: "/" }, { prompt: "login" }).catch(
-          (err) => console.log("social login", err)
+          (err) => console.error("social login", err)
         );
       }}
       className={`${style}`}
