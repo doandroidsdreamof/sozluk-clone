@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "../button/Button";
 import { api } from "~/utils/api";
+import { useSession } from "next-auth/react";
 
 interface FollowButtonProps {
   userId: string;
@@ -13,6 +14,7 @@ const FollowButton = ({ userId }: FollowButtonProps) => {
   });
   const [follow, setFollow] = useState(true);
   const utils = api.useContext();
+  const session = useSession();
 
   useEffect(() => {
     setFollow(followServerState ? true : false);
@@ -40,9 +42,15 @@ const FollowButton = ({ userId }: FollowButtonProps) => {
   };
 
   return (
-    <Button onClick={handleClick} size="tiny" type="primary">
-      {!follow ? "follow user" : "unfollow user"}
-    </Button>
+    <>
+      {session.data?.user ? (
+        <Button onClick={handleClick} size="tiny" type="primary">
+          {!follow ? "follow user" : "unfollow user"}
+        </Button>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 
