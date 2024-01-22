@@ -55,6 +55,7 @@ $ npm start
 - [ ] Avatar && image upload
 - [ ] e2e && unit testing
 - [ ] Tag system
+- [ ] IDOR vulnerability
 
 ## Credits
 
