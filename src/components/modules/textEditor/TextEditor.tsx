@@ -3,6 +3,7 @@ import TextStyle from "@tiptap/extension-text-style";
 import { EditorContent, useEditor, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import dynamic from "next/dynamic";
+import { LOG_MESSAGES } from "~/constants/staticContents";
 import { api } from "~/utils/api";
 
 // TODO: refactoring && debouncing && image upload icon
@@ -40,7 +41,7 @@ const TextEditor = ({
     editorProps: {
       attributes: {
         class:
-          "richText prose prose-sm sm:prose-base  lg:prose-md xl:prose-lg  block min-w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-dark text-sm text-gray-800  bg-gray-50 border-0 dark:bg-dark-300  dark:text-typography-body-light",
+          "richText prose prose-sm sm:prose-base lg:prose-md xl:prose-lg  block min-w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-dark text-sm text-gray-800  bg-gray-50 border-0 dark:bg-dark-300  dark:text-typography-body-light",
       },
     },
     onCreate({ editor }) {
@@ -61,7 +62,7 @@ const TextEditor = ({
           },
           {
             onSuccess: (data) => {
-              console.info("entry updated", data);
+              console.info(LOG_MESSAGES.INFO_ENTRY_UPDATED, data);
               void utils.entry.getUserEntries.invalidate();
               updateUI();
               handleClose();
@@ -102,7 +103,7 @@ const TextEditor = ({
           {
             onSuccess: () => {
               updateUI();
-              console.info("entry created");
+              console.info(LOG_MESSAGES.INFO_ENTRY_CREATED);
             },
             onError: (error) => {
               console.error(error);
@@ -121,7 +122,7 @@ const TextEditor = ({
   }
 
   return (
-    <div className="w-full border  border-gray-200 bg-gray-50   dark:border-input-border-dark dark:bg-dark-300 lg:w-[38rem]   ">
+    <div className="w-full border  border-gray-200 bg-gray-50 dark:border-input-border-dark dark:bg-dark-300 lg:w-[38rem]">
       <EditorContent editor={editor} />
       <TextEditorMenu
         buttonText={entry ? "edit" : "comment"}

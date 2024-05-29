@@ -49,7 +49,7 @@ function Tabs({ categories, profilePage }: ITabsProps) {
           : "flex  w-full flex-col pb-10"
       }
     >
-      <div className="relative  top-0 mx-auto mt-4 w-full   sm:px-0 ">
+      <div className="relative top-0 mx-auto mt-4 w-full sm:px-0">
         <Tab.Group
           as="div"
           selectedIndex={indexEl}
@@ -57,7 +57,7 @@ function Tabs({ categories, profilePage }: ITabsProps) {
             handleChange(e);
           }}
         >
-          <Tab.List className="flex space-x-1  rounded-xl bg-bg-secondary-light p-1 dark:bg-bg-alt-dark ">
+          <Tab.List className="flex space-x-1  rounded-xl bg-bg-secondary-light p-1 dark:bg-bg-alt-dark">
             {categories &&
               categories.map((category) => (
                 <Tab

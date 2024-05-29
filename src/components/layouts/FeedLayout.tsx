@@ -49,8 +49,8 @@ const FeedLayout = (data: FeedProps) => {
   };
 
   return (
-    <div className=" top-0 mx-auto flex min-h-screen w-full flex-col justify-between gap-4  p-3  lg:w-[38rem]    lg:-translate-x-3 lg:pl-0">
-      <div className="">
+    <div className="top-0 mx-auto flex min-h-screen w-full flex-col justify-between gap-4 p-3 lg:w-[38rem] lg:-translate-x-3 lg:pl-0">
+      <div>
         <div>
           {data != null ? (
             data.data.map((items) => (

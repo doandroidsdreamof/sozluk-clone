@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { BsSend } from "react-icons/bs";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
-import { ImAttachment } from "react-icons/im";
-import { api } from "~/utils/api";
+import { BUTTON_TEXT } from "~/constants/staticContents";
 
 // TODO enter key
 
@@ -15,7 +14,7 @@ const ChatInput = ({ receiverId, handleClick }: IChatInputProps) => {
   const [message, setMessage] = useState("");
 
   return (
-    <div className="flex  w-full   flex-row items-center  bg-white  px-4 shadow-md ">
+    <div className="flex w-full flex-row items-center bg-white px-4 shadow-md">
       <div className="relative w-full">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
         <input
@@ -26,7 +25,7 @@ const ChatInput = ({ receiverId, handleClick }: IChatInputProps) => {
           id="message-box"
         />
 
-        <button className="absolute left-0 top-0 flex h-full w-12 items-center justify-center text-gray-400 hover:text-gray-600  ">
+        <button className="absolute left-0 top-0 flex h-full w-12 items-center justify-center text-gray-400 hover:text-gray-600">
           <HiOutlineEmojiHappy size={22} />
         </button>
       </div>
@@ -40,9 +39,9 @@ const ChatInput = ({ receiverId, handleClick }: IChatInputProps) => {
               setMessage("");
             }
           }}
-          className="sbui-btn-primary dark mb-2.5  ml-auto mt-3 flex  max-w-fit cursor-pointer flex-row-reverse items-center gap-x-2  rounded-md bg-brandGreen-800  px-4 py-1.5 text-sm font-medium text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
+          className="sbui-btn-primary dark mb-2.5 ml-auto mt-3 flex max-w-fit cursor-pointer flex-row-reverse items-center gap-x-2 rounded-md bg-brandGreen-800 px-4 py-1.5 text-sm font-medium text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
         >
-          Send
+          {BUTTON_TEXT.CHAT_SEND}
           <BsSend size={13} />
         </button>
       </div>

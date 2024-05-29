@@ -1,6 +1,6 @@
 import React from "react";
 import Avatar from "~/components/common/Avatar";
-import { AiFillMessage, AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import { chatBoxClose } from "~/lib/store/reducers/messageSlice";
 import { useAppDispatch } from "~/lib/store/hooks";
 

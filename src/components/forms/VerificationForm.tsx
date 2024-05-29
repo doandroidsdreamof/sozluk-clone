@@ -2,7 +2,6 @@ import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import FormButton from "../elements/FormButton";
-
 import { magic } from "~/lib/auth-helpers/magic";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import FormFooter from "./FormFooter";
@@ -11,6 +10,12 @@ import { emailSchema } from "~/schemas/emailSchema";
 import { api } from "~/utils/api";
 import { setNavigation, setParsed } from "~/lib/store/reducers/navigationSlice";
 import { useAppDispatch } from "~/lib/store/hooks";
+import {
+  BUTTON_TEXT,
+  CLIENT_ROUTE_PATHS,
+  LINK_TEXT,
+  UI_MESSAGES,
+} from "~/constants/staticContents";
 
 type loginFormType = {
   email: string;
@@ -72,7 +77,7 @@ const VerificationForm = () => {
       <Form className="mt-4  space-y-6 px-6">
         <div className="flex flex-col gap-y-5">
           <span className="relative bg-bg-secondary-light text-sm text-gray-400 dark:bg-bg-secondary-dark">
-            Verify your account
+            {UI_MESSAGES.VERIFY_ACCOUNT}
           </span>
           <Input
             type="email"
@@ -84,15 +89,15 @@ const VerificationForm = () => {
         </div>
         <div className="flex flex-col gap-y-5">
           <FormButton
-            text={"Send Code"}
+            text={BUTTON_TEXT.MAGIC_LINK_SEND_CODE}
             style={
               "block rounded-sm bg-brandGreen-800 px-8 py-2 mt-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
             }
           />
           <FormFooter
-            text={"Already have an account?"}
-            href={"login"}
-            linkText={"Login"}
+            text={UI_MESSAGES.HAVE_YOU_ACCOUNT}
+            href={CLIENT_ROUTE_PATHS.LOGIN}
+            linkText={LINK_TEXT.LOGIN}
           />
         </div>
       </Form>

@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 import ChatInput from "./ChatInput";
 import { api } from "~/utils/api";
 import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
-import { setReceiverName } from "~/lib/store/reducers/messageSlice";
 
 const ChatBox = () => {
   const session = useSession();

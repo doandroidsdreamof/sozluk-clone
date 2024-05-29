@@ -38,6 +38,13 @@ export const BUTTON_TEXT = {
   SIGN_IN: "sign in",
   SIGN_OUT: "sign out",
   SEARCH: "Search",
+  CHAT_SEND: "Send",
+  MAGIC_LINK_SEND_CODE: "Send Code",
+  SHARE_TELEGRAM: "share telegram",
+  SHARE_WHATSAPP: "share whatsapp",
+  SHARE_TWITTER: "share twitter",
+  SHARE_FACEBOOK: "share facebook",
+  SHARE_REDDIT: "share reddit",
 };
 
 export const LABEL_TEXT = {
@@ -52,12 +59,20 @@ export const LABEL_TEXT = {
 export const LINK_TEXT = {
   REGISTER: "Register",
   LOGIN: "Login",
+  LOGO_EKSI: "Ekşi",
+  LOGO_YELLOW: "Sözlük",
+};
+
+export const META_TEXT = {
+  TITLE: "Sözlük",
 };
 
 export const LOG_MESSAGES = {
   ERR_SIGN_OUT: "Error signing out:",
   ERR_DURING_SIGN_OUT: "Error during sign-out",
-  SIGN_OUT_FAILED: "Sign-out failed",
+  ERR_SIGN_OUT_FAILED: "Sign-out failed",
+  INFO_ENTRY_CREATED: "entry created",
+  INFO_ENTRY_UPDATED: "entry updated",
 };
 
 export const UI_MESSAGES = {
@@ -65,6 +80,8 @@ export const UI_MESSAGES = {
   DO_NOT_ACCOUNT: "Don't have an account?",
   HAVE_YOU_ACCOUNT: "Already have an account?",
   LOADING: "Loading",
+  SETTINGS: "Settings",
+  VERIFY_ACCOUNT: "Verify your account",
 };
 
 export const SCHEMA_ERROR_MESSAGES = {

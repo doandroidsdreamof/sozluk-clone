@@ -52,7 +52,7 @@ const ButtonContainer = () => {
             handleSignout()
               .then((result) => {
                 if (!result) {
-                  console.error(LOG_MESSAGES.SIGN_OUT_FAILED);
+                  console.error(LOG_MESSAGES.ERR_SIGN_OUT_FAILED);
                 }
               })
               .catch((err) =>

@@ -37,18 +37,18 @@ const UserCard = ({
           <h1
             className={
               !chatBox
-                ? "cursor-pointer text-[0.80rem] font-bold   text-typography-body-light hover:underline dark:text-typography-body-dark"
-                : "cursor-pointer text-[0.80rem] font-bold   text-typography-body-light hover:underline"
+                ? "cursor-pointer text-[0.80rem] font-bold text-typography-body-light hover:underline dark:text-typography-body-dark"
+                : "cursor-pointer text-[0.80rem] font-bold text-typography-body-light hover:underline"
             }
           >
             {userName}
           </h1>
         </button>
-        <p className="font-helvetica text-[0.75em]  font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
+        <p className="font-helvetica text-[0.75em] font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
           {date?.toDateString()}
         </p>
         {email ? (
-          <p className="font-helvetica text-[0.75em]  font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
+          <p className="font-helvetica text-[0.75em] font-light text-typography-body-secondary-light dark:text-typography-body-faded-light">
             {email}
           </p>
         ) : (
@@ -57,7 +57,7 @@ const UserCard = ({
       </div>
       <button onClick={handleNavigation}>
         {/* 
-        //TODO avatar import 
+        //TODO avatar import functionality
         */}
         <Avatar
           style="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover"

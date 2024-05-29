@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import VerificationForm from "./VerificationForm";
 import RegisterForm from "./RegisterForm";
 
@@ -7,21 +7,7 @@ interface FormMachineProps {
 }
 
 function FormMachine({ displayState }: FormMachineProps) {
-  if (displayState) {
-    return (
-      <>
-        {" "}
-        <RegisterForm />
-      </>
-    );
-  } else {
-    return (
-      <>
-        {" "}
-        <VerificationForm />
-      </>
-    );
-  }
+  return displayState ? <RegisterForm /> : <VerificationForm />;
 }
 
 export default FormMachine;

@@ -24,7 +24,7 @@ const Renderer = ({
     <>
       {!edit && typeof output === "string" ? (
         <div
-          className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white "
+          className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white"
           dangerouslySetInnerHTML={{
             __html: output.length > 200 ? output.slice(0, showMore) : output,
           }}

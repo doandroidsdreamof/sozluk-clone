@@ -11,16 +11,17 @@ import { BsCodeSquare, BsTextParagraph } from "react-icons/bs";
 import { MdHorizontalRule, MdRedo, MdUndo } from "react-icons/md";
 import { RxListBullet, RxQuote } from "react-icons/rx";
 
-interface MenuProps {
+interface IMenuProps {
   editor: Editor;
   handleFunc: () => void;
   buttonText: string;
 }
 
 const buttonStyle =
-  "is-active p-2 text-gray-200  rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
+  "is-active p-2 text-gray-200 rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
-const TextEditorMenu = ({ editor, handleFunc, buttonText }: MenuProps) => {
+//TODO refactoring open-closed
+const TextEditorMenu = ({ editor, handleFunc, buttonText }: IMenuProps) => {
   if (!editor) {
     return null;
   }
@@ -30,7 +31,7 @@ const TextEditorMenu = ({ editor, handleFunc, buttonText }: MenuProps) => {
   };
 
   return (
-    <div className="flex flex-wrap  items-center  border-t bg-editorHead   px-3 py-2 dark:border-gray-600 dark:bg-bg-alt-dark">
+    <div className="flex flex-wrap items-center border-t bg-editorHead px-3 py-2 dark:border-gray-600 dark:bg-bg-alt-dark">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}

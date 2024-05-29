@@ -3,7 +3,7 @@ import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 
 // TODO refactor
 
-interface PaginateProps {
+interface IPaginateProps {
   totalPage: number;
   pageNum: number;
   handleFetchPreviousPage: () => void;
@@ -17,7 +17,7 @@ const Paginate = ({
   handleSelect,
   totalPage,
   pageNum,
-}: PaginateProps) => {
+}: IPaginateProps) => {
   const [arr, setArr] = useState<number[]>([]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Paginate = ({
   return (
     <>
       {totalPage >= 2 ? (
-        <div className="flex   items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark ">
+        <div className="flex items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark">
           <button
             onClick={() => handleFetchPreviousPage()}
             className="sbui-btn-primary dark ml-auto  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
