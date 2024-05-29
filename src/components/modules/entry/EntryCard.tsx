@@ -1,6 +1,6 @@
 import React from "react";
 
-interface EntryCardProps {
+interface IEntryCardProps {
   outputLength: number;
   setShowMore: (param: number) => void;
   showMore: number;
@@ -12,7 +12,7 @@ const EntryCard = ({
   outputLength,
   showMore,
   children,
-}: EntryCardProps) => {
+}: IEntryCardProps) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     const input = e.target as HTMLElement;
     if (input.innerText === "show more") {
@@ -22,7 +22,7 @@ const EntryCard = ({
     }
   };
   return (
-    <div className="mt-4 flex items-center   justify-between pb-2   ">
+    <div className="mt-4 flex items-center justify-between pb-2   ">
       <button
         onClick={(e) => {
           handleClick(e);
@@ -35,7 +35,7 @@ const EntryCard = ({
       >
         {showMore === 250 ? "show more" : "show less"}
       </button>
-      <div className="flex w-full flex-row  items-center justify-between ">
+      <div className="flex w-full flex-row items-center justify-between ">
         {children}
       </div>
     </div>

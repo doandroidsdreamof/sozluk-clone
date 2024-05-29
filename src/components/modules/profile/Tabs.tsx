@@ -1,25 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import TabSelector from "./TabSelector";
-import { type IUserName } from "~/@types/interface";
 import { useAppDispatch } from "~/lib/store/hooks";
 import { setFollowers } from "~/lib/store/reducers/followersSlice";
 import { useAppSelector } from "~/lib/store/hooks";
 
-interface Data {
-  id?: number;
-  name?: string;
+interface ICategory {
+  id: number;
+  name: string;
 }
 
 interface ITabsProps {
   profilePage: boolean;
-  categories: {
-    entries?: Data[];
-    favorites?: Data[];
-    images?: Data[];
-    followers?: Data[];
-    following?: Data[];
-  };
+  categories: ICategory[];
 }
 
 function classNames(...classes: string[]) {
@@ -53,7 +46,7 @@ function Tabs({ categories, profilePage }: ITabsProps) {
       className={
         profilePage
           ? "flex  h-full w-full flex-col pb-10"
-          : "flex   w-full flex-col pb-10"
+          : "flex  w-full flex-col pb-10"
       }
     >
       <div className="relative  top-0 mx-auto mt-4 w-full   sm:px-0 ">
@@ -65,22 +58,23 @@ function Tabs({ categories, profilePage }: ITabsProps) {
           }}
         >
           <Tab.List className="flex space-x-1  rounded-xl bg-bg-secondary-light p-1 dark:bg-bg-alt-dark ">
-            {Object.keys(categories).map((category) => (
-              <Tab
-                key={category}
-                className={({ selected }) =>
-                  classNames(
-                    " overview w-full rounded-lg  py-1.5 font-roboto text-xs font-medium leading-5 text-gray-700",
-                    "ring-white ring-opacity-60 ring-offset-1 ring-offset-input-border-focus-light focus:outline-none focus:ring-2 dark:ring-offset-input-border-focus-dark",
-                    selected
-                      ? "bg-bg-primary-light shadow dark:bg-bg-secondary-light"
-                      : "text-typography-body-light hover:bg-white/[0.12] "
-                  )
-                }
-              >
-                <div>{category}</div>
-              </Tab>
-            ))}
+            {categories &&
+              categories.map((category) => (
+                <Tab
+                  key={category.id}
+                  className={({ selected }) =>
+                    classNames(
+                      " overview w-full rounded-lg  py-1.5 font-roboto text-xs font-medium leading-5 text-gray-700",
+                      "ring-white ring-opacity-60 ring-offset-1 ring-offset-input-border-focus-light focus:outline-none focus:ring-2 dark:ring-offset-input-border-focus-dark",
+                      selected
+                        ? "bg-bg-primary-light shadow dark:bg-bg-secondary-light"
+                        : "text-typography-body-light hover:bg-white/[0.12] "
+                    )
+                  }
+                >
+                  <div>{category.name}</div>
+                </Tab>
+              ))}
           </Tab.List>
           <Tab.Panels className="mt-2 " />
         </Tab.Group>

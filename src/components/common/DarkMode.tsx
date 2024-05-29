@@ -24,7 +24,7 @@ const DarkMode = () => {
     dispatch(setTheme(next));
   }
   const buttonStyle =
-    "is-active p-2 border   rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
+    "is-active p-2 border rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
   return (
     <>

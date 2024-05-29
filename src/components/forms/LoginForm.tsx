@@ -15,6 +15,17 @@ import Input from "../elements/Input";
 import FormButton from "../elements/FormButton";
 import FormFooter from "./FormFooter";
 import SocialButton from "./SocialButton";
+import {
+  BUTTON_TEXT,
+  CLIENT_ROUTE_PATHS,
+  LABEL_TEXT,
+  LINK_TEXT,
+  UI_MESSAGES,
+} from "~/constants/staticContents";
+import {
+  NOTIFICATION_MESSAGES,
+  NOTIFICATION_TYPES,
+} from "~/constants/notificationConstants";
 
 const loginValues = {
   email: "",
@@ -24,6 +35,8 @@ const loginValues = {
 const LoginForm = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+
+  //TODO refactoring code duplication with RegisterForm
 
   const setAlert = (message: string, alertRaw: AlertType, timeout = 5000) => {
     const uid = nanoid();
@@ -43,14 +56,26 @@ const LoginForm = () => {
         .then((res) => {
           if (res?.ok === true) {
             router.push("/");
-            setAlert("login is success", "SUCCESS", 5000);
+            setAlert(
+              NOTIFICATION_MESSAGES.LOGIN_SUCCESSFUL,
+              NOTIFICATION_TYPES.SUCCESS,
+              5000
+            );
           } else {
-            setAlert("email or password is wrong", "DANGER", 5000);
+            setAlert(
+              NOTIFICATION_MESSAGES.WRONG_CREDENTIALS,
+              NOTIFICATION_TYPES.DANGER,
+              5000
+            );
           }
         })
         .catch((err) => {
           console.error(err);
-          setAlert("login is not success", "DANGER", 5000);
+          setAlert(
+            NOTIFICATION_MESSAGES.LOGIN_UNSUCCESSFUL,
+            NOTIFICATION_TYPES.DANGER,
+            5000
+          );
         });
     } catch (err) {
       console.error("🚀 ~ file: Login.tsx:27 ~ handleRegister ~ err:", err);
@@ -75,7 +100,7 @@ const LoginForm = () => {
                     htmlFor="email"
                     className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                   >
-                    Email
+                    {LABEL_TEXT.EMAIL}
                   </label>
                   <Input
                     type="email"
@@ -91,7 +116,7 @@ const LoginForm = () => {
                     htmlFor="password"
                     className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                   >
-                    Password
+                    {LABEL_TEXT.PASSWORD}
                   </label>
                   <Input
                     type="password"
@@ -102,7 +127,7 @@ const LoginForm = () => {
                   />
                 </div>
                 <FormButton
-                  text={"Log in"}
+                  text={BUTTON_TEXT.LOGIN}
                   style={
                     "block rounded-sm bg-brandGreen-800 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
                   }
@@ -114,7 +139,7 @@ const LoginForm = () => {
                   </span>
                 </div>
                 <SocialButton
-                  text={"Continue with Google"}
+                  text={BUTTON_TEXT.GOOGLE_LOGIN}
                   style={
                     "flex items-center justify-center gap-2 rounded-sm border border-gray-300 hover:bg-white bg-gray-200 px-8 py-2 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
                   }
@@ -147,11 +172,15 @@ const LoginForm = () => {
                   }
                 />
               </div>
-
+              {/* 
+              
+              //TODO hard-coded strings
+              
+              */}
               <FormFooter
-                text={"Dont have an account?"}
-                href={"register"}
-                linkText={"Register"}
+                text={UI_MESSAGES.DO_NOT_ACCOUNT}
+                href={CLIENT_ROUTE_PATHS.REGISTER}
+                linkText={LINK_TEXT.REGISTER}
               />
             </Form>
           </div>

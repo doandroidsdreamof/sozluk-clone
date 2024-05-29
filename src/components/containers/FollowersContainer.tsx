@@ -28,7 +28,6 @@ const FollowersContainer = () => {
               avatar={items.follower.avatar}
               userId={items.follower.id}
               userName={items.follower.name}
-              email={items.follower.email}
               key={items.follower.id}
             />
           ))
@@ -37,7 +36,6 @@ const FollowersContainer = () => {
               avatar={items.following.avatar}
               userId={items.following.id}
               userName={items.following.name}
-              email={items.following.email}
               key={items.following.id}
             />
           ))}

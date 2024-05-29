@@ -1,34 +1,35 @@
 import * as z from "zod";
+import { SCHEMA_ERROR_MESSAGES } from "~/constants/staticContents";
 
 export const clientRegisterSchema = z
   .object({
     userName: z
       .string({
-        required_error: "User name is required",
+        required_error: SCHEMA_ERROR_MESSAGES.USER_NAME_REQUIRED,
       })
       .min(6, {
-        message: "User name must contain at least 6 character",
+        message: SCHEMA_ERROR_MESSAGES.USER_NAME_MIN_LENGTH,
       }),
     password: z
       .string({
-        required_error: "Password is required",
+        required_error: SCHEMA_ERROR_MESSAGES.PASSWORD_REQUIRED,
       })
       .min(6, {
-        message: "Password name must contain at least 6 character",
+        message: SCHEMA_ERROR_MESSAGES.PASSWORD_MIN_LENGTH,
       }),
     confirmPassword: z
       .string({
-        required_error: "Password is required",
+        required_error: SCHEMA_ERROR_MESSAGES.PASSWORD_REQUIRED,
       })
       .min(6, {
-        message: "Password name must contain at least 6 character",
+        message: SCHEMA_ERROR_MESSAGES.PASSWORD_MIN_LENGTH,
       }),
   })
   .superRefine(({ confirmPassword, password }, ctx) => {
     if (confirmPassword !== password) {
       ctx.addIssue({
         code: "custom",
-        message: "The passwords did not match",
+        message: SCHEMA_ERROR_MESSAGES.PASSWORDS_MUST_MATCH,
         path: ["password"],
       });
     }

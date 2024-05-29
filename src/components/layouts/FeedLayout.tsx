@@ -44,6 +44,7 @@ const FeedLayout = (data: FeedProps) => {
   }
 
   const handleClick = (url: string) => {
+    //TODO hard-coded path
     void router.push(`/topic/${encodeURIComponent(url.replace(/ /g, "+"))}`);
   };
 

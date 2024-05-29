@@ -3,19 +3,21 @@ import React, { useState } from "react";
 import { api } from "~/utils/api";
 import TextRenderer from "../modules/textEditor/TextRenderer";
 import { useRouter } from "next/router";
+import { UI_MESSAGES } from "~/constants/staticContents";
 
 const Button = dynamic(() => import("~/components/modules/button/Button"), {
   ssr: false,
 });
 
 // TODO refactor with entries containers
+// TODO hard-coded strings && magic numbers
 
 const FavoritesContainer = () => {
   const router = useRouter();
   const { currentUser: userName } = router.query as {
     currentUser: string;
   };
-  const { data } = api.favorite.getFavorites.useQuery({
+  const { data, isLoading } = api.favorite.getFavorites.useQuery({
     userName: userName,
   });
   const [showMore, setShowMore] = useState(5);
@@ -28,7 +30,13 @@ const FavoritesContainer = () => {
       setShowMore(5);
     }
   };
-
+  if (isLoading) {
+    return (
+      <p className="text-typography-body-light dark:text-typography-body-dark">
+        {UI_MESSAGES.LOADING}
+      </p>
+    );
+  }
   return (
     <div className="">
       {data &&
@@ -54,7 +62,7 @@ const FavoritesContainer = () => {
         </div>
       ) : (
         <p className="text-typography-body-light dark:text-typography-body-dark">
-          there is empty
+          {UI_MESSAGES.EMPTY_CONTENT}
         </p>
       )}
     </div>

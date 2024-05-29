@@ -1,20 +1,15 @@
 import { useSession } from "next-auth/react";
 import FollowButton from "./FollowButton";
 import UserCard from "~/components/common/UserCard";
+import { CLIENT_ROUTE_PATHS } from "~/constants/staticContents";
 
 interface IFollowersProps {
   avatar: string | null;
   userName: string;
   userId: string;
-  email: string;
 }
 
-const FollowersCard = ({
-  avatar,
-  userName,
-  userId,
-  email,
-}: IFollowersProps) => {
+const FollowersCard = ({ avatar, userName, userId }: IFollowersProps) => {
   const session = useSession();
 
   return (
@@ -23,11 +18,10 @@ const FollowersCard = ({
         <div>
           {userName && (
             <UserCard
-              email={email}
               reverse={true}
               userName={userName}
               imageURL={avatar}
-              urlPath="profile"
+              urlPath={CLIENT_ROUTE_PATHS.PROFILE}
             />
           )}
         </div>

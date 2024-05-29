@@ -5,6 +5,8 @@ import {
   publicProcedure,
 } from "~/server/api/trpc";
 
+//TODO IDOR vulnerability
+
 export const entryRouter = createTRPCRouter({
   createEntry: protectedProcedure
     .input(z.object({ content: z.string().min(2), topicId: z.string() }))

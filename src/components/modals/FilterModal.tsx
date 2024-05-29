@@ -38,8 +38,11 @@ export default function FilterModal({ isOpen, closeModal }: FilterModalProps) {
                   }
                 >
                   <div className=" w-full pr-4 text-right">
-                    <button className="inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
-                      <AiOutlineClose size={20} onClick={closeModal} />
+                    <button
+                      onClick={closeModal}
+                      className="inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+                    >
+                      <AiOutlineClose size={20} />
                     </button>
                     <FilterForm />
                   </div>

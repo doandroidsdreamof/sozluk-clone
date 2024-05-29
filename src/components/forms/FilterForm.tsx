@@ -7,10 +7,10 @@ import Button from "../modules/button/Button";
 import SelectBox from "./SelectBox";
 import { setFilterData } from "~/lib/store/reducers/filterSlice";
 import { api } from "~/utils/api";
-
-// TODO extra local reducer
+import { BUTTON_TEXT, LABEL_TEXT } from "~/constants/staticContents";
 
 const FilterForm = () => {
+  //TODO refactoring
   const [startDate, setStartDate] = useState<null | Date>(null);
   const [endDate, setEndDate] = useState<null | Date>(null);
   const [author, setAuthor] = useState("");
@@ -45,7 +45,7 @@ const FilterForm = () => {
               htmlFor="keywords"
               className="mb-2 inline-block text-xs  text-input-label-light dark:text-input-label-dark "
             >
-              Keywords
+              {LABEL_TEXT.KEYWORDS}
             </label>
             <input
               type="text"
@@ -61,7 +61,7 @@ const FilterForm = () => {
               htmlFor="author"
               className="mb-2 inline-block text-xs text-input-label-light dark:text-input-label-dark "
             >
-              Author
+              {LABEL_TEXT.AUTHOR}
             </label>
             <input
               type="text"
@@ -80,7 +80,7 @@ const FilterForm = () => {
               <DatePicker
                 placeholderText="Choose a date"
                 popperPlacement="top"
-                selected={new Date()}
+                selected={startDate}
                 onChange={(date: Date) => setStartDate(date)}
                 className={
                   "!dark:text-input-label-dark w-full  rounded border  border-input-border-light !bg-bg-secondary-light px-3 py-2.5  pl-8  !text-xs  text-input-label-light outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark"
@@ -111,7 +111,7 @@ const FilterForm = () => {
             type="primary"
             htmlType="button"
           >
-            Search
+            {BUTTON_TEXT.SEARCH}
           </Button>
         </div>
       </form>

@@ -35,7 +35,6 @@ export const followRouter = createTRPCRouter({
             select: {
               avatar: true,
               name: true,
-              email: true,
               id: true,
             },
           },

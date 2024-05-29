@@ -13,7 +13,7 @@ const FormFooter = ({ href, text, linkText }: FormFooterProps) => {
       <p className="text-center text-sm text-gray-500">
         {text}
         <Link
-          href={`/${href}`}
+          href={`${href}`}
           className="text-secondary-text-light  dark:text-secondary-text-dark"
         >
           <span className="ml-1 text-brandGreen-300 transition duration-100 hover:text-brandGreen-200 ">

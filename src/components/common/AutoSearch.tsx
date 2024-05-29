@@ -6,6 +6,7 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { api } from "~/utils/api";
 import FilterModal from "../modals/FilterModal";
 import { useSession } from "next-auth/react";
+import { CLIENT_ROUTE_PATHS } from "~/constants/staticContents";
 
 interface SearchOptions {
   id: string;
@@ -19,6 +20,8 @@ const AutoSearch = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: getData, status } = api.topic.filterTopic.useQuery(input);
   const session = useSession();
+
+  //TODO refactoring => decoupling logic and UI && hard-coded strings
 
   useEffect(() => {
     if (getData != null && status === "success") {
@@ -59,7 +62,11 @@ const AutoSearch = () => {
   // TODO keyboard navigation
 
   const handleNavigation = (e: React.KeyboardEvent<HTMLElement>) => {
-    void router.push(`/topic/${encodeURIComponent(input.replace(/\s/g, " "))}`);
+    void router.push(
+      `${CLIENT_ROUTE_PATHS.TOPIC}/${encodeURIComponent(
+        input.replace(/\s/g, " ")
+      )}`
+    );
     setInput("");
   };
 

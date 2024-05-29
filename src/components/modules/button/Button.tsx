@@ -31,6 +31,7 @@ export interface RefHandle {
   button: () => HTMLButtonElement | null;
 }
 
+//TODO loading state
 // eslint-disable-next-line react/display-name
 const Button = forwardRef<RefHandle, ButtonProps>(
   (

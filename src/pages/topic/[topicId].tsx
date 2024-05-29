@@ -17,10 +17,6 @@ const Topic: NextPage = () => {
     api.topic.getSingleTopic.useQuery(topicId);
 
   const idTopic = topicId?.replace(/\+/g, " ");
-  console.log(
-    "🚀 ~ file: RendererContainer.tsx:13 ~ RendererContainer ~ topicTitle:",
-    idTopic
-  );
 
   return (
     <>

@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import EntryCard from "../entry/EntryCard";
 import ShareButton from "../entry/ShareButton";
 import UserCard from "~/components/common/UserCard";
+import { CLIENT_ROUTE_PATHS } from "~/constants/staticContents";
 
 interface Entry {
   content: string;
@@ -66,7 +67,7 @@ const RendererFeed = ({
           userName={user.name}
           date={parseContent.createdAt}
           imageURL={user.avatar || ""}
-          urlPath="profile"
+          urlPath={CLIENT_ROUTE_PATHS.PROFILE}
         />
       </EntryCard>
     </div>

@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import React, { useState } from "react";
 import Hamburger from "~/components/common/Hamburger";
 import ButtonContainer from "~/components/containers/ButtonContainer";
 import Logo from "~/components/elements/Logo";
@@ -17,6 +16,9 @@ const Navbar = () => {
             <div className="flex flex-col  flex-wrap justify-between gap-y-3 md:flex-row md:items-center">
               <div className="ml-0   flex w-full items-center justify-between md:w-fit md:justify-start">
                 <Hamburger mobile="md" />
+                {/* 
+                //TODO hard-coded strings 
+                 */}
                 <Logo text={"Ekşi"} textYellow={"Sözlük"} />
               </div>
               <AutoSearch />

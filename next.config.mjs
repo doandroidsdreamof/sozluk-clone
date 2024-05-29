@@ -1,4 +1,5 @@
 await import("./src/env.mjs");
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
 /** @type {import("next").NextConfig} */
 const config = {
@@ -11,4 +12,10 @@ const config = {
     defaultLocale: "en",
   },
 };
-export default config;
+
+/** @type {import('next').NextConfig} */
+const enhancedConfig = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+})(config);
+
+export default enhancedConfig;

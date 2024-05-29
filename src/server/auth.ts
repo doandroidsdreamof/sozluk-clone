@@ -90,6 +90,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         try {
           const { email, password } = credentials as ILogin;
+          console.log("🚀 ~ authorize ~ credentials:", credentials);
           const emailAndPassword = await loginSchema.parseAsync(credentials);
           const user = await prisma.user.findFirst({
             where: { email: email },

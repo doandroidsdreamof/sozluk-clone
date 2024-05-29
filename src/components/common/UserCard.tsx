@@ -1,7 +1,6 @@
-import Avatar from "~/components/common/Avatar";
-import { useState } from "react";
-import Link from "next/link";
 import router from "next/router";
+import Avatar from "~/components/common/Avatar";
+import { LOCAL_IMAGE_ALT, LOCAL_IMAGE_PATHS } from "~/constants/staticContents";
 
 interface UserCardProps {
   imageURL?: string | null;
@@ -23,7 +22,7 @@ const UserCard = ({
   chatBox,
 }: UserCardProps) => {
   const handleNavigation = () => {
-    if (urlPath) void router.push(`/${urlPath}/${userName}`);
+    if (urlPath) void router.push(`${urlPath}/${userName}`);
   };
   return (
     <div
@@ -57,11 +56,14 @@ const UserCard = ({
         )}
       </div>
       <button onClick={handleNavigation}>
+        {/* 
+        //TODO avatar import 
+        */}
         <Avatar
           style="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover"
-          alt="avatar"
-          src="/images/default-avatar.png"
-          fallbackSrc="/images/default-avatar.png"
+          alt={LOCAL_IMAGE_ALT.AVATAR}
+          src={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
+          fallbackSrc={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
         />
       </button>
     </div>

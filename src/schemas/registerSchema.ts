@@ -1,18 +1,19 @@
 import * as z from "zod";
+import { SCHEMA_ERROR_MESSAGES } from "~/constants/staticContents";
 
 export const registerSchema = z.object({
   email: z
     .string({
-      required_error: "Email is required",
+      required_error: SCHEMA_ERROR_MESSAGES.EMAIL_REQUIRED,
     })
     .email(),
   password: z
-  .string({
-      required_error: "Password is required",
+    .string({
+      required_error: SCHEMA_ERROR_MESSAGES.PASSWORD_REQUIRED,
     })
     .min(6),
   userName: z.string({
-    required_error: "userName name is required",
+    required_error: SCHEMA_ERROR_MESSAGES.USER_NAME_REQUIRED,
   }),
 });
 

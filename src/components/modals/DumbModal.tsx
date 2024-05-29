@@ -9,12 +9,14 @@ interface DumbModalProps {
 }
 
 function DumbModal({ children, dumbOpen, closeDumbOpen }: DumbModalProps) {
+  //TODO refactoring open-closed principle
+
   function closeModal(param: boolean) {
     closeDumbOpen(false);
   }
 
   return (
-    <div className="">
+    <div>
       <Transition appear show={dumbOpen}>
         <Dialog
           as="div"
@@ -23,26 +25,11 @@ function DumbModal({ children, dumbOpen, closeDumbOpen }: DumbModalProps) {
             closeModal(false);
           }}
         >
-          <Transition.Child
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          ></Transition.Child>
-          <div className="fixed inset-0 overflow-y-auto ">
-            <div className="flex   min-h-full items-center justify-center p-4 ">
-              <Transition.Child
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="flex   w-full transform flex-col overflow-hidden rounded-md   border border-input-border-light bg-bg-secondary-light  align-middle   shadow-xl transition-all dark:border-input-border-dark dark:bg-bg-secondary-dark">
-                  <button className="bright-6 relative top-5 ml-auto inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4">
+              <Transition.Child>
+                <Dialog.Panel className="flex w-full flex-col overflow-hidden rounded-md border border-input-border-light bg-bg-secondary-light align-middle shadow-xl dark:border-input-border-dark dark:bg-bg-secondary-dark">
+                  <button className="bright-6 relative top-5 ml-auto mr-3 inline-flex cursor-pointer items-center rounded-lg bg-transparent p-1 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white">
                     <AiOutlineClose
                       size={20}
                       onClick={() => {

@@ -1,6 +1,4 @@
-// Option 2: Browser-only (lightweight)
 import { generateHTML } from "@tiptap/html";
-// Option 1: Browser + server-side
 import StarterKit from "@tiptap/starter-kit";
 import DOMPurify from "isomorphic-dompurify";
 import { useSession } from "next-auth/react";
@@ -12,20 +10,15 @@ import Settings from "../entry/Settings";
 import ShareButton from "../entry/ShareButton";
 import TextEditor from "./TextEditor";
 import UserCard from "~/components/common/UserCard";
+import { CLIENT_ROUTE_PATHS } from "~/constants/staticContents";
 
-interface User {
+interface IUser {
   avatar: string | null;
   name: string;
   id: string;
 }
-interface Favorites {
-  id: string;
-  favorite: boolean;
-  entryId: string;
-  userId: string;
-}
 
-interface TextRendererProps {
+interface ITextRendererProps {
   content: string;
   createdAt: Date;
   id: string;
@@ -34,7 +27,7 @@ interface TextRendererProps {
     topicTitle: string;
     id: string;
   };
-  user: User;
+  user: IUser;
 }
 
 const TextRenderer = ({
@@ -44,7 +37,7 @@ const TextRenderer = ({
   topic,
   favoriteCount,
   id: entryId,
-}: TextRendererProps) => {
+}: ITextRendererProps) => {
   const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
   const { mutate: removeLastTopic } = api.topic.removeTopic.useMutation();
   const { data: favoriteData } = api.favorite.getSingleFavorite.useQuery({
@@ -58,6 +51,7 @@ const TextRenderer = ({
   const session = useSession();
 
   useEffect(() => {
+    //TODO error handling
     const purfied = DOMPurify.sanitize(generateHTML(json, [StarterKit]));
     setData(purfied);
   }, [json]);
@@ -101,7 +95,7 @@ const TextRenderer = ({
         </div>
         {!edit && typeof data === "string" ? (
           <div
-            className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white "
+            className="prose prose-sm m-2 break-words text-sm dark:text-typography-body-dark dark:prose-headings:text-white dark:prose-strong:text-white dark:prose-code:text-typography-body-strong-light dark:prose-li:text-typography-body-dark "
             dangerouslySetInnerHTML={{
               __html: data.length > 200 ? data.slice(0, showMore) : data,
             }}
@@ -138,7 +132,7 @@ const TextRenderer = ({
           userName={user.name}
           date={createdAt}
           imageURL={user.avatar || ""}
-          urlPath="profile"
+          urlPath={CLIENT_ROUTE_PATHS.PROFILE}
         />
       </EntryCard>
     </div>

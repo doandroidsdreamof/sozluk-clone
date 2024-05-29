@@ -5,6 +5,12 @@ import Button from "../button/Button";
 import ProfileIndicator from "./ProfileIndicator";
 import { useSession } from "next-auth/react";
 import FollowButton from "./FollowButton";
+import {
+  BUTTON_TEXT,
+  LOCAL_IMAGE_ALT,
+  LOCAL_IMAGE_PATHS,
+} from "~/constants/staticContents";
+import Image from "next/image";
 
 interface ProfileHeaderProps {
   entryCount: bigint;
@@ -57,7 +63,7 @@ const ProfileHeader = ({
       <div className="ml-auto  pr-8 pt-3">
         <button
           onClick={() => setDumbOpen(true)}
-          className=" flex w-16  cursor-default   items-center justify-center rounded-full "
+          className="flex w-16 cursor-default items-center justify-center rounded-full "
         >
           <Avatar
             style={`mx-4 block ${
@@ -65,9 +71,9 @@ const ProfileHeader = ({
                 ? "cursor-pointer"
                 : "cursor-default "
             } h-16 w-16 rounded-full object-cover`}
-            alt="avatar"
-            src="/images/default-avatar.png"
-            fallbackSrc="/images/default-avatar.png"
+            alt={LOCAL_IMAGE_ALT.AVATAR}
+            src={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
+            fallbackSrc={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
           />
         </button>
         {session.data?.user?.name === userName ? (
@@ -76,18 +82,21 @@ const ProfileHeader = ({
             dumbOpen={dumbOpen}
           >
             <div className="flex h-36 w-96 flex-col items-center justify-center ">
-              <img
-                className="mx-4  block h-20  w-20 rounded-full object-cover"
-                alt="avatar"
-                src="/images/default-avatar.png"
+              <Image
+                className="mx-4 block rounded-full object-cover"
+                loading="lazy"
+                width={60}
+                height={60}
+                alt={LOCAL_IMAGE_ALT.AVATAR}
+                src={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
               />
             </div>
             <div className="flex flex-row gap-x-3 pb-2 pl-2">
               <Button size="tiny" type="primary">
-                image upload
+                {BUTTON_TEXT.IMAGE_UPLOAD}
               </Button>
               <Button size="tiny" type="secondary">
-                remove image
+                {BUTTON_TEXT.REMOVE_IMAGE}
               </Button>
             </div>
           </DumbModal>

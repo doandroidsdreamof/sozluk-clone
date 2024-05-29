@@ -17,6 +17,14 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { useAppSelector } from "~/lib/store/hooks";
 import { setNavigation } from "~/lib/store/reducers/navigationSlice";
+import {
+  BUTTON_TEXT,
+  CLIENT_ROUTE_PATHS,
+  LABEL_TEXT,
+  LINK_TEXT,
+  UI_MESSAGES,
+} from "~/constants/staticContents";
+import { NOTIFICATION_TYPES } from "~/constants/notificationConstants";
 
 const loginValues = {
   userName: "",
@@ -54,11 +62,11 @@ const RegisterForm = () => {
         {
           onError: (err) => {
             console.log(err);
-            setAlert("error", "DANGER", 5000);
+            setAlert("error", NOTIFICATION_TYPES.DANGER, 5000);
           },
           onSuccess: (data) => {
             if (data.success === false) {
-              setAlert(data.message, "DANGER", 5000);
+              setAlert(data.message, NOTIFICATION_TYPES.DANGER, 5000);
             } else {
               signIn("credentials", {
                 email: email,
@@ -67,7 +75,7 @@ const RegisterForm = () => {
               })
                 .then((res) => {
                   if (res?.ok === true) {
-                    setAlert(data.message, "SUCCESS", 5000);
+                    setAlert(data.message, NOTIFICATION_TYPES.SUCCESS, 5000);
                     router.push("/");
                   }
                 })
@@ -101,7 +109,7 @@ const RegisterForm = () => {
                     htmlFor="user name"
                     className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                   >
-                    User name
+                    {LABEL_TEXT.USER_NAME}
                   </label>
                   <Input
                     type="text"
@@ -117,7 +125,7 @@ const RegisterForm = () => {
                     htmlFor="email"
                     className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                   >
-                    Email
+                    {LABEL_TEXT.EMAIL}
                   </label>
                   <Input
                     type="email"
@@ -133,7 +141,7 @@ const RegisterForm = () => {
                     htmlFor="password"
                     className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                   >
-                    Password
+                    {LABEL_TEXT.PASSWORD}
                   </label>
 
                   <Input
@@ -149,7 +157,7 @@ const RegisterForm = () => {
                     htmlFor="confirmPassword"
                     className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                   >
-                    Confirm password
+                    {LABEL_TEXT.CONFIRM_PASSWORD}
                   </label>
 
                   <Input
@@ -161,16 +169,16 @@ const RegisterForm = () => {
                   />
                 </div>
                 <FormButton
-                  text={"Register"}
+                  text={BUTTON_TEXT.REGISTER}
                   style={
                     "block rounded-sm bg-brandGreen-800 px-8 py-2 mt-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
                   }
                 />
               </div>
               <FormFooter
-                text={"Already have an account?"}
-                href={"login"}
-                linkText={"Login"}
+                text={UI_MESSAGES.HAVE_YOU_ACCOUNT}
+                href={CLIENT_ROUTE_PATHS.LOGIN}
+                linkText={LINK_TEXT.LOGIN}
               />
             </Form>
           </div>
