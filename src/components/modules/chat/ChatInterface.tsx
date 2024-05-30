@@ -1,13 +1,13 @@
 import { useSession } from "next-auth/react";
 import { AiOutlineClose } from "react-icons/ai";
-import UserCard from "~/components/common/UserCard";
-import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
+import UserCard from "@/components/common/UserCard";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import {
   chatBoxOpen,
   chatInterfaceClose,
   setReceiverName,
-} from "~/lib/store/reducers/messageSlice";
-import { api } from "~/utils/api";
+} from "@/lib/store/reducers/messageSlice";
+import { api } from "@/utils/api";
 import ChatSearch from "./ChatSearch";
 import ChatBox from "./ChatBox";
 
@@ -18,9 +18,14 @@ const ChatInterface = () => {
     (state) => state.message.chatInterface
   );
   const chatBoxState = useAppSelector((state) => state.message.chatboxState);
-  const { data } = api.message.getUserMessageData.useQuery({
-    userName: session.data?.user.name || null,
-  });
+  const { data } = api.message.getUserMessageData.useQuery(
+    {
+      userName: session.data?.user.name || null,
+    },
+    {
+      enabled: session?.data?.user ? true : false, // Enable query only if user is logged in
+    }
+  );
   const utils = api.useContext();
   const { mutate: sendMessage } = api.message.postMessage.useMutation();
 

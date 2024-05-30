@@ -4,7 +4,7 @@ const navigationSlice = createSlice({
   name: "navigation",
   initialState: {
     navigationState: false,
-    parsed: "",
+    magicLinkEmail: "",
   },
   reducers: {
     setNavigation: (state, action) => {
@@ -14,14 +14,14 @@ const navigationSlice = createSlice({
         state.navigationState = false;
       }
     },
-    setParsed: (state, action) => {
+    setMagicLinkEmail: (state, action) => {
       if (typeof action.payload === "string") {
-        state.parsed = action.payload;
+        state.magicLinkEmail = action.payload;
       }
     },
   },
 });
 
-export const { setNavigation, setParsed } = navigationSlice.actions;
+export const { setNavigation, setMagicLinkEmail } = navigationSlice.actions;
 
 export default navigationSlice.reducer;

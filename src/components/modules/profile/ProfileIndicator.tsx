@@ -1,16 +1,14 @@
-import { url } from "inspector";
-import Link from "next/link";
-import { useCallback } from "react";
-import { useAppDispatch } from "~/lib/store/hooks";
-import { api } from "~/utils/api";
-import { insertElipsis } from "~/utils/elipsis";
-import { useAppSelector } from "~/lib/store/hooks";
-import { setFollowers } from "~/lib/store/reducers/followersSlice";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { setFollowers } from "@/lib/store/reducers/followersSlice";
+import { api } from "@/utils/api";
+import { insertElipsis } from "@/utils/elipsis";
 import { useRouter } from "next/navigation";
+import { useCallback } from "react";
 
 //TODO refactor
+//TODO hard-coded buttons
 
-interface ProfileIndicatorProps {
+interface IProfileIndicatorProps {
   entryCount: string;
   followers: string;
   following: string;
@@ -22,7 +20,7 @@ const ProfileIndicator = ({
   followers,
   following,
   userName,
-}: ProfileIndicatorProps) => {
+}: IProfileIndicatorProps) => {
   const utils = api.useContext();
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -42,7 +40,7 @@ const ProfileIndicator = ({
 
   return (
     <div className="flex flex-row ">
-      <span className="flex max-w-fit  rounded-md py-1.5 text-xs text-blue-600   dark:text-brandGreen-600">
+      <span className="flex max-w-fit  rounded-md py-1.5 text-xs text-blue-600  dark:text-brandGreen-600">
         {insertElipsis(entryCount, elipsisOffset)} entry
       </span>
       <button

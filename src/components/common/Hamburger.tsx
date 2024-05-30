@@ -1,14 +1,14 @@
-import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
-import { navbarToggle } from "~/lib/store/reducers/toggleSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { navbarToggle } from "@/lib/store/reducers/toggleSlice";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
 
-interface HamburgerProps {
+interface IHamburgerProps {
   breakPoint?: string;
   mobile?: string;
 }
 
-const Hamburger = ({ breakPoint, mobile }: HamburgerProps) => {
+const Hamburger = ({ breakPoint, mobile }: IHamburgerProps) => {
   const dispatch = useAppDispatch();
   const toggleState = useAppSelector((state) => state.toggle.navbarState);
 

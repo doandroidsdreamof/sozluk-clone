@@ -1,8 +1,8 @@
 import React from "react";
-import { useAppSelector } from "~/lib/store/hooks";
+import { useAppSelector } from "@/lib/store/hooks";
 import dynamic from "next/dynamic";
 
-const AlertMessage = dynamic(() => import("~/components/common/AlertMessage"), {
+const AlertMessage = dynamic(() => import("@/components/common/AlertMessage"), {
   ssr: true,
 });
 

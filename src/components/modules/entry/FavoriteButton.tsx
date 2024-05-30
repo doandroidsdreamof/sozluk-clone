@@ -1,6 +1,6 @@
 import { BsDroplet, BsFillDropletFill } from "react-icons/bs";
-import { api } from "~/utils/api";
-import { insertElipsis } from "~/utils/elipsis";
+import { api } from "@/utils/api";
+import { insertElipsis } from "@/utils/elipsis";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
@@ -93,7 +93,7 @@ const FavoriteButton = ({
         )}
       </button>
       {parseInt(favoriteCount) >= 0 ? (
-        <span className=" flex max-w-fit cursor-pointer truncate text-ellipsis rounded-md py-1.5 text-sm text-blue-600 hover:underline dark:text-brandGreen-600">
+        <span className="flex max-w-fit cursor-pointer truncate text-ellipsis rounded-md py-1.5 text-sm text-blue-600 hover:underline dark:text-brandGreen-600">
           {insertElipsis(favoriteCount, 3)}
         </span>
       ) : (

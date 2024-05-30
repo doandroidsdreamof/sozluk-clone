@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const messageSlice = createSlice({
   name: "message",
   initialState: {
-    recieverName: "",
+    receiverName: "",
     reset: false,
     chatboxState: false,
     chatInterface: false,
@@ -13,12 +13,12 @@ const messageSlice = createSlice({
   reducers: {
     setReceiverName: (state, action) => {
       if (typeof action.payload === "string") {
-        state.recieverName = action.payload;
+        state.receiverName = action.payload;
       }
     },
-    resetReciever: (state) => {
+    resetReceiver: (state) => {
       state.reset = !state.reset;
-      state.recieverName = "";
+      state.receiverName = "";
     },
     chatBoxToggle: (state) => {
       state.chatboxState = !state.chatboxState;
@@ -40,7 +40,7 @@ const messageSlice = createSlice({
 
 export const {
   setReceiverName,
-  resetReciever,
+  resetReceiver,
   chatInterfaceClose,
   chatInterfaceToggle,
   chatBoxClose,

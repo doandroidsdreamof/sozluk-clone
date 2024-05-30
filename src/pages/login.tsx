@@ -1,11 +1,11 @@
 import { type NextPage } from "next";
 import dynamic from "next/dynamic";
 
-const FormLayout = dynamic(() => import("~/components/layouts/FormLayout"), {
+const FormLayout = dynamic(() => import("@/components/layouts/FormLayout"), {
   ssr: false,
 });
 
-const LoginForm = dynamic(() => import("~/components/forms/LoginForm"), {
+const LoginForm = dynamic(() => import("@/components/forms/LoginForm"), {
   ssr: false,
 });
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../button/Button";
-import { api } from "~/utils/api";
+import { api } from "@/utils/api";
 import { useSession } from "next-auth/react";
 
 interface FollowButtonProps {

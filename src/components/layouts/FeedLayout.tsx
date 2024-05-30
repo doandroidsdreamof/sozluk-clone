@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
 const RendererFeed = dynamic(
-  () => import("~/components/modules/textEditor/RendererFeed"),
+  () => import("@/components/modules/textEditor/RendererFeed"),
   {
     ssr: true,
     loading: () => <p>Loading...</p>,
@@ -10,34 +10,34 @@ const RendererFeed = dynamic(
 );
 
 const TopicHeader = dynamic(
-  () => import("~/components/modules/topic/TopicHeader"),
+  () => import("@/components/modules/topic/TopicHeader"),
   {
     ssr: true,
     loading: () => <p>Loading...</p>,
   }
 );
 
-interface Entry {
+interface IEntry {
   content: string;
   id: string;
   createdAt: Date;
 }
 
-interface FeedLayoutProps {
+interface IFeedLayoutProps {
   user: {
     name: string;
     id: string;
     avatar: string | null;
   };
-  entry: Entry[];
+  entry: IEntry[];
   topicTitle: string;
   id: string;
 }
-interface FeedProps {
-  data: FeedLayoutProps[];
+interface IFeedProps {
+  data: IFeedLayoutProps[];
 }
 
-const FeedLayout = (data: FeedProps) => {
+const FeedLayout = (data: IFeedProps) => {
   const router = useRouter();
   if (!data) {
     return <></>;

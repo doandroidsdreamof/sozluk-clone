@@ -2,12 +2,12 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AiFillCalendar } from "react-icons/ai";
-import { useAppDispatch } from "~/lib/store/hooks";
+import { useAppDispatch } from "@/lib/store/hooks";
 import Button from "../modules/button/Button";
 import SelectBox from "./SelectBox";
-import { setFilterData } from "~/lib/store/reducers/filterSlice";
-import { api } from "~/utils/api";
-import { BUTTON_TEXT, LABEL_TEXT } from "~/constants/staticContents";
+import { setFilterData } from "@/lib/store/reducers/filterSlice";
+import { api } from "@/utils/api";
+import { BUTTON_TEXT, LABEL_TEXT } from "@/constants/staticContents";
 
 const FilterForm = () => {
   //TODO refactoring

@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
-import Hamburger from "~/components/common/Hamburger";
-import ButtonContainer from "~/components/containers/ButtonContainer";
-import Logo from "~/components/elements/Logo";
-import { LINK_TEXT } from "~/constants/staticContents";
+import Hamburger from "@/components/common/Hamburger";
+import ButtonContainer from "@/components/containers/ButtonContainer";
+import Logo from "@/components/elements/Logo";
+import { LINK_TEXT } from "@/constants/staticContents";
 
-const AutoSearch = dynamic(() => import("~/components/common/AutoSearch"), {
+const AutoSearch = dynamic(() => import("@/components/common/AutoSearch"), {
   ssr: false,
 });
 

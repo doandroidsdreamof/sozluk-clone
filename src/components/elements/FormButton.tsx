@@ -1,10 +1,12 @@
 import React from "react";
+import ButtonStyles from "@/components/modules/button/Button.module.css";
 
-interface FormButtonProps {
+interface IFormButtonProps {
   text: string;
   style: string;
+  isLoading?: boolean;
 }
-const FormButton = ({ text, style }: FormButtonProps) => {
+const FormButton = ({ text, style, isLoading = false }: IFormButtonProps) => {
   return (
     <button
       type="submit"
@@ -13,7 +15,13 @@ const FormButton = ({ text, style }: FormButtonProps) => {
       }}
       className={`${style}`}
     >
-      {text}
+      {isLoading ? (
+        <div className="relative h-5 py-2">
+          <span className={ButtonStyles["button--loading"]}></span>
+        </div>
+      ) : (
+        text
+      )}
     </button>
   );
 };

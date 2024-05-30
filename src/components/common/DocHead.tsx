@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { META_TEXT } from "~/constants/staticContents";
+import { META_TEXT } from "@/constants/staticContents";
 
 const DocHead = () => {
   return (

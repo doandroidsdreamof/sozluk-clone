@@ -2,11 +2,11 @@ import React from "react";
 import VerificationForm from "./VerificationForm";
 import RegisterForm from "./RegisterForm";
 
-interface FormMachineProps {
+interface IFormMachineProps {
   displayState: boolean;
 }
 
-function FormMachine({ displayState }: FormMachineProps) {
+function FormMachine({ displayState }: IFormMachineProps) {
   return displayState ? <RegisterForm /> : <VerificationForm />;
 }
 

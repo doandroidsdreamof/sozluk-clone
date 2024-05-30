@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Avatar from "~/components/common/Avatar";
-import DumbModal from "~/components/modals/DumbModal";
+import Avatar from "@/components/common/Avatar";
+import DumbModal from "@/components/modals/DumbModal";
 import Button from "../button/Button";
 import ProfileIndicator from "./ProfileIndicator";
 import { useSession } from "next-auth/react";
@@ -9,10 +9,10 @@ import {
   BUTTON_TEXT,
   LOCAL_IMAGE_ALT,
   LOCAL_IMAGE_PATHS,
-} from "~/constants/staticContents";
+} from "@/constants/staticContents";
 import Image from "next/image";
 
-interface ProfileHeaderProps {
+interface IProfileHeaderProps {
   entryCount: bigint;
   followersCount: bigint;
   followingCount: bigint;
@@ -28,20 +28,20 @@ const ProfileHeader = ({
   role,
   userName,
   userId,
-}: ProfileHeaderProps) => {
+}: IProfileHeaderProps) => {
   const session = useSession();
   const [dumbOpen, setDumbOpen] = useState(false);
 
   return (
-    <div className="flex w-full flex-row  ">
+    <div className="flex w-full flex-row">
       <div className="flex  flex-col gap-y-3">
-        <span className="text-2xl font-bold text-typography-body-light dark:text-typography-body-dark ">
+        <span className="text-2xl font-bold text-typography-body-light dark:text-typography-body-dark">
           {userName}
         </span>
         <div className="flex flex-row gap-2">
           <span
             className={
-              "cursor-default bg-none text-lg font-medium  text-brandGreen-800 hover:bg-transparent "
+              "cursor-default bg-none text-lg font-medium  text-brandGreen-800 hover:bg-transparent"
             }
           >
             {role}
@@ -63,7 +63,7 @@ const ProfileHeader = ({
       <div className="ml-auto  pr-8 pt-3">
         <button
           onClick={() => setDumbOpen(true)}
-          className="flex w-16 cursor-default items-center justify-center rounded-full "
+          className="flex w-16 cursor-default items-center justify-center rounded-full"
         >
           <Avatar
             style={`mx-4 block ${

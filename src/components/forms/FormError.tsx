@@ -1,11 +1,11 @@
 import React, { type FC } from "react";
 import { ErrorMessage } from "formik";
 
-interface FormErrorProps {
+interface IFormErrorProps {
   name: string;
 }
 
-const FormError: FC<FormErrorProps> = ({ name }: FormErrorProps) => {
+const FormError: FC<IFormErrorProps> = ({ name }: IFormErrorProps) => {
   return (
     <>
       <ErrorMessage

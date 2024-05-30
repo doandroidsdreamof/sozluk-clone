@@ -1,12 +1,13 @@
 import { Combobox, Transition } from "@headlessui/react";
+import { useSession } from "next-auth/react";
 import { Fragment, useCallback, useEffect, useState } from "react";
-import { useAppDispatch } from "~/lib/store/hooks";
+import { useAppDispatch } from "@/lib/store/hooks";
 import {
   chatInterfaceClose,
   setReceiverName,
   chatBoxToggle,
-} from "~/lib/store/reducers/messageSlice";
-import { api } from "~/utils/api";
+} from "@/lib/store/reducers/messageSlice";
+import { api } from "@/utils/api";
 
 interface SearchOptions {
   id: string;
@@ -16,9 +17,12 @@ interface SearchOptions {
 // TODO abstract auto search component logic && style
 
 function ChatSearch() {
+  const session = useSession();
   const [data, setData] = useState<SearchOptions[]>([]);
   const [input, setInput] = useState<string>("");
-  const { data: getData, status } = api.user.filterUser.useQuery(input);
+  const { data: getData, status } = api.user.filterUser.useQuery(input, {
+    enabled: session?.data?.user ? true : false,
+  });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -80,7 +84,7 @@ function ChatSearch() {
             }
           >
             {data.length == 0 && getData == null ? (
-              <div className="relative cursor-default select-none bg-bg-primary-light px-4 py-2  text-gray-700  ">
+              <div className="relative cursor-default select-none bg-bg-primary-light px-4 py-2  text-gray-700">
                 Nothing found.
               </div>
             ) : (
@@ -88,9 +92,9 @@ function ChatSearch() {
                 <Combobox.Option
                   key={items.id}
                   className={({ active }) =>
-                    `relative  cursor-pointer select-none   text-sm ${
+                    `relative  cursor-pointer select-none text-sm ${
                       active
-                        ? "bg-button-light bg-brandGreen-800  text-typography-body-dark "
+                        ? "bg-button-light bg-brandGreen-800  text-typography-body-dark"
                         : "text-typography-body-light "
                     }`
                   }

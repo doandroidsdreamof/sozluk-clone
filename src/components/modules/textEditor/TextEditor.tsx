@@ -3,12 +3,12 @@ import TextStyle from "@tiptap/extension-text-style";
 import { EditorContent, useEditor, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import dynamic from "next/dynamic";
-import { LOG_MESSAGES } from "~/constants/staticContents";
-import { api } from "~/utils/api";
+import { LOG_MESSAGES } from "@/constants/staticContents";
+import { api } from "@/utils/api";
 
 // TODO: refactoring && debouncing && image upload icon
 
-interface TextEditorProps {
+interface ITextEditorProps {
   topicTitle: string;
   entry?: string;
   entryId?: string;
@@ -17,7 +17,7 @@ interface TextEditorProps {
 }
 
 const TextEditorMenu = dynamic(
-  () => import("~/components/modules/textEditor/TextEditorMenu"),
+  () => import("@/components/modules/textEditor/TextEditorMenu"),
   {
     ssr: false,
   }
@@ -29,7 +29,7 @@ const TextEditor = ({
   entryId,
   userId,
   handleClose,
-}: TextEditorProps) => {
+}: ITextEditorProps) => {
   const { mutate: createTopicAndEntry } = api.topic.createTopic.useMutation();
   const { mutate: createEntry } = api.entry.createEntry.useMutation();
   const { mutate: updateEntry } = api.entry.updateEntry.useMutation();

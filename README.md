@@ -51,11 +51,13 @@ $ npm start
 ## Roadmap
 
 - [ ] End-to-end encryption
+- [ ] Websocket integration
 - [ ] Searching by username
 - [ ] Avatar && image upload
 - [ ] e2e && unit testing
-- [ ] Tag system
+- [ ] Tag classification system
 - [ ] IDOR vulnerability
+- [ ] Two factor Authentication
 
 ## Credits
 

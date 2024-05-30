@@ -1,16 +1,16 @@
 import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { logoutClick } from "~/lib/auth-helpers/logout";
+import { logoutClick } from "@/lib/auth-helpers/logout";
 import DarkMode from "../common/DarkMode";
-import ChatButton from "~/components/modules/chat/ChatButton";
+import ChatButton from "@/components/modules/chat/ChatButton";
 import {
   BUTTON_TEXT,
   CLIENT_ROUTE_PATHS,
   LOG_MESSAGES,
-} from "~/constants/staticContents";
+} from "@/constants/staticContents";
 
-const Button = dynamic(() => import("~/components/modules/button/Button"), {
+const Button = dynamic(() => import("@/components/modules/button/Button"), {
   ssr: false,
 });
 

@@ -70,7 +70,10 @@ export const META_TEXT = {
 export const LOG_MESSAGES = {
   ERR_SIGN_OUT: "Error signing out:",
   ERR_DURING_SIGN_OUT: "Error during sign-out",
+  ERR_SOCIAL_LOGIN_FAILED: "Social login failed",
   ERR_SIGN_OUT_FAILED: "Sign-out failed",
+  ERR_REGISTER_FAILED: "Register failed",
+  ERR_MISSING_API_KEY_FOR_SUPABASE: "Missing API keys for Supabase",
   INFO_ENTRY_CREATED: "entry created",
   INFO_ENTRY_UPDATED: "entry updated",
 };
@@ -92,4 +95,9 @@ export const SCHEMA_ERROR_MESSAGES = {
   USER_NAME_REQUIRED: "User name is required",
   USER_NAME_MIN_LENGTH: "User name must contain at least 6 character",
   PASSWORDS_MUST_MATCH: "The passwords did not match",
+};
+
+export const THEME_TYPES = {
+  THEME_DARK: "dark",
+  THEME_LIGHT: "light",
 };

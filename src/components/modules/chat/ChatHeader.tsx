@@ -1,28 +1,31 @@
 import React from "react";
-import Avatar from "~/components/common/Avatar";
+import Avatar from "@/components/common/Avatar";
 import { AiOutlineClose } from "react-icons/ai";
-import { chatBoxClose } from "~/lib/store/reducers/messageSlice";
-import { useAppDispatch } from "~/lib/store/hooks";
+import { chatBoxClose } from "@/lib/store/reducers/messageSlice";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { LOCAL_IMAGE_ALT, LOCAL_IMAGE_PATHS } from "@/constants/staticContents";
 
-interface ChatHeaderProps {
-  recieverName?: string;
+interface IChatHeaderProps {
+  receiverName?: string;
   numberOfMessages: number | null;
 }
 
-const ChatHeader = ({ recieverName, numberOfMessages }: ChatHeaderProps) => {
+//TODO avatar && userName => profile link
+
+const ChatHeader = ({ receiverName, numberOfMessages }: IChatHeaderProps) => {
   const dispatch = useAppDispatch();
 
   return (
     <div className="flex h-full flex-row items-center justify-between rounded-t-md border-b-2 border-b-gray-200 bg-white px-6 py-3.5">
       <div className="flex flex-row items-center">
         <Avatar
-          style="mx-4 block  h-8 w-8 cursor-pointer  rounded-full object-cover"
-          alt="avatar"
-          src="/images/default-avatar.png"
-          fallbackSrc="/images/default-avatar.png"
+          style="mx-4 block h-8 w-8 cursor-pointer rounded-full object-cover"
+          alt={LOCAL_IMAGE_ALT.AVATAR}
+          src={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
+          fallbackSrc={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
         />
         <div className="flex flex-col">
-          <p className="text-xs text-gray-600">{recieverName}</p>
+          <p className="text-xs text-gray-600">{receiverName}</p>
           <p className="text-xs text-gray-400">
             {numberOfMessages ? numberOfMessages : 0} messages
           </p>

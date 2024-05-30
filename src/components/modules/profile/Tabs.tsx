@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import TabSelector from "./TabSelector";
-import { useAppDispatch } from "~/lib/store/hooks";
-import { setFollowers } from "~/lib/store/reducers/followersSlice";
-import { useAppSelector } from "~/lib/store/hooks";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { setFollowers } from "@/lib/store/reducers/followersSlice";
+import { useAppSelector } from "@/lib/store/hooks";
 
 interface ICategory {
   id: number;

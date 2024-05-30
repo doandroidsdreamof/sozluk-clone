@@ -22,7 +22,7 @@ const EntryCard = ({
     }
   };
   return (
-    <div className="mt-4 flex items-center justify-between pb-2 ">
+    <div className="mt-4 flex items-center justify-between pb-2">
       <button
         onClick={(e) => {
           handleClick(e);

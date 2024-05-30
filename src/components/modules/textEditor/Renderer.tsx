@@ -1,6 +1,6 @@
 import TextEditor from "./TextEditor";
 
-interface RendererProps {
+interface IRendererProps {
   topicTitle: string;
   entry?: string;
   entryId?: string;
@@ -19,7 +19,7 @@ const Renderer = ({
   entryId,
   topicTitle,
   userId,
-}: RendererProps) => {
+}: IRendererProps) => {
   return (
     <>
       {!edit && typeof output === "string" ? (

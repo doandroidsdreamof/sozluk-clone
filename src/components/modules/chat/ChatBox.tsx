@@ -3,14 +3,14 @@ import ChatHeader from "./ChatHeader";
 import ChatContent from "./ChatContent";
 import { useSession } from "next-auth/react";
 import ChatInput from "./ChatInput";
-import { api } from "~/utils/api";
-import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
+import { api } from "@/utils/api";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 
 const ChatBox = () => {
   const session = useSession();
-  const recieverName = useAppSelector((state) => state.message.recieverName);
+  const receiverName = useAppSelector((state) => state.message.receiverName);
   const { data: receiverData } = api.user.getReceiver.useQuery({
-    userName: recieverName,
+    userName: receiverName,
   });
   const dispatch = useAppDispatch();
   const { data: chatRoom } = api.message.getChatRoom.useQuery({
@@ -45,9 +45,9 @@ const ChatBox = () => {
 
   return (
     <div className="m fixed bottom-3 right-3 z-[500]  mx-auto  mt-32 w-full max-w-sm rounded-t-md border sm:min-w-[30rem]">
-      <div className="relative   bg-bg-secondary-light  shadow-md dark:shadow-none">
+      <div className="relative bg-bg-secondary-light  shadow-md dark:shadow-none">
         <ChatHeader
-          recieverName={receiverData?.name}
+          receiverName={receiverData?.name}
           numberOfMessages={chatRoom?.messages?.length || null}
         />
         <div className=" max-h-[25rem] min-h-[15rem] overflow-auto px-6 py-1">

@@ -1,28 +1,28 @@
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { type ILayoutProps } from "~/@types/interface";
+import { type ILayoutProps } from "@/@types/interface";
 import DocHead from "../common/DocHead";
 import ChatInterface from "../modules/chat/ChatInterface";
 
 const ScrollUpButton = dynamic(
-  () => import("~/components/common/ScrollUpButton"),
+  () => import("@/components/common/ScrollUpButton"),
   { ssr: false }
 );
 
 const NotificationContainer = dynamic(
-  () => import("~/components/containers/NotificationContainer"),
+  () => import("@/components/containers/NotificationContainer"),
   { ssr: false }
 );
 
-const Navbar = dynamic(() => import("~/components/modules/navbar/Navbar"), {
+const Navbar = dynamic(() => import("@/components/modules/navbar/Navbar"), {
   ssr: false,
 });
 
-const Aside = dynamic(() => import("~/components/modules/aside/Aside"), {
+const Aside = dynamic(() => import("@/components/modules/aside/Aside"), {
   ssr: false,
 });
 
-const Footer = dynamic(() => import("~/components/modules/footer/Footer"), {
+const Footer = dynamic(() => import("@/components/modules/footer/Footer"), {
   ssr: false,
 });
 

@@ -1,20 +1,26 @@
-import { signIn } from "next-auth/react";
 import React from "react";
+import { LOG_MESSAGES } from "@/constants/staticContents";
 
-interface SocialButtonProps {
+interface ISocialButtonProps {
   icon: JSX.Element;
   text: string;
   style: string;
+  handleLogin: () => Promise<void>;
 }
 
-const SocialButton = ({ icon, text, style }: SocialButtonProps) => {
+const SocialButton = ({
+  icon,
+  text,
+  style,
+  handleLogin,
+}: ISocialButtonProps) => {
   return (
     <button
       onClick={(e) => {
         e.preventDefault();
-        void signIn("google", { callbackUrl: "/" }, { prompt: "login" }).catch(
-          (err) => console.error("social login", err)
-        );
+        handleLogin().catch((err) => {
+          console.error(LOG_MESSAGES.ERR_SOCIAL_LOGIN_FAILED, err);
+        });
       }}
       className={`${style}`}
     >

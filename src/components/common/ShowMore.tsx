@@ -1,10 +1,10 @@
 import { useState, type FC } from "react";
 
-interface ShowMoreProps {
+interface IShowMoreProps {
   text: string;
 }
 
-const ShowMore: FC<ShowMoreProps> = ({ text }: ShowMoreProps) => {
+const ShowMore: FC<IShowMoreProps> = ({ text }: IShowMoreProps) => {
   const [expand, setExpand] = useState(false);
 
   const handleClick = () => {
@@ -12,11 +12,11 @@ const ShowMore: FC<ShowMoreProps> = ({ text }: ShowMoreProps) => {
   };
 
   return (
-    <p className="dark:text-dark-text-second mb-2  text-sm ">
+    <p className="dark:text-dark-text-second mb-2 text-sm">
       {text.length > 200 ? (
         <>
           {expand ? (
-            <span className="mr-2 ">{text}</span>
+            <span className="mr-2">{text}</span>
           ) : (
             <span className="mr-1 inline">{text.substring(0, 250)}</span>
           )}

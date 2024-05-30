@@ -1,6 +1,6 @@
 import { IoIosSettings } from "react-icons/io";
-import { useAppSelector } from "~/lib/store/hooks";
-import { api } from "~/utils/api";
+import { useAppSelector } from "@/lib/store/hooks";
+import { api } from "@/utils/api";
 import TopicLink from "../topic/TopicLink";
 
 // TODO topic not found notification

@@ -1,9 +1,9 @@
 import { type NextPage } from "next";
 import { useRouter } from "next/router";
-import { api } from "~/utils/api";
+import { api } from "@/utils/api";
 import dynamic from "next/dynamic";
 
-const TopicLayout = dynamic(() => import("~/components/layouts/TopicLayout"), {
+const TopicLayout = dynamic(() => import("@/components/layouts/TopicLayout"), {
   ssr: true,
 });
 

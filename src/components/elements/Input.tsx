@@ -2,19 +2,21 @@ import { Field } from "formik";
 import { type FC } from "react";
 import FormError from "../forms/FormError";
 
-interface FormInputProps {
+interface IFormInputProps {
   type: string;
   name: string;
   placeholder?: string;
   style: string;
 }
 
-const Input: FC<FormInputProps> = ({
+//TODO refactoring open-closed principle
+
+const Input: FC<IFormInputProps> = ({
   type,
   name,
   placeholder,
   style,
-}: FormInputProps) => {
+}: IFormInputProps) => {
   return (
     <>
       <Field

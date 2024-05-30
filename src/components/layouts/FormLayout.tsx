@@ -1,7 +1,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const Modal = dynamic(() => import("~/components/modals/Modal"), {
+const Modal = dynamic(() => import("@/components/modals/Modal"), {
   ssr: true,
 });
 

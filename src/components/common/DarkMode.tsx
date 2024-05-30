@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { BsSun } from "react-icons/bs";
 import { FiMoon } from "react-icons/fi";
-import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
-import { setTheme } from "~/lib/store/reducers/themeSlice";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { setTheme } from "@/lib/store/reducers/themeSlice";
 
 const DarkMode = () => {
   const theme = useAppSelector((state) => state.theme);

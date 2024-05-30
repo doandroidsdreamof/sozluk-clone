@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { string } from "zod";
+import { createSlice } from "@reduxjs/toolkit";
 
 type EndTypes = "user" | "entry" | "topic";
 

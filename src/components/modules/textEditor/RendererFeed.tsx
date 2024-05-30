@@ -6,22 +6,22 @@ import DOMPurify from "isomorphic-dompurify";
 import { useMemo, useState } from "react";
 import EntryCard from "../entry/EntryCard";
 import ShareButton from "../entry/ShareButton";
-import UserCard from "~/components/common/UserCard";
-import { CLIENT_ROUTE_PATHS } from "~/constants/staticContents";
+import UserCard from "@/components/common/UserCard";
+import { CLIENT_ROUTE_PATHS } from "@/constants/staticContents";
 
-interface Entry {
+interface IEntry {
   content: string;
   id: string;
   createdAt: Date;
 }
 
-interface TextRendererProps {
+interface ITextRendererProps {
   user: {
     name: string;
     id: string;
     avatar: string | null;
   };
-  entry: Entry[];
+  entry: IEntry[];
   topicTitle: string;
   id: string;
 }
@@ -31,7 +31,7 @@ const RendererFeed = ({
   user,
   entry,
   id: topicId,
-}: TextRendererProps) => {
+}: ITextRendererProps) => {
   const parseContent = { ...entry[0] };
   const json = JSON.parse(parseContent.content as string) as string[];
   const [showMore, setShowMore] = useState<number>(250);
@@ -44,7 +44,7 @@ const RendererFeed = ({
   return (
     <div className="my-4 flex min-h-[10rem] max-w-4xl flex-col justify-between rounded-sm bg-white p-3 text-sm shadow-sm dark:bg-bg-secondary-dark lg:w-[38rem]">
       <div className="mt-2">
-        <div className="flex flex-row  justify-end">
+        <div className="flex flex-row justify-end">
           <ShareButton />
         </div>
         {typeof output === "string" ? (

@@ -1,23 +1,8 @@
-import { useEffect, useState } from "react";
 import { AiOutlineArrowUp } from "react-icons/ai";
+import useScrollVisibility from "@/hooks/useScrollVisibility";
 
 const ScrollUpButton = () => {
-  const [visible, setVisible] = useState(false);
-
-  function handlePos() {
-    if (window.scrollY > 50) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-  }
-
-  useEffect(() => {
-    window.addEventListener("scroll", handlePos);
-    return () => {
-      window.removeEventListener("scroll", handlePos);
-    };
-  }, []);
+  const visible = useScrollVisibility(50);
 
   const handleClick = () => {
     window.scrollTo({

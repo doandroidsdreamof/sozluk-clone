@@ -1,4 +1,4 @@
-import Avatar from "~/components/common/Avatar";
+import Avatar from "@/components/common/Avatar";
 
 interface IChatContentProps {
   messageText: string;

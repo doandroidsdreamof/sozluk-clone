@@ -8,9 +8,9 @@ import {
 } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { type ILogin } from "~/@types/interface";
-import { loginSchema } from "~/schemas/loginSchema";
-import { prisma } from "~/server/db";
+import { type ILogin } from "@/@types/interface";
+import { loginSchema } from "@/schemas/loginSchema";
+import { prisma } from "@/server/db";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -26,11 +26,6 @@ declare module "next-auth" {
       // role: UserRole;
     } & DefaultSession["user"];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
 /**
@@ -90,7 +85,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         try {
           const { email, password } = credentials as ILogin;
-          console.log("🚀 ~ authorize ~ credentials:", credentials);
           const emailAndPassword = await loginSchema.parseAsync(credentials);
           const user = await prisma.user.findFirst({
             where: { email: email },

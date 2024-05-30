@@ -1,4 +1,3 @@
-import DarkMode from "~/components/common/DarkMode";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Register from "../components/forms/RegisterForm";

@@ -1,4 +1,4 @@
-import Aside from "~/components/modules/aside/Aside";
+import Aside from "@/components/modules/aside/Aside";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import type Login from "../components/forms/LoginForm";

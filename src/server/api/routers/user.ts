@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { hash } from "bcrypt";
 import { z } from "zod";
-import { registerSchema } from "~/schemas/registerSchema";
+import { registerSchema } from "@/schemas/registerSchema";
 import {
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
-} from "~/server/api/trpc";
+} from "@/server/api/trpc";
 import { Magic } from "@magic-sdk/admin";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call

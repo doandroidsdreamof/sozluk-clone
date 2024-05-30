@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsSend } from "react-icons/bs";
 import { HiOutlineEmojiHappy } from "react-icons/hi";
-import { BUTTON_TEXT } from "~/constants/staticContents";
+import { BUTTON_TEXT } from "@/constants/staticContents";
 
 // TODO enter key
 

@@ -1,15 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useAppDispatch, useAppSelector } from "~/lib/store/hooks";
-import { api } from "~/utils/api";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { api } from "@/utils/api";
 import Paginate from "../common/Paginate";
 import TextRenderer from "../modules/textEditor/TextRenderer";
-import { refetchData } from "~/lib/store/reducers/refetchSlice";
 
-interface RendererContainerProps {
+interface IRendererContainerProps {
   topicTitle: string;
 }
 
-const RendererContainer = ({ topicTitle }: RendererContainerProps) => {
+const RendererContainer = ({ topicTitle }: IRendererContainerProps) => {
   const [page, setPage] = useState(0);
   const [total, setTotalPage] = useState(0);
   const [take, setTake] = useState(5); //* resultsPerPage

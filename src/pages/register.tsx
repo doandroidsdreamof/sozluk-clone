@@ -1,9 +1,9 @@
 import { type NextPage } from "next";
 import dynamic from "next/dynamic";
-import FormMachine from "~/components/forms/FormMachine";
-import { useAppSelector } from "~/lib/store/hooks";
+import FormMachine from "@/components/forms/FormMachine";
+import { useAppSelector } from "@/lib/store/hooks";
 
-const FormLayout = dynamic(() => import("~/components/layouts/FormLayout"), {
+const FormLayout = dynamic(() => import("@/components/layouts/FormLayout"), {
   ssr: false,
 });
 

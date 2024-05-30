@@ -1,5 +1,5 @@
 import { type NextPage } from "next";
-import FollowersLayout from "~/components/layouts/FollowersLayout";
+import FollowersLayout from "@/components/layouts/FollowersLayout";
 
 const Followers: NextPage = () => {
   return (

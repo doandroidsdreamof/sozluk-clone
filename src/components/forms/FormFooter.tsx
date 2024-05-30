@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React from "react";
 
-interface FormFooterProps {
+interface IFormFooterProps {
   href: string;
   text: string;
   linkText: string;
 }
 
-const FormFooter = ({ href, text, linkText }: FormFooterProps) => {
+const FormFooter = ({ href, text, linkText }: IFormFooterProps) => {
   return (
     <div className="flex items-center justify-center  p-4 ">
       <p className="text-center text-sm text-gray-500">

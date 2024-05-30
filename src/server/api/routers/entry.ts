@@ -3,7 +3,7 @@ import {
   createTRPCRouter,
   protectedProcedure,
   publicProcedure,
-} from "~/server/api/trpc";
+} from "@/server/api/trpc";
 
 //TODO IDOR vulnerability
 
@@ -49,7 +49,6 @@ export const entryRouter = createTRPCRouter({
               avatar: true,
               name: true,
               id: true,
-              email: true,
             },
           },
         },

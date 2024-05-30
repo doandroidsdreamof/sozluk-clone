@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileHeader from "../modules/profile/ProfileHeader";
-import { api } from "~/utils/api";
-import { type IUserName } from "~/@types/interface";
+import { api } from "@/utils/api";
+import { type IUserName } from "@/@types/interface";
 
 const ProfileHeaderContainer = ({ userName }: IUserName) => {
   const { data } = api.user.getUserProfileData.useQuery({

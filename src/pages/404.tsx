@@ -5,7 +5,7 @@ import {
   ERROR_PAGE_CONTENT,
   LOCAL_IMAGE_ALT,
   LOCAL_IMAGE_PATHS,
-} from "~/constants/staticContents";
+} from "@/constants/staticContents";
 import Image from "next/image";
 
 const Error: NextPage = () => {

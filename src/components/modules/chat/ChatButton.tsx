@@ -1,7 +1,7 @@
 import { BsFillChatDotsFill } from "react-icons/bs";
-import { useAppDispatch } from "~/lib/store/hooks";
-import { chatInterfaceToggle } from "~/lib/store/reducers/messageSlice";
-import { chatBoxClose } from "~/lib/store/reducers/messageSlice";
+import { useAppDispatch } from "@/lib/store/hooks";
+import { chatInterfaceToggle } from "@/lib/store/reducers/messageSlice";
+import { chatBoxClose } from "@/lib/store/reducers/messageSlice";
 import Button from "../button/Button";
 
 const ChatButton = () => {

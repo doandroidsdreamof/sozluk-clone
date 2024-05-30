@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import { api } from "~/utils/api";
+import { api } from "@/utils/api";
 import TextRenderer from "../modules/textEditor/TextRenderer";
 import { useRouter } from "next/router";
 
-const Button = dynamic(() => import("~/components/modules/button/Button"), {
+const Button = dynamic(() => import("@/components/modules/button/Button"), {
   ssr: false,
 });
 
@@ -30,7 +30,7 @@ const EntriesContainer = () => {
   };
 
   return (
-    <div className="">
+    <div>
       {data &&
         data
           .slice(0, showMore)

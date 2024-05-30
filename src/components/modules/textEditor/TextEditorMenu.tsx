@@ -20,7 +20,7 @@ interface IMenuProps {
 const buttonStyle =
   "is-active p-2 text-gray-200 rounded dark:text-typography-body-strong-dark cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600";
 
-//TODO refactoring open-closed
+//TODO refactoring open-closed principle
 const TextEditorMenu = ({ editor, handleFunc, buttonText }: IMenuProps) => {
   if (!editor) {
     return null;

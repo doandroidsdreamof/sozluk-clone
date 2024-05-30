@@ -14,7 +14,7 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import { BUTTON_TEXT } from "~/constants/staticContents";
+import { BUTTON_TEXT } from "@/constants/staticContents";
 
 const shareButtons = [
   {

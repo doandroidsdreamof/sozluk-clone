@@ -3,10 +3,10 @@ import { useRouter } from "next/navigation";
 import { Fragment, useCallback, useEffect, useState } from "react";
 import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import { HiOutlineSearch } from "react-icons/hi";
-import { api } from "~/utils/api";
+import { api } from "@/utils/api";
 import FilterModal from "../modals/FilterModal";
 import { useSession } from "next-auth/react";
-import { CLIENT_ROUTE_PATHS } from "~/constants/staticContents";
+import { CLIENT_ROUTE_PATHS } from "@/constants/staticContents";
 
 interface SearchOptions {
   id: string;

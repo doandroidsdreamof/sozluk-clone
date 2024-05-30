@@ -2,24 +2,27 @@ import { Menu, Transition } from "@headlessui/react";
 import { useSession } from "next-auth/react";
 import { Fragment } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import ShareButton from "./ShareButton";
 
-interface SettingsProps {
+interface ISettingsProps {
   userId: string;
   handleEdit: () => void;
   handleRemoveEntry: () => void;
 }
-
-const Settings = ({ userId, handleEdit, handleRemoveEntry }: SettingsProps) => {
+//TODO hard-coded buttons
+const Settings = ({
+  userId,
+  handleEdit,
+  handleRemoveEntry,
+}: ISettingsProps) => {
   const session = useSession();
 
   return (
     <>
       {session.data?.user.id === userId ? (
         <div className="z-30">
-          <Menu as="div" className="relative inline-block text-left ">
+          <Menu as="div" className="relative inline-block text-left">
             <div>
-              <Menu.Button className="is-active  right-0 flex  cursor-pointer rounded  p-2 text-typography-body-light hover:bg-gray-100 hover:text-gray-900  dark:text-typography-body-strong-dark dark:hover:bg-gray-600 dark:hover:text-white">
+              <Menu.Button className="is-active right-0 flex  cursor-pointer rounded  p-2 text-typography-body-light hover:bg-gray-100 hover:text-gray-900  dark:text-typography-body-strong-dark dark:hover:bg-gray-600 dark:hover:text-white">
                 <BsThreeDotsVertical />
               </Menu.Button>
             </div>

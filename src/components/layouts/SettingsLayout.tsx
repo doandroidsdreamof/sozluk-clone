@@ -1,5 +1,5 @@
 import React from "react";
-import { UI_MESSAGES } from "~/constants/staticContents";
+import { UI_MESSAGES } from "@/constants/staticContents";
 
 const SettingsLayout = () => {
   return (

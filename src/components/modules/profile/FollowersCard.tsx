@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import FollowButton from "./FollowButton";
-import UserCard from "~/components/common/UserCard";
-import { CLIENT_ROUTE_PATHS } from "~/constants/staticContents";
+import UserCard from "@/components/common/UserCard";
+import { CLIENT_ROUTE_PATHS } from "@/constants/staticContents";
 
 interface IFollowersProps {
   avatar: string | null;

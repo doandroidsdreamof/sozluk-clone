@@ -1,21 +1,24 @@
 import { Form, Formik } from "formik";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import FormButton from "../elements/FormButton";
-import { magic } from "~/lib/auth-helpers/magic";
+import { magic } from "@/lib/auth-helpers/magic";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import FormFooter from "./FormFooter";
 import Input from "../elements/Input";
-import { emailSchema } from "~/schemas/emailSchema";
-import { api } from "~/utils/api";
-import { setNavigation, setParsed } from "~/lib/store/reducers/navigationSlice";
-import { useAppDispatch } from "~/lib/store/hooks";
+import { emailSchema } from "@/schemas/emailSchema";
+import { api } from "@/utils/api";
+import {
+  setNavigation,
+  setMagicLinkEmail,
+} from "@/lib/store/reducers/navigationSlice";
+import { useAppDispatch } from "@/lib/store/hooks";
 import {
   BUTTON_TEXT,
   CLIENT_ROUTE_PATHS,
   LINK_TEXT,
   UI_MESSAGES,
-} from "~/constants/staticContents";
+} from "@/constants/staticContents";
+import { useLoading } from "@/hooks/useLoading";
 
 type loginFormType = {
   email: string;
@@ -24,18 +27,20 @@ const loginValues: loginFormType = {
   email: "",
 };
 
+//TODO hard-coded strings
+
 const VerificationForm = () => {
+  const { isLoading, startLoading, stopLoading } = useLoading();
   const [killMagic, setKillMagic] = useState<boolean>(false);
   const [token, setToken] = useState<string>("");
-  const [parsedData, setParsedData] = useState<string>("");
-  const router = useRouter();
+  const [email, setEmail] = useState<string>("");
   const { data } = api.user.emailVerification.useQuery(token);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (killMagic === true && data === true) {
       dispatch(setNavigation(true));
-      dispatch(setParsed(parsedData));
+      dispatch(setMagicLinkEmail(email));
       return () => {
         magicLogout().catch((err) => console.error(err));
       };
@@ -43,15 +48,18 @@ const VerificationForm = () => {
   }, [killMagic, data]);
 
   async function handleSubmit(email: loginFormType) {
+    //TODO error handling
+    startLoading();
     if (!magic) throw new Error(`magic not defined`);
     const { email: parsedCheck }: { email: string } = email;
     const emailVerification = await magic?.auth?.loginWithEmailOTP(email);
     const isLoggedIn = await magic?.user?.isLoggedIn();
     if (emailVerification) {
       setToken(emailVerification);
-      setParsedData(parsedCheck);
+      setEmail(parsedCheck);
       setKillMagic(true);
     }
+    stopLoading();
   }
 
   async function magicLogout() {
@@ -74,7 +82,7 @@ const VerificationForm = () => {
         handleSubmit(values).catch((err) => console.error(err));
       }}
     >
-      <Form className="mt-4  space-y-6 px-6">
+      <Form className="mt-4 space-y-6 px-6">
         <div className="flex flex-col gap-y-5">
           <span className="relative bg-bg-secondary-light text-sm text-gray-400 dark:bg-bg-secondary-dark">
             {UI_MESSAGES.VERIFY_ACCOUNT}
@@ -89,6 +97,7 @@ const VerificationForm = () => {
         </div>
         <div className="flex flex-col gap-y-5">
           <FormButton
+            isLoading={isLoading}
             text={BUTTON_TEXT.MAGIC_LINK_SEND_CODE}
             style={
               "block rounded-sm bg-brandGreen-800 px-8 py-2 mt-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"

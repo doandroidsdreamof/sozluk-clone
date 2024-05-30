@@ -1,7 +1,6 @@
 import React from "react";
-import { useAppSelector } from "~/lib/store/hooks";
-import { type IUserName } from "~/@types/interface";
-import { api } from "~/utils/api";
+import { useAppSelector } from "@/lib/store/hooks";
+import { api } from "@/utils/api";
 import FollowersCard from "../modules/profile/FollowersCard";
 import { useRouter } from "next/router";
 

@@ -1,8 +1,8 @@
 import router from "next/router";
-import Avatar from "~/components/common/Avatar";
-import { LOCAL_IMAGE_ALT, LOCAL_IMAGE_PATHS } from "~/constants/staticContents";
+import Avatar from "@/components/common/Avatar";
+import { LOCAL_IMAGE_ALT, LOCAL_IMAGE_PATHS } from "@/constants/staticContents";
 
-interface UserCardProps {
+interface IUserCardProps {
   imageURL?: string | null;
   userName: string;
   date?: Date;
@@ -20,7 +20,7 @@ const UserCard = ({
   email,
   urlPath,
   chatBox,
-}: UserCardProps) => {
+}: IUserCardProps) => {
   const handleNavigation = () => {
     if (urlPath) void router.push(`${urlPath}/${userName}`);
   };
@@ -60,7 +60,7 @@ const UserCard = ({
         //TODO avatar import functionality
         */}
         <Avatar
-          style="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover"
+          style="mx-4 block  h-10 w-10 cursor-pointer rounded-full object-cover"
           alt={LOCAL_IMAGE_ALT.AVATAR}
           src={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
           fallbackSrc={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}

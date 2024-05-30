@@ -24,6 +24,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   ref?: any;
   role?: string;
   textAlign?: "left" | "center" | "right";
+  isLoading?: boolean;
 }
 
 export interface RefHandle {
@@ -31,7 +32,6 @@ export interface RefHandle {
   button: () => HTMLButtonElement | null;
 }
 
-//TODO loading state
 // eslint-disable-next-line react/display-name
 const Button = forwardRef<RefHandle, ButtonProps>(
   (
@@ -50,6 +50,7 @@ const Button = forwardRef<RefHandle, ButtonProps>(
       tabIndex,
       role,
       textAlign = "center",
+      isLoading = false,
       ...props
     }: ButtonProps,
     ref
@@ -106,7 +107,11 @@ const Button = forwardRef<RefHandle, ButtonProps>(
         tabIndex={tabIndex}
         role={role}
       >
-        {children}
+        {isLoading ? (
+          <span className={ButtonStyles["spinner"]}></span>
+        ) : (
+          children
+        )}
       </button>
     );
 
