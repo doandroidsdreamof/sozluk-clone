@@ -85,6 +85,7 @@ export const UI_MESSAGES = {
   LOADING: "Loading",
   SETTINGS: "Settings",
   VERIFY_ACCOUNT: "Verify your account",
+  SEARCH_NOTHING_FOUND: " Nothing found",
 };
 
 export const SCHEMA_ERROR_MESSAGES = {

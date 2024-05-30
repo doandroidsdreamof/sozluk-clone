@@ -45,7 +45,7 @@ const ButtonContainer = () => {
   };
 
   return (
-    <div className="flex gap-x-2">
+    <div className="flex gap-x-1">
       <Link href={loginLink}>
         <Button
           onClick={() => {

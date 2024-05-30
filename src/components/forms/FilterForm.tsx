@@ -52,14 +52,14 @@ const FilterForm = () => {
               name="keywords"
               onChange={(e) => setKeywords(e.target.value)}
               className={
-                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-3 text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border border-input-border-light bg-bg-secondary-light px-3 py-2.5 text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>
           <div>
             <label
               htmlFor="author"
-              className="mb-2 inline-block text-xs text-input-label-light dark:text-input-label-dark "
+              className="mb-2 inline-block text-xs text-input-label-light dark:text-input-label-dark"
             >
               {LABEL_TEXT.AUTHOR}
             </label>
@@ -68,11 +68,11 @@ const FilterForm = () => {
               name="author"
               onChange={(e) => setAuthor(e.target.value)}
               className={
-                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-3  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
+                "w-full rounded border  border-input-border-light bg-bg-secondary-light px-3 py-2.5  text-xs text-black outline-none ring-brandGreen-500 transition duration-100 focus:ring-1 dark:border-input-border-dark dark:bg-bg-secondary-dark dark:text-white"
               }
             />
           </div>
-          <div className="flex w-full items-center ">
+          <div className="flex w-full items-center">
             <div className="relative w-full">
               <div className="pointer-events-none absolute inset-y-0 left-0 z-40 flex items-center pl-3">
                 <AiFillCalendar className="text-brandGreen-800 dark:text-typography-body-dark" />
@@ -89,7 +89,7 @@ const FilterForm = () => {
             </div>
             <span className="1 mx-4 text-xs text-gray-500">to</span>
             <div className="relative  w-full">
-              <div className="pointer-events-none  absolute inset-y-0 left-0 z-40 flex items-center pl-3 ">
+              <div className="pointer-events-none  absolute inset-y-0 left-0 z-40 flex items-center pl-3">
                 <AiFillCalendar className="text-brandGreen-800 dark:text-typography-body-dark" />
               </div>
               <DatePicker
@@ -106,7 +106,7 @@ const FilterForm = () => {
           <SelectBox handleSelected={handleSelected} />
           <Button
             onClick={handleClick}
-            className="block w-full rounded-sm bg-brandGreen-800 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
+            className="block w-full rounded-sm bg-brandGreen-800 px-8 py-1.5 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
             size="xlarge"
             type="primary"
             htmlType="button"
