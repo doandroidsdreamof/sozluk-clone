@@ -4,8 +4,3 @@
 echo 'running pre-commiting checks...'
 
 npx lint-staged
-
-# Skip Husky checks in production and CI
-if [ "$NODE_ENV" = "production" ] || [ "$CI" = "true" ]; then
-  exit 0;
-fi

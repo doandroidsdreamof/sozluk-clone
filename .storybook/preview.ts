@@ -1,8 +1,7 @@
 import type { Preview } from "@storybook/react";
-import "../src/styles/globals.css"
+import "../src/styles/globals.css";
 import { store } from "../src/lib/store/store";
 import { Provider } from "react-redux";
-
 
 const preview: Preview = {
   globalTypes: {
@@ -11,20 +10,21 @@ const preview: Preview = {
     },
     // Optional (Default: 'dark')
     className: {
-      defaultValue: 'dark', // Set
-    },},
+      defaultValue: "dark", // Set
+    },
+  },
   parameters: {
     actions: { argTypesRegex: "^on[A-Z].*" },
     backgrounds: {
-      default: 'dark',
+      default: "dark",
       values: [
         {
-          name: 'dark',
-          value: '#181818',
+          name: "dark",
+          value: "#181818",
         },
         {
-          name: 'light',
-          value: '#ffffff',
+          name: "light",
+          value: "#ffffff",
         },
       ],
     },
@@ -32,14 +32,9 @@ const preview: Preview = {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/,
-
       },
     },
-
   },
-
 };
 
 export default preview;
-
-

@@ -1,2 +1,2 @@
 # ignorePatterns: ["/*", "!/src"]
-husky-install.mjs
+commitlint.config.js

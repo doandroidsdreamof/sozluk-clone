@@ -11,7 +11,7 @@
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "node husky-install.mjs"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
@@ -51,6 +51,8 @@
     "zod-formik-adapter": "^1.2.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@next/bundle-analyzer": "^13.4.6",
     "@storybook/addon-essentials": "^7.0.12",
     "@storybook/addon-interactions": "^7.0.12",
