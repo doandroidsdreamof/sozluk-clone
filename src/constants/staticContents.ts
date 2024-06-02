@@ -45,6 +45,8 @@ export const BUTTON_TEXT = {
   SHARE_TWITTER: "share twitter",
   SHARE_FACEBOOK: "share facebook",
   SHARE_REDDIT: "share reddit",
+  SHOW_MORE: "show more",
+  SHOW_LESS: "show less",
 };
 
 export const LABEL_TEXT = {
@@ -79,13 +81,15 @@ export const LOG_MESSAGES = {
 };
 
 export const UI_MESSAGES = {
-  EMPTY_CONTENT: "there is nothing",
+  EMPTY_CONTENT: "There is nothing",
   DO_NOT_ACCOUNT: "Don't have an account?",
   HAVE_YOU_ACCOUNT: "Already have an account?",
-  LOADING: "Loading",
+  LOADING: "Loading...",
   SETTINGS: "Settings",
   VERIFY_ACCOUNT: "Verify your account",
-  SEARCH_NOTHING_FOUND: " Nothing found",
+  SEARCH_NOTHING_FOUND: "Nothing found",
+  MESSAGES: "Messages",
+  TRENDING: "Trending",
 };
 
 export const SCHEMA_ERROR_MESSAGES = {

@@ -8,17 +8,19 @@ import FilterModal from "../modals/FilterModal";
 import { useSession } from "next-auth/react";
 import { CLIENT_ROUTE_PATHS, UI_MESSAGES } from "@/constants/staticContents";
 
-interface SearchOptions {
+interface ISearchOptions {
   id: string;
   topicTitle: string;
 }
 
 const AutoSearch = () => {
   const router = useRouter();
-  const [data, setData] = useState<SearchOptions[]>([]);
+  const [data, setData] = useState<ISearchOptions[]>([]);
   const [input, setInput] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
-  const { data: getData, status } = api.topic.filterTopic.useQuery(input);
+  const { data: getData, status } = api.topic.filterTopic.useQuery(input, {
+    enabled: input.length >= 1,
+  });
   const session = useSession();
 
   //TODO refactoring => decoupling logic and UI && hard-coded strings
@@ -37,7 +39,9 @@ const AutoSearch = () => {
       if (typeof value === "string" && typeof id === "string") {
         setData([]);
         void router.push(
-          `/topic/${encodeURIComponent(value.replace(/\s/g, ""))}`
+          `${CLIENT_ROUTE_PATHS.TOPIC}/${encodeURIComponent(
+            value.replace(/\s/g, "")
+          )}`
         );
       }
     }
@@ -96,7 +100,7 @@ const AutoSearch = () => {
               />
               <button
                 onClick={() => openModal()}
-                className="top-1 z-[2] inline-block items-center  border-b border-t  border-solid border-neutral-300 bg-transparent px-2  text-xs font-medium uppercase dark:border-neutral-600"
+                className="top-1 z-[2] inline-block items-center border-b border-t border-solid border-neutral-300 bg-transparent px-2  text-xs font-medium uppercase dark:border-neutral-600"
               >
                 {isOpen ? (
                   <BsFillCaretUpFill className="z-40 h-3 w-4 dark:text-bg-primary-light" />
@@ -124,7 +128,7 @@ const AutoSearch = () => {
                 }
               >
                 {data.length == 0 && getData == null ? (
-                  <div className=" relative cursor-default select-none px-4 py-2 dark:text-typography-body-strong-dark ">
+                  <div className="relative cursor-default select-none px-4 py-2 dark:text-typography-body-strong-dark ">
                     {UI_MESSAGES.SEARCH_NOTHING_FOUND}
                   </div>
                 ) : (

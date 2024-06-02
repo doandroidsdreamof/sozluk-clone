@@ -166,12 +166,19 @@ export const topicRouter = createTRPCRouter({
       skip: randomSkip,
       take: randomTake,
       include: {
-        entry: true,
-        user: {
+        entry: {
+          take: 1,
           select: {
-            avatar: true,
-            name: true,
-            id: true,
+            content: true,
+            createdAt: true,
+            entryId: true,
+            user: {
+              select: {
+                avatar: true,
+                name: true,
+                id: true,
+              },
+            },
           },
         },
       },

@@ -10,6 +10,7 @@ import {
 import { api } from "@/utils/api";
 import ChatSearch from "./ChatSearch";
 import ChatBox from "./ChatBox";
+import { UI_MESSAGES } from "@/constants/staticContents";
 
 const ChatInterface = () => {
   const session = useSession();
@@ -26,6 +27,7 @@ const ChatInterface = () => {
       enabled: session?.data?.user ? true : false, // Enable query only if user is logged in
     }
   );
+
   const utils = api.useContext();
   const { mutate: sendMessage } = api.message.postMessage.useMutation();
 
@@ -34,16 +36,16 @@ const ChatInterface = () => {
       <div
         className={
           chatInterfaceState
-            ? "fixed bottom-3  right-3 z-[500]  w-96 max-w-sm list-none divide-y overflow-hidden rounded  bg-white text-base  shadow-lg"
+            ? "fixed bottom-3 right-3 z-[500] w-96 max-w-sm list-none divide-y overflow-hidden rounded bg-white text-base shadow-lg"
             : "hidden"
         }
       >
-        <div className=" mb-4 flex flex-row items-center justify-between py-2 pl-6 pr-2 text-center font-helvetica text-sm font-light ">
-          <h3>Messages</h3>
+        <div className="mb-4 flex flex-row items-center justify-between py-2 pl-6 pr-2 text-center font-helvetica text-sm font-light">
+          <h3>{UI_MESSAGES.MESSAGES}</h3>
           <button
             type="button"
             onClick={() => dispatch(chatInterfaceClose())}
-            className=" inline-flex  items-center rounded-full p-1.5 text-center text-sm font-medium  text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+            className="inline-flex items-center rounded-full p-1.5 text-center text-sm font-medium  text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
           >
             <AiOutlineClose size={16} />
           </button>
@@ -51,7 +53,7 @@ const ChatInterface = () => {
         <div className="mb-4">
           <ChatSearch />
         </div>
-        <div className="flex  max-h-[20rem] w-full flex-col overflow-y-auto">
+        <div className="flex max-h-[20rem] w-full flex-col overflow-y-auto">
           {data?.length ? (
             <>
               {data &&
@@ -62,7 +64,7 @@ const ChatInterface = () => {
                       dispatch(chatInterfaceClose());
                       dispatch(chatBoxOpen());
                     }}
-                    className="relative  flex   min-h-[6rem] w-full  cursor-pointer   items-center    bg-white  text-sm  shadow-sm  hover:bg-brandGreen-500"
+                    className="relative flex min-h-[6rem] w-full cursor-pointer items-center bg-white text-sm shadow-sm hover:bg-brandGreen-500"
                     key={item.users[0]?.id}
                   >
                     <UserCard
@@ -75,8 +77,8 @@ const ChatInterface = () => {
                 ))}
             </>
           ) : (
-            <div className="relative flex h-[5rem] cursor-default select-none items-center justify-center bg-bg-primary-light px-4 py-4 text-center  text-gray-700  ">
-              Nothing found.
+            <div className="relative flex h-[5rem] cursor-default select-none items-center justify-center bg-bg-primary-light px-4 py-4 text-center text-gray-700">
+              {UI_MESSAGES.SEARCH_NOTHING_FOUND}
             </div>
           )}
         </div>

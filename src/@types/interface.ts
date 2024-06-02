@@ -15,3 +15,14 @@ export interface IRegister extends ILogin {
 export interface IUserName {
   userName: string;
 }
+
+export interface IEntry {
+  content: string;
+  entryId: string;
+  createdAt: Date;
+  user: {
+    name: string;
+    id: string;
+    avatar: string | null;
+  };
+}

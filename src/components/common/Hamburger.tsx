@@ -23,7 +23,7 @@ const Hamburger = ({ breakPoint, mobile }: IHamburgerProps) => {
         type="button"
         className={
           mobile === "md"
-            ? ` }:hidden hidden items-center  rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-dark-100 dark:hover:bg-gray-500 lg:inline-flex
+            ? ` }:hidden hidden items-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-dark-100 dark:hover:bg-gray-500 lg:inline-flex
         lg:hidden`
             : `inline-flex items-center  rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-dark-100 dark:hover:bg-gray-500 lg:hidden ${
                 breakPoint || ""

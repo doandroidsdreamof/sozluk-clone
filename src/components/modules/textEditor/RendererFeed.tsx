@@ -8,19 +8,9 @@ import EntryCard from "../entry/EntryCard";
 import ShareButton from "../entry/ShareButton";
 import UserCard from "@/components/common/UserCard";
 import { CLIENT_ROUTE_PATHS } from "@/constants/staticContents";
-
-interface IEntry {
-  content: string;
-  id: string;
-  createdAt: Date;
-}
+import { type IEntry } from "@/@types/interface";
 
 interface ITextRendererProps {
-  user: {
-    name: string;
-    id: string;
-    avatar: string | null;
-  };
   entry: IEntry[];
   topicTitle: string;
   id: string;
@@ -28,7 +18,6 @@ interface ITextRendererProps {
 
 const RendererFeed = ({
   topicTitle,
-  user,
   entry,
   id: topicId,
 }: ITextRendererProps) => {
@@ -64,9 +53,9 @@ const RendererFeed = ({
         outputLength={output.length}
       >
         <UserCard
-          userName={user.name}
+          userName={entry[0]?.user?.name || ""}
           date={parseContent.createdAt}
-          imageURL={user.avatar || ""}
+          imageURL={entry[0]?.user?.avatar || ""}
           urlPath={CLIENT_ROUTE_PATHS.PROFILE}
         />
       </EntryCard>

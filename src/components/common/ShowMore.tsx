@@ -1,3 +1,4 @@
+import { BUTTON_TEXT } from "@/constants/staticContents";
 import { useState, type FC } from "react";
 
 interface IShowMoreProps {
@@ -20,8 +21,8 @@ const ShowMore: FC<IShowMoreProps> = ({ text }: IShowMoreProps) => {
           ) : (
             <span className="mr-1 inline">{text.substring(0, 250)}</span>
           )}
-          <button onClick={handleClick} className=" text-show-more">
-            show {expand ? "less" : "more"}
+          <button onClick={handleClick} className="text-show-more">
+            {expand ? BUTTON_TEXT.SHOW_LESS : BUTTON_TEXT.SHOW_MORE}
           </button>
         </>
       ) : (

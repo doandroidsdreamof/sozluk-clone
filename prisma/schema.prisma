@@ -3,10 +3,9 @@ generator client {
   previewFeatures = ["jsonProtocol"]
 }
 
-
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
@@ -74,69 +73,63 @@ model VerificationToken {
 }
 
 model Entry {
-  id        String   @id @default(uuid())
-  createdAt DateTime    @default(now())
-  content   String
-  userId    String
-  entryId   String
-  user      User        @relation(fields: [userId], references: [id])
-  topic     Topic       @relation(fields: [entryId], references: [id], onDelete: Cascade)
-  favorites Favorites[]
-  avatar    String?
-  postUrl   String?
+  id            String      @id @default(uuid())
+  createdAt     DateTime    @default(now())
+  content       String
+  userId        String
+  entryId       String
+  user          User        @relation(fields: [userId], references: [id])
+  topic         Topic       @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  favorites     Favorites[]
+  avatar        String?
+  postUrl       String?
   favoriteCount Int         @default(0)
 
-
-  @@index([entryId,userId])
-
-
+  @@index([entryId, userId])
 }
 
 model Favorites {
-  id        String    @id @default(uuid())
-  user      User      @relation(fields: [userId], references: [id])
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
   userId    String
-  createdAt DateTime  @default(now())
+  createdAt DateTime @default(now())
   entryId   String
-  entry     Entry     @relation(fields: [entryId], references: [id], onDelete: Cascade)
-  favorite  Boolean   @default(false)
+  entry     Entry    @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  favorite  Boolean  @default(false)
 
   @@index([entryId])
   @@index([userId])
-
 }
 
 model Topic {
-  id              String   @id @default(uuid())
-  createdAt       DateTime @default(now())
-  topicTitle      String   @unique
-  userId          String
-  user            User     @relation(fields: [userId], references: [id])
-  entry           Entry[]
+  id         String   @id @default(uuid())
+  createdAt  DateTime @default(now())
+  topicTitle String   @unique
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  entry      Entry[]
 
+  @@unique([topicTitle, userId])
   @@index([topicTitle])
-  @@unique([topicTitle,userId])
-
 }
 
 model Tag {
-  id      String   @id @default(uuid())
+  id      String @id @default(uuid())
   tagId   String
   tagName String
 }
 
 model Message {
-  id          String   @id @default(uuid())
-  sender      User     @relation("sender", fields: [senderId], references: [id])
-  senderId    String
-  receiver    User     @relation("receiver", fields: [receiverId], references: [id])
-  receiverId  String
-  message     String
-  image       String?
-  createdAt   DateTime @default(now())
-  chatRoom    ChatRoom? @relation(fields: [chatRoomId], references: [id])
-  chatRoomId  String
-
+  id         String    @id @default(uuid())
+  sender     User      @relation("sender", fields: [senderId], references: [id])
+  senderId   String
+  receiver   User      @relation("receiver", fields: [receiverId], references: [id])
+  receiverId String
+  message    String
+  image      String?
+  createdAt  DateTime  @default(now())
+  chatRoom   ChatRoom? @relation(fields: [chatRoomId], references: [id])
+  chatRoomId String
 }
 
 enum Role {
@@ -152,16 +145,14 @@ model Follower {
   followingId String
   createdAt   DateTime @default(now())
 
-  @@index([followerId,followingId])
+  @@index([followerId, followingId])
 }
 
-
 model ChatRoom {
-    id         String    @id @default(cuid())
-    senderId   String
-    receiverId String
-    users      User[]
-    messages   Message[]
-    createdAt  DateTime  @default(now())
-
+  id         String    @id @default(cuid())
+  senderId   String
+  receiverId String
+  users      User[]
+  messages   Message[]
+  createdAt  DateTime  @default(now())
 }
