@@ -6,6 +6,7 @@ import BaseLayout from "@/components/layouts/BaseLayout";
 import { store } from "@/lib/store/store";
 import "@/styles/globals.css";
 import { api } from "@/utils/api";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,6 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <SessionProvider session={session}>
         <BaseLayout>
           <Component {...pageProps} />
+          <SpeedInsights />
         </BaseLayout>
       </SessionProvider>
     </Provider>
