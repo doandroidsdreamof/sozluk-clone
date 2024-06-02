@@ -1,2 +1,2 @@
 # ignorePatterns: ["/*", "!/src"]
-husky-install.js
+husky-install.mjs
