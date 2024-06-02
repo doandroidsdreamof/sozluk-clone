@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import NotificationContainer from "../containers/NotificationContainer";
 
-interface ModalProps {
+interface IModalProps {
   children: React.ReactNode;
 }
 
-export default function Modal({ children }: ModalProps) {
+export default function Modal({ children }: IModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   const router = useRouter();
 
@@ -46,14 +46,7 @@ export default function Modal({ children }: ModalProps) {
             leaveTo="opacity-0"
           ></Transition.Child>
           <div className="fixed inset-0 grid h-full w-full place-content-center px-4 sm:px-12">
-            <Transition.Child
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
+            <Transition.Child>
               <Dialog.Panel className="flex w-full min-w-[25rem] transform flex-col overflow-hidden rounded-md border border-input-border-light bg-bg-secondary-light align-middle shadow-xl dark:border-input-border-dark dark:bg-bg-secondary-dark sm:w-[30rem]">
                 <button
                   onClick={() => {

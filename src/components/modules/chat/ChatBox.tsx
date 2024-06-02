@@ -1,10 +1,9 @@
-import React from "react";
-import ChatHeader from "./ChatHeader";
-import ChatContent from "./ChatContent";
-import { useSession } from "next-auth/react";
-import ChatInput from "./ChatInput";
+import { useAppSelector } from "@/lib/store/hooks";
 import { api } from "@/utils/api";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { useSession } from "next-auth/react";
+import ChatContent from "./ChatContent";
+import ChatHeader from "./ChatHeader";
+import ChatInput from "./ChatInput";
 
 const ChatBox = () => {
   const session = useSession();
@@ -12,7 +11,6 @@ const ChatBox = () => {
   const { data: receiverData } = api.user.getReceiver.useQuery({
     userName: receiverName,
   });
-  const dispatch = useAppDispatch();
   const { data: chatRoom } = api.message.getChatRoom.useQuery({
     receiverId: receiverData?.id || null,
     senderId: session.data?.user.id || null,

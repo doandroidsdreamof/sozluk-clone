@@ -75,6 +75,7 @@ export const LOG_MESSAGES = {
   ERR_SIGN_OUT: "Error signing out:",
   ERR_DURING_SIGN_OUT: "Error during sign-out",
   ERR_SOCIAL_LOGIN_FAILED: "Social login failed",
+  ERR_MAGIC_IS_NOT_DEFINED: "magic is not defined",
   ERR_SIGN_OUT_FAILED: "Sign-out failed",
   ERR_REGISTER_FAILED: "Register failed",
   ERR_MISSING_API_KEY_FOR_SUPABASE: "Missing API keys for Supabase",

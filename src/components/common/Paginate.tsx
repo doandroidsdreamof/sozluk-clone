@@ -39,7 +39,7 @@ const Paginate = ({
         <div className="flex items-center justify-center font-roboto text-typography-body-light dark:text-typography-body-dark">
           <button
             onClick={() => handleFetchPreviousPage()}
-            className="sbui-btn-primary dark ml-auto  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
+            className="sbui-btn-primary dark ml-auto max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
           >
             <MdNavigateBefore size={18} />
           </button>
@@ -61,7 +61,7 @@ const Paginate = ({
           <button
             disabled={pageNum + 1 == totalPage ? true : false}
             onClick={() => handleFetchNextPage()}
-            className="sbui-btn-primary dark ml-2  max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
+            className="sbui-btn-primary dark ml-2 max-w-fit cursor-pointer rounded-sm  bg-brandGreen-800 p-2.5 py-1.5 text-sm text-white hover:bg-brandGreen-600 dark:hover:bg-brandGreen-900"
           >
             <MdNavigateNext size={18} />
           </button>

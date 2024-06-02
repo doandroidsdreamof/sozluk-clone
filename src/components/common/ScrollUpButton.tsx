@@ -16,7 +16,7 @@ const ScrollUpButton = () => {
       onClick={handleClick}
       className={
         visible
-          ? "fixed bottom-12 left-3 z-50 mx-auto flex items-center rounded-full bg-brandGreen-700 p-3 text-sm text-white hover:bg-green-600  md:bottom-24 lg:bottom-12  lg:left-auto lg:right-3"
+          ? "fixed bottom-12 left-3 z-50 mx-auto flex items-center rounded-full bg-brandGreen-700 p-3 text-sm text-white hover:bg-green-600 md:bottom-24 lg:bottom-12 lg:left-auto lg:right-3"
           : "hidden"
       }
     >

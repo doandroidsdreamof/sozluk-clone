@@ -3,11 +3,11 @@ import Button from "../button/Button";
 import { api } from "@/utils/api";
 import { useSession } from "next-auth/react";
 
-interface FollowButtonProps {
+interface IFollowButtonProps {
   userId: string;
 }
 
-const FollowButton = ({ userId }: FollowButtonProps) => {
+const FollowButton = ({ userId }: IFollowButtonProps) => {
   const { mutate: followUser } = api.follow.followUser.useMutation();
   const { data: followServerState } = api.follow.checkFollow.useQuery({
     followerId: userId,

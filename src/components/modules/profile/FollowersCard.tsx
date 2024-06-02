@@ -13,8 +13,8 @@ const FollowersCard = ({ avatar, userName, userId }: IFollowersProps) => {
   const session = useSession();
 
   return (
-    <div className="relative flex min-h-[6rem]  w-full   flex-col justify-center rounded-sm bg-white p-3  text-sm shadow-sm dark:bg-bg-secondary-dark   lg:w-[35rem]  ">
-      <div className="flex flex-row  items-center  justify-between ">
+    <div className="relative flex min-h-[6rem] w-full flex-col justify-center rounded-sm bg-white p-3 text-sm shadow-sm dark:bg-bg-secondary-dark lg:w-[35rem]">
+      <div className="flex flex-row items-center justify-between">
         <div>
           {userName && (
             <UserCard

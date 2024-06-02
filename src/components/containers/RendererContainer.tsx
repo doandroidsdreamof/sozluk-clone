@@ -1,6 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
 import { api } from "@/utils/api";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Paginate from "../common/Paginate";
 import TextRenderer from "../modules/textEditor/TextRenderer";
 
@@ -13,9 +12,6 @@ const RendererContainer = ({ topicTitle }: IRendererContainerProps) => {
   const [total, setTotalPage] = useState(0);
   const [take, setTake] = useState(5); //* resultsPerPage
   const [skip, setSkip] = useState(0);
-  const stateEntry = useAppSelector((state) => state.refetch);
-  const dispatch = useAppDispatch();
-  const utils = api.useContext();
 
   const { data, fetchNextPage } = api.entry.getInfitineEntries.useInfiniteQuery(
     {

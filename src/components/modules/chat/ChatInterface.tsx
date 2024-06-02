@@ -28,9 +28,6 @@ const ChatInterface = () => {
     }
   );
 
-  const utils = api.useContext();
-  const { mutate: sendMessage } = api.message.postMessage.useMutation();
-
   return (
     <>
       <div

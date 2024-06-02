@@ -9,7 +9,6 @@ import {
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { type ILogin } from "@/@types/interface";
-import { loginSchema } from "@/schemas/loginSchema";
 import { prisma } from "@/server/db";
 
 /**
@@ -85,7 +84,6 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         try {
           const { email, password } = credentials as ILogin;
-          const emailAndPassword = await loginSchema.parseAsync(credentials);
           const user = await prisma.user.findFirst({
             where: { email: email },
           });

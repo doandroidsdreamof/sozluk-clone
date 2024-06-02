@@ -123,7 +123,7 @@ const RegisterForm = () => {
                 <div>
                   <label
                     htmlFor="userName"
-                    className="mb-2 inline-block text-sm text-input-label-light  dark:text-input-label-dark sm:text-base"
+                    className="mb-2 inline-block text-sm text-input-label-light dark:text-input-label-dark sm:text-base"
                   >
                     {LABEL_TEXT.USER_NAME}
                   </label>

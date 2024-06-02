@@ -9,7 +9,6 @@ const Button = dynamic(() => import("@/components/modules/button/Button"), {
   ssr: false,
 });
 
-// TODO refactor with entries containers
 // TODO hard-coded strings && magic numbers
 
 const FavoritesContainer = () => {

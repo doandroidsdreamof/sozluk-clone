@@ -17,7 +17,6 @@ const EntriesContainer = () => {
     userName: userName,
   });
   const [showMore, setShowMore] = useState(5);
-  const utils = api.useContext();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const newValue = e.currentTarget.innerText;
@@ -39,7 +38,7 @@ const EntriesContainer = () => {
         <div
           className={
             data.length > 5
-              ? " flex w-full items-center  justify-center"
+              ? " flex w-full items-center justify-center"
               : "hidden"
           }
         >

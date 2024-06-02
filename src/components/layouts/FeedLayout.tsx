@@ -1,23 +1,7 @@
 import { type IEntry } from "@/@types/interface";
-import { UI_MESSAGES } from "@/constants/staticContents";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-
-const RendererFeed = dynamic(
-  () => import("@/components/modules/textEditor/RendererFeed"),
-  {
-    ssr: true,
-    loading: () => <p>{UI_MESSAGES.LOADING}</p>,
-  }
-);
-
-const TopicHeader = dynamic(
-  () => import("@/components/modules/topic/TopicHeader"),
-  {
-    ssr: true,
-    loading: () => <p>{UI_MESSAGES.LOADING}</p>,
-  }
-);
+import RendererFeed from "@/components/modules/textEditor/RendererFeed";
+import TopicHeader from "@/components/modules/topic/TopicHeader";
 
 interface IFeedLayoutProps {
   entry: IEntry[];

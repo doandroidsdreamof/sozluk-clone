@@ -1,10 +1,20 @@
-import FollowersContainer from "../containers/FollowersContainer";
-import Tabs from "../modules/profile/Tabs";
+import dynamic from "next/dynamic";
 
 const categories = [
   { id: 0, name: "followers" },
   { id: 1, name: "following" },
 ];
+
+const FollowersContainer = dynamic(
+  () => import("@/components/containers/FavoritesContainer"),
+  {
+    ssr: false,
+  }
+);
+
+const Tabs = dynamic(() => import("@/components/modules/profile/Tabs"), {
+  ssr: false,
+});
 
 const FollowersLayout = () => {
   return (

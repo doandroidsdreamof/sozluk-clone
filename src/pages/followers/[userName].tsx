@@ -1,5 +1,12 @@
 import { type NextPage } from "next";
-import FollowersLayout from "@/components/layouts/FollowersLayout";
+import dynamic from "next/dynamic";
+
+const FollowersLayout = dynamic(
+  () => import("@/components/layouts/FollowersLayout"),
+  {
+    ssr: false,
+  }
+);
 
 const Followers: NextPage = () => {
   return (

@@ -34,7 +34,7 @@ const ProfileHeader = ({
 
   return (
     <div className="flex w-full flex-row">
-      <div className="flex  flex-col gap-y-3">
+      <div className="flex flex-col gap-y-3">
         <span className="text-2xl font-bold text-typography-body-light dark:text-typography-body-dark">
           {userName}
         </span>
@@ -81,7 +81,7 @@ const ProfileHeader = ({
             closeDumbOpen={() => setDumbOpen(false)}
             dumbOpen={dumbOpen}
           >
-            <div className="flex h-36 w-96 flex-col items-center justify-center ">
+            <div className="flex h-36 w-96 flex-col items-center justify-center">
               <Image
                 className="mx-4 block rounded-full object-cover"
                 loading="lazy"

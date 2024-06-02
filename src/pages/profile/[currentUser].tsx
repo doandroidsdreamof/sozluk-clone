@@ -2,8 +2,6 @@ import { type NextPage } from "next";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
-// TODO currentUser will be change because it's not only current profile page but also regular user profile page
-
 const ProfileLayout = dynamic(
   () => import("@/components/layouts/ProfileLayout"),
   { ssr: false }

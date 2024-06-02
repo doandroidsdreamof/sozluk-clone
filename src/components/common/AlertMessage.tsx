@@ -1,7 +1,7 @@
 import { useAppDispatch } from "@/lib/store/hooks";
 import { removeNotification } from "@/lib/store/reducers/notificationSlice";
 
-interface AlertMessageProps {
+interface IAlertMessageProps {
   msg: string;
   alertType: string;
   id: string;
@@ -20,7 +20,7 @@ const alertStyle: StyleAlert<string> = {
   WARNING: `${sharedStyle} dark:bg-gray-800 dark:text-yellow-300`,
 };
 
-const AlertMessage = ({ msg, alertType, id }: AlertMessageProps) => {
+const AlertMessage = ({ msg, alertType, id }: IAlertMessageProps) => {
   const dispatch = useAppDispatch();
 
   const handleClose = (uid: string) => {

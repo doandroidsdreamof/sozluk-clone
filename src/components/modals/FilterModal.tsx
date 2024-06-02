@@ -1,5 +1,4 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import FilterForm from "../forms/FilterForm";
 import { useSession } from "next-auth/react";

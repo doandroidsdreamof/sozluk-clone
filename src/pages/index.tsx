@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
-import FeedLayout from "@/components/layouts/FeedLayout";
 import { api } from "@/utils/api";
+import FeedLayout from "@/components/layouts/FeedLayout";
 
 const Home: NextPage = () => {
   const { data } = api.topic.getRandomEntriesAndTopics.useQuery();

@@ -5,11 +5,11 @@ const Modal = dynamic(() => import("@/components/modals/Modal"), {
   ssr: true,
 });
 
-interface FormLayoutProps {
+interface IFormLayoutProps {
   children: React.ReactNode;
 }
 
-const FormLayout = ({ children }: FormLayoutProps) => {
+const FormLayout = ({ children }: IFormLayoutProps) => {
   return (
     <div className="z-50 h-screen w-full bg-black opacity-75">
       <Modal>{children}</Modal>

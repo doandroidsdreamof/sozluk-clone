@@ -8,8 +8,9 @@ import {
   chatBoxToggle,
 } from "@/lib/store/reducers/messageSlice";
 import { api } from "@/utils/api";
+import { UI_MESSAGES } from "@/constants/staticContents";
 
-interface SearchOptions {
+interface ISearchOptions {
   id: string;
   name: string;
 }
@@ -18,7 +19,7 @@ interface SearchOptions {
 
 function ChatSearch() {
   const session = useSession();
-  const [data, setData] = useState<SearchOptions[]>([]);
+  const [data, setData] = useState<ISearchOptions[]>([]);
   const [input, setInput] = useState<string>("");
   const { data: getData, status } = api.user.filterUser.useQuery(input, {
     enabled: session?.data?.user ? true : false,
@@ -39,10 +40,6 @@ function ChatSearch() {
         });
   }, [data]);
 
-  const handleNavigation = (e: React.KeyboardEvent<HTMLElement>) => {
-    setInput("");
-  };
-
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     if (e.target != null) {
@@ -59,7 +56,7 @@ function ChatSearch() {
 
   return (
     <Combobox value={data} onChange={filteredUsers}>
-      <div className="order relative z-50 mb-2 mt-1 w-full ">
+      <div className="order relative z-50 mb-2 mt-1 w-full">
         <div className="relative w-full cursor-default overflow-hidden rounded-md border-none text-left shadow-sm focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
           <Combobox.Input
             className="w-full border-none pl-6 text-xs"
@@ -79,13 +76,13 @@ function ChatSearch() {
           <Combobox.Options
             className={
               data.length > 0
-                ? " absolute z-50  mt-1 max-h-60  w-full  overflow-auto rounded-md bg-bg-primary-light py-1 text-base shadow ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                ? " absolute z-50 mt-1 max-h-60 w-full  overflow-auto rounded-md bg-bg-primary-light py-1 text-base shadow ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                 : "hidden"
             }
           >
             {data.length == 0 && getData == null ? (
               <div className="relative cursor-default select-none bg-bg-primary-light px-4 py-2  text-gray-700">
-                Nothing found.
+                {UI_MESSAGES.EMPTY_CONTENT}
               </div>
             ) : (
               data.map((items) => (
@@ -94,7 +91,7 @@ function ChatSearch() {
                   className={({ active }) =>
                     `relative  cursor-pointer select-none text-sm ${
                       active
-                        ? "bg-button-light bg-brandGreen-800  text-typography-body-dark"
+                        ? "bg-button-light bg-brandGreen-800 text-typography-body-dark"
                         : "text-typography-body-light "
                     }`
                   }
@@ -119,7 +116,7 @@ function ChatSearch() {
                           className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
                             active
                               ? " dark:text-typography-body-strong-dark"
-                              : " dark:text-typography-body-strong-dark  "
+                              : " dark:text-typography-body-strong-dark"
                           }`}
                         ></span>
                       ) : null}

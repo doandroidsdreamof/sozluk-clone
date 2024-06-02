@@ -35,7 +35,7 @@ const ChatHeader = ({ receiverName, numberOfMessages }: IChatHeaderProps) => {
         <button
           type="button"
           onClick={() => dispatch(chatBoxClose())}
-          className=" inline-flex items-center rounded-full p-1.5 text-center text-sm font-medium  text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
+          className=" inline-flex items-center rounded-full p-1.5 text-center text-sm font-medium text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white"
         >
           <AiOutlineClose size={18} />
         </button>

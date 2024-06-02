@@ -1,4 +1,5 @@
 import Avatar from "@/components/common/Avatar";
+import { LOCAL_IMAGE_ALT, LOCAL_IMAGE_PATHS } from "@/constants/staticContents";
 
 interface IChatContentProps {
   messageText: string;
@@ -27,10 +28,10 @@ const ChatContent = ({
     >
       <div className={`${isChatOwner ? "order-2" : "order-1"}`}>
         <Avatar
-          style="mx-4 block  h-10 w-10 cursor-pointer  rounded-full object-cover"
-          alt="avatar"
-          src="/images/default-avatar.png"
-          fallbackSrc="/images/default-avatar.png"
+          style="mx-4 block h-10 w-10 cursor-pointer rounded-full object-cover"
+          alt={LOCAL_IMAGE_ALT.AVATAR}
+          src={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
+          fallbackSrc={LOCAL_IMAGE_PATHS.DEFAULT_AVATAR_SRC}
         />
       </div>
       <div

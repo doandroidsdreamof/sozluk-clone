@@ -2,7 +2,15 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { type ILayoutProps } from "@/@types/interface";
 import DocHead from "../common/DocHead";
-import ChatInterface from "../modules/chat/ChatInterface";
+import { useSession } from "next-auth/react";
+
+const Navbar = dynamic(() => import("@/components/modules/navbar/Navbar"), {
+  ssr: false,
+});
+
+const Aside = dynamic(() => import("@/components/modules/aside/Aside"), {
+  ssr: false,
+});
 
 const ScrollUpButton = dynamic(
   () => import("@/components/common/ScrollUpButton"),
@@ -13,28 +21,21 @@ const NotificationContainer = dynamic(
   () => import("@/components/containers/NotificationContainer"),
   { ssr: false }
 );
-
-const Navbar = dynamic(() => import("@/components/modules/navbar/Navbar"), {
-  ssr: false,
-});
-
-const Aside = dynamic(() => import("@/components/modules/aside/Aside"), {
-  ssr: false,
-});
-
-const Footer = dynamic(() => import("@/components/modules/footer/Footer"), {
-  ssr: false,
-});
+const ChatInterface = dynamic(
+  () => import("@/components/modules/chat/ChatInterface"),
+  { ssr: false }
+);
 
 const BaseLayout = ({ children }: ILayoutProps) => {
   const router = useRouter();
-  const noNavFooterRoutes = ["/404", "/reset", "/login", "/register"];
+  const routes = ["/404", "/reset", "/login", "/register"];
+  const session = useSession();
 
   return (
     <>
       <DocHead />
       <main className="bg-bg-primary-light dark:bg-bg-primary-dark">
-        {noNavFooterRoutes.includes(router.pathname) ? (
+        {routes.includes(router.pathname) ? (
           children
         ) : (
           <div className="flex min-h-screen w-full flex-col bg-bg-primary-light dark:bg-bg-primary-dark">
@@ -45,10 +46,9 @@ const BaseLayout = ({ children }: ILayoutProps) => {
               <Aside />
               {children}
             </div>
-            <ChatInterface />
+            {session.data?.user ? <ChatInterface /> : <></>}
             <NotificationContainer />
             <ScrollUpButton />
-            <Footer />
           </div>
         )}
       </main>

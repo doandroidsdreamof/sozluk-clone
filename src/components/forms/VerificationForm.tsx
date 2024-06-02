@@ -16,6 +16,7 @@ import {
   BUTTON_TEXT,
   CLIENT_ROUTE_PATHS,
   LINK_TEXT,
+  LOG_MESSAGES,
   UI_MESSAGES,
 } from "@/constants/staticContents";
 import { useLoading } from "@/hooks/useLoading";
@@ -26,8 +27,6 @@ type loginFormType = {
 const loginValues: loginFormType = {
   email: "",
 };
-
-//TODO hard-coded strings
 
 const VerificationForm = () => {
   const { isLoading, startLoading, stopLoading } = useLoading();
@@ -50,10 +49,10 @@ const VerificationForm = () => {
   async function handleSubmit(email: loginFormType) {
     //TODO error handling
     startLoading();
-    if (!magic) throw new Error(`magic not defined`);
+    if (!magic) throw new Error(LOG_MESSAGES.ERR_MAGIC_IS_NOT_DEFINED);
     const { email: parsedCheck }: { email: string } = email;
     const emailVerification = await magic?.auth?.loginWithEmailOTP(email);
-    const isLoggedIn = await magic?.user?.isLoggedIn();
+    //const isLoggedIn = await magic?.user?.isLoggedIn();
     if (emailVerification) {
       setToken(emailVerification);
       setEmail(parsedCheck);
@@ -64,13 +63,10 @@ const VerificationForm = () => {
 
   async function magicLogout() {
     try {
-      if (!magic) throw new Error(`magic not defined`);
+      if (!magic) throw new Error(LOG_MESSAGES.ERR_MAGIC_IS_NOT_DEFINED);
       await magic?.user?.logout();
     } catch (err) {
-      console.error(
-        "🚀 ~ file: MagicVerification.tsx:64 ~ magicLogout ~ err:",
-        err
-      );
+      console.error(err);
     }
   }
 
@@ -100,7 +96,7 @@ const VerificationForm = () => {
             isLoading={isLoading}
             text={BUTTON_TEXT.MAGIC_LINK_SEND_CODE}
             style={
-              "block rounded-sm bg-brandGreen-800 px-8 py-2 mt-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring  md:text-base"
+              "block rounded-sm bg-brandGreen-800 px-8 py-2 mt-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-brandGreen-700 focus-visible:ring md:text-base"
             }
           />
           <FormFooter

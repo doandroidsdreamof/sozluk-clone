@@ -9,14 +9,14 @@ interface IFormFooterProps {
 
 const FormFooter = ({ href, text, linkText }: IFormFooterProps) => {
   return (
-    <div className="flex items-center justify-center  p-4 ">
+    <div className="flex items-center justify-center p-4">
       <p className="text-center text-sm text-gray-500">
         {text}
         <Link
           href={`${href}`}
-          className="text-secondary-text-light  dark:text-secondary-text-dark"
+          className="text-secondary-text-light dark:text-secondary-text-dark"
         >
-          <span className="ml-1 text-brandGreen-300 transition duration-100 hover:text-brandGreen-200 ">
+          <span className="ml-1 text-brandGreen-300 transition duration-100 hover:text-brandGreen-200">
             {linkText}
           </span>
         </Link>
