@@ -144,18 +144,6 @@ export const topicRouter = createTRPCRouter({
         return getAllFiltered;
       }
     }),
-  removeTopic: protectedProcedure
-    .input(z.string().nullable())
-    .mutation(async ({ ctx, input }) => {
-      //*If there is no entry inside topic
-      if (input) {
-        const deleteTopic = await ctx.prisma.topic.delete({
-          where: {
-            id: input,
-          },
-        });
-      }
-    }),
   getRandomEntriesAndTopics: publicProcedure.query(async ({ ctx }) => {
     const totalRecords = await ctx.prisma.topic.count();
     const randomSkip = Math.floor(

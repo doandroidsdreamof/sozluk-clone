@@ -47,6 +47,8 @@ export const BUTTON_TEXT = {
   SHARE_REDDIT: "share reddit",
   SHOW_MORE: "show more",
   SHOW_LESS: "show less",
+  EDIT: "Edit",
+  DELETE: "Delete",
 };
 
 export const LABEL_TEXT = {

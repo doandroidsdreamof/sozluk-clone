@@ -140,13 +140,18 @@ export const entryRouter = createTRPCRouter({
       }
     }),
   removeEntry: protectedProcedure
-    .input(z.string().nullable())
+    .input(
+      z.object({
+        entryId: z.string(),
+        userId: z.string(),
+      })
+    )
     .mutation(async ({ ctx, input }) => {
-      if (input != null) {
+      if (input.userId && ctx.session.user.id === input.userId) {
         const [removeSingleEntry] = await ctx.prisma.$transaction([
           ctx.prisma.entry.delete({
             where: {
-              id: input,
+              id: input.entryId,
             },
           }),
           ctx.prisma.user.update({

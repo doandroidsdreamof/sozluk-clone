@@ -41,7 +41,7 @@ const TextEditor = ({
     editorProps: {
       attributes: {
         class:
-          "richText prose prose-sm sm:prose-base lg:prose-md xl:prose-lg  block min-w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-dark text-sm text-gray-800  bg-gray-50 border-0 dark:bg-dark-300  dark:text-typography-body-light",
+          "richText prose prose-sm sm:prose-base lg:prose-md xl:prose-lg block min-w-full px-0  min-h-[10rem] rounded-t-sm dark:bg-bg-alt-dark text-sm text-gray-800 bg-gray-50 border-0 dark:bg-dark-300 dark:text-typography-body-light",
       },
     },
     onCreate({ editor }) {
@@ -122,7 +122,7 @@ const TextEditor = ({
   }
 
   return (
-    <div className="w-full border  border-gray-200 bg-gray-50 dark:border-input-border-dark dark:bg-dark-300 lg:w-[38rem]">
+    <div className="w-full border border-gray-200 bg-gray-50 dark:border-input-border-dark dark:bg-dark-300 lg:w-[38rem]">
       <EditorContent editor={editor} />
       <TextEditorMenu
         buttonText={entry ? "edit" : "comment"}

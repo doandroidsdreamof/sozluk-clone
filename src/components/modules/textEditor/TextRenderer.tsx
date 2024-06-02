@@ -40,7 +40,6 @@ const TextRenderer = ({
 }: ITextRendererProps) => {
   const session = useSession();
   const { mutate: removeEntry } = api.entry.removeEntry.useMutation();
-  const { mutate: removeLastTopic } = api.topic.removeTopic.useMutation();
   const { data: favoriteData } = api.favorite.getSingleFavorite.useQuery(
     {
       entryId: entryId,
@@ -69,15 +68,21 @@ const TextRenderer = ({
   };
 
   const handleRemoveEntry = () => {
-    removeEntry(entryId, {
-      onSuccess: () => {
-        updateUI();
-        setEdit(false);
+    removeEntry(
+      {
+        userId: user.id,
+        entryId: entryId,
       },
-      onError: (error) => {
-        console.error(error);
-      },
-    });
+      {
+        onSuccess: () => {
+          updateUI();
+          setEdit(false);
+        },
+        onError: (error) => {
+          console.error(error);
+        },
+      }
+    );
   };
 
   function updateUI() {
