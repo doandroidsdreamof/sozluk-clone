@@ -11,7 +11,7 @@
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "node .husky/install.mjs"
+    "prepare": "node scripts/husky-install.js"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.15",
