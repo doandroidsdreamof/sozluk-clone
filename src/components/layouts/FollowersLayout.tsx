@@ -6,7 +6,7 @@ const categories = [
 ];
 
 const FollowersContainer = dynamic(
-  () => import("@/components/containers/FavoritesContainer"),
+  () => import("@/components/containers/FollowersContainer"),
   {
     ssr: false,
   }
